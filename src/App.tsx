@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 import LandingView from './Routes/LandingView';
@@ -19,10 +18,10 @@ function App() {
     <Routes>
       <Route path="/" element={<LandingView />} />
       <Route path="/login" element={ <LoginView />}/> 
-      //Admin
+      {/* Admin */}
       <Route path="/AdminOrder" element={ <AdminOrder />}/>
       <Route path="/AdminPage" element={ <AdminPage />}/>
-      /////USER
+      {/* USER */}
       <Route path="/Account" element={ <Account />}/>
       <Route path="/CheckOut" element={ <CheckOut />}/>
       <Route path="/Menu" element={ <Menu />}/>
