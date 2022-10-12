@@ -1,0 +1,6 @@
+@use '../../styles/variables';
+
+div .menu-wrapper {
+    @include variables.flexContainer($dir: column);
+    font-family: 'Rock Salt';
+}
