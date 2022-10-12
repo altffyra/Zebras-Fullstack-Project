@@ -13,7 +13,6 @@ import OrderConfirm from './Routes/User/OrderConfirm';
 import SignUp from './Routes/User/SignUp';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <BrowserRouter>
