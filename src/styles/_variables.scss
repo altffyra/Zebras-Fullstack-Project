@@ -1,0 +1,81 @@
+@use 'sass:color';
+
+
+$darkRed:#541412;
+$yellowSenap: #D69F3A;
+$primaryBackground: #F8D4BA;
+$acceptBtnGreen: #53BC8A;
+$dropdownRed: #6C2623;
+$fontLight: #FFFFFF;
+$fontDark: #000000;
+$boxShadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.25);
+
+@mixin loader() {
+      position: fixed;
+      left: 0; 
+      right: 0; 
+      top: 0;
+      bottom: 0;
+      width: 4em;
+      height: 4em;
+      margin: auto;
+      border-radius: 50px;
+      border: 0.5em solid color.scale($darkRed, $lightness: 80%);
+      &:after {
+          content: '';
+          position: absolute;
+          top: -0.5em; 
+          left: -0.5em;
+          bottom: -0.5em;
+          right: -0.5em;
+          border-radius: 50px;
+          border: 0.5em solid transparent;
+          border-top-color: $yellowSenap;
+          -webkit-animation: spin 1s linear infinite;
+          animation: spin 1s linear infinite;
+          @keyframes spin {
+              0%{ -webkit-transform: rotate(0deg); tranform: rotate(0deg);}
+            100%{ -webkit-transform: rotate(360deg); tranform: rotate(360deg);}
+        }
+      }
+}
+
+@mixin sectionTop($bg: $darkRed) {
+      background: $bg;
+      color: $fontLight;
+}
+
+@mixin flexContainer($dir: column) {
+      display: flex;
+      flex-direction: $dir;
+}
+
+@mixin headerTitle($image)  {
+      background-image: $image;
+      background-position: center;
+      width: 100vw;
+      display: grid;
+      place-items: center;
+      
+      h1 {
+            color:$fontDark;
+            padding: 0.4em, 1em;
+            background-color: $yellowSenap;
+            font-family: Rock Salt;
+      }
+}
+
+@mixin dropDownActive {
+      transition: all 300ms;
+      .active {
+        transform: rotateZ(90deg);
+    }
+}
+
+@mixin gridContainer($rows: 4) {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat($rows, 1fr);
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;
+}
