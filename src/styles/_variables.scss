@@ -10,8 +10,8 @@ $fontLight: #FFFFFF;
 $fontDark: #000000;
 $navBackground: #377395;
 $boxShadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.25);
-$primaryFont: 'Rock Salt', cursive;
-$headerFont: 'Roboto', sans-serif;
+$primaryFont: 'Roboto', sans-serif;
+$headerFont: 'Rock Salt', cursive;
 
 @mixin loader() {
       position: fixed;

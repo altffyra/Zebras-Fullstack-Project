@@ -81,6 +81,7 @@ header {
 
             .link {
                 font-size: 1.2rem;
+                font-family: variables.$headerFont;
                 position: relative; 
                 color: variables.$fontLight;
                 text-decoration: none;
@@ -121,6 +122,7 @@ header {
                 margin-left: 1em;
 
                 .link {
+                    color: variables.$fontDark;
                     &:hover::after {
                         opacity: 1;
                     }

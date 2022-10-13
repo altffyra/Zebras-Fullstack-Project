@@ -1,11 +1,9 @@
 import '../styles/_nav.scss';
-import { useNavigate, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import logo from '../assets/logo.svg'
+import logoDark from '../assets/logoDark.svg'
 
 const Nav = () => {
-    const navigate = useNavigate();
-
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
@@ -20,7 +18,6 @@ const Nav = () => {
     const handleMenu: () => void = () => {
         setMenuOpen(!menuOpen);       
     };
-
 
     return (
         <header>             
@@ -47,7 +44,7 @@ const Nav = () => {
             </nav>  
             <div className="logo-container">
                 <h2 className='nav-headline'>ROCKSALT</h2>
-                <img className='logo' src={logo} alt="Rocksalt logo" />
+                <img className='logo' src={logoDark} alt="Rocksalt logo" />
             </div>
         </header>
     )
