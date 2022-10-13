@@ -3,4 +3,47 @@
 div .menu-wrapper {
     @include variables.flexContainer($dir: column);
     font-family: 'Rock Salt';
+    background-color: variables.$primaryBackground;
 }
+
+.menu-header--container {
+    .menu-header--info {
+        position: relative;
+        margin: 0;
+        img {
+            width: 100vw;
+        }
+    }
+}
+
+
+.menu-header--info {
+
+    .menu-header--text {
+        position: absolute;
+        top: 25%;
+        left: 33%;
+        background-color: variables.$yellowSenap;
+        width: 33%;
+        height: 50%;
+
+        .menu-header--flex {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+    }
+}
+
+.menu-header--container {
+    .menu-header--category {
+        display: flex;
+        justify-content: space-evenly;
+        box-shadow: 0 .25em .25em rgba(0, 0, 0, 0.25);
+    }
+}
+
+
+
+
