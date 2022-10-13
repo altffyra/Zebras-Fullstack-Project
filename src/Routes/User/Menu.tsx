@@ -1,5 +1,6 @@
 import './Menu.scss';
 import menu from '../../assets/menu.svg';
+import mainmeal from '../../assets/mainmeal.svg';
 
 type Props = {}
 
@@ -34,26 +35,27 @@ const Menu = (props: Props) => {
         </figure>
       </section>
 
-      <section className="menu-mainmeals--wrapper">
-
-        <figure className="menu-mainmeals--container">
-          <img src="" alt="" />
-          <section className="menu-mainmeal--text">
-            <p>HUVUDRÄTTER</p>
+      <section className="menu-header--container">
+        <figure className="menu-header--info">
+          <img src={mainmeal} alt="" />
+          <section className="menu-header--text">
+            <section className="menu-header--flex">
+              <p>HUVUDRÄTTER</p>
+            </section>
           </section>
         </figure>
-        <section className="menu-mainmeal--meat">
-          <p>KÖTT</p>
+        <section className="menu-title--text">
+          <p className="menu-title--margin">KÖTT</p>
         </section>
         <section> HÄR LOOPAS KÖTT </section>
 
-        <section className="menu-mainmeal--fish">
-          <p>FISK</p>
+        <section className="menu-title--text">
+          <p className="menu-title--margin"> FISK</p>
         </section>
         <section> HÄR LOOPAS FISK </section>
 
-        <section className="menu-mainmeal--veg">
-          <p>VEGETARISKT</p>
+        <section className="menu-title--text">
+          <p className="menu-title--margin">VEGETARISKT</p>
         </section>
         <section> HÄR LOOPAS VEGETARISKT </section>
 
@@ -62,7 +64,7 @@ const Menu = (props: Props) => {
       <figure className="menu-desserts--container">
         <img src="" alt="" />
         <section className="menu-dessert--text">
-          <p>EFTERRÄTTER</p>
+          <p className="menu-title-margin">EFTERRÄTTER</p>
         </section>
       </figure>
 

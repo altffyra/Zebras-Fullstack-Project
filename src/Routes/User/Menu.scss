@@ -7,7 +7,11 @@ div .menu-wrapper {
 }
 
 .menu-header--container {
+    margin-top: 1.5rem;
     .menu-header--info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         position: relative;
         margin: 0;
         img {
@@ -21,10 +25,8 @@ div .menu-wrapper {
 
     .menu-header--text {
         position: absolute;
-        top: 25%;
-        left: 33%;
         background-color: variables.$yellowSenap;
-        width: 33%;
+        width: 50%;
         height: 50%;
 
         .menu-header--flex {
@@ -41,6 +43,14 @@ div .menu-wrapper {
         display: flex;
         justify-content: space-evenly;
         box-shadow: 0 .25em .25em rgba(0, 0, 0, 0.25);
+    }
+}
+
+.menu-header--container {
+    .menu-title--text {
+        .menu-title--margin {
+            margin-left: 1rem;
+        }
     }
 }
 
