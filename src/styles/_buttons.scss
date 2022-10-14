@@ -15,7 +15,7 @@
       }
 }
 @mixin bigBtn ($pad: 1em 2em, $bg: variables.$darkRed) {
-      border: 1px solid black;
+      border: none;
       padding: $pad;
       border-radius: 5px;
       background: $bg;

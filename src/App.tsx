@@ -1,4 +1,4 @@
-import './App.css'
+import './App.scss'
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 import LandingView from './Routes/LandingView';
 import LoginView from './Routes/LoginView';
@@ -10,6 +10,7 @@ import CheckOut from './Routes/User/CheckOut';
 import Menu from './Routes/User/Menu';
 import OrderConfirm from './Routes/User/OrderConfirm';
 import SignUp from './Routes/User/SignUp';
+import Search from './Routes/User/Search';
 
 function App() {
 
@@ -27,7 +28,7 @@ function App() {
       <Route path="/Menu" element={ <Menu />}/>
       <Route path="/OrderConfirm" element={ <OrderConfirm />}/>
       <Route path="/Signup" element={ <SignUp />}/>
-
+      <Route path="/Search" element={ <Search />}/>
       <Route path="/*" element={ <Error />}/>
     </Routes>
     </BrowserRouter>
