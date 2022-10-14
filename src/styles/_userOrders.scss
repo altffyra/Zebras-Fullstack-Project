@@ -1,0 +1,26 @@
+@use 'variables';
+
+.user-orders {
+    .headline {
+        @include variables.headerTitle();
+    }
+    
+
+    .orderlist {
+        @include variables.accordianHeader();
+        @include variables.accordianMenu();
+
+        .accordian-header {
+            @include variables.flexContainer(row);
+            justify-content: space-between;
+            img {
+                margin-right: 1em;
+                transform-origin: center;
+                transition: all 500ms;
+            }
+            .active-icon {
+                transform: rotateZ(180deg);
+            }
+        }
+    }
+}
