@@ -8,7 +8,8 @@ import {Order} from '../lowDb/dbinterface.js'
 
 
 
-// GET USER ORDERS
+
+// GET ORDER
 type IdObject = { id: string };
 type IdParam = Request<IdObject>;
 
@@ -32,10 +33,23 @@ orderRoute.get("/admin", async (req:Request, res:Response) => {
 })
 
 
-
-// GET ORDER
+// GET USER ORDERS
+type nameObject = { name: string };
+type nameParam = Request<nameObject>;
+orderRoute.get("/:name", async (req:nameParam, res:Response) => {
+    const name:string = req.params.name;
+    let resOrders = await getOrders()
+    let filter = resOrders.orders.filter((order:Order) => order.user.name == name);
+  if (filter.length > 0) {
+    res.send(filter);
+  } else {
+    res.sendStatus(404);
+  }
+});
 
 // MAKE ORDER
+
+
 
 // CHANGE ORDER
 
