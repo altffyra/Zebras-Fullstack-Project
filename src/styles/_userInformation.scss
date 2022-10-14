@@ -1,11 +1,39 @@
 @use 'variables';
+@use '_buttons';
 
 .user-information {
+    .loading {
+        @include variables.loader();
+    }
+    h2 {
+        text-align: center;
+    }
     .user-container {
-        // width: 100%;
+        @include variables.flexContainer();
+        gap: 1em;
+        width: 100%;
         padding: 1em;
         .user-info {
             @include variables.flexContainer(row);
+            justify-content: space-between;
+        }
+        .change-btn {
+            @include buttons.bigBtn();
+            align-self: center;
+        }
+        .button-container {
+            @include variables.flexContainer(row);
+            justify-content: space-between;
+            gap: 2em;
+            button {
+                flex: 1;
+            }
+            .update-btn {
+                @include buttons.bigBtn($bg: variables.$acceptBtnGreen);
+            }
+            .cancel-btn {
+                @include buttons.bigBtn();
+            }
         }
     }
 }
