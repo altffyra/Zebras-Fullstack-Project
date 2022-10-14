@@ -1,0 +1,120 @@
+@use '../../styles/variables';
+
+div .menu-wrapper {
+    @include variables.flexContainer($dir: column);
+    font-family: 'Rock Salt';
+    background-color: variables.$primaryBackground;
+
+    .menu-header--category {
+        display: flex;
+        justify-content: space-evenly;
+        box-shadow: 0 .25em .25em rgba(0, 0, 0, 0.25);
+    }
+
+    h1 {
+        font-size: 1.1em;
+    }
+
+    h2 {
+        font-size: .8em;
+    }
+
+}
+
+
+.menu-header--container {
+    margin-top: 1.5rem;
+    .menu-header--info {
+        display: flex;
+        @include variables.flexBox($justify: center, $align: center);
+        position: relative;
+        margin: 0;
+        img {
+            width: 100vw;
+        }
+    }
+
+
+    .menu-item {
+
+        display: flex;
+        width: 80%;
+        margin: 1em auto 2em auto;
+        border-bottom: .1em solid #050505;
+        position: relative;
+
+        p {
+            font-family: 'Roboto';
+            margin: .5em 0 .5em 0;
+        }
+
+        .menu-item--vector {
+            position: absolute;
+            width: 100%;
+            bottom: 0;
+            transform: translateY(.7em);
+
+            .menu-item--img {
+                display: flex;
+                justify-content: center;
+            }
+
+        }
+
+        .menu-item--right {
+            display: flex;
+            align-items: center;
+            margin: 0 0 0 auto;
+        }
+
+        .menu-item--left {
+
+            .menu-item--flex {
+                display: flex;
+
+                img {
+                    margin-left: .5em;
+                }
+            }
+
+        }
+
+        .menu-item--add {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+    }
+
+}
+
+
+.menu-header--info {
+
+    .menu-header--text {
+        position: absolute;
+        background-color: variables.$yellowSenap;
+        width: 50%;
+        height: 50%;
+
+        .menu-header--flex {
+            display: flex;
+            @include variables.flexBox($justify: center, $align: center);
+            height: 100%;
+
+        }
+    }
+}
+
+
+.menu-header--container {
+    .menu-title--text {
+        .menu-title--margin {
+            margin: 3em 0 0 1em;
+        }
+    }
+}
+
+
+
+
