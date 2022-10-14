@@ -2,6 +2,7 @@ import { join, dirname } from 'path'
 import { Low, JSONFile } from 'lowdb'
 import { fileURLToPath } from 'url'
 import {MenuItems, Cart, User, Order } from './dbinterface'
+import menuInit from '../data.json' assert {type: "json"}
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -17,7 +18,7 @@ const menudb:any = new Low(menuadapter)
 const userdb:any = new Low(useradapter)
 const orderdb:any = new Low(orderadapter)
 
-menudb.data ||= { menu: [] } 
+menudb.data ||= { menu: menuInit.menu } 
 userdb.data ||= { users: [] }
 orderdb.data ||= { orders: [] }
 
@@ -27,11 +28,16 @@ console.log('lol')
 return "lol"
 }
 
+async function getMenu(){
+    const menureply = await menudb.data
+    return menureply
+}
 
 
-const { menu:MenuInterface} = menudb.data
-const { users:UsersInterface } = userdb.data
-const { orders:OrdersInterface } = orderdb.data
+
+const menu:MenuItems[] = menudb.data
+const users:User[] = userdb.data
+const orders:Order[] = orderdb.data
 
 
 // PUSHA IN OBJECT
@@ -45,4 +51,4 @@ await menudb.write()
 await orderdb.write()
 
 
-export {lol}
+export {lol, getMenu}

@@ -6,27 +6,12 @@ export interface MenuItems {
     type: string;
 }
 
-export interface MenuInterface{
-    menu: MenuItems[]
-}
 
 
 export interface Cart {
     cartItems: MenuItems[];
     totalPrice: number;
 }
-
-export interface User {
-    name: string;
-    email: string;
-    accountId: string;
-    phoneNumber: string;
-    admin?: boolean;
-}
-export interface UsersInterface{
-    users: User[]
-}
-
 export interface Order {
     cartItems: MenuItems[];
     totalPrice: number;
@@ -36,9 +21,14 @@ export interface Order {
     locked: boolean;
     completed: boolean;
     orderPlaced: string;
+    id:string;
 }
 
-export interface OrdersInterface{
-    orders: Order[]
+export interface User {
+    name: string;
+    email: string;
+    accountId: string;
+    phoneNumber: string;
+    admin?: boolean;
 }
 
