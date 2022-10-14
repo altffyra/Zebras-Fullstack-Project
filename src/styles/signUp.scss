@@ -1,0 +1,18 @@
+@use 'variables';
+
+.signUp {
+      width: 80vw;
+      height: 100vh;
+      @include variables.flexContainer();
+      margin: 0 auto;
+      
+
+      figure {
+            background-image: url('../assets/formLogo.svg');
+            background: center 100%;
+      }
+      
+      form {
+            @include variables.flexContainer();
+      }
+}
