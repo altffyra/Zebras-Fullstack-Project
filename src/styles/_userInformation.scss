@@ -1,0 +1,11 @@
+@use 'variables';
+
+.user-information {
+    .user-container {
+        // width: 100%;
+        padding: 1em;
+        .user-info {
+            @include variables.flexContainer(row);
+        }
+    }
+}
