@@ -27,7 +27,7 @@ const SignUp = (props: Props) => {
       phoneNumber: userPhone,
       admin: false
     }
-    const response = await fetch('http://localhost:/user/signup', {
+    const response = await fetch('http://localhost:8000/user/signup', {
       method: 'POST',
       body: JSON.stringify(newUser),
       headers: { 'Content-Type': 'application/json' }
@@ -61,7 +61,7 @@ const SignUp = (props: Props) => {
       <button className='smallBtn'>Tillbaka</button>
       <section className="flex-container">
         <figure></figure>
-        <form>
+        <form onSubmit={(e)=>{handleSubmit(e)}}>
           <label htmlFor="username">Användarnamn</label>
           <input type="text" name='username' onChange={(e)=> {handleEmail(e)}} />
           <label htmlFor="password">Lösenord</label>

@@ -34,6 +34,17 @@ async function getMenu(){
 }
 
 
+// USER FUNCTIONS
+export async function newUser(userData:User) {
+      userdb.read()
+      users.push(userData)
+      userdb.write();
+}
+
+export async function findUser(userData:User) {
+      let userExist = userdb.data.users.find((user: { accountId: string }) => user.accountId === userData.accountId)
+      return userExist
+}     
 
 const menu:MenuItems[] = menudb.data
 const users:User[] = userdb.data
