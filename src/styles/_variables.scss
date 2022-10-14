@@ -92,25 +92,27 @@ $headerFont: 'Rock Salt', cursive;
 @mixin accordianHeader() {
       background-color: $darkRed;
       color: $fontLight;
+      box-shadow: $boxShadow;
       h2 {
             font-family: $primaryFont;
             padding: 1em;
       }
 }
 
-@mixin accordianMenu($bg: $dropdownRed) {
+@mixin accordianMenu($bg: $dropdownRed, $fontCol: $fontLight) {
+      box-shadow: $boxShadow;
       .dropdown {
+            color: $fontCol;
             background-color: $bg;
             padding: 0 1em;
             max-height: 0px;
             height: 100%;
             overflow: hidden;
-            transition: 500ms ease;
+            transition: 500ms;
       }
       .active {
-            padding: 1em;
             max-height: 1000px;
             overflow: hidden;
-            transition: 500ms ease;
+            transition: 500ms;
       }
 }

@@ -1,6 +1,8 @@
 @use 'variables';
 
 .user-orders {
+    @include variables.flexContainer();
+    gap: 3em;
     .headline {
         @include variables.headerTitle();
     }
@@ -8,7 +10,7 @@
 
     .orderlist {
         @include variables.accordianHeader();
-        @include variables.accordianMenu();
+        @include variables.accordianMenu(variables.$primaryBackground, variables.$fontDark);
 
         .accordian-header {
             @include variables.flexContainer(row);
@@ -21,6 +23,9 @@
             .active-icon {
                 transform: rotateZ(180deg);
             }
+        }
+        .single-order {
+            padding: 1em;
         }
     }
 }

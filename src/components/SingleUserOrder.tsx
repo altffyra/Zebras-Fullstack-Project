@@ -1,4 +1,5 @@
 import { Order } from '../models/Interface';
+import lockedIcon from '../assets/locked.png'
 
 type SingleUserOrderProps = {
     order: Order;
@@ -7,10 +8,15 @@ type SingleUserOrderProps = {
 const SingleUserOrders = (props: SingleUserOrderProps) => {
 
     return (
-      <section className="user-order">
-        <p>{}</p>
-        <p>{}</p>
-        <p>{}</p>
+      <section className="single-order">
+        <p>Order {props.order.orderPlaced}</p>
+        {props.order.completed 
+        ? 
+            <img src={lockedIcon} alt="locked icon" />
+        :
+            ''
+        }
+        <img src='' alt="info icon" />
       </section>
     )
   }
