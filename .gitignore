@@ -14,6 +14,7 @@ dist-ssr
 
 #databasen
 backend/tsconfig.json
+backen/dist
 
 
 # Editor directories and files

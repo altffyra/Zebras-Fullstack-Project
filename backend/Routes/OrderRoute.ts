@@ -5,6 +5,11 @@ const orderRoute = express.Router();
 
 // GET USER ORDERS
 
+
+
+orderRoute.get("/", async (req:Request, res:Response) => {
+    res.json('getOrders!')
+})
 // GET ORDERS
 
 // GET ORDER
@@ -12,6 +17,10 @@ const orderRoute = express.Router();
 // MAKE ORDER
 
 // CHANGE ORDER
+
+
+//{user: (account ID/guest), cartItems: [] , orderPlaced: , userComment: , adminComment: , locked: , completed: ,  }
+
 
 
 
