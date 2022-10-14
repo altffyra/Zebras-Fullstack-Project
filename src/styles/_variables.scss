@@ -50,6 +50,12 @@ $boxShadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.25);
       flex-direction: $dir;
 }
 
+@mixin flexBox($justify: center, $align: center) {
+      display: flex;
+      justify-content: $justify;
+      align-items: $align;
+}
+
 @mixin headerTitle($image)  {
       background-image: $image;
       background-position: center;
