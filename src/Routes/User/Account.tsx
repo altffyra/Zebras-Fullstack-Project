@@ -2,6 +2,7 @@ import '../../styles/_account.scss';
 import UserInformation from '../../components/UserInformation';
 import Nav from '../../components/Nav';
 import SearchUser from '../../components/SearchUser';
+import UserOrders from '../../components/UserOrders';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
@@ -34,6 +35,7 @@ const Account = () => {
         <div className='divider'></div>
         <SearchUser orders={orders} />
       </div>
+      <UserOrders orders={orders} />
     </section>
   )
 }
