@@ -1,4 +1,4 @@
-import './App.css'
+import './App.scss'
 import { Routes, BrowserRouter, Route } from "react-router-dom";
 import LandingView from './Routes/LandingView';
 import LoginView from './Routes/LoginView';
