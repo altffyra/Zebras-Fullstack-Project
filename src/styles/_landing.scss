@@ -76,13 +76,13 @@
     }
 
     .our-goal {
-        grid-area: 5 / 3 / 6 / 6;
+        grid-area: 5 / 1 / 6 / 3;
         background-color: black;
         color: variables.$fontLight;
     }
 
     .our-goal-img {
-        grid-area: 5 / 1 / 6 / 3;
+        grid-area: 5 / 3 / 6 / 6;
         background-image: url('../assets/our-goal.jpg');
     }
 
@@ -127,11 +127,11 @@
         }
 
         .our-goal {
-            grid-area: 8 / 3 / 10 / 6;
+            grid-area: 8 / 1 / 10 / 3;
         }
 
         .our-goal-img {
-            grid-area: 8 / 1 / 10 / 3;
+            grid-area: 8 / 3 / 10 / 6;
             background-position-x: center;
             background-position-y: center;
         }
