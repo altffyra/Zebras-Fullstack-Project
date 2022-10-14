@@ -81,7 +81,7 @@ $headerFont: 'Rock Salt', cursive;
     }
 }
 
-@mixin gridContainer($rows: 4) {
+@mixin gridContainer($rows: 5) {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       grid-template-rows: repeat($rows, 1fr);
