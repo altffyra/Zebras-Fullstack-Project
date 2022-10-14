@@ -7,18 +7,18 @@
     }
     h2 {
         text-align: center;
+        margin: 1em 0;
     }
     .user-container {
         @include variables.flexContainer();
         gap: 1em;
         width: 100%;
-        padding: 1em;
         .user-info {
             @include variables.flexContainer(row);
             justify-content: space-between;
         }
         .change-btn {
-            @include buttons.bigBtn();
+            @include buttons.bigBtn($pad: 0.6em 4em);
             align-self: center;
         }
         .button-container {
@@ -27,13 +27,23 @@
             gap: 2em;
             button {
                 flex: 1;
+                margin: 1em 0;
             }
             .update-btn {
-                @include buttons.bigBtn($bg: variables.$acceptBtnGreen);
+                @include buttons.bigBtn($pad: 0.6em 2em, $bg: variables.$acceptBtnGreen);
             }
             .cancel-btn {
-                @include buttons.bigBtn();
+                @include buttons.bigBtn($pad: 0.6em 2em);
             }
+        }
+    }
+}
+
+@media screen and (min-width: 786px) {
+    .user-information {
+        margin: 0 1em;
+        .user-container {
+            gap: 2em;
         }
     }
 }
