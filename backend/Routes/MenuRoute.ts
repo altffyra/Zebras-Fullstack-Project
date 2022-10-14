@@ -10,7 +10,7 @@ import {MenuItems} from '../lowDb/dbinterface.js'
 
 
 menuRoute.get("/", async (req:Request, res:Response) => {
-    const resMenu = await getMenu()
+    const resMenu: MenuItems[] = await getMenu()
     res.json(resMenu)
 })
 
