@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import Nav from '../components/Nav';
 import '../styles/_landing.scss';
 
@@ -7,11 +8,17 @@ import '../styles/_landing.scss';
 type Props = {}
 
 const LandingView = (props: Props) => {
+  const navigate = useNavigate();
+
+  function goToMenu() {
+    navigate('/Menu')
+  }
+
   return (
     <main className='landing'>
       <Nav />
       <section className='hero'>
-        <button>FOOD</button>
+        <button onClick={goToMenu}>FOOD</button>
       </section>
 
       <section className='about-us'>
