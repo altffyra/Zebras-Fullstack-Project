@@ -8,6 +8,8 @@ const orderRoute = express.Router();
 
 
 orderRoute.get("/", async (req:Request, res:Response) => {
+    
+
     res.json('getOrders!')
 })
 // GET ORDERS
@@ -19,7 +21,7 @@ orderRoute.get("/", async (req:Request, res:Response) => {
 // CHANGE ORDER
 
 
-//{user: (account ID/guest), cartItems: [] , orderPlaced: , userComment: , adminComment: , locked: , completed: ,  }
+//{user: (account ID/guest), cartItems: [] , orderPlaced: , userComment: , adminComment: , locked: , completed: , id:  }
 
 
 
