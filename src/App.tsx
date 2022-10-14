@@ -15,23 +15,25 @@ import Search from './Routes/User/Search';
 function App() {
 
   return (
-    <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<LandingView />} />
-      <Route path="/login" element={ <LoginView />}/> 
-      {/* Admin */}
-      <Route path="/AdminOrder" element={ <AdminOrder />}/>
-      <Route path="/AdminPage" element={ <AdminPage />}/>
-      {/* USER */}
-      <Route path="/Account" element={ <Account />}/>
-      <Route path="/CheckOut" element={ <CheckOut />}/>
-      <Route path="/Menu" element={ <Menu />}/>
-      <Route path="/OrderConfirm" element={ <OrderConfirm />}/>
-      <Route path="/Signup" element={ <SignUp />}/>
-      <Route path="/Search" element={ <Search />}/>
-      <Route path="/*" element={ <Error />}/>
-    </Routes>
-    </BrowserRouter>
+    <div className="App">
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingView />} />
+        <Route path="/login" element={ <LoginView />}/> 
+        {/* Admin */}
+        <Route path="/AdminOrder" element={ <AdminOrder />}/>
+        <Route path="/AdminPage" element={ <AdminPage />}/>
+        {/* USER */}
+        <Route path="/Account" element={ <Account />}/>
+        <Route path="/CheckOut" element={ <CheckOut />}/>
+        <Route path="/Menu" element={ <Menu />}/>
+        <Route path="/OrderConfirm" element={ <OrderConfirm />}/>
+        <Route path="/Signup" element={ <SignUp />}/>
+        <Route path="/Search" element={ <Search />}/>
+        <Route path="/*" element={ <Error />}/>
+      </Routes>
+      </BrowserRouter>
+    </div>
   )
 }
 
