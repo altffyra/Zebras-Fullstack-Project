@@ -7,11 +7,15 @@ const userRoute = express.Router();
 
 // LOGIN
 
+
+userRoute.get("/signup", async (req:Request, res:Response) => {
+    res.json('nice!')
+})
 // SIGNUP
 
 // UPDATE USER
 
-
+//user{name: , email: , accountId: , accountID: , phoneNumber: ,admin: , }
 
 
 
