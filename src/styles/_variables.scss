@@ -53,6 +53,12 @@ $headerFont: 'Rock Salt', cursive;
       flex-direction: $dir;
 }
 
+@mixin flexBox($justify: center, $align: center) {
+      display: flex;
+      justify-content: $justify;
+      align-items: $align;
+}
+
 @mixin headerTitle($image)  {
       background-image: $image;
       background-position: center;

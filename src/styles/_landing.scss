@@ -1,0 +1,91 @@
+@use 'variables';
+@use 'buttons';
+
+.landing {
+    @include variables.gridContainer();
+    background-color: variables.$primaryBackground;
+
+    & > figure {
+        margin-block-start: 0;
+        margin-block-end: 0;
+        margin-inline-start: 0;
+        margin-inline-end: 0;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    & > section {
+        @include variables.flexBox();
+        flex-direction: column;
+        padding: 1em;
+    }
+
+    & >* .border {
+        border-bottom: 1px solid white;
+        border-right: 1px solid white;
+        padding-right: 1em;
+    }
+
+    .hero {
+        grid-area: 1 / 1 / 3 / 6;
+        background-image: url('../assets/hero.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position-x: center;
+        background-position-y: center;
+        position: relative;
+
+        button {
+            @include buttons.smallBtn;
+            border-color: variables.$yellowSenap;
+            color: variables.$yellowSenap;
+            background-color: transparent;
+            position: absolute;
+            bottom: 25em;
+        }
+    }
+
+    .about-us {
+        grid-area: 3 / 1 / 4 / 3;
+        background-color: black;
+        color: variables.$fontLight;
+    }
+
+    .about-us-img {
+        grid-area: 3 / 3 / 4 / 6;
+        background-image: url('../assets/chef-cooking.jpg');
+
+
+    }
+
+    .our-food-img {
+        grid-area: 4 / 1 / 5 / 4;
+        background-image: url('../assets/food.jpg');
+    }
+
+    .our-food {
+        grid-area: 4 / 4 / 5 / 6;
+        background-color: variables.$darkRed;
+        color: variables.$fontLight;
+    }
+
+    .our-goal {
+        grid-area: 5 / 3 / 6 / 6;
+        background-color: black;
+        color: variables.$fontLight;
+    }
+
+    .our-goal-img {
+        grid-area: 5 / 1 / 6 / 3;
+        background-image: url('../assets/our-goal.jpg');
+    }
+
+    .map {
+        grid-area: 6 / 1 / 7 / 6;
+
+
+    }
+
+
+
+}
