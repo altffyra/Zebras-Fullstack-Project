@@ -28,6 +28,7 @@ export interface Order {
     locked: boolean;
     completed: boolean;
     orderPlaced: string;
+    id: string;
 }
 
 

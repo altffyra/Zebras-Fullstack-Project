@@ -32,6 +32,10 @@ async function getMenu(){
     const menureply = await menudb.data
     return menureply
 }
+async function getOrders(){
+    const orderreply = await orderdb.data
+    return orderreply
+}
 
 
 // USER FUNCTIONS
@@ -62,4 +66,4 @@ await menudb.write()
 await orderdb.write()
 
 
-export {lol, getMenu}
+export {lol, getMenu, getOrders}

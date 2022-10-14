@@ -3,10 +3,16 @@ import { Order } from "../models/Interface";
 
 const initialState: Order[] = [];
 
-const actions = { };
+const getOrders = createAction<Order[]>('Get all orders');
+
+const actions = { getOrders };
 
 const reducer = createReducer(initialState, {
+    [getOrders.toString()]: (state, action) => {
+        const allOrders = [...action.payload];
 
+        return allOrders
+    }
 })
 
 export {reducer, actions}

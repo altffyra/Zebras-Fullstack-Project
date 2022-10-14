@@ -59,18 +59,18 @@ $headerFont: 'Rock Salt', cursive;
       align-items: $align;
 }
 
-@mixin headerTitle($image)  {
+@mixin headerTitle($image: url('../assets/about-us.jpg'))  {
       background-image: $image;
       background-position: center;
-      width: 100vw;
+      width: 100%;
       display: grid;
       place-items: center;
-      
+      padding: 1em;
+
       h1 {
             color:$fontDark;
-            padding: 0.4em, 1em;
+            padding: 1em;
             background-color: $yellowSenap;
-            font-family: Rock Salt;
       }
 }
 
@@ -81,10 +81,38 @@ $headerFont: 'Rock Salt', cursive;
     }
 }
 
-@mixin gridContainer($rows: 4) {
+@mixin gridContainer($rows: 5) {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       grid-template-rows: repeat($rows, 1fr);
       grid-column-gap: 0px;
       grid-row-gap: 0px;
+}
+
+@mixin accordianHeader() {
+      background-color: $darkRed;
+      color: $fontLight;
+      box-shadow: $boxShadow;
+      h2 {
+            font-family: $primaryFont;
+            padding: 1em;
+      }
+}
+
+@mixin accordianMenu($bg: $dropdownRed, $fontCol: $fontLight) {
+      box-shadow: $boxShadow;
+      .dropdown {
+            color: $fontCol;
+            background-color: $bg;
+            padding: 0 1em;
+            max-height: 0px;
+            height: 100%;
+            overflow: hidden;
+            transition: 500ms;
+      }
+      .active {
+            max-height: 1000px;
+            overflow: hidden;
+            transition: 500ms;
+      }
 }

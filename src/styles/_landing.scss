@@ -18,12 +18,17 @@
         @include variables.flexBox();
         flex-direction: column;
         padding: 1em;
+
+        h3 {
+            font-family: variables.$headerFont;
+        }
     }
 
     & >* .border {
         border-bottom: 1px solid white;
         border-right: 1px solid white;
         padding-right: 1em;
+        padding-bottom: .5em;
     }
 
     .hero {
@@ -36,12 +41,13 @@
         position: relative;
 
         button {
-            @include buttons.smallBtn;
+            @include buttons.smallBtn($pad: 1em 2em);
             border-color: variables.$yellowSenap;
             color: variables.$yellowSenap;
-            background-color: transparent;
+            background: rgba(50, 50, 50, 0.5);
             position: absolute;
-            bottom: 25em;
+            bottom: 20em;
+            font-family: variables.$headerFont;
         }
     }
 
@@ -70,13 +76,13 @@
     }
 
     .our-goal {
-        grid-area: 5 / 3 / 6 / 6;
+        grid-area: 5 / 1 / 6 / 3;
         background-color: black;
         color: variables.$fontLight;
     }
 
     .our-goal-img {
-        grid-area: 5 / 1 / 6 / 3;
+        grid-area: 5 / 3 / 6 / 6;
         background-image: url('../assets/our-goal.jpg');
     }
 
@@ -86,6 +92,52 @@
 
     }
 
+}
 
+@media screen and (min-width: 786px) {
+    .landing {
+        @include variables.gridContainer($rows: 10);
+        .hero {
+            grid-area: 1 / 1 / 4 / 6;
 
+            button {
+                bottom: 5em;
+                cursor: pointer;
+            }
+        }
+
+        .about-us {
+            grid-area: 4 / 1 / 6 / 3;
+        }
+
+        .about-us-img {
+            grid-area: 4 / 3 / 6 / 6;
+            background-position-x: center;
+            background-position-y: center;
+        }
+
+        .our-food-img {
+            grid-area: 6 / 1 / 8 / 4;
+            background-position-x: center;
+            background-position-y: center;
+        }
+
+        .our-food {
+            grid-area: 6 / 4 / 8 / 6;
+        }
+
+        .our-goal {
+            grid-area: 8 / 1 / 10 / 3;
+        }
+
+        .our-goal-img {
+            grid-area: 8 / 3 / 10 / 6;
+            background-position-x: center;
+            background-position-y: center;
+        }
+
+        .map {
+            grid-area: 10 / 1 / 11 / 6;
+        }
+    }
 }
