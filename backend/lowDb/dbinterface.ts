@@ -6,8 +6,6 @@ export interface MenuItems {
     type: string;
 }
 
-
-
 export interface Cart {
     cartItems: MenuItems[];
     totalPrice: number;
@@ -16,8 +14,8 @@ export interface Order {
     cartItems: MenuItems[];
     totalPrice: number;
     user: User;
-    userComment: string;
-    adminComment: string;
+    userComment?: string;
+    adminComment?: string;
     locked: boolean;
     completed: boolean;
     orderPlaced: string;

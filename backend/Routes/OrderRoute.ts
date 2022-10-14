@@ -2,6 +2,7 @@ import express, { Request, Response } from "express";
 const app = express();
 app.use(express.json());
 const orderRoute = express.Router();
+import {MenuItems} from '../lowDb/dbinterface'
 import {getOrders} from '../lowDb/database.js'
 import {Order} from '../lowDb/dbinterface.js'
 
@@ -52,6 +53,10 @@ orderRoute.get("/:name", async (req:nameParam, res:Response) => {
 
 
 // CHANGE ORDER
+
+
+// function isValidOrder(isorder: Order)
+   
 
 
 //{user: (account ID/guest), cartItems: [] , orderPlaced: , userComment: , adminComment: , locked: , completed: , id:  }

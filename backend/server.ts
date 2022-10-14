@@ -13,7 +13,7 @@ app.use(express.json());
 
 const __dirname:string = dirname(fileURLToPath(import.meta.url));
 const staticPath:string = join(__dirname, '../../dist')
-app.use(express.static(staticPath))
+
 
 
 
@@ -28,6 +28,9 @@ async function start(){
 const lolw = await lol()
 }
 start()
+
+app.use(express.static(staticPath))
+
 
 app.listen(PORT, () => {
     console.log("Running on ", PORT);
