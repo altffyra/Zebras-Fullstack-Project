@@ -5,6 +5,7 @@
       height: 100vh;
       @include variables.flexContainer();
       margin: 0 auto;
+      
 
       figure {
             background-image: url('../assets/formLogo.svg');
