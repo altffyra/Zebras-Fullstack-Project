@@ -2,23 +2,72 @@ import '../styles/_cart.scss';
 import dropDownLight from '../assets/dropDownLight.svg';
 import { CartProps } from '../models/Interface';
 import CartItem from './CartItem';
+import {useState, ChangeEvent, useEffect} from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux'
+import {actions as cartActions} from '../features/cartReducer';
 
 type CartProp = {
     cart: CartProps;
 }
 
+type UpdatedItemProps = {
+    name: string;
+    amount: number;
+}
+
 const Cart = (props: CartProp) => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [active, setActive] = useState<boolean>(false)
 
-    const cartItemEl = props.cart.cartItems.map((item, index) => <CartItem item={item} key={index} />)
+    const handleCart: () => void = () => {
+        setActive(!active)
+    };
+
+    useEffect(() => {
+        if(props.cart.cartItems.length == 0) {
+            setActive(false)
+        }
+    }, [props.cart.cartItems.length])
+
+    const activeCss: string = active ? 'active' : '';
+    const cartCss: string = active ? 'active-cart' : 'closed-cart';
+
+    const handleCheckout: () => void = () => {
+        navigate('/checkout')
+    }    
+    
+    const handleAmount: (e:ChangeEvent<HTMLSelectElement>, itemName: string) => void = (e, itemName) => {
+
+        const updatedItem: UpdatedItemProps = {
+            name : itemName,
+            amount : parseInt(e.target.value)
+        }        
+
+        dispatch(cartActions.updateAmount(updatedItem));
+    }
+
+    const cartItemEl = props.cart.cartItems.map((item, index) => <CartItem item={item} key={index} handleAmount={handleAmount} />)
     return (
-        <section className="cart">
-            <img src={dropDownLight} alt="drop down icon" />
-
-            <div className="cart-headline">
-                <p>{props.cart.cartItems.length} produkter</p>
-                <p>{props.cart.totalPrice} kr</p>
+        <section className='cart'>
+            <div className="cart-dropdown" onClick={handleCart}>
+                <img src={dropDownLight} className={activeCss} alt="drop down icon" />
+                {props.cart.cartItems.length > 0 && !active
+                ?
+                <div className="cart-headline">
+                    <p>{props.cart.cartItems.length} produkter</p>
+                    <p>{props.cart.totalPrice} kr</p>
+                </div>
+                :
+                ''
+                }
             </div>
-            {cartItemEl}
+            <div className={cartCss}>
+                {cartItemEl}
+                <p className='total-price'>Totalt : {props.cart.totalPrice} kr</p>
+                <button onClick={handleCheckout}>Kassa</button>
+            </div>
         </section>
     )
 }

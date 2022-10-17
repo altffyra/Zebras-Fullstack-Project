@@ -80,13 +80,12 @@ const Menu = (props: Props) => {
 
       < MenuTopic topic={vegTopic} foodImg={vegImg}/>
       < MenuTopic topic={dessTopic} foodImg={dessImg}/>
-      {/* {cart.cartItems.length > 0 
+      {cart.cartItems.length > 0 
       ?
         <Cart cart={cart}/>
       : 
         ''
-      } */}
-      <Cart cart={cart}/>
+      }
     </div>
   )
 }

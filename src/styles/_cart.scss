@@ -1,23 +1,96 @@
 @use 'variables';
+@use 'buttons';
+@use 'sass:color';
 
 .cart {
     position: fixed;
     bottom: 0;
     left: 0;
-    background-color: variables.$darkRed;
+    background-color: variables.$dropdownRed;
     width: 100%;
     @include variables.flexContainer();
     align-items: center;
-    padding: 1em 0;
+
     * {
         color: variables.$fontLight;
     }
 
-    .cart-headline {
+    .cart-dropdown {
         width: 100%;
+        background-color: variables.$darkRed;
+        @include variables.flexContainer();
+        box-shadow: variables.$boxShadow;
+
+        img {
+            padding: 1em 0;
+            margin: 0 auto;
+            transition: all 400ms;
+        }
+
+        .active {
+            transform: rotateZ(180deg);
+        }
+        
+        .cart-headline {
+            width: 100%;
+            padding: 1em;
+            @include variables.flexContainer(row);
+            justify-content: space-between;
+        }
+    }
+    
+    .closed-cart {
+        transform: translateY(100%);
+        position: fixed;
+        transition: all 400ms;
+    }
+    
+    .active-cart {
+        width: 100%;
+        @include variables.flexContainer();
+        height: 94vh;
+        overflow-y: auto;
+        transition: all 400ms;
+        transform: translateY(0%);
+        z-index: 1000;
+    }
+
+    .cart-item {
+        position: relative;
         padding: 1em;
+        padding-top: 2em;
+        width: 100%;
         @include variables.flexContainer(row);
         justify-content: space-between;
-        
+        gap: 1em;
+        border-bottom: 2px solid variables.$fontLight;
+        :first-child {
+            flex: 3;
+        }
+        * {
+            flex: 1;
+            align-self: center;
+            justify-self: flex-end;
+        }
+
+        select, option {
+            color: variables.$fontDark;
+        }
     }
+
+    .total-price {
+        width: 100%;
+        padding: 1em;
+        text-align: end;
+    }
+
+    button {
+        @include buttons.bigBtn($pad: 0.6em 2em, $bg: color.scale(variables.$dropdownRed, $lightness: 40%));
+        margin: 2em 0;
+        align-self: center;
+    }
+}
+
+.active-cart {
+    transform: translateY(0%);
 }
