@@ -7,7 +7,9 @@ import {getOrders} from '../lowDb/database.js'
 import {Order} from '../lowDb/dbinterface.js'
 
 
-
+async function auth(){
+const loginDetails = "jdiaji"
+}
 
 
 // GET ORDER
