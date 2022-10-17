@@ -9,7 +9,13 @@ const initialState: CartProps = {
         {name:"4", price: 4, amount: 1},
         {name:"5", price: 5, amount: 1},
         {name:"6", price: 6, amount: 1},
-        {name:"7", price: 7, amount: 1}
+        {name:"7", price: 4, amount: 1},
+        {name:"8", price: 5, amount: 1},
+        {name:"9", price: 6, amount: 1},
+        {name:"10", price: 4, amount: 1},
+        {name:"11", price: 5, amount: 1},
+        {name:"12", price: 6, amount: 1},
+        {name:"13", price: 7, amount: 1}
     ],
     totalPrice: 28
 };
@@ -46,11 +52,8 @@ const reducer = createReducer(initialState, {
             } 
         })
         
-        console.log(cartCopy);
-        
         state.totalPrice = updatedPrice;
-        state.cartItems = cartCopy;
-        
+        state.cartItems = cartCopy;        
         
         return state
     }
