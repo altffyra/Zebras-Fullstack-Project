@@ -9,6 +9,7 @@ import {lol} from './lowDb/database.js'
 const app = express();
 const PORT: number = 8000;
 
+// app.use(cors({origin: '*'}))
 app.use(express.json());
 
 const __dirname:string = dirname(fileURLToPath(import.meta.url));
