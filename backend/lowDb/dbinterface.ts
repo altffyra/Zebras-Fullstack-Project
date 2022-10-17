@@ -1,3 +1,6 @@
+import { IncomingHttpHeaders } from 'http'
+
+
 export interface MenuItems {
     name: string;
     desc: string;
@@ -23,6 +26,7 @@ export interface User {
     accountId: string;
     phoneNumber: string;
     admin?: boolean;
+    password: string;
 }
 
 export interface Order {
@@ -35,3 +39,8 @@ export interface Order {
     orderPlaced: string;
     id: string;
 }
+export type headersType = {
+    headers : IncomingHttpHeaders & {
+      "accountID": string
+    }
+  }

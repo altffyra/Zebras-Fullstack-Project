@@ -1,21 +1,92 @@
 {
   "orders": [
-  {
-    "cart": {"cartItems": [], "totalPrice": 349
+    {
+      "cart": {
+        "cartItems": [
+          {"name": "Fake", "price": 10, "amount": 2},
+          {"name": "Fake Igen", "price": 10, "amount": 3}
+        ], 
+        "totalPrice": 50
+      },
+      "user": { 
+        "name": "Fake",
+        "email": "Fake@fake.com",
+        "phoneNumber": "0707891502"
+      },
+  
+      "userComment": "",
+      "adminComment": "",
+      "locked": false,
+      "completed": false,
+      "orderPlaced": "2022-10-17 22:15",
+      "id":"123asd"
     },
-    "user": { "name": "jens",
-    "email": "jensa@jenssen.com",
-    "accountId": "jenso",
-    "phoneNumber": "0703323502",
-    "admin": false },
-
-    "userComment": "inge shit",
-    "adminComment": "instabil person",
-    "locked": true,
-    "completed": false,
-    "orderPlaced": "2022-10-17 12:15",
-    "id":"eiuriuaa"
-  }
+    {
+      "cart": {
+        "cartItems": [
+          {"name": "Påhittad", "price": 100, "amount": 1},
+          {"name": "Påhittad Igen", "price": 10, "amount": 3}
+        ], 
+        "totalPrice": 130
+      },
+      "user": { 
+        "name": "Påhittad",
+        "email": "Påhittad@fake.com",
+        "phoneNumber": "0704502"
+      },
+  
+      "userComment": "Jag har ont i magen",
+      "adminComment": "",
+      "locked": false,
+      "completed": false,
+      "orderPlaced": "2022-02-17 22:15",
+      "id":"345zxc"
+    },
+    {
+      "cart": {
+        "cartItems": [
+          {"name": "Fake", "price": 10, "amount": 2},
+          {"name": "Fake Igen", "price": 10, "amount": 3}
+        ], 
+        "totalPrice": 50
+      },
+      "user": { 
+        "name": "Fake",
+        "email": "Fake@fake.com",
+        "phoneNumber": "0707891502"
+      },
+  
+      "userComment": "",
+      "adminComment": "",
+      "locked": false,
+      "completed": false,
+      "orderPlaced": "2022-10-17 22:15",
+      "id":"123asd"
+    },
+    {
+      "cart": {
+        "cartItems": [
+          {"name": "Imaginary", "price": 100, "amount": 1},
+          {"name": "Imaginary Igen", "price": 10, "amount": 3},
+          {"name": "Något", "price": 10, "amount": 1},
+          {"name": "Något Igen", "price": 50, "amount": 1}
+        ], 
+        "totalPrice": 190
+      },
+      "user": { 
+        "name": "Imaginary",
+        "email": "Imaginary@fake.com",
+        "accountId": "uaidy89hdaskd",
+        "phoneNumber": "070423502"
+      },
+  
+      "userComment": "Tål inte saker",
+      "adminComment": "Ge vatten bara",
+      "locked": true,
+      "completed": true,
+      "orderPlaced": "2022-04-17 22:15",
+      "id":"456zxcg"
+    }
   
 
 
