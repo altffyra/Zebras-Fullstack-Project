@@ -24,7 +24,7 @@
         img {
             padding: 1em 0;
             margin: 0 auto;
-            transition: all 400ms;
+            transition: all 300ms;
         }
 
         .active {
@@ -40,9 +40,9 @@
     }
     
     .closed-cart {
-        transform: translateY(100%);
+        display: none;
+        max-height: 0%;
         position: fixed;
-        transition: all 400ms;
     }
     
     .active-cart {
@@ -50,8 +50,7 @@
         @include variables.flexContainer();
         height: 94vh;
         overflow-y: auto;
-        transition: all 400ms;
-        transform: translateY(0%);
+        max-height: 100%;
         z-index: 1000;
     }
 
