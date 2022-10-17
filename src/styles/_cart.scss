@@ -1,0 +1,23 @@
+@use 'variables';
+
+.cart {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background-color: variables.$darkRed;
+    width: 100%;
+    @include variables.flexContainer();
+    align-items: center;
+    padding: 1em 0;
+    * {
+        color: variables.$fontLight;
+    }
+
+    .cart-headline {
+        width: 100%;
+        padding: 1em;
+        @include variables.flexContainer(row);
+        justify-content: space-between;
+        
+    }
+}

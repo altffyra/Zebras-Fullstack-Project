@@ -2,11 +2,12 @@ export interface MenuItems {
     name: string;
     desc: string;
     price: number;
-    allergy: string;
+    allergies: string;
     type: string;
+    amount?: number;
 }
 
-export interface Cart {
+export interface CartProps {
     cartItems: MenuItems[];
     totalPrice: number;
 }
