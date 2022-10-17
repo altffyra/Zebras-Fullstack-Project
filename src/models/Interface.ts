@@ -2,12 +2,18 @@ export interface MenuItems {
     name: string;
     desc: string;
     price: number;
-    allergy: string;
+    allergies: string;
     type: string;
 }
 
-export interface Cart {
-    cartItems: MenuItems[];
+export interface CartItems {
+    name: string;
+    price: number;
+    amount: number;
+}
+
+export interface CartProps {
+    cartItems: CartItems[];
     totalPrice: number;
 }
 
@@ -20,11 +26,10 @@ export interface User {
 }
 
 export interface Order {
-    cartItems: MenuItems[];
-    totalPrice: number;
+    cart: CartProps;
     user: User;
-    userComment: string;
-    adminComment: string;
+    userComment?: string;
+    adminComment?: string;
     locked: boolean;
     completed: boolean;
     orderPlaced: string;
