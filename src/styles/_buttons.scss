@@ -1,0 +1,29 @@
+@use 'variables';
+@use 'sass:color';
+
+@mixin smallBtn($pad: .5em 1em, $bg: variables.$primaryBackground) {
+      border: 1px solid black;
+      padding: $pad;
+      border-radius: 4px;
+      background: $bg;
+      font-size: .8em;
+      box-shadow: variables.$boxShadow;
+      color: variables.$fontDark;
+      transition: all 300ms;
+      &:hover {
+            background: color.scale($bg, $blackness: 40%);
+      }
+}
+@mixin bigBtn ($pad: 1em 2em, $bg: variables.$darkRed) {
+      border: none;
+      padding: $pad;
+      border-radius: 5px;
+      background: $bg;
+      font-size: 1.1em;
+      box-shadow: variables.$boxShadow;
+      color: variables.$fontLight;
+      transition: all 300ms;
+      &:hover {
+            background: color.scale($bg, $blackness: 40%);
+      }
+}
