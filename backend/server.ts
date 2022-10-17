@@ -9,13 +9,13 @@ import cors from 'cors';
 
 const app = express();
 const PORT: number = 8000;
+
 app.use(cors({ origin: "*" }));
 
 app.use(express.json());
 
 const __dirname:string = dirname(fileURLToPath(import.meta.url));
 const staticPath:string = join(__dirname, '../../dist')
-
 
 
 

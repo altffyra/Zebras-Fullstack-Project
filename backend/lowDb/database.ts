@@ -1,8 +1,15 @@
 import { join, dirname } from 'path'
 import { Low, JSONFile } from 'lowdb'
 import { fileURLToPath } from 'url'
-import {MenuItems, Cart, User, Order } from './dbinterface'
-import menuInit from '../data.json' assert {type: "json"}
+import {MenuItems, CartProps, User, Order } from './dbinterface'
+import menuInit from '../menudata.json' assert {type: "json"}
+import ordersInit from '../orderdb.json' assert {type: "json"}
+
+import dayjs from 'dayjs'
+dayjs()
+
+const started= dayjs().format('YYYY-MM-DD HH:mm')
+console.log(started)
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -18,9 +25,13 @@ const menudb:any = new Low(menuadapter)
 const userdb:any = new Low(useradapter)
 const orderdb:any = new Low(orderadapter)
 
+
 menudb.data ||= { menu: menuInit.menu } 
 userdb.data ||= { users: [] }
-orderdb.data ||= { orders: [] }
+
+
+orderdb.data ||= { orders: ordersInit.orders }
+
 
 
 async function lol(){

@@ -1,0 +1,23 @@
+{
+  "orders": [
+  {
+    "cart": {"cartItems": [], "totalPrice": 349
+    },
+    "user": { "name": "jens",
+    "email": "jensa@jenssen.com",
+    "accountId": "jenso",
+    "phoneNumber": "0703323502",
+    "admin": false },
+
+    "userComment": "inge shit",
+    "adminComment": "instabil person",
+    "locked": true,
+    "completed": false,
+    "orderPlaced": "2022-10-17 12:15",
+    "id":"eiuriuaa"
+  }
+  
+
+
+]
+}

@@ -8,7 +8,7 @@ import {Order} from '../lowDb/dbinterface.js'
 
 
 async function auth(){
-const loginDetails = "jdiaji"
+const loginDetails = ""
 }
 
 
@@ -39,6 +39,7 @@ orderRoute.get("/admin", async (req:Request, res:Response) => {
 // GET USER ORDERS
 type nameObject = { name: string };
 type nameParam = Request<nameObject>;
+
 orderRoute.get("/:name", async (req:nameParam, res:Response) => {
     const name:string = req.params.name;
     let resOrders = await getOrders()
