@@ -1,25 +1,23 @@
+import { IncomingHttpHeaders } from 'http'
+
+
 export interface MenuItems {
     name: string;
     desc: string;
     price: number;
-    allergy: string;
+    allergies: string;
     type: string;
 }
 
-export interface Cart {
-    cartItems: MenuItems[];
-    totalPrice: number;
+export interface CartItems {
+    name: string;
+    price: number;
+    amount: number;
 }
-export interface Order {
-    cartItems: MenuItems[];
+
+export interface CartProps {
+    cartItems: CartItems[];
     totalPrice: number;
-    user: User;
-    userComment?: string;
-    adminComment?: string;
-    locked: boolean;
-    completed: boolean;
-    orderPlaced: string;
-    id:string;
 }
 
 export interface User {
@@ -28,5 +26,21 @@ export interface User {
     accountId: string;
     phoneNumber: string;
     admin?: boolean;
+    password: string;
 }
 
+export interface Order {
+    cart: CartProps;
+    user: User;
+    userComment?: string;
+    adminComment?: string;
+    locked: boolean;
+    completed: boolean;
+    orderPlaced: string;
+    id: string;
+}
+export type headersType = {
+    headers : IncomingHttpHeaders & {
+      "accountID": string
+    }
+  }

@@ -1,10 +1,39 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
+import { IncomingHttpHeaders } from 'http';
 const app = express();
 app.use(express.json());
 const orderRoute = express.Router();
-import {MenuItems} from '../lowDb/dbinterface'
-import {getOrders} from '../lowDb/database.js'
+import {MenuItems, headersType, User} from '../lowDb/dbinterface'
+import {authenticateLogin, getOrders} from '../lowDb/database.js'
 import {Order} from '../lowDb/dbinterface.js'
+import { stringify } from "querystring";
+
+
+
+
+
+
+
+
+const auth = async function (req:Request, res:Response, next:NextFunction) {
+  
+  const idhead = req.header('accountID')
+  if (!idhead ) 
+    {
+    return res.status(403).json({ error: 'no credentials.' });
+    } 
+
+  if (idhead)
+    {
+      const checklogin:User[] = await authenticateLogin(idhead)
+      if (checklogin.length>0) next();
+       else 
+      return res.json({ error: 'not an admin' })
+      
+    }
+};
+
+
 
 
 
@@ -28,7 +57,7 @@ orderRoute.get("/user/:id", async (req:IdParam, res:Response) => {
 
 
 // GET ALL ORDERS ADMIN
-orderRoute.get("/admin", async (req:Request, res:Response) => {
+orderRoute.get("/admin", auth, async (req:Request, res:Response) => {
     const resOrders:Order[] = await getOrders()
     res.json(resOrders)
 })
@@ -37,6 +66,7 @@ orderRoute.get("/admin", async (req:Request, res:Response) => {
 // GET USER ORDERS
 type nameObject = { name: string };
 type nameParam = Request<nameObject>;
+
 orderRoute.get("/:name", async (req:nameParam, res:Response) => {
     const name:string = req.params.name;
     let resOrders = await getOrders()

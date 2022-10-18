@@ -7,6 +7,12 @@ import vector from '../../assets/menu/vector.svg';
 import allergy from '../../assets/menu/allergy.svg';
 import MenuTopic from '../../components/MenuTopic';
 import MenuItem from '../../components/MenuItem';
+import Cart from '../../components/Cart';
+
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store';
+import { CartProps } from '../../models/Interface';
+// import {actions as cartActions} from '../../features/cartReducer';
 
 type Props = {}
 
@@ -18,6 +24,8 @@ const Menu = (props: Props) => {
   const vegImg = veg;
   const dessTopic = "DESSERT";
   const dessImg = dessert;
+
+  const cart: CartProps = useSelector((state: RootState) => state.cart);
 
   return (
     <div className="menu-wrapper">
@@ -72,8 +80,12 @@ const Menu = (props: Props) => {
 
       < MenuTopic topic={vegTopic} foodImg={vegImg}/>
       < MenuTopic topic={dessTopic} foodImg={dessImg}/>
-
-
+      {cart.cartItems.length > 0 
+      ?
+        <Cart cart={cart}/>
+      : 
+        ''
+      }
     </div>
   )
 }

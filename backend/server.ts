@@ -5,16 +5,17 @@ import userRoute from './Routes/UserRoute.js'
 import orderRoute from './Routes/OrderRoute.js'
 import menuRoute from './Routes/MenuRoute.js'
 import {lol} from './lowDb/database.js'
+import cors from 'cors';
 
 const app = express();
 const PORT: number = 8000;
 
-// app.use(cors({origin: '*'}))
+app.use(cors({ origin: "*" }));
+
 app.use(express.json());
 
 const __dirname:string = dirname(fileURLToPath(import.meta.url));
 const staticPath:string = join(__dirname, '../../dist')
-
 
 
 

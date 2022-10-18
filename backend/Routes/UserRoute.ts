@@ -6,34 +6,13 @@ const app = express();
 app.use(express.json());
 const userRoute = express.Router();
 
-userRoute.get('/', async (req, res) => {
-    const users: User[] = await getUsers()
-    console.log(users)
-    res.json(users)
-})
+
 
 // LOGIN
 
 
-// SIGNUP
-userRoute.post("/signup", async (req, res) => {
-    
-    const userData: User = req.body
-    let userExist: User = await findUser(userData)
-
-    const resObj = {
-        success: true,
-        userExist: false
-    }
-
-    newUser(userData)
-    console.log('userExist:', userExist)
-    console.log('userData:', userData);
-    
-
-    res.json(resObj)
-    
-
+userRoute.get("/signup", async (req:Request, res:Response) => {
+    res.json('nice!')
 })
 
 // UPDATE USER
@@ -41,6 +20,22 @@ userRoute.post("/signup", async (req, res) => {
 //user{name: , email: , accountId: , accountID: , phoneNumber: ,admin: , }
 
 
+
+//{
+  //  "cart": {[cartItems:[ ],  "totalPrice": 0}
+  //  "user": { "name": "",
+  //  "email": "",
+  //  "accountId": "",
+  //  "phoneNumber": "",
+  //  "admin": false },
+
+  //  "userComment": "",
+  //  "adminComment": "",
+  //  "locked": false,
+  //  "completed": false,
+  //  "orderPlaced": "",
+  //  "id":""
+  //} 
 
 
 
