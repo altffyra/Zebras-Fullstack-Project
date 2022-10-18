@@ -48,6 +48,12 @@ const Cart = (props: CartProp) => {
         dispatch(cartActions.updateAmount(updatedItem));
     }
 
+    let amountOfProducts: number = 0;
+
+    props.cart.cartItems.forEach(item => {
+        amountOfProducts = amountOfProducts + item.amount;
+    });
+
     const cartItemEl = props.cart.cartItems.map((item, index) => <CartItem item={item} key={index} handleAmount={handleAmount} />)
     return (
         <section className='cart'>
@@ -56,7 +62,7 @@ const Cart = (props: CartProp) => {
                 {props.cart.cartItems.length > 0 && !active
                 ?
                 <div className="cart-headline">
-                    <p>{props.cart.cartItems.length} produkter</p>
+                    <p>{amountOfProducts} produkter</p>
                     <p>{props.cart.totalPrice} kr</p>
                 </div>
                 :

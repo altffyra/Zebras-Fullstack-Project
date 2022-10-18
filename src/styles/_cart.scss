@@ -25,10 +25,11 @@
             padding: 1em 0;
             margin: 0 auto;
             transition: all 300ms;
+            transform: rotateZ(180deg);
         }
 
         .active {
-            transform: rotateZ(180deg);
+            transform: rotateZ(0);
         }
         
         .cart-headline {
@@ -48,9 +49,8 @@
     .active-cart {
         width: 100%;
         @include variables.flexContainer();
-        height: 94vh;
+        max-height: 94vh;
         overflow-y: auto;
-        max-height: 100%;
         z-index: 1000;
     }
 
