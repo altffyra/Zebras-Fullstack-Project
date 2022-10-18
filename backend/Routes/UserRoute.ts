@@ -1,13 +1,13 @@
 import express, { Request, Response } from "express";
 import { User } from "../lowDb/dbinterface";
-import { newUser, getUsers } from "../lowDb/database.js";
+import { newUser, getUsers, findUser } from "../lowDb/database.js";
 
 const app = express();
 app.use(express.json());
 const userRoute = express.Router();
 
 userRoute.get('/', async (req, res) => {
-    const users = await getUsers()
+    const users: User[] = await getUsers()
     console.log(users)
     res.json(users)
 })
@@ -19,13 +19,19 @@ userRoute.get('/', async (req, res) => {
 userRoute.post("/signup", async (req, res) => {
     
     const userData: User = req.body
+    let userExist: User = await findUser(userData)
 
-    const userList = await getUsers()
-    
+    const resObj = {
+        success: true,
+        userExist: false
+    }
+
+    newUser(userData)
+    console.log('userExist:', userExist)
     console.log('userData:', userData);
     
-    console.log('userList', userList)
-    res.json()
+
+    res.json(resObj)
     
 
 })
