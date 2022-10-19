@@ -17,7 +17,7 @@ const initialState: CartProps = {
         {name:"12", price: 6, amount: 1},
         {name:"13", price: 7, amount: 1}
     ],
-    totalPrice: 28
+    totalPrice: 58
 };
 
 type UpdatedCartItem = {

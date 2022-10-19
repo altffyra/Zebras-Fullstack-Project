@@ -8,16 +8,16 @@ import allergy from '../../assets/menu/allergy.svg';
 import MenuTopic from '../../components/MenuTopic';
 import MenuItem from '../../components/MenuItem';
 import Cart from '../../components/Cart';
-
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
-import { CartProps } from '../../models/Interface';
-// import {actions as cartActions} from '../../features/cartReducer';
+import { CartProps, MenuItems } from '../../models/Interface';
+import {actions as menuActions} from '../../features/menuReducer';
 
 type Props = {}
 
 const Menu = (props: Props) => {
-
+const dispatch = useDispatch();
   const appertizerTopic = "FÖRRÄTT";
   const appertizerImg = appertizer;
   const vegTopic = "VEGETARISKT";
@@ -25,7 +25,22 @@ const Menu = (props: Props) => {
   const dessTopic = "DESSERT";
   const dessImg = dessert;
 
+  useEffect(() => {
+    async function getMenu() {
+      const response = await fetch('http://localhost:8000/menu/');
+      const data = await response.json();      
+      dispatch(menuActions.getMenu(data.menu));
+
+    }
+    getMenu();
+  }, []);
+
   const cart: CartProps = useSelector((state: RootState) => state.cart);
+  const menu: MenuItems[] = useSelector((state: RootState) => state.menu);
+  const entreeArry = menu.filter(item => item.type == 'Förrätt')
+  const vegArr = menu.filter(item => item.type == 'Veg')
+  const mainCourseArr = menu.filter(item => item.type != 'Förrätt' && item.type != 'Veg' && item.type != 'Efterrätt')
+  const desertArr = menu.filter(item => item.type == 'Efterrätt')
 
   return (
     <div className="menu-wrapper">
@@ -48,38 +63,11 @@ const Menu = (props: Props) => {
         </section>
       </section>
 
-      < MenuTopic topic={appertizerTopic} foodImg={appertizerImg}/>
+      < MenuTopic topic={'Förrätt'} foodImg={appertizerImg} menuArray={entreeArry}/>
+      < MenuTopic topic={'Huvudrätt'} foodImg={mainmeal} menuArray={mainCourseArr}/>
+      < MenuTopic topic={'Vegetarisk'} foodImg={vegImg} menuArray={vegArr}/>
+      < MenuTopic topic={'Efterrätt'} foodImg={dessImg} menuArray={desertArr}/>
 
-      <section className="menu-header--container">
-        <figure className="menu-header--info">
-          <img src={mainmeal} alt="" />
-          <section className="menu-header--text">
-            <section className="menu-header--flex">
-              <h1>HUVUDRÄTTER</h1>
-            </section>
-          </section>
-        </figure>
-
-        <section className="menu-title--text">
-          <h2 className="menu-title--margin">KÖTT</h2>
-        </section>
-        <MenuItem vector={vector} allergy={ allergy } foodTopic={ "kött-namn" }/>
-
-        <section className="menu-title--text">
-          <h2 className="menu-title--margin"> FISK</h2>
-        </section>
-        <MenuItem vector={vector} allergy={ allergy } foodTopic={ "fisk-namn" }/>
-        <MenuItem vector={vector} allergy={ allergy } foodTopic={ "fisk-namn" }/>
-
-
-        <section className="menu-title--text">
-          <h2 className="menu-title--margin">FÅGEL</h2>
-        </section>
-        <MenuItem vector={vector} allergy={ allergy } foodTopic={ "fågel-namn" }/>
-      </section>
-
-      < MenuTopic topic={vegTopic} foodImg={vegImg}/>
-      < MenuTopic topic={dessTopic} foodImg={dessImg}/>
       {cart.cartItems.length > 0 
       ?
         <Cart cart={cart}/>

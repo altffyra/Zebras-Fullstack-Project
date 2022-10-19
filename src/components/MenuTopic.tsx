@@ -1,16 +1,23 @@
 import MenuItem from './MenuItem';
+import MenuMainCouse from './MenuMainCourse';
 import vector from '../assets/menu/vector.svg';
 import allergy from '../assets/menu/allergy.svg';
+import { MenuItems } from '../models/Interface';
 
 type Props = {
     foodImg: string;
     topic: string;
+    menuArray: MenuItems[]
 }
 
-const MenuTopic = ({ foodImg, topic }: Props) => {
+const MenuTopic = ({ foodImg, topic, menuArray }: Props) => {
 
     const vectorImg = vector;
     const allergyImg = allergy;
+
+    const menuItemsEl = menuArray.map((item, index) => <MenuItem item={item} key={index} />)
+    
+
 
     return (
         <section className="menu-header--container">
@@ -23,8 +30,18 @@ const MenuTopic = ({ foodImg, topic }: Props) => {
                 </section>
             </section>
             </figure>
-
-            < MenuItem allergy={ allergyImg } vector={ vectorImg } foodTopic={topic}/>
+            {topic == 'Huvudrätt' ? 
+                <>
+                    <MenuMainCouse menuArr={menuArray} type={'Kött'} />
+                    <MenuMainCouse menuArr={menuArray} type={'Fisk'}/>
+                    <MenuMainCouse menuArr={menuArray} type={'Fågel'}/>
+                </>
+                : 
+                <>
+                    {menuItemsEl}
+                </>
+            }
+            
 
         </section>
     )

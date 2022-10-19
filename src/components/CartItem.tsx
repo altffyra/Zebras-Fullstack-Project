@@ -7,7 +7,6 @@ type CartItemsProps = {
 }
 
 const CartItem = (props:CartItemsProps) => {
-    console.log(props.item.amount);
     
     return (
         <section className="cart-item">
