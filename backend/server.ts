@@ -19,9 +19,9 @@ const staticPath:string = join(__dirname, '../../dist')
 
 
 
-app.use("/menu", menuRoute)
-app.use("/order", orderRoute)
-app.use("/user", userRoute)
+app.use("/api/menu", menuRoute)
+app.use("/api/order", orderRoute)
+app.use("/api/user", userRoute)
 
 // HA KVAR FÖR DET AKTIVERAR DATABASEN
 // @ts-ignore
