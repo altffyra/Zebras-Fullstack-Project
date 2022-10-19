@@ -100,13 +100,26 @@
         }
     }
 
-    iframe {
-        align-self: center;
-        width: 90%;        
+    .order-comment {
+        margin: 0 1em;
         box-shadow: variables.$boxShadow;
+        p {
+            padding: 0.4em;
+            &:first-child {
+                font-weight: 700;
+                background-color: variables.$darkRed;
+                box-shadow: variables.$boxShadow;
+            }
+
+            &:last-child {
+                background-color: variables.$dropdownRed;
+            }
+        }
     }
 
     .location {
+        @include variables.flexContainer(row);
+        justify-content: space-between;
         align-self: center;
         text-align: center;
         width: 90%;
@@ -117,4 +130,11 @@
         color: variables.$fontDark;
         box-shadow: variables.$boxShadow;
     }
+    
+    iframe {
+        align-self: center;
+        width: 90%;        
+        box-shadow: variables.$boxShadow;
+    }
+
 }
