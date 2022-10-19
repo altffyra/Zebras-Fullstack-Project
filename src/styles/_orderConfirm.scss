@@ -1,7 +1,15 @@
 @use 'variables';
 
-.confirm {
+.confirmed {
+    margin-top: 12vh;
+    @include variables.flexContainer();
     .loading {
         @include variables.loader();
+    }
+    .headline {
+        @include variables.headerTitle();
+    }
+    iframe {
+        align-self: center;
     }
 }

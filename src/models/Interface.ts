@@ -30,10 +30,11 @@ export interface Order {
     user: User;
     userComment?: string;
     adminComment?: string;
-    locked: boolean;
-    completed: boolean;
-    orderPlaced: string;
-    id: string;
+    locked?: boolean;
+    completed?: boolean;
+    orderPlaced?: string;
+    orderCompleted?: string
+    id?: string;
 }
 
 
