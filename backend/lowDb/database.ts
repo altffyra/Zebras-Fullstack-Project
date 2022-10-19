@@ -55,26 +55,33 @@ async function authenticateLogin(ID:any){
     return []
 }
 
-// USER FUNCTIONS
-// async function getUsers() {
-//     await db.read()
-//     const allUsers:User[] = db.data.users
-//     console.log('getUsers', allUsers)
-//     return allUsers
-// }
-// async function newUser(userData:User) {
-//     await db.read()
-//     const result = await db.data.users.push(userData)
-//     await userdb.write()
-//     return result
-// }
-// //
-// async function findUser(userData:User) {
-//     db.read()
-//     let userExist: User = db.data.users.find((user:User) => user.name === userData.name)
-//     console.log('userExist i db:', userExist)
-//     return userExist
-// }     
+// // USER FUNCTIONS
+async function getUsers() {
+    await db.read()
+    if( !db.data ) {
+      db.data = defaultData
+}
+    const allUsers: User[] = db.data.users
+    console.log('getUsers', allUsers)
+    return allUsers
+}
+export async function createAccount(userData:User) {
+      await db.read()
+      if( !db.data ) {
+            db.data = defaultData
+      }
+      db.data.users.push(userData)
+      await db.write()
+}
+
+export async function findUser(userData:User) {
+    db.read()
+    if( !db.data ) {
+      db.data = defaultData
+      }
+    let userExist = db.data.users.find((user) => user.email === userData.email || user.name === userData.name)
+    return userExist
+}     
 
 
 
