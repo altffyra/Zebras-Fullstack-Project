@@ -1,5 +1,5 @@
 import '../styles/_orderItem.scss';
-import { Order } from '../models/Interface';
+import { Order } from '../models/types';
 import OrderItems from '../components/OrderItems';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';

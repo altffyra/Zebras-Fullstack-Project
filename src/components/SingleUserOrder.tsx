@@ -1,4 +1,4 @@
-import { Order } from '../models/Interface';
+import { Order } from '../models/types';
 import lockedIcon from '../assets/locked.png'
 import unlockedIcon from '../assets/unlocked.png'
 import OrderItem from '../components/OrderItem'

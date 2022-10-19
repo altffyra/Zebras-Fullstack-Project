@@ -2,7 +2,7 @@ import MenuItem from './MenuItem';
 import MenuMainCouse from './MenuMainCourse';
 import vector from '../assets/menu/vector.svg';
 import allergy from '../assets/menu/allergy.svg';
-import { MenuItems } from '../models/Interface';
+import { MenuItems } from '../models/types';
 
 type Props = {
     foodImg: string;

@@ -1,6 +1,6 @@
 import '../styles/_userInformation.scss';
 import { useDispatch } from 'react-redux';
-import { User } from '../models/Interface';
+import { User } from '../models/types';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import {actions as userActions} from '../features/userReducer';
 

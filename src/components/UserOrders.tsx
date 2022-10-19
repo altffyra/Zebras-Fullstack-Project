@@ -1,5 +1,5 @@
 import '../styles/_userOrders.scss';
-import { Order } from '../models/Interface';
+import { Order } from '../models/types';
 import UserOrderAccordian from './UserOrderAccordian';
 
 type UserOrdersProps = {

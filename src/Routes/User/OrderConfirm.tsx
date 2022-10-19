@@ -1,7 +1,7 @@
 import '../../styles/_orderConfirm.scss';
 import Nav from '../../components/Nav';
 import OrderItems from '../../components/OrderItems';
-import { Order } from '../../models/Interface';
+import { Order } from '../../models/types';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';

@@ -1,4 +1,4 @@
-import { MenuItems } from "../models/Interface";
+import { MenuItems } from "../models/types";
 import MenuItem from "./MenuItem";
 
 type Props = {

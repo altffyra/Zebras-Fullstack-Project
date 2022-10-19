@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { useEffect, useState } from 'react';
-import { User, Order } from '../../models/Interface';
+import { User, Order } from '../../models/types';
 import {actions as orderActions} from '../../features/orderReducer';
 
 const Account = () => {
