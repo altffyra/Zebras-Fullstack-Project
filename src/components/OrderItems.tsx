@@ -1,3 +1,4 @@
+import '../styles/_orderItems.scss';
 import { CartItems } from '../models/Interface';
 
 type OrderItemProps = {
@@ -7,9 +8,12 @@ type OrderItemProps = {
 const OrderItems = (props: OrderItemProps) => {
     return (
       <section className="order-item">
-        <p className='item-name'>{props.item.name}</p>
-        <p>{props.item.amount}</p>
-        <p>{props.item.price} kr</p>
+        <div className="order-info">
+            <p className='item-name'>{props.item.name}</p>
+            <p>{props.item.amount}</p>
+            <p>{props.item.price} kr</p>
+        </div>
+        <div className='divider'></div>
       </section>
     )
   }

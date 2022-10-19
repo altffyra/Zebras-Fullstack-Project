@@ -61,31 +61,6 @@
             padding: 0 1em;
             gap: 2em;
 
-            .order-item {
-                
-                @include variables.flexContainer(row);
-                justify-content: space-between;
-                position: relative;
-                gap: 0.4em;
-                &:after {
-                    position: absolute;
-                    content: '';
-                    width: 90%;
-                    height: 0.2em;
-                    background-color: variables.$fontLight;
-                    opacity: 60%;
-                    left: 5%;
-                    bottom: -1em;
-                }
-        
-                .item-name {
-                    flex: 4;
-                }
-                p {
-                    flex: 1;
-                }
-                
-            }
     
         }
         .order-price {
@@ -130,7 +105,7 @@
         color: variables.$fontDark;
         box-shadow: variables.$boxShadow;
     }
-    
+
     iframe {
         align-self: center;
         width: 90%;        

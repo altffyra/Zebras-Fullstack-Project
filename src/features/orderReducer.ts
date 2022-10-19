@@ -25,7 +25,7 @@ const initialState: Order[] = [
       completed: true,
       orderCompleted: "2022-04-17 22:45",
       orderPlaced: "2022-04-17 22:15",
-      id:"456zxcg"
+      id:"asd"
     },
     {
       cart: {
@@ -50,7 +50,7 @@ const initialState: Order[] = [
       completed: false,
       orderCompleted: "2022-04-17 22:45",
       orderPlaced: "2022-04-17 22:15",
-      id:"456zxcg"
+      id:"123"
     },
       
 ];
