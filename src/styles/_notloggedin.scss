@@ -1,0 +1,47 @@
+@use 'variables';
+@use 'buttons';
+
+.login {
+    width: 80vw;
+    height: 100vh;
+
+    margin: 0 auto;
+
+    .flex-container {
+        // @include variables.flexContainer();
+
+
+        .form {
+            @include variables.flexContainer();
+            align-items: center;
+            gap: 3em;
+
+            & > div {
+                @include variables.flexContainer();
+                align-items: center;
+                
+            }
+
+            input {
+                background-color: transparent;
+                outline: none;
+                border: none;
+                border-bottom: 1px solid black;
+            }
+
+            .login-btn {
+                @include buttons.bigBtn($bg: variables.$acceptBtnGreen);
+                margin-bottom: 1em;
+            }
+
+            .guest-btn {
+                @include buttons.bigBtn($bg: transparent);
+                color: variables.$fontDark;
+                border: 1px solid black;
+            }
+      }
+    }
+    
+    
+
+}

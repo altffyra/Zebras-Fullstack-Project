@@ -3,6 +3,7 @@ import Nav from '../../components/Nav';
 import OrderItem from '../../components/OrderItem';
 import mainmeal from '../../assets/menu/mainmeal.svg';
 import '../../styles/_checkout.scss'
+import NotLoggedIn from '../../components/NotLoggedIn';
 
 type Props = {}
 
@@ -24,6 +25,8 @@ const CheckOut = (props: Props) => {
           <section className='current-order'>
             <OrderItem />
           </section>
+
+          <NotLoggedIn />
 
       </div>
     </main>
