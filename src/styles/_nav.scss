@@ -17,7 +17,7 @@ header {
     .logo-container {
         @include variables.flexContainer(row);
         .nav-headline {
-            font-size: 1.4em;
+            font-size: 1em;
             margin: 0 0.5em;
             margin-left: auto;
             color: variables.$fontDark;
@@ -141,8 +141,7 @@ header {
                 .divider{
                     display: none;
                 }  
-            }
-            
+            }            
         }
     }
 }
