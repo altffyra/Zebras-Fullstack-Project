@@ -12,9 +12,7 @@ const userRoute = express.Router();
 // SIGNUP
 
 userRoute.post('/signup', async (req, res) => {
-//     if( !db.data ) {
-//         db.data = defaultData
-//   }
+
     const userData: User = req.body
     const resObj = {
         success: true,
@@ -31,6 +29,10 @@ userRoute.post('/signup', async (req, res) => {
         const userExist = await db.data.users.filter((user) => user.email === userData.email || user.name === userData.name)
         if( userExist.length > 0 ) {
             resObj.userExist = true
+            resObj.message = `Konto finns redan för ${userData.name}`
+        } 
+        if( resObj.userExist ) {
+            resObj.success = false
         } else {
             db.data.users.push(userData)
             db.write()
