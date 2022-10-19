@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState, ChangeEvent, FormEvent } from 'react';
-import { User } from '../../models/Interface';
+import { User } from '../../models/types';
 import '../../styles/signUp.scss'
 import { v4 as uuid } from 'uuid';
 

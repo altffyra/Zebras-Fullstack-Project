@@ -1,5 +1,5 @@
 import '../styles/_orderItems.scss';
-import { CartItems } from '../models/Interface';
+import { CartItems } from '../models/types';
 
 type OrderItemProps = {
     item: CartItems

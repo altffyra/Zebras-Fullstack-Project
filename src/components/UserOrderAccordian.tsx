@@ -1,4 +1,4 @@
-import { Order } from '../models/Interface';
+import { Order } from '../models/types';
 import { useState } from 'react';
 import dropArrowLight from '../assets/dropDownLight.svg';
 import SingleUserOrders from './SingleUserOrder';

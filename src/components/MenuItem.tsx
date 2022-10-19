@@ -1,4 +1,4 @@
-import { MenuItems } from "../models/Interface";
+import { MenuItems } from "../models/types";
 
 type Props = {
     // allergy: string;

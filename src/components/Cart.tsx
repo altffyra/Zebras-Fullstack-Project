@@ -1,6 +1,6 @@
 import '../styles/_cart.scss';
 import dropDownLight from '../assets/dropDownLight.svg';
-import { CartProps } from '../models/Interface';
+import { CartProps } from '../models/types';
 import CartItem from './CartItem';
 import {useState, ChangeEvent, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -55,7 +55,7 @@ const Cart = (props: CartProp) => {
     });
 
     const cartItemEl = props.cart.cartItems.map((item, index) => <CartItem item={item} key={index} handleAmount={handleAmount} />);
-    
+
     return (
         <section className='cart'>
             <div className="cart-dropdown" onClick={handleCart}>

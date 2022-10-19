@@ -1,5 +1,5 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
-import { Order } from "../models/Interface";
+import { Order } from "../models/types";
 
 const initialState: Order[] = [
     {
