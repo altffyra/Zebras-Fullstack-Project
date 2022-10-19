@@ -118,3 +118,11 @@ $headerFont: 'Rock Salt', cursive;
             transition: 500ms;
       }
 }
+
+@mixin divider($bg: $fontLight) {
+      width: 90%;
+      height: 0.2em;
+      background-color: $bg;
+      opacity: 60%;
+      margin: 0 auto;
+}

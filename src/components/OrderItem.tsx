@@ -36,6 +36,7 @@ const OrderItem = (props: OrderItemProps) => {
         <div className='order-information'>
           <p className='order-title'>Order {order.id}</p>
             {orderItem}
+            <p>Totalt : {order.cart.totalPrice} kr</p>
         </div>
             <div className='button-container'>
         <button className='btn-close' onClick={props.showOrderOverlay}>Stäng</button>

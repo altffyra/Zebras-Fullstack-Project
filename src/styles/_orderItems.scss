@@ -15,10 +15,6 @@
         }                
     }
     .divider {
-        width: 90%;
-        height: 0.2em;
-        background-color: variables.$fontLight;
-        opacity: 60%;
-        margin: 0 auto;
+        @include variables.divider()
     }
 }
