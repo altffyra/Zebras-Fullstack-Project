@@ -11,6 +11,7 @@
     .checkout-header--info {
         position: relative;
         @include variables.flexBox($justify: center, $align: center);
+
         
         img {
             width: 100%;

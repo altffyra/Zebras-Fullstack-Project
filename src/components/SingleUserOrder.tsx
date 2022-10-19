@@ -14,11 +14,6 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
   const showOrderOverlay: () => void = () => {
     setShowOrder(!showOrder)
   }
-    const lockOrder: () => void = async () => {
-      // FETCHA PUT LÅS ORDER
-
-      // DISPATCHA LÅST
-    }
 
     return (
       <section className="single-order">
@@ -27,7 +22,7 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
         ? 
             <img src={lockedIcon} alt="locked icon" />
         :
-            <img src={unlockedIcon} alt="unlocked icon" onClick={lockOrder} />
+            <img src={unlockedIcon} alt="unlocked icon" />
         }
       {showOrder ? 
         <OrderItem order={props.order} showOrderOverlay={showOrderOverlay} />  
