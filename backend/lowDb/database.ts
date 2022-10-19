@@ -79,7 +79,8 @@ export async function findUser(userData:User) {
     if( !db.data ) {
       db.data = defaultData
       }
-    let userExist = db.data.users.find((user) => user.email === userData.email || user.name === userData.name)
+    let userExist = db.data.users.filter((user) => user.email === userData.email || user.name === userData.name)
+      console.log('userExist', userExist)
     return userExist
 }     
 
