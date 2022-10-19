@@ -43,6 +43,27 @@ async function getOrders(){
     return orderreply
 }
 
+async function checkOrder(id: string){
+      let resOrders = await getOrders()
+      const foundIndex = resOrders.findIndex(order => order.id === id)
+      if(foundIndex === -1) {
+            return false
+      } else {            
+            return resOrders[foundIndex]
+      }
+}
+
+async function updateOrder(updatedOrder: Order, id:string) {
+      let resOrders = await getOrders()
+      const index = parseInt(id)
+            updatedOrder.orderPlaced = started;
+            resOrders[index] = updatedOrder;
+               
+      
+      await db.write()
+      return updatedOrder
+}
+
 async function authenticateLogin(ID:any){
     if(!db.data) {
         db.data = defaultData
@@ -93,6 +114,6 @@ export async function findUser(userData:User) {
 
 
 
-export {getMenu, getOrders, authenticateLogin, }
+export {getMenu, getOrders, authenticateLogin, checkOrder, updateOrder }
 // newUser, findUser, getUsers
 export default db
