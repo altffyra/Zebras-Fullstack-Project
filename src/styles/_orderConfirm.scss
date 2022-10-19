@@ -1,0 +1,7 @@
+@use 'variables';
+
+.confirm {
+    .loading {
+        @include variables.loader();
+    }
+}
