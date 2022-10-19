@@ -12,14 +12,14 @@ const NotLoggedIn = (props: Props) => {
     <section className="flex-container">
       <form className='form' onSubmit={() => console.log('loggain')}>
         <div>
-            <label htmlFor="username">Användarnamn</label>
-            <input type="text" name='username' onChange={() => console.log('namn')} />
+            <input className='form__input' placeholder=' ' type="text" name='username' onChange={() => console.log('namn')} />
+            <label className='form__label form--name' htmlFor="username">Användarnamn</label>
         </div>
         <div>
-            <label htmlFor="password">Lösenord</label>
-            <input type="password" name="password" onChange={() => console.log('lösen')} />
+            <input className='form__input' placeholder=' ' type="password" name="password" onChange={() => console.log('lösen')} />
+            <label className='form__label form--password' htmlFor="password">Lösenord</label>
         </div>
-        <p>Inget konto? <a href=""> Skapa </a></p>
+        <p>Inget konto? <a href="/SignUp"> Skapa </a></p>
         <div>
             <button type="submit" className='login-btn'>Logga in</button>
             <button className='guest-btn'>Fortsätt som gäst</button>

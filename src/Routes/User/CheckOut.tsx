@@ -61,7 +61,7 @@ const CheckOut = (props: Props) => {
             <img src={mainmeal} alt="" />
 
               <section className="checkout-header--text">
-                <h1>varukorg</h1>
+                <h1>Kassa</h1>
               </section>
 
           </figure>
