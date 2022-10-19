@@ -4,10 +4,47 @@ import OrderItem from '../../components/OrderItem';
 import mainmeal from '../../assets/menu/mainmeal.svg';
 import '../../styles/_checkout.scss'
 import NotLoggedIn from '../../components/NotLoggedIn';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../../store';
+import { CartProps, MenuItems, User } from '../../models/Interface';
+
+
 
 type Props = {}
 
 const CheckOut = (props: Props) => {
+
+  const user: User = useSelector((state: RootState) => state.user);
+  const cart: CartProps = useSelector((state: RootState) => state.cart);
+  console.log(cart)
+  const cartItemEl = cart.cartItems.map((item, index) => <div key={index} className='cart-item' ><p className='item-name'>{item.name }</p> <p className='item-price'>{item.price }</p> </div>);
+
+  const notLoggedInElem = user.name==''? 
+  <div></div>
+  // <NotLoggedIn/>
+  : <div className='LoggedIn'>
+      <div className='Account-info'> 
+        <div className='Account-top'>
+          <p className='Account-top-p'>Mina Uppgifter</p>
+      
+        </div>
+        <div className='Account-info-main'>
+          <p className='User-info'>{user.name}</p>
+          <p className='User-info'>{user.email}</p>
+          <p className='User-info'>{user.phoneNumber}</p>
+        </div>
+        <div className='Comment-wrapper'>
+          <div className='Comment-top'>
+            <p className='Comment-top-p'>Kommentar</p>      
+        </div>
+
+        </div>
+      </div>
+      <button className='back-btn'>Tillbaka </button>
+      <button className='order-btn'>Beställ </button>
+    </div>
+  
+
   return (
     <main>
       <Nav />
@@ -23,7 +60,11 @@ const CheckOut = (props: Props) => {
           </figure>
 
           <section className='current-order'>
-            <OrderItem />
+            <section className='order-top'> Order</section>
+            {cartItemEl}
+            <section className='total'> 
+            <p className='total'>Totalt:</p> <p className='total-sum'>{cart.totalPrice}</p>
+            </section>
           </section>
 
           <NotLoggedIn />

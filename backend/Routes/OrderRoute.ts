@@ -9,12 +9,6 @@ import express, { NextFunction, Request, Response } from "express";
 
 
 
-
-
-
-
-
-
  const auth = async function (req:Request, res:Response, next:NextFunction) {
   
    const idhead = req.header('accountID')
