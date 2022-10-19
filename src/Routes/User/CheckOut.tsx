@@ -3,6 +3,7 @@ import Nav from '../../components/Nav';
 import OrderItem from '../../components/OrderItem';
 import mainmeal from '../../assets/menu/mainmeal.svg';
 import '../../styles/_checkout.scss'
+import NotLoggedIn from '../../components/NotLoggedIn';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { CartProps, MenuItems, User } from '../../models/Interface';
@@ -53,7 +54,7 @@ const CheckOut = (props: Props) => {
             <img src={mainmeal} alt="" />
 
               <section className="checkout-header--text">
-                <h1>varukorg</h1>
+                <h1>Kassa</h1>
               </section>
 
           </figure>
@@ -65,7 +66,9 @@ const CheckOut = (props: Props) => {
             <p className='total'>Totalt:</p> <p className='total-sum'>{cart.totalPrice}</p>
             </section>
           </section>
-          {notLoggedInElem}
+
+          <NotLoggedIn />
+
       </div>
     </main>
   )
