@@ -1,12 +1,11 @@
 import express, { NextFunction, Request, Response } from "express";
-// import { IncomingHttpHeaders } from 'http';
-// const app = express();
-// app.use(express.json());
-// const orderRoute = express.Router();
-// import {MenuItems, headersType, User} from '../lowDb/dbinterface'
-// import {authenticateLogin, getOrders} from '../lowDb/database.js'
-// import {Order} from '../lowDb/dbinterface.js'
-// import { stringify } from "querystring";
+ import { IncomingHttpHeaders } from 'http';
+ const app = express();
+ app.use(express.json());
+ const orderRoute = express.Router();
+ import {User} from '../lowDb/dbinterface'
+ import {authenticateLogin, getOrders} from '../lowDb/database.js'
+ import {Order} from '../lowDb/dbinterface.js'
 
 
 
@@ -15,23 +14,24 @@ import express, { NextFunction, Request, Response } from "express";
 
 
 
-// const auth = async function (req:Request, res:Response, next:NextFunction) {
+
+ const auth = async function (req:Request, res:Response, next:NextFunction) {
   
-//   const idhead = req.header('accountID')
-//   if (!idhead ) 
-//     {
-//     return res.status(403).json({ error: 'no credentials.' });
-//     } 
+   const idhead = req.header('accountID')
+   if (!idhead ) 
+     {
+     return res.status(403).json({ error: 'no credentials.' });
+     } 
 
-//   if (idhead)
-//     {
-//       const checklogin:User[] = await authenticateLogin(idhead)
-//       if (checklogin.length>0) next();
-//        else 
-//       return res.json({ error: 'not an admin' })
+   if (idhead)
+     {
+       const checklogin:User[] = await authenticateLogin(idhead)
+       if (checklogin.length>0) next();
+        else 
+       return res.json({ error: 'not an admin' })
       
-//     }
-// };
+     }
+ };
 
 
 
@@ -39,44 +39,44 @@ import express, { NextFunction, Request, Response } from "express";
 
 
 
-// // GET ORDER
-// type IdObject = { id: string };
-// type IdParam = Request<IdObject>;
+ // GET ORDER
+ type IdObject = { id: string };
+ type IdParam = Request<IdObject>;
 
-// orderRoute.get("/user/:id", async (req:IdParam, res:Response) => {
-//     const id:string = req.params.id;
-//     let resOrders = await getOrders()
-//     let filter = resOrders.orders.filter((order:Order) => order.id == id);
+ orderRoute.get("/user/:id", async (req:IdParam, res:Response) => {
+     const id:string = req.params.id;
+     let resOrders = await getOrders()
+     let filter = resOrders.filter((order:Order) => order.id == id);
 
-//   if (filter.length > 0) {
-//     res.send(filter);
-//   } else {
-//     res.sendStatus(404);
-//   }
-// });
+   if (filter.length > 0) {
+     res.send(filter);
+   } else {
+     res.sendStatus(404);
+   }
+ });
 
 
 // // GET ALL ORDERS ADMIN
-// orderRoute.get("/admin", auth, async (req:Request, res:Response) => {
-//     const resOrders:Order[] = await getOrders()
-//     res.json(resOrders)
-// })
+ orderRoute.get("/admin", auth, async (req:Request, res:Response) => {
+     const resOrders:Order[] = await getOrders()
+     res.json(resOrders)
+ })
 
 
 // // GET USER ORDERS
-// type nameObject = { name: string };
-// type nameParam = Request<nameObject>;
+ type nameObject = { name: string };
+ type nameParam = Request<nameObject>;
 
-// orderRoute.get("/:name", async (req:nameParam, res:Response) => {
-//     const name:string = req.params.name;
-//     let resOrders = await getOrders()
-//     let filter = resOrders.orders.filter((order:Order) => order.user.name == name);
-//   if (filter.length > 0) {
-//     res.send(filter);
-//   } else {
-//     res.sendStatus(404);
-//   }
-// });
+ orderRoute.get("/:name", async (req:nameParam, res:Response) => {
+     const name:string = req.params.name;
+     let resOrders = await getOrders()
+     let filter = resOrders.filter((order:Order) => order.user.name == name);
+   if (filter.length > 0) {
+     res.send(filter);
+   } else {
+     res.sendStatus(404);
+   }
+ });
 
 // // MAKE ORDER
 
@@ -103,4 +103,4 @@ import express, { NextFunction, Request, Response } from "express";
 
 
 
-// export default orderRoute
+export default orderRoute

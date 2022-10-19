@@ -1,9 +1,8 @@
-import { IncomingHttpHeaders } from 'http'
 
-export type Schema = {
-    users: User[];
-    orders: Order[];
-    menu: MenuItem[];
+export type Schema= {
+    users: User[] ; 
+    orders: Order[] ;
+    menu: MenuItem[] ;
 }
 
 export type MenuItem = {
@@ -25,7 +24,7 @@ export type CartProps = {
     totalPrice: number;
 }
 
-export type User = {
+export type User  = {
     name: string;
     email: string;
     accountId: string;
@@ -44,8 +43,3 @@ export type Order = {
     orderPlaced: string;
     id: string;
 }
-export type headersType = {
-    headers : IncomingHttpHeaders & {
-      "accountID": string
-    }
-  }
