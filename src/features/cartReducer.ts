@@ -3,21 +3,21 @@ import { CartProps, CartItems } from "../models/Interface";
 
 const initialState: CartProps = {
     cartItems: [
-        {name:"1", price: 1, amount: 1},
-        {name:"2", price: 2, amount: 1},
-        {name:"3", price: 3, amount: 1},
-        {name:"4", price: 4, amount: 1},
-        {name:"5", price: 5, amount: 1},
-        {name:"6", price: 6, amount: 1},
-        {name:"7", price: 4, amount: 1},
-        {name:"8", price: 5, amount: 1},
-        {name:"9", price: 6, amount: 1},
-        {name:"10", price: 4, amount: 1},
-        {name:"11", price: 5, amount: 1},
-        {name:"12", price: 6, amount: 1},
-        {name:"13", price: 7, amount: 1}
+    //     {name:"1", price: 1, amount: 1},
+    //     {name:"2", price: 2, amount: 1},
+    //     {name:"3", price: 3, amount: 1},
+    //     {name:"4", price: 4, amount: 1},
+    //     {name:"5", price: 5, amount: 1},
+    //     {name:"6", price: 6, amount: 1},
+    //     {name:"7", price: 4, amount: 1},
+    //     {name:"8", price: 5, amount: 1},
+    //     {name:"9", price: 6, amount: 1},
+    //     {name:"10", price: 4, amount: 1},
+    //     {name:"11", price: 5, amount: 1},
+    //     {name:"12", price: 6, amount: 1},
+    //     {name:"13", price: 7, amount: 1}
     ],
-    totalPrice: 58
+    totalPrice: 0
 };
 
 type UpdatedCartItem = {
@@ -27,8 +27,9 @@ type UpdatedCartItem = {
 
 const addToCart = createAction<CartItems>('Add To Cart');
 const updateAmount = createAction<UpdatedCartItem>('Update amount')
+const changeOrder = createAction<CartProps>('Update order')
 
-const actions = { addToCart, updateAmount };
+const actions = { addToCart, updateAmount, changeOrder };
 
 const reducer = createReducer(initialState, {
     [addToCart.toString()]: (state, action) => {
@@ -56,6 +57,11 @@ const reducer = createReducer(initialState, {
         state.cartItems = cartCopy;        
         
         return state
+    },
+    [changeOrder.toString()]: (state, action) => {
+
+
+        return action.payload
     }
 })
 

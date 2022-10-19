@@ -1,0 +1,20 @@
+@use 'variables';
+
+.order-item {                
+    @include variables.flexContainer();
+    justify-content: space-between;
+    gap: 0.4em;
+    .order-info {
+        @include variables.flexContainer(row);
+        justify-content: space-between;
+        .item-name {
+            flex: 4;
+        }
+        p {
+            flex: 1;
+        }                
+    }
+    .divider {
+        @include variables.divider()
+    }
+}

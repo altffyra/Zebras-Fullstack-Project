@@ -12,15 +12,15 @@ const UserOrderAccordian = (props: UserOrderAccordian) => {
     const [dropActive, setDropActive] = useState<boolean>(false);
     const cssActive = dropActive ? 'active' : '';
 
-    const ordersEl = props.orders.map(order => <SingleUserOrders order={order} />);
+    const ordersEl = props.orders.map(order => <SingleUserOrders key={order.id} order={order} />);
 
     const handleDropDown: () => void = () => {
         setDropActive(!dropActive);
     };
 
     return (
-        <div className='orderlist' onClick={handleDropDown}>
-            <div className="accordian-header">
+        <div className='orderlist'>
+            <div className="accordian-header" onClick={handleDropDown}>
                 <h2>{props.orderType}</h2>
                 <img src={dropArrowLight} className={cssActive+'-icon'} alt="drop down icon" />
             </div>
