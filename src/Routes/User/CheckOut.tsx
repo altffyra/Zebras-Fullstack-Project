@@ -6,7 +6,7 @@ import '../../styles/_checkout.scss'
 import NotLoggedIn from '../../components/NotLoggedIn';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
-import { CartProps, MenuItems, User } from '../../models/Interface';
+import { CartProps, MenuItems, User } from '../../models/types';
 
 
 
