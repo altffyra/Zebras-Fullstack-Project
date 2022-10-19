@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { CartProps, MenuItems } from '../../models/Interface';
 import {actions as menuActions} from '../../features/menuReducer';
+import Nav from '../../components/Nav';
 
 type Props = {}
 
@@ -44,7 +45,7 @@ const dispatch = useDispatch();
 
   return (
     <div className="menu-wrapper">
-
+      <Nav />
       <section className="menu-header--container">
 
         <figure className="menu-header--info">

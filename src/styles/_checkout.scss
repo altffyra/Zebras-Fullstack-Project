@@ -1,0 +1,29 @@
+@use 'variables';
+@use 'buttons';
+
+.checkout-wrapper {
+    @include variables.flexContainer();
+    max-width: 90vw;
+    margin: 0 auto;
+    margin-top: 12vh;
+
+
+    .checkout-header--info {
+        position: relative;
+        @include variables.flexBox($justify: center, $align: center);
+        
+        img {
+            width: 100%;
+        }
+    
+            .checkout-header--text {
+                padding: 0em 1em;
+                position: absolute;
+                background-color: variables.$yellowSenap;
+                
+        
+            }
+        
+    }
+
+}
