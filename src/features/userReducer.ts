@@ -1,7 +1,7 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
 import { User } from "../models/Interface";
 
-const initialState: User = {name: '', email: '', phoneNumber: '', accountId: ''};
+const initialState: User = {name: '', email: '', phoneNumber: '', accountId: '', password:''};
 
 const setUser = createAction<User>('Set User');
 
