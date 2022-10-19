@@ -14,10 +14,17 @@ type Props = {}
 
 const CheckOut = (props: Props) => {
 
+
+
   const user: User = useSelector((state: RootState) => state.user);
   const cart: CartProps = useSelector((state: RootState) => state.cart);
   console.log(cart)
-  const cartItemEl = cart.cartItems.map((item, index) => <div key={index} className='cart-item' ><p className='item-name'>{item.name }</p> <p className='item-price'>{item.price }</p> </div>);
+  const cartItemEl = cart.cartItems.map((item, index) => <div key={index} className='cart-item' ><p className='item-name'>{item.name }</p> <p className='item-price'>{item.price } Kr</p> </div>);
+
+
+  function makeOrder(){
+    const response = fetch()
+  }
 
   const notLoggedInElem = user.name==''? 
   <div></div>
@@ -62,8 +69,8 @@ const CheckOut = (props: Props) => {
           <section className='current-order'>
             <section className='order-top'> Order</section>
             {cartItemEl}
-            <section className='total'> 
-            <p className='total'>Totalt:</p> <p className='total-sum'>{cart.totalPrice}</p>
+            <section className='total-wrapper'> 
+            <p className='total'>Totalt:</p> <p className='total-sum'>{cart.totalPrice} Kr.</p>
             </section>
           </section>
 
