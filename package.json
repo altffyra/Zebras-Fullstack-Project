@@ -8,7 +8,8 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "build-backend": "cd backend/ && tsc",
-    "start-backend": "node backend/dist/server.js"
+    "start-backend": "node backend/dist/server.js",
+    "restart-backend": "npm run build-backend && npm run start-backend"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.6",

@@ -44,24 +44,25 @@ async function getOrders(){
 }
 
 async function checkOrder(id: string){
-      let resOrders = await getOrders()
-      const foundIndex = resOrders.findIndex(order => order.id === id)
-      if(foundIndex === -1) {
-            return false
-      } else {            
-            return resOrders[foundIndex]
+      if( !db.data ) {
+            db.data = defaultData
       }
+      const foundIndex = db.data.orders.findIndex(order => order.id === id)
+      return foundIndex
+
 }
 
-async function updateOrder(updatedOrder: Order, id:string) {
-      let resOrders = await getOrders()
-      const index = parseInt(id)
-            updatedOrder.orderPlaced = started;
-            resOrders[index] = updatedOrder;
-               
-      
+async function updateOrder(updatedOrder: Order, id:number) {
+      if( !db.data ) {
+            db.data = defaultData
+      }
+      if(updatedOrder.locked) {
+            return false
+      }
+      updatedOrder.orderPlaced = started;      
+      db.data.orders[id] = updatedOrder;  
       await db.write()
-      return updatedOrder
+      return true
 }
 
 async function authenticateLogin(ID:any){

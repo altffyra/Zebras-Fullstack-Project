@@ -83,25 +83,20 @@ import express, { NextFunction, Request, Response } from "express";
 orderRoute.put("/:id", async (req:IdParam, res:Response) => {
   const id:string = req.params.id;  
   let updatedOrder: Order = req.body;
-  const checkedOrders = await checkOrder(id);
-  if(!checkedOrders) {
+  const foundIndex: number = await checkOrder(id);
+  if(foundIndex === -1) {
     res.status(400).send('No order with that id')
     return
   }
 
-  if(checkedOrders.locked) {
-    res.status(400).send('Already Locked')
-  } 
-
-
   if(isValidUser(updatedOrder.user)) {
     if(isValidOrder(updatedOrder)) {    
       if(isValidUpdatedOrder(updatedOrder)) {        
-        const orderUpdate = await updateOrder(updatedOrder, id)
-        if(!orderUpdate) {
-          res.sendStatus(400)
-          return
-        } 
+          const checkedOrder = await updateOrder(updatedOrder, foundIndex)
+          if(!checkedOrder) {
+            res.status(400).send('Already Locked')
+            return
+          }
           res.sendStatus(200)
       } else {
         res.status(400).send('Bad placed order')

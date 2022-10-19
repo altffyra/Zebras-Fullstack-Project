@@ -35,7 +35,7 @@ export function isValidOrder(order:Order) : boolean  {
 
 export function isValidUpdatedOrder(order:Order) : boolean {
 	if(order.hasOwnProperty('locked')) {
-		if (typeof order.locked !== 'boolean' || order.locked == true) {
+		if (typeof order.locked !== 'boolean') {
 			return false
 		}
 	} else {
