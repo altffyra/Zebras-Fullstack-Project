@@ -1,8 +1,6 @@
 import express, { Request, Response } from "express";
 import { User } from "../lowDb/dbinterface";
-import db from "../lowDb/database.js";
-import { resolve } from "path";
-import { data as defaultData } from "../defaultData.js";
+import { findUser, createAccount } from "../lowDb/database.js";
 import { isValidUser } from "../validators/validUser.js";
 const app = express();
 app.use(express.json());
@@ -23,41 +21,20 @@ userRoute.post('/signup', async (req, res) => {
         resObj.message = '400 No data'
         res.json(resObj)
     } else if( isValidUser(userData) ) {
-        if( !db.data ) {
-            db.data = defaultData
-        }
-        const userExist = await db.data.users.filter((user) => user.email === userData.email || user.name === userData.name)
-        if( userExist.length > 0 ) {
+        const userExist = await findUser(userData)
+        if( userExist !== undefined ) {
             resObj.userExist = true
             resObj.message = `Konto finns redan för ${userData.name}`
         } 
         if( resObj.userExist ) {
             resObj.success = false
         } else {
-            db.data.users.push(userData)
-            db.write()
+            createAccount(userData)
         }
     }
         res.send(resObj)
 })
 
-// userRoute.post("/signup", async (req, res) => {
-
-//     const userData: User = req.body
-//     let userExist: User = await findUser(userData)
-
-//     const resObj = {
-//         success: true,
-//         userExist: false
-//     }
-
-//     newUser(userData)
-//     console.log('userExist:', userExist)
-//     console.log('userData:', userData);
-
-
-//     res.json(resObj)
-// })
 // LOGIN
 
 

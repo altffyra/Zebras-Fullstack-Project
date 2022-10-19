@@ -87,25 +87,32 @@ async function getOrders(){
 // }
 
 // // USER FUNCTIONS
-// async function getUsers() {
-//     await userdb.read()
-//     const allUsers: User[] = userdb.data.users
-//     console.log('getUsers', allUsers)
-//     return allUsers
-// }
-// async function newUser(userData:User) {
-//     await userdb.read()
-//     const result = await userdb.data.users.push(userData)
-//     await userdb.write()
-//     return result
-// }
+async function getUsers() {
+    await db.read()
+    if( !db.data ) {
+      db.data = defaultData
+}
+    const allUsers: User[] = db.data.users
+    console.log('getUsers', allUsers)
+    return allUsers
+}
+export async function createAccount(userData:User) {
+      await db.read()
+      if( !db.data ) {
+            db.data = defaultData
+      }
+      db.data.users.push(userData)
+      await db.write()
+}
 
-// async function findUser(userData:User) {
-//     userdb.read()
-//     let userExist: User = userdb.data.users.find((user:User) => user.name === userData.name)
-//     console.log('userExist i db:', userExist)
-//     return userExist
-// }     
+export async function findUser(userData:User) {
+    db.read()
+    if( !db.data ) {
+      db.data = defaultData
+      }
+    let userExist = db.data.users.find((user) => user.email === userData.email || user.name === userData.name)
+    return userExist
+}     
 
 // const menu:MenuItem[] = menudb.data
 // const orders:Order[] = orderdb.data
