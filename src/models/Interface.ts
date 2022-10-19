@@ -23,6 +23,7 @@ export interface User {
     accountId: string;
     phoneNumber: string;
     admin?: boolean;
+    password: string;
 }
 
 export interface Order {
