@@ -2,9 +2,9 @@ import express, { Request, Response } from "express";
 import {join, dirname} from 'path'
 import {fileURLToPath}from 'url'
 import userRoute from './Routes/UserRoute.js'
-import orderRoute from './Routes/OrderRoute.js'
-import menuRoute from './Routes/MenuRoute.js'
-import {lol} from './lowDb/database.js'
+// import orderRoute from './Routes/OrderRoute.js'
+// import menuRoute from './Routes/MenuRoute.js'
+// import {lol} from './lowDb/database.js'
 import cors from 'cors';
 
 const app = express();
@@ -19,17 +19,17 @@ const staticPath:string = join(__dirname, '../../dist')
 
 
 
-app.use("/menu", menuRoute)
-app.use("/order", orderRoute)
+// app.use("/menu", menuRoute)
+// app.use("/order", orderRoute)
 app.use("/user", userRoute)
 
 // HA KVAR FÖR DET AKTIVERAR DATABASEN
 // @ts-ignore
 
-async function start(){
-const lolw = await lol()
-}
-start()
+// async function start(){
+// // const lolw = await lol()
+// }
+// start()
 
 app.use(express.static(staticPath))
 
