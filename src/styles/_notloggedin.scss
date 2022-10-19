@@ -24,14 +24,16 @@
 
             input {
                 background-color: transparent;
+                width: 12em;
                 outline: none;
                 border: none;
-                border-bottom: 1px solid black;
+                border-bottom: 2px solid black;
             }
 
             .login-btn {
                 @include buttons.bigBtn($bg: variables.$acceptBtnGreen);
                 margin-bottom: 1em;
+                width: 12em;
             }
 
             .guest-btn {
