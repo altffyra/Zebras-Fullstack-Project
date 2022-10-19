@@ -3,10 +3,7 @@ import appertizer from '../../assets/menu/appertizer.svg';
 import mainmeal from '../../assets/menu/mainmeal.svg';
 import veg from '../../assets/menu/veg.svg';
 import dessert from '../../assets/menu/dessert.svg';
-import vector from '../../assets/menu/vector.svg';
-import allergy from '../../assets/menu/allergy.svg';
 import MenuTopic from '../../components/MenuTopic';
-import MenuItem from '../../components/MenuItem';
 import Cart from '../../components/Cart';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -19,16 +16,13 @@ type Props = {}
 
 const Menu = (props: Props) => {
 const dispatch = useDispatch();
-  const appertizerTopic = "FÖRRÄTT";
   const appertizerImg = appertizer;
-  const vegTopic = "VEGETARISKT";
   const vegImg = veg;
-  const dessTopic = "DESSERT";
   const dessImg = dessert;
 
   useEffect(() => {
     async function getMenu() {
-      const response = await fetch('http://localhost:8000/menu/');
+      const response = await fetch('/api/menu');
       const data = await response.json();      
       dispatch(menuActions.getMenu(data.menu));
 
@@ -45,7 +39,10 @@ const dispatch = useDispatch();
 
   return (
     <div className="menu-wrapper">
-      <Nav />
+      <section className="menu-nav--container">
+        <Nav />
+      </section>
+
       <section className="menu-header--container">
 
         <figure className="menu-header--info">

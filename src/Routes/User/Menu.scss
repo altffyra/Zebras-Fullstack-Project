@@ -2,8 +2,13 @@
 
 div .menu-wrapper {
     @include variables.flexContainer($dir: column);
+    align-items: center;
     font-family: 'Rock Salt';
     background-color: variables.$primaryBackground;
+
+    .menu-nav--container {
+        margin-bottom: 4em;
+    }
 
     .menu-header--category {
         display: flex;
@@ -23,7 +28,7 @@ div .menu-wrapper {
 
 
 .menu-header--container {
-    margin-top: 1.5rem;
+    margin-top: 2em;
     .menu-header--info {
         display: flex;
         @include variables.flexBox($justify: center, $align: center);
@@ -34,22 +39,48 @@ div .menu-wrapper {
         }
     }
 
+    h2 {
+        margin: 1.5em;
+    }
+
 
     .menu-item {
 
         display: flex;
+        flex-direction: column;
         width: 80%;
         margin: 1em auto 2em auto;
         border-bottom: .1em solid #050505;
-        position: relative;
 
         p {
             font-family: 'Roboto';
             margin: .5em 0 .5em 0;
         }
+    
+
+        .menu-item--info {
+            display: flex;
+
+            .menu-item--right {
+                display: flex;
+                align-items: center;
+                margin: 0 0 0 auto;
+            }
+    
+            .menu-item--left {
+    
+                .menu-item--flex {
+                    display: flex;
+                    
+                    img {
+                        margin-left: 0.4em;
+                    }
+                }
+    
+            }
+        }
 
         .menu-item--vector {
-            position: absolute;
             width: 100%;
             bottom: 0;
             transform: translateY(.7em);
@@ -59,29 +90,16 @@ div .menu-wrapper {
                 justify-content: center;
             }
 
-        }
-
-        .menu-item--right {
-            display: flex;
-            align-items: center;
-            margin: 0 0 0 auto;
-        }
-
-        .menu-item--left {
-
-            .menu-item--flex {
-                display: flex;
-
-                img {
-                    margin-left: .5em;
-                }
+            .rotated {
+                transform: rotate(180deg);
             }
 
         }
 
+
         .menu-item--add {
-            font-size: 1.8em;
-            font-weight: bold;
+            font-size: 1.6em;
+            font-weight: 500;
         }
 
     }
@@ -115,6 +133,27 @@ div .menu-wrapper {
     }
 }
 
+@media screen and (min-width: 620px) {
 
+    div .menu-wrapper {
+        h1 {
+            font-size: 1.6em;
+        }
+    }
+
+    .menu-header--container {
+        width: 90%;
+        .menu-subheader--text {
+            margin-left: 4em;
+            font-size: 1.5em;
+        }
+    }
+
+    .menu-header--container {
+        .menu-item {
+            width: 55%;
+        }
+    }
+}
 
 

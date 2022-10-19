@@ -12,7 +12,7 @@ const MenuMainCouse = ({ menuArr, type }: Props) => {
 
     return (
         <section>
-            <h2>{type}</h2>
+            <h2 className="menu-subheader--text">{type}</h2>
             {menuItems}
         </section>
     )
