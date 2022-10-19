@@ -1,35 +1,40 @@
 import { IncomingHttpHeaders } from 'http'
 
+export type Schema = {
+    users: User[];
+    orders: Order[];
+    menu: MenuItem[];
+}
 
-export interface MenuItems {
+export type MenuItem = {
     name: string;
     desc: string;
-    price: number;
+    price: string;
     allergies: string;
     type: string;
 }
 
-export interface CartItems {
+export type CartItems = {
     name: string;
     price: number;
     amount: number;
 }
 
-export interface CartProps {
+export type CartProps = {
     cartItems: CartItems[];
     totalPrice: number;
 }
 
-export interface User {
+export type User = {
     name: string;
     email: string;
     accountId: string;
     phoneNumber: string;
-    admin?: boolean;
+    admin: boolean;
     password: string;
 }
 
-export interface Order {
+export type Order = {
     cart: CartProps;
     user: User;
     userComment?: string;
