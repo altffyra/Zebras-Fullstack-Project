@@ -37,20 +37,19 @@ const UserInformation = (props: UserInformationProps) => {
             accountId : props.user.accountId,
         };
 
-        // TODO when backend is ready
 
-        // const response = await fetch(`${props.user.accountId}`, {
-        //     method: 'PUT',
-        //     body: JSON.stringify(updatedUser),
-        //     headers: { 'Content-Type': 'application/json' }
-        // });
+        const response = await fetch(`/api/user/${props.user.accountId}`, {
+            method: 'PUT',
+            body: JSON.stringify(updatedUser),
+            headers: { 'Content-Type': 'application/json' }
+        });
 
-        // const data = await response.json();
-        // if (data.success) {
-        //     setUpdate(false);
-        //     setLoading(false);
-        //     dispatch(userActions.setUser(updatedUser));           
-        // };
+        const data = await response.json();
+        if (data.success) {
+            setUpdate(false);
+            setLoading(false);
+            dispatch(userActions.setUser(updatedUser));           
+        };
     };
 
     const handleName: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
@@ -98,7 +97,7 @@ const UserInformation = (props: UserInformationProps) => {
             :
             <form className='user-container' onSubmit={(e) => handleSubmit(e) }>
                 <div className='user-info'>
-                    <label htmlFor="username">Name : </label>
+                    <label htmlFor="username">Namn : </label>
                     <input type="text" name="username" id="username" defaultValue={props.user.name} onChange={(e) => handleName(e)} />
                 </div>
                 <div className='user-info'>
@@ -106,7 +105,7 @@ const UserInformation = (props: UserInformationProps) => {
                     <input type="email" name="email" id="email" defaultValue={props.user.email} onChange={(e) => handleEmail(e)} />
                 </div>
                 <div className='user-info'>
-                    <label htmlFor="username">Tel. nr : </label>
+                    <label htmlFor="username">Tel.nr : </label>
                     <input type="number" name="phonenum" id="phonenum" defaultValue={props.user.phoneNumber} onChange={(e) => handlePhone(e)} />
                 </div>
                 <div className="button-container">

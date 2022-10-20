@@ -2,6 +2,12 @@ import { MenuItems } from "../models/types";
 import vector from '../assets/menu/vector.svg';
 import allergy from '../assets/menu/allergy.svg';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store';
+import { CartItems } from '../models/types';
+import {actions as cartActions} from '../features/cartReducer';
+import { useDispatch } from 'react-redux';
+
 
 type Props = {
     // allergy: string;
@@ -13,6 +19,18 @@ type Props = {
 const MenuItem = ({ item }: Props) => {
 
     const [tabbed, setTabbed] = useState<boolean>(false);
+    const dispatch = useDispatch();
+
+    //const cartItems: CartItems[] = useSelector((state: RootState) => state.cart);
+
+    const AddItemToCart = () => {
+      const cartObject: CartItems = {
+        name: item.name,
+        price: item.price,
+        amount: 1
+      }
+      dispatch(cartActions.addToCart(cartObject));
+    }
 
 
     const tabFood = () => {
@@ -34,7 +52,7 @@ const MenuItem = ({ item }: Props) => {
             </section>
 
             <section className="menu-item--right">
-              <p className="menu-item--add">+</p>
+              <p className="menu-item--add" onClick={AddItemToCart} >+</p>
             </section>
 
           </section>

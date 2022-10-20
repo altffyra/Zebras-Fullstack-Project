@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { User, LoginCreds, Order } from "../lowDb/dbinterface";
-import db, { findUser, createAccount, findAccount } from "../lowDb/database.js";
+import db, { findUser, createAccount, findAccount, updateUser,getUsers } from "../lowDb/database.js";
 import { data as defaultData } from '../defaultData.js'
 import { isValidUser } from "../validators/validUser.js";
 const app = express();
@@ -98,6 +98,23 @@ userRoute.get('/login', async (req, res) => {
   //  "id":""
   //} 
 
+  // UPDATE USER
+  type IdObject = { id: string };
+  type IdParam = Request<IdObject>;
+  userRoute.put('/:id', async (req:IdParam, res:Response) => {
+    const id:string = req.params.id;
+    let updatedUser: User = req.body;
+    const checkIfUpdate = await updateUser(id, updatedUser)
+    if(!checkIfUpdate) {
+        res.status(400).send({success: false})
+    }
+    res.status(200).send({success: true})
+  })
+
+  userRoute.get('/', async(req, res) => {
+    const lol = await getUsers()
+    res.send(lol)
+  })
 
 
 export default userRoute
