@@ -87,6 +87,11 @@ orderRoute.get('/:id', async (req:IdParam, res:Response) => {
 // // MAKE ORDER
 orderRoute.post("/", async (req, res) => {
   let orderObj: Order = req.body;
+  console.log(orderObj.cart);
+  console.log(orderObj.cart.cartItems);
+  console.log(orderObj.cart.cartItems[1]);
+  console.log(orderObj.user);
+  
   const func = orderObj.user.accountId ? isValidUser : isValidGuest;
   const person = func == isValidUser ? 'user' : 'guest'
 
@@ -95,12 +100,15 @@ orderRoute.post("/", async (req, res) => {
     if(isValidCart(orderObj)) {
       await createOrder(orderObj)
       res.status(200).send('Order placed')
-
+      
     } else {
+     
+      
       res.status(400).send('Bad cart')
     }
 
   } else {
+   
     res.status(400).send('Bad '+ person)
   }
 })
