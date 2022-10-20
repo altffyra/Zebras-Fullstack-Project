@@ -32,6 +32,10 @@ export type User  = {
     admin: boolean;
     password: string;
 }
+export type LoginCreds = {
+    name: string;
+    password: string;
+}
 
 export type Order = {
     cart: CartProps;

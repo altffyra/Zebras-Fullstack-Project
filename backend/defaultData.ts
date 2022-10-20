@@ -39,7 +39,7 @@ export const data: Schema = {
                   "accountId": "0983",
                   "phoneNumber": "070000005",
                   "admin": false,
-                  "password": ""
+                  "password": "felle"
             }
       ],
       "orders": [
