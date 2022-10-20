@@ -16,10 +16,12 @@ const Search = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [searchId, setSearchId] = useState<string>('');
 
-    async function getOrder() {
-      const response = await fetch(`/api/order/${searchId}`);
+    async function getOrder(search:string) {
+      setLoading(true)
+      const response = await fetch(`/api/order/${search}`);
       const data = await response.json();      
       dispatch(orderActions.getOrders(data));
+      setLoading(false)
     }
 
     const handleInput: (e:ChangeEvent<HTMLInputElement>) => void = (e) => {
@@ -28,8 +30,7 @@ const Search = () => {
     }
 
     const searchOrder: () => void = () => {
-      console.log(searchId);
-      
+      getOrder(searchId)      
     }
 
     const changeOrder: () => void = async () => {
@@ -45,37 +46,40 @@ const Search = () => {
   return (
     <section className="search">
       <Nav />
+      {loading ? 
+            <div className='loading'></div>
+            : ''
+        }
       <div className="search-container">
         <input type="text" name='search' placeholder='Sök ordernummer' value={searchId} id="search" onChange={(e) => handleInput(e)}/>
         <label htmlFor="search" onClick={searchOrder}>Sök</label>
-        {searchedOrder ? 
-                <div className="order-container">
-                <h2>Order {searchedOrder.id}</h2>
-                <div className='user-information'>
-                  <p>Beställare</p>
-                  <p>Namn : {searchedOrder.user.name}</p>
-                  <p>Email : {searchedOrder.user.email}</p>
-                  <p>Tel.nr : {searchedOrder.user.phoneNumber}</p>
-                </div>
-                <div className='divider'></div>
-                <div className='order-information'>
-                  <p className='order-title'>Order {searchedOrder.id}</p>
-                    {orderItem}
-                    <p>Totalt : {searchedOrder.cart.totalPrice} kr</p>
-                </div>
-                    <div className='button-container'>
-                {!searchedOrder.locked
-                  ?
-                    <button className='btn-change' onClick={changeOrder}>Ändra</button>
-                  :
-                    ''
-                }
-                    </div>
-              </div>
-          :
+      </div>
+        {searchedOrder 
+          ? 
+        <div className="order-container">
+        <h2>Order {searchedOrder.id}</h2>
+        <div className='user-information'>
+          <p>Beställare</p>
+          <p>Namn : {searchedOrder.user.name}</p>
+          <p>Email : {searchedOrder.user.email}</p>
+          <p>Tel.nr : {searchedOrder.user.phoneNumber}</p>
+        </div>
+        <div className='divider'></div>
+        <div className='order-information'>
+          <p className='order-title'>Order {searchedOrder.id}</p>
+            {orderItem}
+            <p>Totalt : {searchedOrder.cart.totalPrice} kr</p>
+        </div>
+            {!searchedOrder.locked
+              ?
+                <button className='btn-change' onClick={changeOrder}>Ändra</button>
+              :
+                ''
+            }
+          </div>
+        :
           ''
       }
-      </div>
     </section>
   )
 }
