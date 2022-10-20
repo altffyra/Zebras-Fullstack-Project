@@ -86,6 +86,7 @@ orderRoute.post("/", async (req, res) => {
       orderObj.locked = false;
       orderObj.completed = false;
       orderObj.orderPlaced = started;
+      orderObj.orderCompleted = completed;
       orderObj.id = uuid();
       await createOrder(orderObj)
       res.status(200).send('Order placed')

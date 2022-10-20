@@ -7,8 +7,9 @@ import dayjs from 'dayjs';
 
 
 export const started = dayjs().format('YYYY-MM-DD HH:mm');
-export const completed = dayjs().add(23, 'minutes');
-console.log(completed);
+export const newtime = dayjs().add(23, 'minutes');
+export const completed = newtime.toString()
+
 
 
 
