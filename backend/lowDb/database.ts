@@ -1,13 +1,17 @@
-import { join, dirname } from 'path'
-import { Low, JSONFile } from 'lowdb'
-import { fileURLToPath } from 'url'
-import { User, Schema, Order, LoginCreds } from './dbinterface'
-import { data as defaultData } from '../defaultData.js'
+import { join, dirname } from 'path';
+import { Low, JSONFile } from 'lowdb';
+import { fileURLToPath } from 'url';
+import { User, Schema, Order, LoginCreds } from './dbinterface';
+import { data as defaultData } from '../defaultData.js';
+import dayjs from 'dayjs';
 
-import dayjs from 'dayjs'
-dayjs()
-const started= dayjs().format('YYYY-MM-DD HH:mm')
-console.log(started)
+
+export const started = dayjs().format('YYYY-MM-DD HH:mm');
+export const newtime = dayjs().add(23, 'minutes');
+export const completed = newtime.toString()
+
+
+
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
