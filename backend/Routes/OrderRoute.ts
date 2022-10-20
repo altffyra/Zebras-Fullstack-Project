@@ -4,8 +4,10 @@ import express, { NextFunction, Request, Response } from "express";
  app.use(express.json());
  const orderRoute = express.Router();
  import {User} from '../lowDb/dbinterface'
- import {authenticateLogin, getOrders} from '../lowDb/database.js'
+ import {authenticateLogin, getOrders,checkOrder, updateOrder} from '../lowDb/database.js'
  import {Order} from '../lowDb/dbinterface.js'
+ import { isValidCart, isValidUpdatedOrder } from "../validators/validOrder.js";
+ import { isValidUser } from "../validators/validUser.js";
 
 
 
@@ -70,14 +72,51 @@ import express, { NextFunction, Request, Response } from "express";
    } else {
      res.sendStatus(404);
    }
+   
  });
 
 // // MAKE ORDER
 
-
-
 // // CHANGE ORDER
+orderRoute.put("/:id", async (req:IdParam, res:Response) => {
+  const id:string = req.params.id;  
+  let updatedOrder: Order = req.body;
+  const foundIndex: number = await checkOrder(id);
+  if(foundIndex === -1) {
+    res.status(400).send('No order with that id')
+    return
+  }
 
+  if(isValidUser(updatedOrder.user)) {
+    if(isValidCart(updatedOrder)) {    
+      if(isValidUpdatedOrder(updatedOrder)) {        
+          const checkedOrder = await updateOrder(updatedOrder, foundIndex)
+          if(!checkedOrder) {
+            res.send({locked: true})
+            return
+          }
+          res.sendStatus(200)
+      } else {
+        res.status(400).send('Bad placed order')
+      }
+    } else {
+      res.status(400).send('Bad order')
+    }
+  } else {
+    res.status(400).send('Bad user')
+  }
+});
+
+// GET ALL FOR TESTING
+orderRoute.get("/", async (req:IdParam, res:Response) => {
+  const id:string = req.params.id;
+  let resOrders = await getOrders()
+  if (resOrders.length > 0) {
+    res.send(resOrders);
+  } else {
+    res.sendStatus(404);
+  }
+});
 
 // // function isValidOrder(isorder: Order)
    
