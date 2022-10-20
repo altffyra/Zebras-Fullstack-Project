@@ -2,16 +2,26 @@ import '../../styles/_orderConfirm.scss';
 import Nav from '../../components/Nav';
 import OrderItems from '../../components/OrderItems';
 import { Order } from '../../models/types';
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
+import { actions as cartActions } from '../../features/cartReducer';
 
 const OrderConfirm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
   const [loading, setLoading] = useState<boolean>(false);
 
   const confirmedOrder: Order = useSelector((state: RootState) => state.orders)[0];
   const orderItemsEl = confirmedOrder.cart.cartItems.map(item => <OrderItems item={item} key={item.name} />)
   const orderDone:string | undefined = confirmedOrder.orderCompleted?.slice(10)
+
+  const changeOrder: () => void = () => {
+    dispatch(cartActions.changeOrder(confirmedOrder.cart));
+    navigate('/checkout');
+  }
+  
   return (
     <section className="confirmed">
       <Nav />
@@ -45,6 +55,7 @@ const OrderConfirm = () => {
             <p>{confirmedOrder.cart.totalPrice} kr</p>
           </div>
         </div>
+          <p className='change-order'>Blev det något tokigt? <span onClick={changeOrder}>Tryck här!</span></p>
         {confirmedOrder.userComment ? 
         <div className='order-comment'>
           <p>Kommentar</p>

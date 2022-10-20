@@ -56,15 +56,20 @@ const initialState: Order[] = [
 ];
 
 const getOrders = createAction<Order[]>('Get all orders');
+const clearOrders = createAction('Clear orders');
 
-const actions = { getOrders };
+const actions = { getOrders, clearOrders };
 
 const reducer = createReducer(initialState, {
     [getOrders.toString()]: (state, action) => {
         const allOrders = [...action.payload];
 
         return allOrders
-    }
+    },
+    [clearOrders.toString()]: (state, action) => {
+
+      return initialState
+  }
 })
 
 export {reducer, actions}
