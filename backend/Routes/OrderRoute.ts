@@ -52,7 +52,7 @@ orderRoute.get('/:id', async (req:IdParam, res:Response) => {
  orderRoute.get("/user/:id", async (req:IdParam, res:Response) => {
      const id:string = req.params.id;
      let resOrders = await getOrders()
-     let filter = resOrders.filter((order:Order) => order.id == id);
+     let filter = resOrders.filter((order:Order) => order.user.accountId == id);
 
    if (filter.length > 0) {
      res.send(filter);
