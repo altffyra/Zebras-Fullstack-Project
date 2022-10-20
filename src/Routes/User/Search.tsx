@@ -15,12 +15,21 @@ const Search = () => {
   const navigate = useNavigate()
   const [loading, setLoading] = useState<boolean>(false);
   const [searchId, setSearchId] = useState<string>('');
+  const [searchError, setSearchError] = useState<boolean>(false);
 
     async function getOrder(search:string) {
       setLoading(true)
-      const response = await fetch(`http://localhost:8000//api/order/${search}`);
+      setSearchError(false)
+      const response = await fetch(`/api/order/${search}`);
       const data = await response.json();      
-      dispatch(orderActions.getOrders(data));
+      if(data.found == false) {
+        setSearchError(true)
+        dispatch(orderActions.clearOrders())
+      } else {
+
+        dispatch(orderActions.getOrders(data));
+      }
+      
       setLoading(false)
     }
 
@@ -57,6 +66,10 @@ const Search = () => {
         <input type="text" name='search' placeholder='Sök ordernummer' value={searchId} id="search" onChange={(e) => handleInput(e)}/>
         <label htmlFor="search" onClick={searchOrder}>Sök</label>
       </div>
+      {searchError ? 
+      <p>Ingen order hittades på det ordernumret.</p>
+    :
+    ''}
         {searchedOrder 
           ? 
         <div className="order-container">

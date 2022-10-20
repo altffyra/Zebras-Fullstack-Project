@@ -38,7 +38,7 @@ orderRoute.get('/:id', async (req:IdParam, res:Response) => {
   if (filter.length > 0) {
     res.send(filter);
   } else {
-    res.sendStatus(400);
+    res.send({found: false})
   }
 })
 
