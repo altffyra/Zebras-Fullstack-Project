@@ -18,7 +18,7 @@ const Search = () => {
 
     async function getOrder(search:string) {
       setLoading(true)
-      const response = await fetch(`/api/order/${search}`);
+      const response = await fetch(`http://localhost:8000//api/order/${search}`);
       const data = await response.json();      
       dispatch(orderActions.getOrders(data));
       setLoading(false)
@@ -30,6 +30,9 @@ const Search = () => {
     }
 
     const searchOrder: () => void = () => {
+      if(searchId.length <= 1) {
+        return
+      }
       getOrder(searchId)      
     }
 

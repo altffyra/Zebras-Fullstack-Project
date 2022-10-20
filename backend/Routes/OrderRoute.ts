@@ -1,10 +1,9 @@
 import express, { NextFunction, Request, Response } from "express";
- import { IncomingHttpHeaders } from 'http';
  const app = express();
  app.use(express.json());
  const orderRoute = express.Router();
  import {User} from '../lowDb/dbinterface'
- import {authenticateLogin, getOrders,checkOrder, updateOrder, getOrder} from '../lowDb/database.js'
+ import {authenticateLogin, getOrders,checkOrder, updateOrder } from '../lowDb/database.js'
  import {Order} from '../lowDb/dbinterface.js'
  import { isValidCart, isValidUpdatedOrder } from "../validators/validOrder.js";
  import { isValidUser } from "../validators/validUser.js";
@@ -30,7 +29,18 @@ import express, { NextFunction, Request, Response } from "express";
  };
 
 
-
+// SEARCH ORDER
+orderRoute.get('/:id', async (req:IdParam, res:Response) => {
+  const id:string = req.params.id;  
+  
+  let resOrders = await getOrders()
+  let filter = resOrders.filter((order:Order) => order.id == id);
+  if (filter.length > 0) {
+    res.send(filter);
+  } else {
+    res.sendStatus(400);
+  }
+})
 
 
 
@@ -107,16 +117,6 @@ orderRoute.put("/:id", async (req:IdParam, res:Response) => {
   }
 });
 
-orderRoute.get('/:id', async (req:IdParam, res:Response) => {
-  const id:string = req.params.id;  
-  const searchedOrder = await getOrder(id);
-  if(!searchedOrder) {
-    res.sendStatus(404)
-    return
-  }
-  res.status(200).send(searchedOrder)
-})
-
 // GET ALL FOR TESTING
 orderRoute.get("/", async (req:IdParam, res:Response) => {
   const id:string = req.params.id;
@@ -127,9 +127,7 @@ orderRoute.get("/", async (req:IdParam, res:Response) => {
     res.sendStatus(404);
   }
 });
-
-// // function isValidOrder(isorder: Order)
-   
+  
 
 
 // //{user: (account ID/guest), cartItems: [] , orderPlaced: , userComment: , adminComment: , locked: , completed: , id:  }
