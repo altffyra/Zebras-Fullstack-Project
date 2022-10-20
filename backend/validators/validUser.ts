@@ -1,4 +1,4 @@
-import { User } from "../lowDb/dbinterface";
+import { User, Guest } from "../lowDb/dbinterface";
 
 
 export function isValidUser(userData:User) {
@@ -45,4 +45,29 @@ export function isValidUser(userData:User) {
             return userObj.password = false
       }
       return userObj
+}
+
+export function isValidGuest(guestData: Guest) {
+      if( guestData.hasOwnProperty('name') ) {
+            if((typeof guestData.name !== 'string') || guestData.name === '') {
+                  return false
+            }
+      } else {
+            return false
+      }
+      if( guestData.hasOwnProperty('email') ) {
+            if((typeof guestData.email !== 'string') || guestData.email === '') {
+                  return false
+            }
+      } else {
+            return false
+      }
+      if( guestData.hasOwnProperty('phoneNumber') ) {
+            if((typeof guestData.phoneNumber !== 'string') || guestData.phoneNumber === '') {
+                  return false
+            }
+      } else {
+            return false
+      }
+      return true
 }

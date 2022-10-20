@@ -37,6 +37,12 @@ export type LoginCreds = {
     password: string;
 }
 
+export type Guest = {
+    name: string;
+    email: string;
+    phoneNumber: string
+}
+
 export type Order = {
     cart: CartProps;
     user: User;

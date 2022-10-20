@@ -105,7 +105,7 @@ export async function findUser(userData:User) {
 
       console.log('userExist', userExist)
     return userExist
-}
+}    
 
 export async function findAccount(userData:LoginCreds) {
       db.read()
@@ -114,6 +114,15 @@ export async function findAccount(userData:LoginCreds) {
       }
       let filterAccount = db.data.users.filter((user)=> user.name === userData.name && user.password === userData.password)
       return filterAccount
+}
+
+export async function createOrder(orderData: Order) {
+      await db.read()
+      if ( !db.data ) {
+            db.data = defaultData
+      }
+      db.data.orders.push(orderData)
+      await db.write();
 }
 
 
