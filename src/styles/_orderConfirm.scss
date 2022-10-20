@@ -75,6 +75,16 @@
         }
     }
 
+    .change-order {
+        align-self: center;
+        color: variables.$fontDark;
+        
+        span {
+            color: variables.$navBackground;
+            text-decoration: underline;
+        }
+    }
+
     .order-comment {
         margin: 0 1em;
         box-shadow: variables.$boxShadow;
