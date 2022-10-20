@@ -14,14 +14,14 @@
             background: color.scale($bg, $blackness: 40%);
       }
 }
-@mixin bigBtn ($pad: 1em 2em, $bg: variables.$darkRed) {
+@mixin bigBtn ($pad: 1em 2em, $bg: variables.$darkRed, $fontcolor: variables.$fontLight ) {
       border: none;
       padding: $pad;
       border-radius: 5px;
       background: $bg;
       font-size: 1.1em;
       box-shadow: variables.$boxShadow;
-      color: variables.$fontLight;
+      color: $fontcolor;
       transition: all 300ms;
       &:hover {
             background: color.scale($bg, $blackness: 40%);

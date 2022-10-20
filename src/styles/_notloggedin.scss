@@ -2,13 +2,12 @@
 @use 'buttons';
 
 .login {
-    width: 80vw;
     height: 100%;
-
     margin: 0 auto;
+    width: 100%;
 
     .flex-container {
-
+        
         // @include variables.flexContainer();
         // .form--name, .form--email {
         //     position: relative;
@@ -49,6 +48,7 @@
         .form {
             @include variables.flexContainer();
             align-items: center;
+            justify-items: center;
             gap: 3em;
             .form--name, .form--email {
                 position: relative;

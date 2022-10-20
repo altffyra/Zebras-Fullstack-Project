@@ -3,10 +3,10 @@ import { CartProps, CartItems } from "../models/types";
 
 const initialState: CartProps = {
     cartItems: [
-    //     {name:"1", price: 1, amount: 1},
-    //     {name:"2", price: 2, amount: 1},
-    //     {name:"3", price: 3, amount: 1},
-    //     {name:"4", price: 4, amount: 1},
+        {name:"1", price: 1, amount: 1},
+        {name:"2", price: 2, amount: 1},
+        {name:"3", price: 3, amount: 1},
+        {name:"4", price: 4, amount: 1},
     //     {name:"5", price: 5, amount: 1},
     //     {name:"6", price: 6, amount: 1},
     //     {name:"7", price: 4, amount: 1},
