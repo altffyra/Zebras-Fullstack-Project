@@ -78,7 +78,7 @@ orderRoute.post("/", async (req, res) => {
   let orderObj: Order = req.body;
   const func = orderObj.user.accountId ? isValidUser : isValidGuest;
   const person = func == isValidUser ? 'user' : 'guest'
-  console.log(orderObj, func);
+
   
  if (func(orderObj.user)) {
     if(isValidCart(orderObj)) {
