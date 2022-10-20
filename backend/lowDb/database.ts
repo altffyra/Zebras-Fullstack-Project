@@ -1,13 +1,16 @@
-import { join, dirname } from 'path'
-import { Low, JSONFile } from 'lowdb'
-import { fileURLToPath } from 'url'
-import { User, Schema, Order } from './dbinterface'
-import { data as defaultData } from '../defaultData.js'
+import { join, dirname } from 'path';
+import { Low, JSONFile } from 'lowdb';
+import { fileURLToPath } from 'url';
+import { User, Schema, Order } from './dbinterface';
+import { data as defaultData } from '../defaultData.js';
+import dayjs from 'dayjs';
 
-import dayjs from 'dayjs'
-dayjs()
-const started= dayjs().format('YYYY-MM-DD HH:mm')
-console.log(started)
+
+export const started = dayjs().format('YYYY-MM-DD HH:mm');
+export const completed = dayjs().add(23, 'minutes');
+console.log(completed);
+
+
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -114,6 +117,7 @@ export async function createOrder(orderData: Order) {
       await db.write();
 }
 
+// set userComment, locked = false, completed = false, orderPlaced = dayjs, orderComplete = randomfunc, id = uuid
 
 
 // // PUSHA IN OBJECT

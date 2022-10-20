@@ -3,9 +3,10 @@ import express, { NextFunction, Request, Response } from "express";
  app.use(express.json());
  const orderRoute = express.Router();
  import {User, Order} from '../lowDb/dbinterface'
- import db, {authenticateLogin, getOrders,checkOrder, updateOrder, createOrder} from '../lowDb/database.js'
+ import db, {authenticateLogin, getOrders,checkOrder, updateOrder, createOrder, started, completed} from '../lowDb/database.js'
  import { isValidCart, isValidUpdatedOrder } from "../validators/validOrder.js";
  import { isValidUser, isValidGuest } from "../validators/validUser.js";
+import { uuid } from "uuidv4";
 
 
 
@@ -77,11 +78,15 @@ import express, { NextFunction, Request, Response } from "express";
 orderRoute.post("/", async (req, res) => {
   let orderObj: Order = req.body;
   const func = orderObj.user.accountId ? isValidUser : isValidGuest;
-  const person = func == isValidUser ? 'user' : 'guest'
+  const person = func == isValidUser ? 'user' : 'guest';
 
   
  if (func(orderObj.user)) {
     if(isValidCart(orderObj)) {
+      orderObj.locked = false;
+      orderObj.completed = false;
+      orderObj.orderPlaced = started;
+      orderObj.id = uuid();
       await createOrder(orderObj)
       res.status(200).send('Order placed')
 
