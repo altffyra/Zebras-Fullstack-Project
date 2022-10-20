@@ -1,7 +1,7 @@
 import { join, dirname } from 'path'
 import { Low, JSONFile } from 'lowdb'
 import { fileURLToPath } from 'url'
-import { User, Schema, Order } from './dbinterface'
+import { User, Schema, Order, LoginCreds } from './dbinterface'
 import { data as defaultData } from '../defaultData.js'
 
 import dayjs from 'dayjs'
@@ -101,9 +101,20 @@ export async function findUser(userData:User) {
     if( !db.data ) {
       db.data = defaultData
       }
-    let userExist = db.data.users.find((user) => user.email === userData.email || user.name === userData.name)
+    let userExist = db.data.users.filter((user) => user.email === userData.email || user.name === userData.name)
+
+      console.log('userExist', userExist)
     return userExist
-}     
+}
+
+export async function findAccount(userData:LoginCreds) {
+      db.read()
+    if( !db.data ) {
+      db.data = defaultData
+      }
+      let filterAccount = db.data.users.filter((user)=> user.name === userData.name && user.password === userData.password)
+      return filterAccount
+}
 
 
 
