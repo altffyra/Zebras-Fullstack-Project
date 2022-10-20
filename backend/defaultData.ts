@@ -65,6 +65,7 @@ export const data: Schema = {
               "locked": false,
               "completed": false,
               "orderPlaced": "2022-10-17 22:15",
+              "orderCompleted": "2022-10-20 22:45",
               "id":"123asd"
             },
             {
@@ -89,6 +90,7 @@ export const data: Schema = {
               "locked": false,
               "completed": false,
               "orderPlaced": "2022-02-17 22:15",
+              "orderCompleted": "2022-02-17 22:45",
               "id":"345zxc"
             },
             {
@@ -113,6 +115,7 @@ export const data: Schema = {
               "locked": false,
               "completed": false,
               "orderPlaced": "2022-10-17 22:15",
+              "orderCompleted": "2022-10-17 22:45",
               "id":"123assad"
             },
             {
@@ -139,6 +142,7 @@ export const data: Schema = {
               "locked": true,
               "completed": true,
               "orderPlaced": "2022-04-17 22:15",
+              "orderCompleted": "2022-04-17 22:45",
               "id":"456zxcg"
             }
         ],

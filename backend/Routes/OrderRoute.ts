@@ -6,7 +6,7 @@ import express, { NextFunction, Request, Response } from "express";
  import {User} from '../lowDb/dbinterface'
  import {authenticateLogin, getOrders,checkOrder, updateOrder} from '../lowDb/database.js'
  import {Order} from '../lowDb/dbinterface.js'
- import { isValidOrder, isValidUpdatedOrder } from "../validators/validOrder.js";
+ import { isValidCart, isValidUpdatedOrder } from "../validators/validOrder.js";
  import { isValidUser } from "../validators/validUser.js";
 
 
@@ -77,8 +77,6 @@ import express, { NextFunction, Request, Response } from "express";
 
 // // MAKE ORDER
 
-
-
 // // CHANGE ORDER
 orderRoute.put("/:id", async (req:IdParam, res:Response) => {
   const id:string = req.params.id;  
@@ -90,11 +88,11 @@ orderRoute.put("/:id", async (req:IdParam, res:Response) => {
   }
 
   if(isValidUser(updatedOrder.user)) {
-    if(isValidOrder(updatedOrder)) {    
+    if(isValidCart(updatedOrder)) {    
       if(isValidUpdatedOrder(updatedOrder)) {        
           const checkedOrder = await updateOrder(updatedOrder, foundIndex)
           if(!checkedOrder) {
-            res.status(400).send('Already Locked')
+            res.send({locked: true})
             return
           }
           res.sendStatus(200)

@@ -1,13 +1,6 @@
 import { Order } from "../lowDb/dbinterface";
 
-export function isValidOrder(order:Order) : boolean  {
-	if (order.hasOwnProperty('id')) {
-		if ((typeof order.id !== 'string') || order.id === '') {
-			return false
-		}
-	} else {
-		return false
-	}
+export function isValidCart(order:Order) : boolean  {
 	if(order.hasOwnProperty('cart')) {
 		if (typeof order.cart !== 'object') {
 			return false
@@ -34,6 +27,13 @@ export function isValidOrder(order:Order) : boolean  {
 } 
 
 export function isValidUpdatedOrder(order:Order) : boolean {
+	if (order.hasOwnProperty('id')) {
+		if ((typeof order.id !== 'string') || order.id === '') {
+			return false
+		}
+	} else {
+		return false
+	}
 	if(order.hasOwnProperty('locked')) {
 		if (typeof order.locked !== 'boolean') {
 			return false
@@ -43,6 +43,13 @@ export function isValidUpdatedOrder(order:Order) : boolean {
 	}
 	if (order.hasOwnProperty('orderPlaced')) {
 		if ((typeof order.orderPlaced !== 'string') || order.orderPlaced === '') {
+			return false
+		}
+	} else {
+		return false
+	}
+	if (order.hasOwnProperty('orderCompleted')) {
+		if ((typeof order.orderCompleted !== 'string') || order.orderCompleted === '') {
 			return false
 		}
 	} else {

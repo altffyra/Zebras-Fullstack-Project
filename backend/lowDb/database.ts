@@ -56,7 +56,7 @@ async function updateOrder(updatedOrder: Order, id:number) {
       if( !db.data ) {
             db.data = defaultData
       }
-      if(updatedOrder.locked) {
+      if(updatedOrder.orderPlaced < db.data.orders[id].orderCompleted || db.data.orders[id].locked === true) {
             return false
       }
       updatedOrder.orderPlaced = started;      
