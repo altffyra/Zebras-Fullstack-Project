@@ -1,4 +1,5 @@
 @use 'variables';
+@use 'sass:color';
 
 .account-page {
     margin-top: 12vh;
@@ -6,13 +7,33 @@
     height: 100%;
     @include variables.flexContainer();
     gap: 3em;
+    
+    .loading {
+        @include variables.loader()
+    }
+
+    .headline {
+        @include variables.headerTitle();
+    }  
+
+    .single-order {
+        @include variables.flexContainer(row);
+        justify-content: space-between;
+        padding: 1em;
+        p {
+            &:first-child {
+                cursor: pointer;
+            }
+        }
+    }
     .account-top {
         @include variables.flexContainer();   
         .user-search {
             @include variables.flexContainer();
-    
+            
             .search-container {
                 @include variables.flexContainer(row);
+                margin-top: 2em;
                 input {
                     flex: 9;
                     outline: none;
@@ -22,9 +43,13 @@
                     flex: 1;
                     text-align: center;
                     padding: 0.4em;
-                    background-color: variables.$dropdownRed;
+                    background-color: variables.$navBackground;
                     color: variables.$fontLight;
                     font-weight: 700;
+                    transition: all 300ms;
+                    &:hover {
+                        background-color: color.scale(variables.$navBackground, $lightness: 40%);
+                    }
                 }
             }
             .order {

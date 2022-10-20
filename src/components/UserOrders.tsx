@@ -14,11 +14,8 @@ const UserOrders = (props: UserOrdersProps) => {
 
     return (
       <section className="user-orders">
-        <div className="headline">
-            <h1>Mina Ordrar</h1>
-        </div>
-        <UserOrderAccordian orderType={'Aktiva'} orders={activeOrders} />
-        <UserOrderAccordian orderType={'Tidigare'} orders={completedOrders} />
+        <UserOrderAccordian orderType={'Aktiva ordrar'} orders={activeOrders} />
+        <UserOrderAccordian orderType={'Tidigare ordrar'} orders={completedOrders} />
       </section>
     )
   }

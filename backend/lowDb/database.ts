@@ -125,6 +125,25 @@ export async function createOrder(orderData: Order) {
       await db.write();
 }
 
+export async function getUser(accountId: string) {
+      
+}
+
+export async function updateUser(accountId:string, updatedUser:User) {
+      if( !db.data ) {
+            db.data = defaultData
+      }
+
+      const userIndex: number = db.data.users.findIndex(user => user.accountId === accountId)
+      if(userIndex == -1) {
+            return false
+      }
+      
+      db.data.users[userIndex] = updatedUser; 
+      await db.write()
+      return true
+}
+
 
 
 // // PUSHA IN OBJECT
@@ -135,6 +154,6 @@ export async function createOrder(orderData: Order) {
 
 
 
-export {getMenu, getOrders, authenticateLogin, checkOrder, updateOrder }
+export {getMenu, getOrders, authenticateLogin, checkOrder, updateOrder, getUsers }
 // newUser, findUser, getUsers
 export default db
