@@ -33,18 +33,21 @@ const SignUp = (props: Props) => {
 
     const data = await response.json();
     console.log(data)
+    navigate('/login')
+
     
   }
 
   const handleSubmit: (e: FormEvent) => void = (e) => {
     e.preventDefault();
     
-
     addUser();
   }
 
   const handleName: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
+    if( e.target.value !== ' ') {
       setUserName(e.target.value);
+    }
   };
 
   const handleEmail: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
@@ -63,16 +66,16 @@ const SignUp = (props: Props) => {
     <div className='userForm'>
        <button className='smallBtn'>Tillbaka</button>
       <figure className='formLogo'></figure>
-      <form onSubmit={(e)=>{handleSubmit(e)}}>
+      <form>
         <label htmlFor="username">Användarnamn</label>
-        <input type="text" name='username' onChange={(e)=> {handleName(e)}} />
+        <input type="text" name='username' required onChange={(e)=> {handleName(e)}} />
         <label htmlFor="password">Lösenord</label>
-        <input type="password" name="password" onChange={(e)=>{handlePassword(e)}} />
+        <input type="password" name="password" required onChange={(e)=>{handlePassword(e)}} />
         <label htmlFor="email">Email</label>
-        <input type="email" name="email" onChange={(e)=>{handleEmail(e)}} />
+        <input type="email" name="email" required onChange={(e)=>{handleEmail(e)}} />
         <label htmlFor="phonNumber">Telefonnummer</label>
-        <input type="number" name="phoneNumber" onChange={(e)=>{handlePhone(e)}} />
-        <button type="submit" className='bigBtn'>Skapa konto</button>
+        <input type="number" name="phoneNumber" required onChange={(e)=>{handlePhone(e)}} />
+        <button className='bigBtn' onClick={(e)=>{handleSubmit(e)}}>Skapa konto</button>
       </form>
 
     </div>
