@@ -43,22 +43,28 @@
             font-size: 2rem;
             padding:1rem;
         }
-
+        .cartmodule{
+            width:100%;
         .cart-item{
             padding:1rem;
-            width:100%;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
- 
-            
-
+            gap:1rem;
             .item-name {
+                width:50%;
                 font-size: 1.75rem;
             }
 
             .item-price {
+                text-align: right;
+                width: 50%;
                 font-size: 1.75rem;
+
+            }
+        }
+            .divider{
+                @include variables.divider
             }
 
         }
@@ -69,6 +75,7 @@
             display: flex;
             flex-direction: row;
             font-size: 1.75rem; 
+            margin-top: 8rem;
             .total{
                 width:100%;
                 margin-left: 0.5rem;
@@ -81,11 +88,86 @@
             }
         }
 
-        .LoggedIn{
 
-        }
 
         
     }
+    .LoggedIn{
+        @include variables.flexBox;
+        flex-direction: column;
+    
+        margin-bottom: 3rem;
 
+        .Account-info{
+                width: 100%;
+                @include variables.flexBox;
+                flex-direction: column;
+                @include variables.sectionTop($bg: variables.$dropdownRed);
+                margin-bottom: 3rem;
+                font-size: 1.75rem; 
+
+                .Account-top{
+                    width:100%;
+                    max-width: 1800px;
+                    @include variables.sectionTop;
+                    font-size: 2rem;
+                    padding:1rem;
+                    
+                }
+                .Account-info-main{
+                width: 100%;
+                justify-content: flex-start;
+                font-size: 1.75rem;
+                padding:1rem 1rem 1rem 0.5rem;
+
+                .User-info{
+                    padding:1rem;
+                }
+
+                }
+            
+        }
+
+    }
+    .Comment-wrapper{
+        width: 100%;
+        @include variables.flexBox;
+        flex-direction: column;
+        @include variables.sectionTop($bg: variables.$dropdownRed);
+        margin-bottom: 3rem;
+        font-size: 1.75rem; 
+
+
+                .Comment-top{
+                    width:100%;
+                    max-width: 1800px;
+                    @include variables.sectionTop;
+                    font-size: 2rem;
+                    padding:1rem;
+                }
+
+        .input-comment{
+            margin: 1rem;
+            width:95%;
+            height:12rem;
+            font-size: 2rem;
+
+            
+        }
+
+}
+.buttonsDiv{
+    @include variables.flexContainer;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+
+    .back-btn{
+        @include buttons.bigBtn($bg: variables.$primaryBackground, $fontcolor: variables.$fontDark);
+    }
+
+    .order-btn{
+        @include buttons.bigBtn($bg: variables.$acceptBtnGreen, $fontcolor: variables.$fontDark);
+    }
+}
 }
