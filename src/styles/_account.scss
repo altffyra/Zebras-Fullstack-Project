@@ -6,6 +6,9 @@
     height: 100%;
     @include variables.flexContainer();
     gap: 3em;
+    .loading {
+        @include variables.loader()
+    }
     .account-top {
         @include variables.flexContainer();   
         .user-search {

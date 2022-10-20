@@ -27,6 +27,11 @@
             @include variables.flexContainer(row);
             justify-content: space-between;
             padding: 1em;
+            p {
+                &:first-child {
+                    cursor: pointer;
+                }
+            }
         }
     }
 }

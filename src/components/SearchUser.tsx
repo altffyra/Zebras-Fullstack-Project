@@ -42,8 +42,7 @@ const SearchUser = (props: SearchUserProps) => {
         <article className="order">
         {order 
             ? 
-            // FIX WHEN WE HAVE ORDER TO TEST ON
-            <p>FIX WHEN WE HAVE ORDER TO TEST ON</p>
+            <p>Order {order.id}</p>
             : 
             ''
         }
