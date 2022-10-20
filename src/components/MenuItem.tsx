@@ -1,4 +1,4 @@
-import { MenuItems } from "../models/Interface";
+import { MenuItems } from "../models/types";
 import vector from '../assets/menu/vector.svg';
 import allergy from '../assets/menu/allergy.svg';
 import { useState } from 'react';

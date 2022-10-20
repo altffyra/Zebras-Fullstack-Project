@@ -6,7 +6,7 @@ import '../../styles/_checkout.scss'
 import NotLoggedIn from '../../components/NotLoggedIn';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
-import { CartProps, MenuItems, User } from '../../models/Interface';
+import { CartProps, MenuItems, User } from '../../models/types';
 
 
 
@@ -17,7 +17,7 @@ const CheckOut = (props: Props) => {
   const user: User = useSelector((state: RootState) => state.user);
   const cart: CartProps = useSelector((state: RootState) => state.cart);
   console.log(cart)
-  const cartItemEl = cart.cartItems.map((item, index) => <div key={index} className='cart-item' ><p className='item-name'>{item.name }</p> <p className='item-price'>{item.price }</p> </div>);
+  const cartItemEl = cart.cartItems.map((item, index) => <div key={index} className='cart-item' ><p className='item-name'>{item.name }</p> <p className='item-price'>{item.price }</p> <div className='divider'></div></div> );
 
   const notLoggedInElem = user.name==''? 
   <div></div>

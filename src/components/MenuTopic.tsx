@@ -1,6 +1,6 @@
 import MenuItem from './MenuItem';
 import MenuMainCourse from './MenuMainCourse';
-import { MenuItems } from '../models/Interface';
+import { MenuItems } from '../models/types';
 
 type Props = {
     foodImg: string;

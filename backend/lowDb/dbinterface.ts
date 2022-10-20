@@ -41,5 +41,6 @@ export type Order = {
     locked: boolean;
     completed: boolean;
     orderPlaced: string;
+    orderCompleted: string
     id: string;
 }

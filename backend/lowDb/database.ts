@@ -43,6 +43,28 @@ async function getOrders(){
     return orderreply
 }
 
+async function checkOrder(id: string){
+      if( !db.data ) {
+            db.data = defaultData
+      }
+      const foundIndex = db.data.orders.findIndex(order => order.id === id)
+      return foundIndex
+
+}
+
+async function updateOrder(updatedOrder: Order, id:number) {
+      if( !db.data ) {
+            db.data = defaultData
+      }
+      if(updatedOrder.orderPlaced < db.data.orders[id].orderCompleted || db.data.orders[id].locked === true) {
+            return false
+      }
+      updatedOrder.orderPlaced = started;      
+      db.data.orders[id] = updatedOrder;  
+      await db.write()
+      return true
+}
+
 async function authenticateLogin(ID:any){
     if(!db.data) {
         db.data = defaultData
@@ -93,6 +115,6 @@ export async function findUser(userData:User) {
 
 
 
-export {getMenu, getOrders, authenticateLogin, }
+export {getMenu, getOrders, authenticateLogin, checkOrder, updateOrder }
 // newUser, findUser, getUsers
 export default db

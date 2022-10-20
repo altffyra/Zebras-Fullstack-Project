@@ -1,5 +1,5 @@
 import { ChangeEvent, useState, KeyboardEvent } from "react"
-import { Order } from '../models/Interface';
+import { Order } from '../models/types';
 
 type SearchUserProps = {
     orders: Order[];

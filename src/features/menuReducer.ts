@@ -1,5 +1,5 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
-import { MenuItems } from "../models/Interface";
+import { MenuItems } from "../models/types";
 
 const initialState: MenuItems[] = [];
 

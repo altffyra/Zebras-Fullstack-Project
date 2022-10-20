@@ -8,7 +8,7 @@ import Cart from '../../components/Cart';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
-import { CartProps, MenuItems } from '../../models/Interface';
+import { CartProps, MenuItems } from '../../models/types';
 import {actions as menuActions} from '../../features/menuReducer';
 import Nav from '../../components/Nav';
 

@@ -1,4 +1,4 @@
-import { CartItems} from '../models/Interface';
+import { CartItems} from '../models/types';
 import { ChangeEvent } from 'react';
 
 type CartItemsProps = {
