@@ -36,7 +36,16 @@ userRoute.post('/signup', async (req, res) => {
 })
 
 // LOGIN
-
+userRoute.get('/login', async (req, res) => {
+    const userData = req.body
+    const resObj = {
+        success: true,
+        userExist: true,
+        message: `${credentials.name} är inloggad`
+    }
+    const userExist = await findUser(userData)
+    
+})
 
 // UPDATE USER
 
