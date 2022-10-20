@@ -25,7 +25,6 @@ const dispatch = useDispatch();
       const response = await fetch('/api/menu');
       const data = await response.json();      
       dispatch(menuActions.getMenu(data));
-
     }
     getMenu();
   }, []);
