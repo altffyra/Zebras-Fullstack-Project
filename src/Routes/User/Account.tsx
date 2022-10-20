@@ -26,7 +26,7 @@ const Account = () => {
 
   async function getOrder(accountId:string) {
     setLoading(true)
-    const response = await fetch(`/api/order/${accountId}`);
+    const response = await fetch(`/api/order/user/${accountId}`);
     const data = await response.json();      
     dispatch(orderActions.getOrders(data));
     setLoading(false)
