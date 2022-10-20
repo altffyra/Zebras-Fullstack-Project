@@ -1,0 +1,10 @@
+@use 'variables';
+
+.search {
+    margin-top: 12vh;
+    @include variables.flexContainer();
+    
+    .search-container {
+
+    }
+}

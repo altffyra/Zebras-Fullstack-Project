@@ -7,7 +7,7 @@ import {actions as cartActions} from '../features/cartReducer';
 
 type OrderItemProps = {
   order: Order;
-  showOrderOverlay: () => void;
+  showOrderOverlay?: () => void;
 }
 
 const OrderItem = (props: OrderItemProps) => {
