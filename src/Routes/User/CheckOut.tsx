@@ -11,7 +11,7 @@ import { CartProps, MenuItems, User } from "../../models/types";
 type Props = {};
 
 const CheckOut = (props: Props) => {
-  const [userMessage, setMessage] = useState<string>()
+  const [userMessage, setMessage] = useState<string>();
   const user: User = useSelector((state: RootState) => state.user);
   const cart: CartProps = useSelector((state: RootState) => state.cart);
   console.log(cart);
@@ -24,27 +24,31 @@ const CheckOut = (props: Props) => {
       <div className="divider"></div>
     </div>
   ));
+  const data = {
+    cart: cart,
+    user: user,
+    userComment: userMessage,
+  };
 
-    const data= { "cart": cart,
-                  "user": user,
-                  "userComment": userMessage
-    }
+  async function sendOrder() {
+    console.log(data);
 
-  function sendOrder(){
-    const res= fetch('https://localhost:8000/api/order/', {
-      method: 'POST',
+    const response = await fetch("/api/order/", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
-    })
+    });
+    const datasave = await response.json();
+    
+    
   }
 
-function changeMessages(e:ChangeEvent<HTMLInputElement>){
-  setMessage(e.target.value)
-  console.log(userMessage)
-}
-
+  function changeMessages(e: ChangeEvent<HTMLInputElement>) {
+    setMessage(e.target.value);
+    console.log(userMessage);
+  }
 
   const notLoggedInElem =
     user.name == "" ? (
@@ -65,11 +69,17 @@ function changeMessages(e:ChangeEvent<HTMLInputElement>){
           <div className="Comment-top">
             <p className="Comment-top-p">Kommentar</p>
           </div>
-          <input onChange={(e)=> changeMessages(e)} className="input-comment" type="text"></input>
+          <input
+            onChange={(e) => changeMessages(e)}
+            className="input-comment"
+            type="text"
+          ></input>
         </div>
         <div className="buttonsDiv">
           <button className="back-btn">Tillbaka </button>
-          <button onClick={sendOrder} className="order-btn">Beställ </button>
+          <button onClick={sendOrder} className="order-btn">
+            Beställ{" "}
+          </button>
         </div>
       </div>
     );

@@ -48,9 +48,9 @@ export type Order = {
     user: User;
     userComment?: string;
     adminComment?: string;
-    locked: boolean;
-    completed: boolean;
-    orderPlaced: string;
-    orderCompleted: string
-    id: string;
+    locked?: boolean;
+    completed?: boolean;
+    orderPlaced?: string;
+    orderCompleted?: string
+    id?: string;
 }
