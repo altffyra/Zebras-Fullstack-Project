@@ -1,5 +1,6 @@
 import { ChangeEvent, useState, KeyboardEvent } from "react"
 import { Order } from '../models/types';
+import SingleUserOrders from "./SingleUserOrder";
 
 type SearchUserProps = {
     orders: Order[];
@@ -16,8 +17,9 @@ const SearchUser = (props: SearchUserProps) => {
 
     const handleSearch: () => void = () => {
         if(search.length > 0) {
+            setOrder(undefined);
             setSearched(false)
-            const foundOrder: Order | undefined  = props.orders.find(order => order.id == search)
+            const foundOrder: Order | undefined  = props.orders.find(order => order.id === search)
             if(foundOrder) {
                 setOrder(foundOrder);
             } else {
@@ -42,7 +44,7 @@ const SearchUser = (props: SearchUserProps) => {
         <article className="order">
         {order 
             ? 
-            <p>Order {order.id}</p>
+            <SingleUserOrders  order={order} />
             : 
             ''
         }

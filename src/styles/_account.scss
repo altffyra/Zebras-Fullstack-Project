@@ -7,16 +7,33 @@
     height: 100%;
     @include variables.flexContainer();
     gap: 3em;
+    
     .loading {
         @include variables.loader()
+    }
+
+    .headline {
+        @include variables.headerTitle();
+    }  
+
+    .single-order {
+        @include variables.flexContainer(row);
+        justify-content: space-between;
+        padding: 1em;
+        p {
+            &:first-child {
+                cursor: pointer;
+            }
+        }
     }
     .account-top {
         @include variables.flexContainer();   
         .user-search {
             @include variables.flexContainer();
-    
+            
             .search-container {
                 @include variables.flexContainer(row);
+                margin-top: 2em;
                 input {
                     flex: 9;
                     outline: none;

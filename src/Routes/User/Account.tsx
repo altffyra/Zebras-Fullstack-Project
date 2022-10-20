@@ -44,6 +44,9 @@ const Account = () => {
             <div className='loading'></div>
             : ''
         }
+      <div className="headline">
+          <h1>Konto</h1>
+      </div>
       <div className='account-top'>
         <UserInformation user={user} />
         <div className='divider'></div>

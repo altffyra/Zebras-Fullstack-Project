@@ -98,7 +98,7 @@ const UserInformation = (props: UserInformationProps) => {
             :
             <form className='user-container' onSubmit={(e) => handleSubmit(e) }>
                 <div className='user-info'>
-                    <label htmlFor="username">Name : </label>
+                    <label htmlFor="username">Namn : </label>
                     <input type="text" name="username" id="username" defaultValue={props.user.name} onChange={(e) => handleName(e)} />
                 </div>
                 <div className='user-info'>
@@ -106,7 +106,7 @@ const UserInformation = (props: UserInformationProps) => {
                     <input type="email" name="email" id="email" defaultValue={props.user.email} onChange={(e) => handleEmail(e)} />
                 </div>
                 <div className='user-info'>
-                    <label htmlFor="username">Tel. nr : </label>
+                    <label htmlFor="username">Tel.nr : </label>
                     <input type="number" name="phonenum" id="phonenum" defaultValue={props.user.phoneNumber} onChange={(e) => handlePhone(e)} />
                 </div>
                 <div className="button-container">
