@@ -36,7 +36,7 @@ const SearchUser = (props: SearchUserProps) => {
     return (
       <section className="user-search">
         <div className="search-container">
-            <input type="text" name="search" id="search-user" value={search} onKeyUp={(e) => {handleEnter(e)}} onChange={(e) => { handleInput(e) }} />
+            <input type="text" name="search" id="search-user" placeholder="Sök ordernummer" value={search} onKeyUp={(e) => {handleEnter(e)}} onChange={(e) => { handleInput(e) }} />
             <label htmlFor="search" onClick={handleSearch} >SÖK</label>
         </div>
         <article className="order">
