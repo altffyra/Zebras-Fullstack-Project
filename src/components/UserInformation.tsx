@@ -37,20 +37,19 @@ const UserInformation = (props: UserInformationProps) => {
             accountId : props.user.accountId,
         };
 
-        // TODO when backend is ready
 
-        // const response = await fetch(`${props.user.accountId}`, {
-        //     method: 'PUT',
-        //     body: JSON.stringify(updatedUser),
-        //     headers: { 'Content-Type': 'application/json' }
-        // });
+        const response = await fetch(`/api/user/${props.user.accountId}`, {
+            method: 'PUT',
+            body: JSON.stringify(updatedUser),
+            headers: { 'Content-Type': 'application/json' }
+        });
 
-        // const data = await response.json();
-        // if (data.success) {
-        //     setUpdate(false);
-        //     setLoading(false);
-        //     dispatch(userActions.setUser(updatedUser));           
-        // };
+        const data = await response.json();
+        if (data.success) {
+            setUpdate(false);
+            setLoading(false);
+            dispatch(userActions.setUser(updatedUser));           
+        };
     };
 
     const handleName: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
