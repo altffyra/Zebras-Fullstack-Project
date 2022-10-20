@@ -105,7 +105,7 @@ orderRoute.post("/", async (req, res) => {
       orderObj.orderCompleted = completed;
       orderObj.id = uuid();
       await createOrder(orderObj)
-      res.status(200).send('Order placed')
+      res.status(200).send(orderObj)
       
     } else {
      

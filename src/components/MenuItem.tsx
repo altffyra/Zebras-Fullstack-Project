@@ -48,7 +48,7 @@ const MenuItem = ({ item }: Props) => {
                 : ''
               }</p>
               </section>
-              <p>Pris: {item.price}</p>
+              <p>Pris: {item.price} kr</p>
             </section>
 
             <section className="menu-item--right">

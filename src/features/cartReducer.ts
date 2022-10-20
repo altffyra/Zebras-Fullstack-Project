@@ -4,10 +4,10 @@ import { CartProps, CartItems } from "../models/types";
 
 const initialState: CartProps = {
     cartItems: [
-        {name:"1", price: 1, amount: 1},
-        {name:"2", price: 2, amount: 1},
-        {name:"3", price: 3, amount: 1},
-        {name:"4", price: 4, amount: 1},
+        // {name:"1", price: 1, amount: 1},
+        // {name:"2", price: 2, amount: 1},
+        // {name:"3", price: 3, amount: 1},
+        // {name:"4", price: 4, amount: 1},
     //     {name:"5", price: 5, amount: 1},
     //     {name:"6", price: 6, amount: 1},
     //     {name:"7", price: 4, amount: 1},
@@ -18,7 +18,7 @@ const initialState: CartProps = {
     //     {name:"12", price: 6, amount: 1},
     //     {name:"13", price: 7, amount: 1}
     ],
-    totalPrice: 1
+    totalPrice: 0
 };
 
 type UpdatedCartItem = {
@@ -40,9 +40,14 @@ const reducer = createReducer(initialState, {
         if (cartItemsCopy.length === 0) {
             cartItemsCopy.push({ name: action.payload.name, price: action.payload.price, amount: 0 });
         }
-
+        console.log(typeof action.payload.price);
+        
         cartItemsCopy.forEach((item) => {
             if (item.name === action.payload.name) {
+                if(item.amount == 10) {
+                    return
+                }
+                state.totalPrice = state.totalPrice + parseInt(action.payload.price);
                 return item.amount++;
             }
         });
