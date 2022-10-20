@@ -52,6 +52,18 @@ async function checkOrder(id: string){
 
 }
 
+async function getOrder(id: string){
+      if( !db.data ) {
+            db.data = defaultData
+      }
+      const found = db.data.orders.find(order => order.id === id)
+      if(!found) {
+            return false
+      }
+      return found
+
+}
+
 async function updateOrder(updatedOrder: Order, id:number) {
       if( !db.data ) {
             db.data = defaultData
@@ -115,6 +127,6 @@ export async function findUser(userData:User) {
 
 
 
-export {getMenu, getOrders, authenticateLogin, checkOrder, updateOrder }
+export {getMenu, getOrders, authenticateLogin, checkOrder, updateOrder, getOrder }
 // newUser, findUser, getUsers
 export default db

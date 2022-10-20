@@ -4,7 +4,7 @@ import express, { NextFunction, Request, Response } from "express";
  app.use(express.json());
  const orderRoute = express.Router();
  import {User} from '../lowDb/dbinterface'
- import {authenticateLogin, getOrders,checkOrder, updateOrder} from '../lowDb/database.js'
+ import {authenticateLogin, getOrders,checkOrder, updateOrder, getOrder} from '../lowDb/database.js'
  import {Order} from '../lowDb/dbinterface.js'
  import { isValidCart, isValidUpdatedOrder } from "../validators/validOrder.js";
  import { isValidUser } from "../validators/validUser.js";
@@ -106,6 +106,16 @@ orderRoute.put("/:id", async (req:IdParam, res:Response) => {
     res.status(400).send('Bad user')
   }
 });
+
+orderRoute.get('/:id', async (req:IdParam, res:Response) => {
+  const id:string = req.params.id;  
+  const searchedOrder = await getOrder(id);
+  if(!searchedOrder) {
+    res.sendStatus(404)
+    return
+  }
+  res.status(200).send(searchedOrder)
+})
 
 // GET ALL FOR TESTING
 orderRoute.get("/", async (req:IdParam, res:Response) => {
