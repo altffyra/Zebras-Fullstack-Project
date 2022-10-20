@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 import Nav from "../../components/Nav";
 import OrderItem from "../../components/OrderItem";
 import mainmeal from "../../assets/menu/mainmeal.svg";
@@ -11,6 +11,7 @@ import { CartProps, MenuItems, User } from "../../models/types";
 type Props = {};
 
 const CheckOut = (props: Props) => {
+  const [userMessage, setMessage] = useState<string>()
   const user: User = useSelector((state: RootState) => state.user);
   const cart: CartProps = useSelector((state: RootState) => state.cart);
   console.log(cart);
@@ -23,6 +24,27 @@ const CheckOut = (props: Props) => {
       <div className="divider"></div>
     </div>
   ));
+
+    const data= { "cart": cart,
+                  "user": user,
+                  "userComment": userMessage
+    }
+
+  function sendOrder(){
+    const res= fetch('https://localhost:8000/api/order/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data),
+    })
+  }
+
+function changeMessages(e:ChangeEvent<HTMLInputElement>){
+  setMessage(e.target.value)
+  console.log(userMessage)
+}
+
 
   const notLoggedInElem =
     user.name == "" ? (
@@ -43,11 +65,11 @@ const CheckOut = (props: Props) => {
           <div className="Comment-top">
             <p className="Comment-top-p">Kommentar</p>
           </div>
-          <input className="input-comment" type="text"></input>
+          <input onChange={(e)=> changeMessages(e)} className="input-comment" type="text"></input>
         </div>
         <div className="buttonsDiv">
           <button className="back-btn">Tillbaka </button>
-          <button className="order-btn">Beställ </button>
+          <button onClick={sendOrder} className="order-btn">Beställ </button>
         </div>
       </div>
     );
