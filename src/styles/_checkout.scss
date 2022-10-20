@@ -1,6 +1,10 @@
 @use 'variables';
 @use 'buttons';
 
+
+
+
+
 .checkout-wrapper {
     @include variables.flexContainer();
     max-width: 90vw;
@@ -11,8 +15,7 @@
     .checkout-header--info {
         position: relative;
         @include variables.flexBox($justify: center, $align: center);
-
-        
+        padding:0 0rem 1rem 0rem;
         img {
             width: 100%;
         }
@@ -24,6 +27,64 @@
                 
         
             }
+        
+    }
+
+    .current-order{
+        @include variables.flexBox;
+        flex-direction: column;
+        @include variables.sectionTop($bg: variables.$dropdownRed);
+        margin-bottom: 3rem;
+
+        .order-top{
+            width:100%;
+            max-width: 1800px;
+            @include variables.sectionTop;
+            font-size: 2rem;
+            padding:1rem;
+        }
+
+        .cart-item{
+            padding:1rem;
+            width:100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+ 
+            
+
+            .item-name {
+                font-size: 1.75rem;
+            }
+
+            .item-price {
+                font-size: 1.75rem;
+            }
+
+        }
+
+        .total-wrapper{
+            padding:1rem 1rem 1rem 0.5rem;
+            width:100%;
+            display: flex;
+            flex-direction: row;
+            font-size: 1.75rem; 
+            .total{
+                width:100%;
+                margin-left: 0.5rem;
+            }
+            .total-sum{
+                text-align: right;
+                align-self: flex-end;
+                width:100%;
+
+            }
+        }
+
+        .LoggedIn{
+
+        }
+
         
     }
 

@@ -14,6 +14,8 @@ type Props = {}
 
 const CheckOut = (props: Props) => {
 
+
+
   const user: User = useSelector((state: RootState) => state.user);
   const cart: CartProps = useSelector((state: RootState) => state.cart);
   console.log(cart)
@@ -62,8 +64,8 @@ const CheckOut = (props: Props) => {
           <section className='current-order'>
             <section className='order-top'> Order</section>
             {cartItemEl}
-            <section className='total'> 
-            <p className='total'>Totalt:</p> <p className='total-sum'>{cart.totalPrice}</p>
+            <section className='total-wrapper'> 
+            <p className='total'>Totalt:</p> <p className='total-sum'>{cart.totalPrice} Kr.</p>
             </section>
           </section>
 
