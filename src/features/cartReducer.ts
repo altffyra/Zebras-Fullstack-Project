@@ -1,4 +1,5 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
+import CartItem from "../components/CartItem";
 import { CartProps, CartItems } from "../models/types";
 
 const initialState: CartProps = {
@@ -34,8 +35,26 @@ const actions = { addToCart, updateAmount, changeOrder };
 const reducer = createReducer(initialState, {
     [addToCart.toString()]: (state, action) => {
 
+        let cartItemsCopy: CartItems[] = [...state.cartItems];
+        
+        if (cartItemsCopy.length === 0) {
+            cartItemsCopy.push({ name: action.payload.name, price: action.payload.price, amount: 0 });
+        }
 
-        return state
+        cartItemsCopy.forEach((item) => {
+            if (item.name === action.payload.name) {
+                return item.amount++;
+            }
+        });
+
+        let found = cartItemsCopy.find(item => item.name === action.payload.name)
+        if (!found) {
+            cartItemsCopy.push(action.payload);
+        }
+        
+        state.cartItems = cartItemsCopy;
+        console.log(state.cartItems);
+        return state;
     },
     [updateAmount.toString()]: (state, action) => {
         
