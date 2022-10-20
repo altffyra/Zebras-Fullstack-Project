@@ -56,9 +56,9 @@ async function updateOrder(updatedOrder: Order, id:number) {
       if( !db.data ) {
             db.data = defaultData
       }
-      // if(updatedOrder.orderPlaced < db.data.orders[id].orderCompleted || db.data.orders[id].locked === true) {
-      //       return false
-      // }
+      if(updatedOrder.orderPlaced < db.data.orders[id].orderCompleted || db.data.orders[id].locked === true) {
+            return false
+      }
       updatedOrder.orderPlaced = started;      
       db.data.orders[id] = updatedOrder;  
       await db.write()
