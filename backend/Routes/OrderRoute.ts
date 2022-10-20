@@ -1,13 +1,11 @@
 import express, { NextFunction, Request, Response } from "express";
- import { IncomingHttpHeaders } from 'http';
  const app = express();
  app.use(express.json());
  const orderRoute = express.Router();
- import {User} from '../lowDb/dbinterface'
- import {authenticateLogin, getOrders,checkOrder, updateOrder} from '../lowDb/database.js'
- import {Order} from '../lowDb/dbinterface.js'
+ import {User, Order} from '../lowDb/dbinterface'
+ import db, {authenticateLogin, getOrders,checkOrder, updateOrder, createOrder} from '../lowDb/database.js'
  import { isValidCart, isValidUpdatedOrder } from "../validators/validOrder.js";
- import { isValidUser } from "../validators/validUser.js";
+ import { isValidUser, isValidGuest } from "../validators/validUser.js";
 
 
 
@@ -76,6 +74,25 @@ import express, { NextFunction, Request, Response } from "express";
  });
 
 // // MAKE ORDER
+orderRoute.post("/", async (req, res) => {
+  let orderObj: Order = req.body;
+  const func = orderObj.user.accountId ? isValidUser : isValidGuest;
+  const person = func == isValidUser ? 'user' : 'guest'
+  console.log(orderObj, func);
+  
+ if (func(orderObj.user)) {
+    if(isValidCart(orderObj)) {
+      await createOrder(orderObj)
+      res.status(200).send('Order placed')
+
+    } else {
+      res.status(400).send('Bad cart')
+    }
+
+  } else {
+    res.status(400).send('Bad '+ person)
+  }
+})
 
 // // CHANGE ORDER
 orderRoute.put("/:id", async (req:IdParam, res:Response) => {

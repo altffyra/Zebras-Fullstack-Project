@@ -103,7 +103,16 @@ export async function findUser(userData:User) {
       }
     let userExist = db.data.users.find((user) => user.email === userData.email || user.name === userData.name)
     return userExist
-}     
+}    
+
+export async function createOrder(orderData: Order) {
+      await db.read()
+      if ( !db.data ) {
+            db.data = defaultData
+      }
+      db.data.orders.push(orderData)
+      await db.write();
+}
 
 
 
