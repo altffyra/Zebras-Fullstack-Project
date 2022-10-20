@@ -56,9 +56,9 @@ async function updateOrder(updatedOrder: Order, id:number) {
       if( !db.data ) {
             db.data = defaultData
       }
-      if(updatedOrder.orderPlaced < db.data.orders[id].orderCompleted || db.data.orders[id].locked === true) {
-            return false
-      }
+      // if(updatedOrder.orderPlaced < db.data.orders[id].orderCompleted || db.data.orders[id].locked === true) {
+      //       return false
+      // }
       updatedOrder.orderPlaced = started;      
       db.data.orders[id] = updatedOrder;  
       await db.write()
@@ -101,7 +101,8 @@ export async function findUser(userData:User) {
     if( !db.data ) {
       db.data = defaultData
       }
-    let userExist = db.data.users.find((user) => user.email === userData.email || user.name === userData.name)
+    let userExist = db.data.users.filter((user) => user.email === userData.email || user.name === userData.name)
+      console.log('userExist', userExist)
     return userExist
 }     
 

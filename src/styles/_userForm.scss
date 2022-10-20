@@ -1,0 +1,39 @@
+@use 'variables';
+@use 'buttons';
+@use 'sass:color';
+
+.userForm {
+      @include variables.gridContainer(15);
+
+      .smallBtn {
+            @include buttons.smallBtn();
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+      }
+
+      .formLogo {
+            grid-area: 3 / 2 / 6 / 5;
+            background-image: url('../assets/formLogo.svg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            box-shadow: variables.$boxShadow;
+
+      }
+
+
+            form {
+                  grid-area: 7 / 2 / 14 / 5;
+                  @include variables.flexContainer();
+                  gap: 1rem;
+                  .bigBtn {
+                        @include buttons.bigBtn();
+                        background-color: #377395;
+
+                  }
+            }
+
+
+}

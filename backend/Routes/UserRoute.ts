@@ -22,7 +22,7 @@ userRoute.post('/signup', async (req, res) => {
         res.json(resObj)
     } else if( isValidUser(userData) ) {
         const userExist = await findUser(userData)
-        if( userExist !== undefined ) {
+        if( userExist.length > 0 ) {
             resObj.userExist = true
             resObj.message = `Konto finns redan för ${userData.name}`
         } 
@@ -41,10 +41,10 @@ userRoute.get('/login', async (req, res) => {
     const resObj = {
         success: true,
         userExist: true,
-        message: `${credentials.name} är inloggad`
+        message: `${userData.name} är inloggad`
     }
     const userExist = await findUser(userData)
-    
+
 })
 
 // UPDATE USER

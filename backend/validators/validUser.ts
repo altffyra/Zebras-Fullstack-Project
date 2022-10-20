@@ -1,40 +1,48 @@
 import { User } from "../lowDb/dbinterface";
 
+
 export function isValidUser(userData:User) {
+      let userObj = {
+            name: true,
+            email: true,
+            password: true,
+            phoneNumber: true,
+            accountId: true
+      }
       if( userData.hasOwnProperty('name') ) {
             if((typeof userData.name !== 'string') || userData.name === '') {
-                  return false
+                  userObj.name = false
             }
       } else {
-            return false
+            return userObj.name = false
       }
       if( userData.hasOwnProperty('email') ) {
             if((typeof userData.email !== 'string') || userData.email === '') {
-                  return false
+                  userObj.email = false
             }
       } else {
-            return false
+            return userObj.email = false
       }
       if( userData.hasOwnProperty('accountId') ) {
             if((typeof userData.accountId !== 'string') || userData.accountId === '') {
-                  return false
+                  userObj.accountId = false
             } 
       } else {
-            return false
+            return userObj.accountId = false
       }
       if( userData.hasOwnProperty('phoneNumber') ) {
             if((typeof userData.phoneNumber !== 'string') || userData.phoneNumber === '') {
-                  return false
+                  userObj.phoneNumber = false
             }
       } else {
-            return false
+            return userObj.phoneNumber = false
       }
       if( userData.hasOwnProperty('password') ) {
             if((typeof userData.password !== 'string') || userData.password === '') {
-                  return false
+                  userObj.password = false
             }
       } else {
-            return false
+            return userObj.password = false
       }
-      return true
+      return userObj
 }
