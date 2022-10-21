@@ -2,8 +2,12 @@ import '../styles/_orderItem.scss';
 import { Order } from '../models/types';
 import OrderItems from '../components/OrderItems';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+
+import { useSelector, useDispatch } from "react-redux";
 import {actions as cartActions} from '../features/cartReducer';
+import { actions as setTempOrderaction } from "../features/tempOrderReducer";
+import { RootState } from "../store";
+
 
 type OrderItemProps = {
   order: Order;
@@ -11,14 +15,18 @@ type OrderItemProps = {
 }
 
 const OrderItem = (props: OrderItemProps) => {
+
   const { order } = props;
+  
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const orderItem = order.cart.cartItems.map(item => <OrderItems key={item.name} item={item} />)
+  const tempOrder: Order[] = useSelector((state: RootState) => state.tempOrder);
 
   const changeOrder: () => void = async () => {
     dispatch(cartActions.changeOrder(order.cart))
+    dispatch(setTempOrderaction.setTempOrder(order));
     navigate('/menu')
   }
 

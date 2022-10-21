@@ -5,21 +5,22 @@ import "../../styles/_checkout.scss";
 import NotLoggedIn from "../../components/NotLoggedIn";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
-import { CartProps, MenuItems, User } from "../../models/types";
-import { useNavigate } from 'react-router-dom';
-import {actions as orderActions} from '../../features/orderReducer';
+import { CartProps, MenuItems, User, Order } from "../../models/types";
+import { useNavigate } from "react-router-dom";
+import { actions as orderActions } from "../../features/orderReducer";
+import { actions as setTempOrder } from "../../features/tempOrderReducer";
 
 type Props = {};
 
 const CheckOut = (props: Props) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
 
   const [userMessage, setMessage] = useState<string>();
   const user: User = useSelector((state: RootState) => state.user);
   const cart: CartProps = useSelector((state: RootState) => state.cart);
-
+  const tempOrder: Order[] = useSelector((state: RootState) => state.tempOrder);
   const cartItemEl = cart.cartItems.map((item, index) => (
     <div className="cartmodule">
       <div key={index} className="cart-item">
@@ -30,33 +31,45 @@ const CheckOut = (props: Props) => {
     </div>
   ));
 
-  const data = {
-    cart: cart,
-    user: user,
-    userComment: userMessage,
-  };
-
-
   async function sendOrder() {
-    console.log(data);
 
-    const response = await fetch("/api/order/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    });
-    const datasave = await response.json();
-    console.log(datasave);
-    
-    dispatch(orderActions.makeOrders(datasave));
-    navigate("/OrderConfirm")
+    if (tempOrder.length <= 0) {
+      const data = {
+        cart: cart,
+        user: user,
+        userComment: userMessage,
+      };
+
+      const response = await fetch("/api/order/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const datasave = await response.json();
+
+      dispatch(orderActions.makeOrders(datasave));
+      navigate("/OrderConfirm");
+    } else {
+      const data = tempOrder;
+      const tempOrderId = tempOrder[0].id
+      const response = await fetch(`/api/order/${tempOrderId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const datasave = await response.json();
+
+      dispatch(orderActions.makeOrders(datasave));
+      navigate("/OrderConfirm");
+    }
   }
 
   function changeMessages(e: ChangeEvent<HTMLInputElement>) {
     setMessage(e.target.value);
-  
   }
 
   const notLoggedInElem =
