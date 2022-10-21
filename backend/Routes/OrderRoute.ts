@@ -137,7 +137,7 @@ orderRoute.put("/:id", async (req:IdParam, res:Response) => {
             res.send({locked: true})
             return
           }
-          res.sendStatus(200)
+          res.status(200).send(updatedOrder)
       } else {
         res.status(400).send('Bad placed order')
       }
