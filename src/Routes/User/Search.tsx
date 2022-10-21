@@ -4,7 +4,7 @@ import OrderItems from "../../components/OrderItems"
 import Nav from "../../components/Nav";
 import { Order } from '../../models/types';
 import { useSelector, useDispatch } from 'react-redux';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState, KeyboardEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { actions as orderActions } from '../../features/orderReducer';
@@ -47,6 +47,12 @@ const Search = () => {
       getOrder(searchId)      
     }
 
+    const handleEnter: (e: KeyboardEvent) => void = (e) => { 
+      if(e.key == 'Enter') {
+        searchOrder();
+      };
+    };
+
     const changeOrder: () => void = async () => {
       dispatch(cartActions.changeOrder(searchedOrder.cart))
       navigate('/menu')
@@ -65,7 +71,7 @@ const Search = () => {
             : ''
         }
       <div className="search-container">
-        <input type="text" name='search' placeholder='Sök ordernummer' value={searchId} id="search" onChange={(e) => handleInput(e)}/>
+        <input type="text" name='search' placeholder='Sök ordernummer' value={searchId} id="search" onKeyUp={(e) => handleEnter(e)} onChange={(e) => handleInput(e)}/>
         <label htmlFor="search" onClick={searchOrder}>Sök</label>
       </div>
       {searchError ? 
