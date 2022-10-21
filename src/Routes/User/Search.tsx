@@ -16,17 +16,19 @@ const Search = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [searchId, setSearchId] = useState<string>('');
   const [searchError, setSearchError] = useState<boolean>(false);
+  const [found, setFound] = useState<boolean>(false);
 
     async function getOrder(search:string) {
       setLoading(true)
       setSearchError(false)
+      setFound(false)
       const response = await fetch(`/api/order/${search}`);
       const data = await response.json();      
       if(data.found == false) {
         setSearchError(true)
         dispatch(orderActions.clearOrders())
       } else {
-
+        setFound(true)
         dispatch(orderActions.getOrders(data));
       }
       
@@ -70,7 +72,7 @@ const Search = () => {
       <p>Ingen order hittades på det ordernumret.</p>
     :
     ''}
-        {searchedOrder 
+        {found 
           ? 
         <div className="order-container">
         <h2>Order {searchedOrder.id}</h2>
