@@ -30,14 +30,12 @@ const Search = () => {
       } else {
         setFound(true)
         dispatch(orderActions.getOrders(data));
-      }
-      
+      }      
       setLoading(false)
     }
 
     const handleInput: (e:ChangeEvent<HTMLInputElement>) => void = (e) => {
-      setSearchId(e.target.value)
-      
+      setSearchId(e.target.value)      
     }
 
     const searchOrder: () => void = () => {
@@ -63,6 +61,7 @@ const Search = () => {
   if(searchedOrder) {
     orderItem = searchedOrder.cart.cartItems.map(item => <OrderItems key={item.name} item={item} />)
   }
+  
   return (
     <section className="search">
       <Nav />

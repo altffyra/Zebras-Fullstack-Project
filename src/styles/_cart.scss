@@ -86,15 +86,25 @@
 
     .total-price {
         width: 100%;
-        padding: 1em;
+        padding: 1em 2em;
         text-align: end;
     }
 
-    button {
-        @include buttons.bigBtn($pad: 0.6em 2em, $bg: color.scale(variables.$dropdownRed, $lightness: 40%));
+    .button-container {
+        @include variables.flexContainer(row);
+        width: 100%;
         margin-bottom: 1em;
-        align-self: center;
+        .btn-cancel {
+            @include buttons.bigBtn($pad: 0.6em 2em, $bg: color.scale(variables.$dropdownRed, $lightness: 20%));
+            margin: 0 auto;
+        }
+
+        .btn-checkout {
+            @include buttons.bigBtn($pad: 0.6em 2em, $bg: color.scale(variables.$dropdownRed, $lightness: 40%));
+            margin: 0 auto;
+        }
     }
+
 }
 
 .active-cart {
@@ -108,7 +118,6 @@
         margin-right: auto;
         left: 0;
         right: 0;
-        text-align: center;
-    
+        text-align: center;    
     }
 }

@@ -6,7 +6,7 @@ const initialState: Order[] | null = [];
 const setTempOrder = createAction<Order>('Set temp order');
 const clearTempOrder = createAction('Clear temp order');
 
-const actions = { setTempOrder };
+const actions = { setTempOrder, clearTempOrder };
 
 const reducer = createReducer(initialState, {
     [setTempOrder.toString()]: (state, action) => {
@@ -14,7 +14,7 @@ const reducer = createReducer(initialState, {
 
         return tempOrder
     },
-    [setTempOrder.toString()]: (state, action) => {
+    [clearTempOrder.toString()]: (state, action) => {
     
         return initialState
     }

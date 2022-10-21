@@ -29,8 +29,9 @@ type UpdatedCartItem = {
 const addToCart = createAction<CartItems>('Add To Cart');
 const updateAmount = createAction<UpdatedCartItem>('Update amount')
 const changeOrder = createAction<CartProps>('Update order')
+const clearCart = createAction('Clear Cart');
 
-const actions = { addToCart, updateAmount, changeOrder };
+const actions = { addToCart, updateAmount, changeOrder, clearCart };
 
 const reducer = createReducer(initialState, {
     [addToCart.toString()]: (state, action) => {
@@ -58,8 +59,6 @@ const reducer = createReducer(initialState, {
         
         let cartCopy: CartItems[] = [...state.cartItems]; 
         let updatedPrice: number = state.totalPrice;
-// I cart hämta tempOrder, om den finns längd 1, så lägg till en knappp för avbryt
-// kanppen dispatchar töm temporder
         cartCopy.forEach(item => {
             if(item.name == action.payload.name) {
                 updatedPrice = +updatedPrice - +(item.price * item.amount)
@@ -80,7 +79,13 @@ const reducer = createReducer(initialState, {
 
 
         return action.payload
+    },
+    [clearCart.toString()]: (state, action) => {
+
+
+        return initialState
     }
+
 })
 
 export {reducer, actions}

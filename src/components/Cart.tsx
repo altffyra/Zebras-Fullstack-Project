@@ -1,12 +1,13 @@
 import '../styles/_cart.scss';
 import dropDownLight from '../assets/dropDownLight.svg';
-import { CartProps } from '../models/types';
+import { CartProps, Order } from '../models/types';
 import CartItem from './CartItem';
 import {useState, ChangeEvent, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import {actions as cartActions} from '../features/cartReducer';
-
+import { actions as tempOrderActions } from "../features/tempOrderReducer";
+import { RootState } from '../store';
 type CartProp = {
     cart: CartProps;
 }
@@ -20,6 +21,8 @@ const Cart = (props: CartProp) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [active, setActive] = useState<boolean>(false)
+
+    const tempOrder : Order[] = useSelector((state: RootState) => state.tempOrder);
 
     const handleCart: () => void = () => {
         setActive(!active)
@@ -37,6 +40,11 @@ const Cart = (props: CartProp) => {
     const handleCheckout: () => void = () => {
         navigate('/checkout')
     }    
+
+    const handleCancelUpdate: () => void = () => {
+        dispatch(tempOrderActions.clearTempOrder());
+        dispatch(cartActions.clearCart())
+    } 
     
     const handleAmount: (e:ChangeEvent<HTMLSelectElement>, itemName: string) => void = (e, itemName) => {
 
@@ -73,7 +81,13 @@ const Cart = (props: CartProp) => {
             <div className={cartCss}>
                 {cartItemEl}
                 <p className='total-price'>Totalt : {props.cart.totalPrice} kr</p>
-                <button onClick={handleCheckout}>Kassa</button>
+                <div className="button-container">
+                    {tempOrder.length > 0 ?
+                        <button className='btn-cancel' onClick={handleCancelUpdate}>Avbryt</button>
+                    : ''
+                    }
+                        <button className='btn-checkout' onClick={handleCheckout}>Kassa</button>
+                    </div>
             </div>
         </section>
     )
