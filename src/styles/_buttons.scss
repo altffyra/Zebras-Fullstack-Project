@@ -10,6 +10,7 @@
       box-shadow: variables.$boxShadow;
       color: variables.$fontDark;
       transition: all 300ms;
+      cursor: pointer;
       &:hover {
             background: color.scale($bg, $blackness: 40%);
       }
@@ -23,6 +24,7 @@
       box-shadow: variables.$boxShadow;
       color: $fontcolor;
       transition: all 300ms;
+      cursor: pointer;
       &:hover {
             background: color.scale($bg, $blackness: 40%);
       }
