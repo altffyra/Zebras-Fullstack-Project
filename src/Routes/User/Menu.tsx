@@ -38,27 +38,24 @@ const dispatch = useDispatch();
 
   return (
     <div className="menu-wrapper">
-      <section className="menu-nav--container">
+
         <Nav />
-      </section>
 
-      <section className="menu-header--container">
 
-        <figure className="menu-header--info">
-          <img src={mainmeal} alt="" />
-          <section className="menu-header--text">
-            <section className="menu-header--flex">
+
+
+            <section className="menu-header" style={{'backgroundImage':`url(${mainmeal  })`}}>
               <h1>MENY</h1>
             </section>
-          </section>
-        </figure>
+
+
+
 
         <section className="menu-header--category">
           <h2>KÖTT</h2>
           <h2>FISK</h2>
           <h2>FÅGEL</h2>
         </section>
-      </section>
 
       < MenuTopic topic={'Förrätt'} foodImg={appertizerImg} menuArray={entreeArry}/>
       < MenuTopic topic={'Huvudrätt'} foodImg={mainmeal} menuArray={mainCourseArr}/>

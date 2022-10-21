@@ -4,25 +4,31 @@
 
 .cart {
     position: fixed;
-    bottom: 0;
+    bottom: -1px;
     left: 0;
     background-color: variables.$dropdownRed;
     width: 100%;
     @include variables.flexContainer();
     align-items: center;
-
+    z-index: 99999;
+    box-shadow: 0 -0.2em 0.51em variables.$fontDark;
+    border-top-left-radius: 1em;
+    border-top-right-radius: 1em;
     * {
         color: variables.$fontLight;
     }
-
+    
     .cart-dropdown {
+        border-top-left-radius: 1em;
+        border-top-right-radius: 1em;
         width: 100%;
         background-color: variables.$darkRed;
         @include variables.flexContainer();
         box-shadow: variables.$boxShadow;
 
         img {
-            padding: 1em 0;
+            cursor: pointer;
+            padding: 0.5em;
             margin: 0 auto;
             transition: all 300ms;
             transform: rotateZ(180deg);
@@ -58,7 +64,8 @@
         position: relative;
         padding: 1em;
         padding-top: 2em;
-        width: 100%;
+        width: 90%;
+        margin: 0 auto;
         @include variables.flexContainer(row);
         justify-content: space-between;
         gap: 1em;
@@ -85,11 +92,23 @@
 
     button {
         @include buttons.bigBtn($pad: 0.6em 2em, $bg: color.scale(variables.$dropdownRed, $lightness: 40%));
-        margin: 2em 0;
+        margin-bottom: 1em;
         align-self: center;
     }
 }
 
 .active-cart {
     transform: translateY(0%);
+}
+
+@media screen and (min-width: 786px) {
+    .cart {        
+        max-width: 1000px;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        text-align: center;
+    
+    }
 }
