@@ -1,13 +1,17 @@
 @use '../../styles/variables';
 
-div .menu-wrapper {
+.menu-wrapper {
+    margin-top: 12vh;
     @include variables.flexContainer($dir: column);
-    align-items: center;
     font-family: 'Rock Salt';
     background-color: variables.$primaryBackground;
 
     .menu-nav--container {
         margin-bottom: 4em;
+    }
+
+    .menu-header {
+        @include variables.headerTitle()
     }
 
     .menu-header--category {
@@ -16,12 +20,12 @@ div .menu-wrapper {
         box-shadow: 0 .25em .25em rgba(0, 0, 0, 0.25);
     }
 
-    h1 {
-        font-size: 1.1em;
-    }
-
     h2 {
         font-size: .8em;
+    }
+
+    .menu-topic {
+        @include variables.headerTitle()
     }
 
 }
@@ -29,6 +33,7 @@ div .menu-wrapper {
 
 .menu-header--container {
     margin-top: 2em;
+    padding: 0 1em;
     .menu-header--info {
         display: flex;
         @include variables.flexBox($justify: center, $align: center);
@@ -142,7 +147,7 @@ div .menu-wrapper {
     }
 
     .menu-header--container {
-        width: 90%;
+        // width: 90%;
         .menu-subheader--text {
             margin-left: 4em;
             font-size: 1.5em;

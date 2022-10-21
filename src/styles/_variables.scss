@@ -61,6 +61,7 @@ $headerFont: 'Rock Salt', cursive;
 
 @mixin headerTitle($image: url('../assets/about-us.jpg'))  {
       background-image: $image;
+      background-size: cover;
       background-position: center;
       width: 100%;
       display: grid;

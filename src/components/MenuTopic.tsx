@@ -16,15 +16,9 @@ const MenuTopic = ({ foodImg, topic, menuArray }: Props) => {
 
     return (
         <section className="menu-header--container">
-
-            <figure className="menu-header--info">
-            <img src={foodImg} alt="" />
-            <section className="menu-header--text">
-                <section className="menu-header--flex">
+            <section className='menu-topic' style={{'backgroundImage':`url(${foodImg})`}}>
                 <h1>{topic}</h1>
-                </section>
             </section>
-            </figure>
             {topic == 'Huvudrätt' ? 
                 <>
                     <MenuMainCourse menuArr={menuArray} type={'Kött'} />
