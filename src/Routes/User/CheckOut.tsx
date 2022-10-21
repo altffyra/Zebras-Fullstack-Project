@@ -1,20 +1,25 @@
 import React, { ChangeEvent, useState } from "react";
 import Nav from "../../components/Nav";
-import OrderItem from "../../components/OrderItem";
 import mainmeal from "../../assets/menu/mainmeal.svg";
 import "../../styles/_checkout.scss";
 import NotLoggedIn from "../../components/NotLoggedIn";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
 import { CartProps, MenuItems, User } from "../../models/types";
+import { useNavigate } from 'react-router-dom';
+import {actions as orderActions} from '../../features/orderReducer';
 
 type Props = {};
 
 const CheckOut = (props: Props) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const [loading, setLoading] = useState<boolean>(false);
+
   const [userMessage, setMessage] = useState<string>();
   const user: User = useSelector((state: RootState) => state.user);
   const cart: CartProps = useSelector((state: RootState) => state.cart);
-  console.log(cart);
+
   const cartItemEl = cart.cartItems.map((item, index) => (
     <div className="cartmodule">
       <div key={index} className="cart-item">
@@ -24,11 +29,13 @@ const CheckOut = (props: Props) => {
       <div className="divider"></div>
     </div>
   ));
+
   const data = {
     cart: cart,
     user: user,
     userComment: userMessage,
   };
+
 
   async function sendOrder() {
     console.log(data);
@@ -41,13 +48,15 @@ const CheckOut = (props: Props) => {
       body: JSON.stringify(data),
     });
     const datasave = await response.json();
+    console.log(datasave);
     
-    
+    dispatch(orderActions.makeOrders(datasave));
+    navigate("/OrderConfirm")
   }
 
   function changeMessages(e: ChangeEvent<HTMLInputElement>) {
     setMessage(e.target.value);
-    console.log(userMessage);
+  
   }
 
   const notLoggedInElem =
