@@ -63,7 +63,7 @@ orderRoute.get('/:id', async (req:IdParam, res:Response) => {
 
 
 // // GET ALL ORDERS ADMIN
- orderRoute.get("/admin", auth, async (req:Request, res:Response) => {
+ orderRoute.get("/admin/admin", async (req:Request, res:Response) => {
      const resOrders:Order[] = await getOrders()
      res.json(resOrders)
  })

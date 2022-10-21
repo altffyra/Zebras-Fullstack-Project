@@ -16,6 +16,7 @@ const CheckOut = (props: Props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
+  const [userValue, setUser] = useState()
 
   const [userMessage, setMessage] = useState<string>();
   const user: User = useSelector((state: RootState) => state.user);
@@ -68,6 +69,12 @@ const CheckOut = (props: Props) => {
     }
   }
 
+
+  function updateUser(e){
+    //const userTemp = [...userValue], e.target.name= e.target.value
+
+  }
+
   function changeMessages(e: ChangeEvent<HTMLInputElement>) {
     setMessage(e.target.value);
   }
@@ -82,9 +89,9 @@ const CheckOut = (props: Props) => {
             <p className="Account-top-p">Mina Uppgifter</p>
           </div>
           <div className="Account-info-main">
-            <p className="User-info">Namn: {user.name}</p>
-            <p className="User-info">Epost: {user.email}</p>
-            <p className="User-info">Telefon nummer: {user.phoneNumber}</p>
+            <p className="User-info">Namn: <input name="name" onChange={(e)=> updateUser(e)} required placeholder={user.name} type="text"></input></p>
+            <p className="User-info">Epost: <input name="email" required placeholder={user.email} type="text"></input></p>
+            <p className="User-info">Telefon nummer: <input name="phoneNumber" required placeholder={user.phoneNumber} type="text"></input></p>
           </div>
         </div>
         <div className="Comment-wrapper">
