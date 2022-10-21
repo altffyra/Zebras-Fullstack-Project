@@ -4,7 +4,7 @@ import OrderItems from "../../components/OrderItems"
 import Nav from "../../components/Nav";
 import { Order } from '../../models/types';
 import { useSelector, useDispatch } from 'react-redux';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState, KeyboardEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { actions as orderActions } from '../../features/orderReducer';
@@ -16,17 +16,19 @@ const Search = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [searchId, setSearchId] = useState<string>('');
   const [searchError, setSearchError] = useState<boolean>(false);
+  const [found, setFound] = useState<boolean>(false);
 
     async function getOrder(search:string) {
       setLoading(true)
       setSearchError(false)
+      setFound(false)
       const response = await fetch(`/api/order/${search}`);
       const data = await response.json();      
       if(data.found == false) {
         setSearchError(true)
         dispatch(orderActions.clearOrders())
       } else {
-
+        setFound(true)
         dispatch(orderActions.getOrders(data));
       }
       
@@ -44,6 +46,12 @@ const Search = () => {
       }
       getOrder(searchId)      
     }
+
+    const handleEnter: (e: KeyboardEvent) => void = (e) => { 
+      if(e.key == 'Enter') {
+        searchOrder();
+      };
+    };
 
     const changeOrder: () => void = async () => {
       dispatch(cartActions.changeOrder(searchedOrder.cart))
@@ -63,14 +71,14 @@ const Search = () => {
             : ''
         }
       <div className="search-container">
-        <input type="text" name='search' placeholder='Sök ordernummer' value={searchId} id="search" onChange={(e) => handleInput(e)}/>
+        <input type="text" name='search' placeholder='Sök ordernummer' value={searchId} id="search" onKeyUp={(e) => handleEnter(e)} onChange={(e) => handleInput(e)}/>
         <label htmlFor="search" onClick={searchOrder}>Sök</label>
       </div>
       {searchError ? 
       <p>Ingen order hittades på det ordernumret.</p>
     :
     ''}
-        {searchedOrder 
+        {found 
           ? 
         <div className="order-container">
         <h2>Order {searchedOrder.id}</h2>
