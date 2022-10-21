@@ -75,15 +75,19 @@ async function updateOrder(updatedOrder: Order, id:number) {
 }
 
 async function authenticateLogin(ID:any){
+      
     if(!db.data) {
         db.data = defaultData
     }
+
     const authreply:User[] = await db.data.users
-    let filter = authreply.find((user:User) => user.accountId == ID.accountID);
-    if (filter != undefined && filter.admin == true)
-    return authreply
-    else
-    return []
+    let filter: User[] = authreply.filter((user:User) => user.accountId == ID);
+
+    if (filter != undefined && filter[0].admin == true) {
+      return filter;
+    } else {
+      return [];
+    }
 }
 
 // // USER FUNCTIONS

@@ -3,10 +3,9 @@ import express, { NextFunction, Request, Response } from "express";
  app.use(express.json());
  const orderRoute = express.Router();
  import {User, Order} from '../lowDb/dbinterface'
- import db, {authenticateLogin, getOrders,checkOrder, updateOrder, createOrder, started, completed} from '../lowDb/database.js'
+ import db, {authenticateLogin, getOrders,checkOrder, updateOrder, createOrder} from '../lowDb/database.js'
  import { isValidCart, isValidUpdatedOrder } from "../validators/validOrder.js";
  import { isValidUser, isValidGuest } from "../validators/validUser.js";
-import { uuid } from "uuidv4";
 
 
 
@@ -20,8 +19,8 @@ import { uuid } from "uuidv4";
 
    if (idhead)
      {
-       const checklogin:User[] = await authenticateLogin(idhead)
-       if (checklogin.length>0) next();
+       const checklogin: User[] = await authenticateLogin(idhead)
+       if (checklogin.length > 0) next();
         else 
        return res.json({ error: 'not an admin' })
       
@@ -52,7 +51,7 @@ orderRoute.get('/:id', async (req:IdParam, res:Response) => {
  orderRoute.get("/user/:id", async (req:IdParam, res:Response) => {
      const id:string = req.params.id;
      let resOrders = await getOrders()
-     let filter = resOrders.filter((order:Order) => order.user.accountId == id);
+     let filter = resOrders.filter((order:Order) => order.id == id);
 
    if (filter.length > 0) {
      res.send(filter);
@@ -63,10 +62,10 @@ orderRoute.get('/:id', async (req:IdParam, res:Response) => {
 
 
 // // GET ALL ORDERS ADMIN
- orderRoute.get("/admin", auth, async (req:Request, res:Response) => {
-     const resOrders:Order[] = await getOrders()
-     res.json(resOrders)
- })
+orderRoute.get("/admin/admin", auth, async (req:Request, res:Response) => {
+  const resOrders:Order[] = await getOrders()
+  res.json(resOrders)
+})
 
 
 // // GET USER ORDERS
@@ -88,33 +87,20 @@ orderRoute.get('/:id', async (req:IdParam, res:Response) => {
 // // MAKE ORDER
 orderRoute.post("/", async (req, res) => {
   let orderObj: Order = req.body;
-  console.log(orderObj.cart);
-  console.log(orderObj.cart.cartItems);
-  console.log(orderObj.cart.cartItems[1]);
-  console.log(orderObj.user);
-  
   const func = orderObj.user.accountId ? isValidUser : isValidGuest;
-  const person = func == isValidUser ? 'user' : 'guest';
+  const person = func == isValidUser ? 'user' : 'guest'
 
   
  if (func(orderObj.user)) {
     if(isValidCart(orderObj)) {
-      orderObj.locked = false;
-      orderObj.completed = false;
-      orderObj.orderPlaced = started;
-      orderObj.orderCompleted = completed;
-      orderObj.id = uuid();
       await createOrder(orderObj)
-      res.status(200).send(orderObj)
-      
+      res.status(200).send('Order placed')
+
     } else {
-     
-      
       res.status(400).send('Bad cart')
     }
 
   } else {
-   
     res.status(400).send('Bad '+ person)
   }
 })
