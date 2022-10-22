@@ -53,16 +53,19 @@ const dispatch = useDispatch();
           </section>
         </figure>
 
-        <section className="menu-header--category">
-          <h2>KÖTT</h2>
-          <h2>FISK</h2>
-          <h2>FÅGEL</h2>
+        <section className="menu-header--category link-container">
+          <h2 className='link'>Förrätter</h2>
+          <h2 className='link'>Kött</h2>
+          <h2 className='link'>Fisk</h2>
+          <h2 className='link'>Fågel</h2>
+          <h2 className='link'>Vegetariskt</h2>
+          <h2 className='link'>Efterrätter</h2>
         </section>
       </section>
 
       < MenuTopic topic={'Förrätt'} foodImg={appertizerImg} menuArray={entreeArry}/>
       < MenuTopic topic={'Huvudrätt'} foodImg={mainmeal} menuArray={mainCourseArr}/>
-      < MenuTopic topic={'Vegetarisk'} foodImg={vegImg} menuArray={vegArr}/>
+      < MenuTopic topic={'Vegetariskt'} foodImg={vegImg} menuArray={vegArr}/>
       < MenuTopic topic={'Efterrätt'} foodImg={dessImg} menuArray={desertArr}/>
 
       {cart.cartItems.length > 0 

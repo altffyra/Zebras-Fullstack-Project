@@ -5,9 +5,8 @@
 .cart {
     position: fixed;
     bottom: 0;
-    left: 0;
     background-color: variables.$dropdownRed;
-    width: 100%;
+    width: 100vw;
     @include variables.flexContainer();
     align-items: center;
 
@@ -62,7 +61,7 @@
         @include variables.flexContainer(row);
         justify-content: space-between;
         gap: 1em;
-        border-bottom: 2px solid variables.$fontLight;
+        // border-bottom: 2px solid variables.$fontLight;
         :first-child {
             flex: 3;
         }
@@ -75,6 +74,9 @@
         select, option {
             color: variables.$fontDark;
         }
+    }
+    .divider {
+        @include variables.divider()
     }
 
     .total-price {
@@ -92,4 +94,10 @@
 
 .active-cart {
     transform: translateY(0%);
+}
+
+@media screen and (min-width: 786px) {
+    .cart {
+        width: 70vw;
+    }
 }

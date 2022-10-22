@@ -48,7 +48,7 @@ const MenuItem = ({ item }: Props) => {
                 : ''
               }</p>
               </section>
-              <p>Pris: {item.price}</p>
+              <p>{item.price} kr</p>
             </section>
 
             <section className="menu-item--right">
@@ -61,10 +61,9 @@ const MenuItem = ({ item }: Props) => {
 
             { tabbed ? 
             <section className="tab-container">
-              <p>Beskrivning:</p>
-              <section>{ item.desc }</section>
-              <p>Allergier:</p>
-              <section>{ item.allergies }</section>
+              <p className="desc">{ item.desc }</p>
+              {item.allergies ? <p className="allergies">Allergener: { item.allergies }</p>
+              : '' }
               </section>
                : '' }
 

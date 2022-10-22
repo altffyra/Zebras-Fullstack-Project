@@ -121,8 +121,8 @@ $headerFont: 'Rock Salt', cursive;
 
 @mixin divider($bg: $fontLight) {
       width: 90%;
-      height: 0.2em;
+      height: 0.1rem;
       background-color: $bg;
-      opacity: 60%;
+      opacity: 70%;
       margin: 0 auto;
 }

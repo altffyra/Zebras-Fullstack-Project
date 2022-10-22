@@ -19,6 +19,7 @@ const CheckOut = (props: Props) => {
     <div className="cartmodule">
       <div key={index} className="cart-item">
         <p className="item-name">{item.name}</p>{" "}
+        <p className="item-amount">{item.amount} st</p> {" "}
         <p className="item-price">{item.price} kr</p>{" "}
       </div>
       <div className="divider"></div>
@@ -45,7 +46,7 @@ const CheckOut = (props: Props) => {
     
   }
 
-  function changeMessages(e: ChangeEvent<HTMLInputElement>) {
+  function changeMessages(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setMessage(e.target.value);
     console.log(userMessage);
   }
@@ -57,23 +58,25 @@ const CheckOut = (props: Props) => {
       <div className="LoggedIn">
         <div className="Account-info">
           <div className="Account-top">
-            <p className="Account-top-p">Mina Uppgifter</p>
+            <p className="Account-top-p">Mina uppgifter</p>
           </div>
           <div className="Account-info-main">
             <p className="User-info">Namn: {user.name}</p>
-            <p className="User-info">Epost: {user.email}</p>
-            <p className="User-info">Telefon nummer: {user.phoneNumber}</p>
+            <div className="divider"></div>
+            <p className="User-info">E-post: {user.email}</p>
+            <div className="divider"></div>
+            <p className="User-info">Telefonnummer: {user.phoneNumber}</p>
           </div>
         </div>
         <div className="Comment-wrapper">
           <div className="Comment-top">
             <p className="Comment-top-p">Kommentar</p>
           </div>
-          <input
+          <textarea
             onChange={(e) => changeMessages(e)}
             className="input-comment"
-            type="text"
-          ></input>
+            placeholder="Är det något vi behöver veta? Här kan du lämna en kommentar till personalen."
+          ></textarea>
         </div>
         <div className="buttonsDiv">
           <button className="back-btn">Tillbaka </button>
@@ -101,7 +104,7 @@ const CheckOut = (props: Props) => {
           {cartItemEl}
           <section className="total-wrapper">
             <p className="total">Totalt:</p>{" "}
-            <p className="total-sum">{cart.totalPrice} Kr.</p>
+            <p className="total-sum">{cart.totalPrice} kr.</p>
           </section>
         </section>
 
