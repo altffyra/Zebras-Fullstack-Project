@@ -133,8 +133,10 @@ orderRoute.put("/:id", async (req:IdParam, res:Response) => {
     res.status(400).send('No order with that id')
     return
   }
-
-  if(isValidUser(updatedOrder.user)) {
+  console.log(req.body)
+  
+    console.log(updatedOrder.user)
+  if(isValidGuest(updatedOrder.user)) {
     if(isValidCart(updatedOrder)) {    
       if(isValidUpdatedOrder(updatedOrder)) {        
           const checkedOrder = await updateOrder(updatedOrder, foundIndex)
