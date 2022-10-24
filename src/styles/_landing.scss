@@ -2,7 +2,7 @@
 @use 'buttons';
 
 .landing {
-    @include variables.gridContainer();
+    @include variables.gridContainer($rows: 10);
     background-color: variables.$primaryBackground;
 
     & > figure {
@@ -34,7 +34,7 @@
     }
 
     .hero {
-        grid-area: 1 / 1 / 3 / 6;
+        grid-area: 1 / 1 / 4 / 6;
         background-image: url('../assets/hero.jpg');
         background-repeat: no-repeat;
         background-size: cover;
@@ -54,45 +54,49 @@
     }
 
     .about-us {
-        grid-area: 3 / 1 / 4 / 3;
+        grid-area: 4 / 1 / 5 / 6;
         background-color: black;
         color: variables.$fontLight;
     }
 
     .about-us-img {
-        grid-area: 3 / 3 / 4 / 6;
+        grid-area: 5 / 1 / 6 / 6;
         background-image: url('../assets/chef-cooking.jpg');
+        background-position-y: 60%;
 
 
     }
 
     .our-food-img {
-        grid-area: 4 / 1 / 5 / 4;
+        grid-area: 7 / 1 / 8 / 6;
         background-image: url('../assets/food.jpg');
+        background-position-y: 60%;
     }
 
     .our-food {
-        grid-area: 4 / 4 / 5 / 6;
+        grid-area: 6 / 1 / 7 / 6;
         background-color: variables.$darkRed;
         color: variables.$fontLight;
     }
 
     .our-goal {
-        grid-area: 5 / 1 / 6 / 3;
+        grid-area: 8 / 1 / 9 / 6;
         background-color: black;
         color: variables.$fontLight;
     }
 
     .our-goal-img {
-        grid-area: 5 / 3 / 6 / 6;
+        grid-area: 9 / 1 / 10 / 6;
         background-image: url('../assets/our-goal.jpg');
+        background-position-y: center;
     }
 
     .map {
-        grid-area: 6 / 1 / 7 / 6;
+        grid-area: 10 / 1 / 11 / 6;
 
         iframe {
             width: 100%;
+            margin-bottom: 1em;
 
         }
 
