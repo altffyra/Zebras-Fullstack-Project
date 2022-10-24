@@ -38,7 +38,7 @@ const OrderConfirm = () => {
         <div className='time-container'>
           <p>Maten klar att hämtas : Kl. {orderDone}</p>
         </div>
-
+        
         <div className='order-cart'>
           <div className='order-header'>
             <p className='order-title'>Order {confirmedOrder.id}</p>
