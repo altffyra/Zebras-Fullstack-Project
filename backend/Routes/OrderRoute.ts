@@ -3,7 +3,7 @@ import express, { NextFunction, Request, Response } from "express";
  app.use(express.json());
  const orderRoute = express.Router();
  import {User, Order} from '../lowDb/dbinterface'
- import db, {authenticateLogin, getOrders,checkOrder, updateOrder, createOrder} from '../lowDb/database.js'
+ import db, {authenticateLogin, getOrders,checkOrder, updateOrder, createOrder, checkLock} from '../lowDb/database.js'
  import { isValidCart, isValidUpdatedOrder } from "../validators/validOrder.js";
  import { isValidUser, isValidGuest } from "../validators/validUser.js";
 
@@ -62,10 +62,29 @@ orderRoute.get('/:id', async (req:IdParam, res:Response) => {
 
 
 // // GET ALL ORDERS ADMIN
-orderRoute.get("/admin/admin", auth, async (req:Request, res:Response) => {
-  const resOrders:Order[] = await getOrders()
-  res.json(resOrders)
+orderRoute.get("/admin/orders", auth, async (req:Request, res:Response) => {
+
+  const resOrders: Order[] = await getOrders()
+  if (resOrders.length > 0) {
+    res.send(resOrders);
+  } else {
+    res.sendStatus(404);
+  }
 })
+
+// // LOCK ORDER ADMIN
+
+orderRoute.put("/admin/orders/:id", auth, async (req:Request, res:Response) => {
+  const orderId: string = req.params.id;
+  const lockedOrder = await checkLock(orderId);
+
+  console.log(lockedOrder);
+
+  if (lockedOrder != undefined && lockedOrder.locked === false) {
+      res.send(lockedOrder);
+    }
+    res.send('Order is already locked');
+});
 
 
 // // GET USER ORDERS
