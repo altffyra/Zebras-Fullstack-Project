@@ -1,12 +1,13 @@
-import { MenuItems } from "../models/types";
+import { MenuItems, CartItems } from "../models/types";
 import vector from '../assets/menu/vector.svg';
+import allergyActive from '../assets/menu/allergy-active.svg';
 import allergy from '../assets/menu/allergy.svg';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { CartItems } from '../models/types';
 import {actions as cartActions} from '../features/cartReducer';
 import { useDispatch } from 'react-redux';
+
 
 
 type Props = {
@@ -19,7 +20,15 @@ type Props = {
 const MenuItem = ({ item }: Props) => {
 
     const [tabbed, setTabbed] = useState<boolean>(false);
+    const [ allergies, setAllergies ] = useState<boolean>(false)
     const dispatch = useDispatch();
+
+    let allergyImg;
+    if (!tabbed && allergies ) {
+      allergyImg = allergy;
+    } else {
+      allergyImg = allergyActive;
+    }
 
     //const cartItems: CartItems[] = useSelector((state: RootState) => state.cart);
 
@@ -35,18 +44,27 @@ const MenuItem = ({ item }: Props) => {
 
     const tabFood = () => {
       setTabbed(!tabbed);
+      setAllergies(false)
+    }
+
+
+    const seeAllergies = () => {
+      setAllergies(!allergies)
+
     }
 
     return (
         <section className="menu-item">
           <section className="menu-item--info">
 
-            <section className="menu-item--left">
+            <section className="menu-item--left"> 
               <section className="menu-item--flex">
                 <p>{item.name} {item.allergies ?
-                <img src={allergy} alt="" />
-                : ''
-              }</p>
+                <img className="allergy-img" src={allergyImg} alt="" onClick={seeAllergies} />
+                : '' }</p>
+              {!tabbed && allergies ? <div className="allergy-info">
+                <p>Rätten innehåller allergener.<br></br>Klicka på pilen för att läsa mer.</p>
+              </div> : ''}
               </section>
               <p>{item.price} kr</p>
             </section>

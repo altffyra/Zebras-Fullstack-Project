@@ -92,6 +92,7 @@
 
         .menu-item--info {
             display: flex;
+            position: relative;
 
             .menu-item--right {
                 display: flex;
@@ -100,12 +101,31 @@
             }
     
             .menu-item--left {
+
     
                 .menu-item--flex {
-                    display: flex;
+
                     
-                    img {
-                        margin-left: 0.4em;
+                    .allergy-img {
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+
+                    }
+                    .allergy-info {
+                        position: absolute;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: variables.$yellowSenap;
+                        width: 11em;
+                        height: 1.9em;
+                        border-radius: .5em;
+                        
+                        & p {
+                            font-size: .7em;
+                        }
                     }
                 }
     
