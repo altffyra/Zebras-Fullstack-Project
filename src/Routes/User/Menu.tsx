@@ -1,4 +1,4 @@
-import './Menu.scss';
+import '../../styles/_menu.scss';
 import appertizer from '../../assets/menu/appertizer.svg';
 import mainmeal from '../../assets/menu/mainmeal.svg';
 import veg from '../../assets/menu/veg.svg';
@@ -11,7 +11,6 @@ import { RootState } from '../../store';
 import { CartProps, MenuItems } from '../../models/types';
 import {actions as menuActions} from '../../features/menuReducer';
 import Nav from '../../components/Nav';
-import { NavLink } from 'react-router-dom';
 
 type Props = {}
 
