@@ -4,12 +4,12 @@ import OrderItems from "../../components/OrderItems"
 import Nav from "../../components/Nav";
 import { Order } from '../../models/types';
 import { useSelector, useDispatch } from 'react-redux';
-import { ChangeEvent, useState, KeyboardEvent } from 'react';
+import { ChangeEvent, useState, KeyboardEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { actions as orderActions } from '../../features/orderReducer';
 import { actions as cartActions } from '../../features/cartReducer';
-
+import { actions as tempOrderActions } from '../../features/tempOrderReducer';
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -19,43 +19,52 @@ const Search = () => {
   const [searchError, setSearchError] = useState<boolean>(false);
   const [found, setFound] = useState<boolean>(false);
 
-    async function getOrder(search:string) {
-      setLoading(true)
-      setSearchError(false)
-      setFound(false)
-      const response = await fetch(`/api/order/${search}`);
-      const data = await response.json();      
-      if(data.found == false) {
-        setSearchError(true)
-        dispatch(orderActions.clearOrders())
-      } else {
-        setFound(true)
-        dispatch(orderActions.getOrders(data));
-      }      
-      setLoading(false)
+  const tempOrder: Order | undefined =  useSelector((state: RootState) => state.tempOrder)[0];
+  useEffect(() => {
+    if(tempOrder) {
+      dispatch(tempOrderActions.clearTempOrder());
+      dispatch(cartActions.clearCart())
     }
+  }, [])
 
-    const handleInput: (e:ChangeEvent<HTMLInputElement>) => void = (e) => {
-      setSearchId(e.target.value)      
+  async function getOrder(search:string) {
+    setLoading(true)
+    setSearchError(false)
+    setFound(false)
+    const response = await fetch(`/api/order/${search}`);
+    const data = await response.json();      
+    if(data.found == false) {
+      setSearchError(true)
+      dispatch(orderActions.clearOrders())
+    } else {
+      setFound(true)
+      dispatch(orderActions.getOrders(data));
+    }      
+    setLoading(false)
+  }
+
+  const handleInput: (e:ChangeEvent<HTMLInputElement>) => void = (e) => {
+    setSearchId(e.target.value)      
+  }
+
+  const searchOrder: () => void = () => {
+    if(searchId.length <= 1) {
+      return
     }
+    getOrder(searchId)      
+  }
 
-    const searchOrder: () => void = () => {
-      if(searchId.length <= 1) {
-        return
-      }
-      getOrder(searchId)      
-    }
-
-    const handleEnter: (e: KeyboardEvent) => void = (e) => { 
-      if(e.key == 'Enter') {
-        searchOrder();
-      };
+  const handleEnter: (e: KeyboardEvent) => void = (e) => { 
+    if(e.key == 'Enter') {
+      searchOrder();
     };
+  };
 
-    const changeOrder: () => void = async () => {
-      dispatch(cartActions.changeOrder(searchedOrder.cart))
-      navigate('/menu')
-    }
+  const changeOrder: () => void = async () => {
+    dispatch(cartActions.changeOrder(searchedOrder.cart))
+    dispatch(tempOrderActions.setTempOrder(searchedOrder))
+    navigate('/menu')
+  }
 
   const searchedOrder: Order = useSelector((state: RootState) => state.orders)[0];
   let orderItem: JSX.Element[] | null = null;
