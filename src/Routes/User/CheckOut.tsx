@@ -1,14 +1,15 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState , useEffect } from "react";
 import Nav from "../../components/Nav";
 import mainmeal from "../../assets/menu/mainmeal.svg";
 import "../../styles/_checkout.scss";
 import NotLoggedIn from "../../components/NotLoggedIn";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch} from "react-redux";
 import { RootState } from "../../store";
 import { CartProps, MenuItems, User, Order } from "../../models/types";
 import { useNavigate } from "react-router-dom";
 import { actions as orderActions } from "../../features/orderReducer";
 import { actions as setTempOrder } from "../../features/tempOrderReducer";
+import { actions as userActions} from "../../features/userReducer";
 
 type Props = {};
 
@@ -21,9 +22,10 @@ const CheckOut = (props: Props) => {
   const user: User = useSelector((state: RootState) => state.user);
   const cart: CartProps = useSelector((state: RootState) => state.cart);
   const tempOrder: Order[] = useSelector((state: RootState) => state.tempOrder);
+
   const cartItemEl = cart.cartItems.map((item, index) => (
     <div className="cartmodule">
-      <div key={index} className="cart-item">
+      <div key={item.name} className="cart-item">
         <p className="item-name">{item.name}</p>{" "}
         <p className="item-amount">{item.amount} st</p> {" "}
         <p className="item-price">{item.price} kr</p>{" "}
@@ -31,15 +33,68 @@ const CheckOut = (props: Props) => {
       <div className="divider"></div>
     </div>
   ));
+ 
+
+    const [userCredentials, setUser] = useState<User>({
+    name: user.name,
+    email: user.email,
+    phoneNumber: user.phoneNumber,
+    accountId:user.accountId
+  })
+
+
+useEffect(() => {
+  if(orderCheck){
+    setUser(tempOrder[0].user)
+  }
+
+}, [])
+
+
+
+async function updateOrder() {
+
+
+
+  const updatedOrder:Order = {
+    cart: cart,
+    user: userCredentials,
+    orderPlaced: tempOrder[0].orderPlaced,
+    orderCompleted: tempOrder[0].orderCompleted, 
+    id: tempOrder[0].id,
+    userComment: userMessage,
+    adminComment: tempOrder[0].adminComment,
+    locked: tempOrder[0].locked,
+    completed: tempOrder[0].completed
+  }
+    const tempOrderId = tempOrder[0].id
+    const response = await fetch(`/api/order/${tempOrderId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedOrder),
+    });
+    console.log(response)
+    const datasave = await response.json();
+    if (datasave.locked = true){
+      
+
+    } else
+
+    dispatch(orderActions.makeOrders(datasave));
+    navigate("/OrderConfirm");
+  
+}
 
   async function sendOrder() {
-
-    if (tempOrder.length <= 0) {
-      const data = {
+    
+      let data = {
         cart: cart,
-        user: user,
+        user: userCredentials,
         userComment: userMessage,
       };
+
 
       const response = await fetch("/api/order/", {
         method: "POST",
@@ -49,32 +104,61 @@ const CheckOut = (props: Props) => {
         body: JSON.stringify(data),
       });
       const datasave = await response.json();
-
       dispatch(orderActions.makeOrders(datasave));
       navigate("/OrderConfirm");
-    } else {
-      const data = tempOrder;
-      const tempOrderId = tempOrder[0].id
-      const response = await fetch(`/api/order/${tempOrderId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const datasave = await response.json();
 
-      dispatch(orderActions.makeOrders(datasave));
-      navigate("/OrderConfirm");
-    }
+    } 
+  
+
+  function changeCredentials(e: ChangeEvent<HTMLInputElement>) {
+    console.log(userCredentials)
+    setUser({
+      ...userCredentials,
+      [e.target.name]: e.target.value
+     
+    })
   }
+ const orderCheck:Boolean =  tempOrder.length> 0 ? true :false 
 
   function changeMessages(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setMessage(e.target.value);
   }
 
+
+
+
+
+
+ const nameCheck =  orderCheck? (<div className="Account-info-main">
+            <p className="User-info">Namn: <input name="name" defaultValue={tempOrder[0].user.name} onChange={(e) => changeCredentials(e)}></input></p>
+            <div className="divider"></div>
+            <p className="User-info">E-post: <input name="email" defaultValue={tempOrder[0].user.email} onChange={(e) => changeCredentials(e)}></input></p>
+            <div className="divider"></div>
+            <p className="User-info">Telefonnummer: <input type="number" name="phoneNumber" defaultValue={tempOrder[0].user.phoneNumber} onChange={(e) => changeCredentials(e)}></input></p>
+          </div>) : (<div className="Account-info-main">
+            <p className="User-info">Namn: <input name="name" defaultValue={user.name} onChange={(e) => changeCredentials(e)}></input></p>
+            <div className="divider"></div>
+            <p className="User-info">E-post: <input name="email" defaultValue={user.email} onChange={(e) => changeCredentials(e)}></input></p>
+            <div className="divider"></div>
+            <p className="User-info">Telefonnummer: <input type="number" name="phoneNumber" defaultValue={user.phoneNumber} onChange={(e) => changeCredentials(e)}></input></p>
+          </div>)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const notLoggedInElem =
-    user.name == "" ? (
+    user.accountId == "" ? (
       <NotLoggedIn />
     ) : (
       <div className="LoggedIn">
@@ -83,11 +167,11 @@ const CheckOut = (props: Props) => {
             <p className="Account-top-p">Mina uppgifter</p>
           </div>
           <div className="Account-info-main">
-            <p className="User-info">Namn: {user.name}</p>
+            <p className="User-info">Namn: <input name="name" value={userCredentials.name} onChange={(e) => changeCredentials(e)}></input></p>
             <div className="divider"></div>
-            <p className="User-info">E-post: {user.email}</p>
+            <p className="User-info">E-post: <input name="email" value={userCredentials.email} onChange={(e) => changeCredentials(e)}></input></p>
             <div className="divider"></div>
-            <p className="User-info">Telefonnummer: {user.phoneNumber}</p>
+            <p className="User-info">Telefonnummer: <input type="number" name="phoneNumber" value={userCredentials.phoneNumber} onChange={(e) => changeCredentials(e)}></input></p>
           </div>
         </div>
         <div className="Comment-wrapper">
@@ -102,9 +186,12 @@ const CheckOut = (props: Props) => {
         </div>
         <div className="buttonsDiv">
           <button className="back-btn">Tillbaka </button>
-          <button onClick={sendOrder} className="order-btn">
+          { orderCheck? (<button onClick={updateOrder} className="order-btn">
+            Updatera{" "}
+          </button>): <button onClick={sendOrder} className="order-btn">
             Beställ{" "}
-          </button>
+          </button> } 
+
         </div>
       </div>
     );
