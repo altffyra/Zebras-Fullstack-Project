@@ -64,6 +64,8 @@ async function updateOrder(updatedOrder: Order, id:number) {
       if (updatedOrder.orderPlaced != undefined)
             //@ts-ignore
           {  if(updatedOrder.orderPlaced < db.data.orders[id].orderCompleted || db.data.orders[id].locked === true) {
+            db.data.orders[id].locked = true
+            await db.write()
             return false
             }
       }
