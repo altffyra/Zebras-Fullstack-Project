@@ -10,6 +10,7 @@ import { RootState } from '../../store';
 import { actions as orderActions } from '../../features/orderReducer';
 import { actions as cartActions } from '../../features/cartReducer';
 
+
 const Search = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
