@@ -11,6 +11,7 @@ import { User, Order } from '../../models/types';
 import {actions as orderActions} from '../../features/orderReducer';
 import { actions as tempOrderActions } from '../../features/tempOrderReducer';
 import { actions as cartActions } from '../../features/cartReducer';
+import { actions as userActions } from '../../features/userReducer';
 
 const Account = () => {
   const navigate = useNavigate();
@@ -41,6 +42,7 @@ const Account = () => {
   }
 
 const handleLogout: () => void = () => {
+    dispatch(userActions.logOut());
     localStorage.removeItem('accountId')
     navigate('/menu')
 }
