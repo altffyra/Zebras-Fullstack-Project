@@ -3,7 +3,7 @@ import express, { NextFunction, Request, Response } from "express";
  app.use(express.json());
  const orderRoute = express.Router();
  import {User, Order} from '../lowDb/dbinterface'
- import db, {authenticateLogin, getOrders,checkOrder, updateOrder, createOrder, started, completed} from '../lowDb/database.js'
+ import db, {authenticateLogin, getOrders,checkOrder, checkUser, updateOrder, createOrder, started, completed} from '../lowDb/database.js'
  import { isValidCart, isValidUpdatedOrder } from "../validators/validOrder.js";
  import { isValidUser, isValidGuest } from "../validators/validUser.js";
 import { uuid } from "uuidv4";
@@ -50,15 +50,15 @@ orderRoute.get('/:id', async (req:IdParam, res:Response) => {
  type IdParam = Request<IdObject>;
 
  orderRoute.get("/user/:id", async (req:IdParam, res:Response) => {
-     const id:string = req.params.id;
-     let resOrders = await getOrders()
-     let filter = resOrders.filter((order:Order) => order.user.accountId == id);
-
-   if (filter.length > 0) {
-     res.send(filter);
-   } else {
-     res.sendStatus(404);
-   }
+  const id:string = req.params.id;  
+  const checkIfExist = await checkUser(id)
+  if(checkIfExist) {
+    let resOrders = await getOrders()
+    let filter = resOrders.filter((order:Order) => order.id == id);
+    res.send(filter);
+  } else {
+    res.send({found: false})
+  }
  });
 
 

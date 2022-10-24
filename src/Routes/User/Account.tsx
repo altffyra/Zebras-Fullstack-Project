@@ -20,6 +20,8 @@ const Account = () => {
   useEffect(() => {
     dispatch(tempOrderActions.clearTempOrder());
     const accountId: string | null = localStorage.getItem('accountId');
+    console.log(accountId);
+    
     if(accountId) {
       getOrder(accountId)
     } else {

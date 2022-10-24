@@ -36,7 +36,9 @@ import { User } from '../models/types'
       if( data.success ) {
             setLoading(false);
             dispatch(userActions.setUser(data.user))
-            localStorage.setItem('accountId', JSON.stringify(data.user.accountId))
+            console.log(data);
+            
+            localStorage.setItem('accountId', (data.user.accountId))
             if( data.user.admin) {
               navigate('/AdminPage')
             }

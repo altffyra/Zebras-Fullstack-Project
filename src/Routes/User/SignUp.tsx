@@ -43,7 +43,7 @@ const SignUp = (props: Props) => {
       setLoading(false)
       dispatch(userActions.setUser(data.user))
       console.log(data)
-      localStorage.setItem('accountId', JSON.stringify(data.user.accountId))
+      localStorage.setItem('accountId', (data.user.accountId))
       navigate('/')
     } else {
       setLoading(false)

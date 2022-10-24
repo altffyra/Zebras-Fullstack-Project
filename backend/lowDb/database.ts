@@ -125,6 +125,20 @@ export async function findAccount(userData:LoginCreds) {
       return filterAccount
 }
 
+export async function checkUser(id: string) {
+      await db.read()
+      if( !db.data ) {
+        db.data = defaultData
+        }
+        let found = db.data.users.find(user => user.accountId === id)
+        if(found) {
+            return found
+        } else {
+            return {success: false}
+        }
+
+}
+
 export async function createOrder(orderData: Order) {
       await db.read()
       if ( !db.data ) {
