@@ -8,9 +8,8 @@ const Nav = () => {
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
     useEffect(() => {
-        const username = localStorage.getItem('user')
-        const accountId = localStorage.getItem('accountKey')
-        if(username && accountId) {
+        const accountId = localStorage.getItem('accountId')
+        if(accountId) {
             setLoggedIn(true)
         }
     }, []);
