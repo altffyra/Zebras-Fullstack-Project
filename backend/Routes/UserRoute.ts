@@ -3,6 +3,7 @@ import { User, LoginCreds, Order } from "../lowDb/dbinterface";
 import db, { findUser, createAccount, findAccount, updateUser,getUsers } from "../lowDb/database.js";
 import { data as defaultData } from '../defaultData.js'
 import { isValidUser } from "../validators/validUser.js";
+import { uuid } from "uuidv4";
 const app = express();
 app.use(express.json());
 const userRoute = express.Router();
@@ -16,6 +17,14 @@ userRoute.post('/signup', async (req, res) => {
     const resObj = {
         success: true,
         userExist: false,
+        user: {
+            name: '',
+            email: '',
+            password: '',
+            phoneNumber: '',
+            accountId: '',
+            admin: false,
+        },
         message: `Konto skapat för: ${userData.name}`
     }
     if( !userData ) {
@@ -30,14 +39,16 @@ userRoute.post('/signup', async (req, res) => {
         if( resObj.userExist ) {
             resObj.success = false
         } else {
+            userData.accountId = uuid()
             createAccount(userData)
+            resObj.user = userData
         }
     }
         res.send(resObj)
 })
 
 // LOGIN
-userRoute.get('/login', async (req, res) => {
+userRoute.post('/login', async (req, res) => {
     if( !db.data ) {
         db.data = defaultData
   }
@@ -45,10 +56,15 @@ userRoute.get('/login', async (req, res) => {
 
     const resObj = {
         success: false,
-        user: '',
-        accountId: '',
-        userOrders: [],
-        message: 'No credentials'
+        user: {
+            name: '',
+            email: '',
+            password: '',
+            phoneNumber: '',
+            accountId: '',
+            admin: false,
+            message: 'No credentials'
+        },
     }
     console.log('userData: ', userData);
     
@@ -57,17 +73,21 @@ userRoute.get('/login', async (req, res) => {
     let account = foundAccount[0]
     if( foundAccount.length < 0) {
         resObj.success = false
-        resObj.message = `Account <${userData.name}> not found.`
+        resObj.user.message = `Account <${userData.name}> not found.`
     }
     if( foundAccount.length > 0 && foundAccount.length < 2) {
         if( userData.name === account.name && userData.password === account.password) {
             resObj.success = true
-            resObj.user = account.name
-            resObj.accountId = account.accountId
-            resObj.message = `${account.name} logged in!`
+            resObj.user.name = account.name
+            resObj.user.email = account.email
+            resObj.user.password = account.password
+            resObj.user.phoneNumber = account.phoneNumber
+            resObj.user.accountId = account.accountId
+            resObj.user.admin = account.admin
+            resObj.user.message = `${account.name} logged in!`
         } else {
             resObj.success = false
-            resObj.message = 'Failed to log in, check name and password'
+            resObj.user.message = 'Failed to log in, check name and password'
         }
     }
     console.log(resObj)

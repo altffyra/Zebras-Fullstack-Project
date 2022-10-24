@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { actions as userActions } from '../../features/userReducer'
 import { User } from '../../models/types';
 import '../../styles/_userForm.scss'
 import { v4 as uuid } from 'uuid';
@@ -8,23 +10,28 @@ import { v4 as uuid } from 'uuid';
 type Props = {}
 
 const SignUp = (props: Props) => {
+  const dispatch = useDispatch();
 
   const [userName, setUserName] = useState<string>('');
   const [userEmail, setUserEmail] = useState<string>('');
   const [userPhone, setUserPhone] = useState<string>('');
   const [userPassword, setUserPassword] = useState<string>('');
+  const [loading, setLoading] = useState(false)
+  const [alreadyExist, setAlreadyExist] = useState<boolean>(false)
 
   const navigate = useNavigate();
 
   const newUser: User = {
     name: userName,
     email: userEmail,
-    accountId: uuid(),
+    accountId: '',
     phoneNumber: userPhone,
     admin: false,
     password: userPassword
   }
   async function addUser() {
+    setLoading(true)
+    setAlreadyExist(false)
     const response = await fetch('http://localhost:8000/api/user/signup', {
       method: 'POST',
       body: JSON.stringify(newUser),
@@ -32,8 +39,17 @@ const SignUp = (props: Props) => {
     })
 
     const data = await response.json();
-    console.log(data)
-    navigate('/login')
+    if( data.success ) {
+      setLoading(false)
+      dispatch(userActions.setUser(data.user))
+      console.log(data)
+      localStorage.setItem('accountId', JSON.stringify(data.user.accountId))
+      navigate('/')
+    } else {
+      setLoading(false)
+      setAlreadyExist(true)
+
+    }
 
     
   }
@@ -64,7 +80,11 @@ const SignUp = (props: Props) => {
 
   return (
     <div className='userForm'>
-       <button className='smallBtn'>Tillbaka</button>
+      {loading ? 
+            <div className='loading'></div>
+            : ''
+        }
+       <button className='smallBtn' onClick={()=>navigate(-1)}>Tillbaka</button>
       <figure className='formLogo'></figure>
       <form>
         <label htmlFor="username">Användarnamn</label>
@@ -75,8 +95,12 @@ const SignUp = (props: Props) => {
         <input type="email" name="email" required onChange={(e)=>{handleEmail(e)}} />
         <label htmlFor="phonNumber">Telefonnummer</label>
         <input type="number" name="phoneNumber" required onChange={(e)=>{handlePhone(e)}} />
-        <button className='bigBtn' onClick={(e)=>{handleSubmit(e)}}>Skapa konto</button>
+        <button className='bigBtn signupBtn' onClick={(e)=>{handleSubmit(e)}}>Skapa konto</button>
       </form>
+      {alreadyExist ? 
+        <p>Konto finns redan</p>
+        : ''
+      }
 
     </div>
   )

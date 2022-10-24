@@ -3,8 +3,17 @@
 @use 'sass:color';
 
 .userForm {
-      @include variables.gridContainer(15);
-
+      // @include variables.gridContainer(15);
+      width: 80vw;
+      height: 100vh;
+      margin: 0 auto;
+      @include variables.flexContainer();
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      .loading {
+            @include variables.loader();
+      }
       .smallBtn {
             @include buttons.smallBtn();
             position: absolute;
@@ -13,25 +22,38 @@
       }
 
       .formLogo {
-            grid-area: 3 / 2 / 6 / 5;
+            // grid-area: 3 / 2 / 6 / 5;
+            width: 60%;
+            height: 19%;
+
             background-image: url('../assets/formLogo.svg');
-            background-size: cover;
+            
+            background-size:contain ;
             background-position: center;
             background-repeat: no-repeat;
+            border: none;
 
             box-shadow: variables.$boxShadow;
 
       }
-
-
             form {
-                  grid-area: 7 / 2 / 14 / 5;
+                  // grid-area: 7 / 2 / 14 / 5;
+
+
                   @include variables.flexContainer();
-                  gap: 1rem;
+                  label {
+                        margin-top: 1em
+                  }
                   .bigBtn {
                         @include buttons.bigBtn();
                         background-color: #377395;
-
+                        margin-top: 1em;
+                  }
+                  .loginBtn {
+                        background: variables.$acceptBtnGreen;
+                  }
+                  p {
+                        margin: 0 auto;
                   }
             }
 
