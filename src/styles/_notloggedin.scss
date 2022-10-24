@@ -7,43 +7,6 @@
     width: 100%;
 
     .flex-container {
-        
-        // @include variables.flexContainer();
-        // .form--name, .form--email {
-        //     position: relative;
-        //     display: flex;    
-        // }
-        
-        // .form__label {
-        //     position: absolute;
-        //     top: -15px;
-        //     // left: 5px;
-        //     font-size: 1.2rem;
-        //     font-weight: 400;
-        //     transition: all 0.5s;    
-        // }
-        
-        // .form__input {
-        //     width: 100%;
-        //     background: transparent;
-        //     border: none;
-        //     border-bottom: 2px solid black;
-        //     outline: none;
-        //     font-size: 1.2rem;
-        // }
-        
-        
-        // .form__input:focus {
-        //     border-color: rgb(0, 0, 0);
-        // }
-        
-        // .form__input:focus ~ .form__label,
-        // .form__input:not(:placeholder-shown)~ .form__label {
-        //     top: -20px;
-        //     left: 0;
-        //     font-size: 1rem;
-        //     color: rgb(0, 0, 0);
-        // }
 
         .form {
             @include variables.flexContainer();

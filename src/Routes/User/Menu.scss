@@ -78,6 +78,16 @@
             font-family: 'Roboto';
             margin: .5em 0 .5em 0;
         }
+
+        .tab-container {
+
+            .desc {
+                font-size: .9em;
+            }
+            .allergies {
+                font-size: .7em;
+            }
+        }
     
 
         .menu-item--info {
@@ -110,6 +120,7 @@
             .menu-item--img {
                 display: flex;
                 justify-content: center;
+                cursor: pointer;
             }
 
             .rotated {
@@ -180,5 +191,4 @@
         }
     }
 }
-
 

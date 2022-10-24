@@ -11,6 +11,10 @@
     margin: 0 auto;
     margin-top: 12vh;
 
+    .divider{
+        @include variables.divider
+    }
+
 
     .checkout-header--info {
         position: relative;
@@ -51,21 +55,25 @@
             flex-direction: row;
             justify-content: space-between;
             gap:1rem;
+
             .item-name {
-                width:50%;
-                font-size: 1.75rem;
+                font-size: 1.5rem;
+                flex: 3;
+
+            }
+            .item-amount {
+                font-size: 1.2em;
+                flex: 1;
             }
 
             .item-price {
                 text-align: right;
-                width: 50%;
-                font-size: 1.75rem;
+                font-size: 1.5rem;
+                flex: 1;
 
             }
         }
-            .divider{
-                @include variables.divider
-            }
+
 
         }
 
@@ -117,7 +125,7 @@
                 .Account-info-main{
                 width: 100%;
                 justify-content: flex-start;
-                font-size: 1.75rem;
+                font-size: 1.5rem;
                 padding:1rem 1rem 1rem 0.5rem;
 
                 .User-info{
@@ -135,7 +143,6 @@
         flex-direction: column;
         @include variables.sectionTop($bg: variables.$dropdownRed);
         margin-bottom: 3rem;
-        font-size: 1.75rem; 
 
 
                 .Comment-top{
@@ -150,7 +157,7 @@
             margin: 1rem;
             width:95%;
             height:12rem;
-            font-size: 2rem;
+            font-size: 1rem;
 
             
         }
