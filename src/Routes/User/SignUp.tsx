@@ -6,6 +6,7 @@ import { actions as userActions } from '../../features/userReducer'
 import { User } from '../../models/types';
 import '../../styles/_userForm.scss'
 import { v4 as uuid } from 'uuid';
+import formLogo from '../../assets/formLogo.svg'
 
 type Props = {}
 
@@ -85,16 +86,26 @@ const SignUp = (props: Props) => {
             : ''
         }
        <button className='smallBtn' onClick={()=>navigate(-1)}>Tillbaka</button>
-      <figure className='formLogo'></figure>
-      <form>
-        <label htmlFor="username">Användarnamn</label>
-        <input type="text" name='username' required onChange={(e)=> {handleName(e)}} />
-        <label htmlFor="password">Lösenord</label>
-        <input type="password" name="password" required onChange={(e)=>{handlePassword(e)}} />
-        <label htmlFor="email">Email</label>
-        <input type="email" name="email" required onChange={(e)=>{handleEmail(e)}} />
-        <label htmlFor="phonNumber">Telefonnummer</label>
-        <input type="number" name="phoneNumber" required onChange={(e)=>{handlePhone(e)}} />
+      <figure className='formLogo'>
+        <img src={ formLogo } alt="logo" />
+      </figure>
+      <form className='form'>
+        <div>
+          <label className='form__label' htmlFor="username">Användarnamn</label>
+          <input className='form__input' type="text" name='username' required onChange={(e)=> {handleName(e)}} />
+        </div>
+        <div>
+          <label className='form__label' htmlFor="password">Lösenord</label>
+          <input className='form__input' type="password" name="password" required onChange={(e)=>{handlePassword(e)}} />
+        </div>
+        <div>
+          <label className='form__label' htmlFor="email">Email</label>
+          <input className='form__input' type="email" name="email" required onChange={(e)=>{handleEmail(e)}} />
+        </div>
+        <div>
+          <label className='form__label' htmlFor="phonNumber">Telefonnummer</label>
+          <input className='form__input' type="number" name="phoneNumber" required onChange={(e)=>{handlePhone(e)}} />
+        </div>
         <button className='bigBtn signupBtn' onClick={(e)=>{handleSubmit(e)}}>Skapa konto</button>
       </form>
       {alreadyExist ? 

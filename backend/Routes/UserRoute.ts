@@ -55,7 +55,7 @@ userRoute.post('/login', async (req, res) => {
     const userData: LoginCreds = req.body
 
     const resObj = {
-        success: false,
+        success: true,
         user: {
             name: '',
             email: '',
@@ -63,37 +63,36 @@ userRoute.post('/login', async (req, res) => {
             phoneNumber: '',
             accountId: '',
             admin: false,
-            message: 'No credentials'
         },
+        message: 'No credentials'
     }
+
     console.log('userData: ', userData);
-    
     const foundAccount = await findAccount(userData)
-    console.log('account: ', foundAccount)
     let account = foundAccount[0]
+    console.log('account: ', account)
     if( foundAccount.length < 0) {
         resObj.success = false
-        resObj.user.message = `Account <${userData.name}> not found.`
+        resObj.message = `Account <${userData.name}> not found.`
     }
     if( foundAccount.length > 0 && foundAccount.length < 2) {
         if( userData.name === account.name && userData.password === account.password) {
             resObj.success = true
+
             resObj.user.name = account.name
             resObj.user.email = account.email
             resObj.user.password = account.password
             resObj.user.phoneNumber = account.phoneNumber
             resObj.user.accountId = account.accountId
             resObj.user.admin = account.admin
-            resObj.user.message = `${account.name} logged in!`
+            resObj.message = `${account.name} logged in!`
         } else {
             resObj.success = false
-            resObj.user.message = 'Failed to log in, check name and password'
+            resObj.message = 'Failed to log in, check name and password'
         }
+        console.log(resObj)
     }
-    console.log(resObj)
     res.json(resObj)
-    
-
 })
 
 // UPDATE USER

@@ -3,7 +3,6 @@
 @use 'sass:color';
 
 .userForm {
-      // @include variables.gridContainer(15);
       width: 80vw;
       height: 100vh;
       margin: 0 auto;
@@ -20,42 +19,68 @@
             top: 1rem;
             left: 1rem;
       }
-
       .formLogo {
-            // grid-area: 3 / 2 / 6 / 5;
-            width: 60%;
-            height: 19%;
-
-            background-image: url('../assets/formLogo.svg');
             
-            background-size:contain ;
-            background-position: center;
-            background-repeat: no-repeat;
-            border: none;
+            img {
+                  width: 100%;
+                  height: 100%;
+            }
+            // background-image: url('../assets/formLogo.svg');
+            
+            // background-size:contain ;
+            // background-position: center;
+            // background-repeat: no-repeat;
+
 
             box-shadow: variables.$boxShadow;
 
       }
-            form {
-                  // grid-area: 7 / 2 / 14 / 5;
-
-
+            .form {
                   @include variables.flexContainer();
-                  label {
-                        margin-top: 1em
+                  align-items: center;
+                  justify-items: center;
+                  gap: 3em;
+                  .form--name, .form--email {
+                      position: relative;
+                      display: flex;    
                   }
-                  .bigBtn {
-                        @include buttons.bigBtn();
-                        background-color: #377395;
-                        margin-top: 1em;
+                  
+                  .form__label {
+                      position: absolute;
+                      top: -15px;
+                      // left: 5px;
+                      font-size: 1.2rem;
+                      font-weight: 400;
+                      transition: all 0.5s;    
                   }
-                  .loginBtn {
-                        background: variables.$acceptBtnGreen;
+                  
+                  .form__input {
+                      width: 100%;
+                      background: transparent;
+                      border: none;
+                      border-bottom: 2px solid black;
+                      outline: none;
+                      font-size: 1.2rem;
                   }
-                  p {
-                        margin: 0 auto;
+                  
+                  
+                  .form__input:focus {
+                      border-color: rgb(0, 0, 0);
                   }
+                  
+                  .form__input:focus ~ .form__label,
+                  .form__input:not(:placeholder-shown)~ .form__label {
+                      top: -20px;
+                      left: 0;
+                      font-size: 1rem;
+                      color: rgb(0, 0, 0);
+                  }
+                  & > div {
+                        @include variables.flexContainer();
+                        align-items: center;
+                        position: relative;
+                        
+                    }
             }
-
 
 }

@@ -122,6 +122,7 @@ export async function findAccount(userData:LoginCreds) {
       db.data = defaultData
       }
       let filterAccount = db.data.users.filter((user)=> user.name === userData.name && user.password === userData.password)
+      console.log('filterAccount: ', filterAccount)
       return filterAccount
 }
 

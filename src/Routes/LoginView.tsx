@@ -14,7 +14,6 @@ import { User } from '../models/types'
     const [userName, setUserName] = useState<string>('')
     const [userPassword, setUserPassword] = useState<string>('')
 
-
     const navigate = useNavigate()
 
 
@@ -40,7 +39,9 @@ import { User } from '../models/types'
             if( data.user.admin) {
               navigate('/AdminPage')
             }
-            navigate('/')
+      } else {
+        setLoading(false)
+        
       }
 
     }
@@ -68,7 +69,7 @@ import { User } from '../models/types'
         }
        <button className='smallBtn' onClick={()=>navigate(-1)}>Tillbaka</button>
       <figure className='formLogo'></figure>
-      <form>
+      <form className='form'>
         <label htmlFor="username">Användarnamn</label>
         <input type="text" name='username' required onChange={(e)=> {handleName(e)}} />
         <label htmlFor="password">Lösenord</label>
