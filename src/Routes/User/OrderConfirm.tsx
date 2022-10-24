@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { actions as cartActions } from '../../features/cartReducer';
+import { actions as tempOrderActions } from '../../features/tempOrderReducer';
 
 const OrderConfirm = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,8 @@ const OrderConfirm = () => {
 
   const changeOrder: () => void = () => {
     dispatch(cartActions.changeOrder(confirmedOrder.cart));
-    navigate('/checkout');
+    dispatch(tempOrderActions.setTempOrder(confirmedOrder))
+    navigate('/menu');
   }
   
   return (
