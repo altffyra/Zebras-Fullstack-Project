@@ -33,7 +33,7 @@ const LandingView = (props: Props) => {
     <main className='landing'>
       <Nav />
       <section className='hero'>
-        <button onClick={goToMenu}>FOOD</button>
+        <button onClick={goToMenu}>MENY</button>
       </section>
 
       <section className='about-us'>

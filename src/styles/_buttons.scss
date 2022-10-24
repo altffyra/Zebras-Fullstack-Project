@@ -2,7 +2,7 @@
 @use 'sass:color';
 
 @mixin smallBtn($pad: .5em 1em, $bg: variables.$primaryBackground) {
-      border: 1px solid black;
+      border: 1.5px solid black;
       padding: $pad;
       border-radius: 4px;
       background: $bg;
