@@ -24,7 +24,7 @@
         margin: 0 1em;
         @include variables.flexContainer();
         background-color: variables.$darkRed;     
-        
+        box-shadow: variables.$boxShadow;
         .user-headline {
             align-self: center;
             padding: 1em;

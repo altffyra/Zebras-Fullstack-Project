@@ -34,6 +34,9 @@ const OrderConfirm = () => {
         <div className='headline'>
           <h1>Orderbekräftelse</h1>
         </div>
+        <div className='time-container'>
+          <p>Maten klar att hämtas : Kl. {orderDone}</p>
+        </div>
 
         <div className="order-user">
           <p className='user-headline'>Beställare</p>
@@ -44,9 +47,6 @@ const OrderConfirm = () => {
           </div>
         </div>
         
-        <div className='time-container'>
-          <p>Maten klar att hämtas : Kl. {orderDone}</p>
-        </div>
         
         <div className='order-cart'>
           <div className='order-header'>
