@@ -3,9 +3,10 @@ import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { actions as userActions } from '../features/userReducer'
 import { useSelector, useDispatch } from 'react-redux';
-import { User } from '../models/types'
-
-
+import { User, Order } from '../models/types'
+import { RootState } from '../store';
+import { actions as tempOrderActions } from '../features/tempOrderReducer';
+import { actions as cartActions } from '../features/cartReducer';
 
   const LoginView = () => {
     const dispatch = useDispatch();
@@ -16,7 +17,14 @@ import { User } from '../models/types'
 
 
     const navigate = useNavigate()
-
+    
+    const tempOrder: Order | undefined =  useSelector((state: RootState) => state.tempOrder)[0];
+    useEffect(() => {
+      if(tempOrder) {
+        dispatch(tempOrderActions.clearTempOrder());
+        dispatch(cartActions.clearCart())
+      }
+    }, [])
 
     async function userLogin() {
       setLoading(true)

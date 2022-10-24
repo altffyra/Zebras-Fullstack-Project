@@ -10,22 +10,25 @@ import { useEffect, useState } from 'react';
 import { User, Order } from '../../models/types';
 import {actions as orderActions} from '../../features/orderReducer';
 import { actions as tempOrderActions } from '../../features/tempOrderReducer';
-
+import { actions as cartActions } from '../../features/cartReducer';
 
 const Account = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(false);
-  
+
+  const tempOrder: Order | undefined =  useSelector((state: RootState) => state.tempOrder)[0];
   useEffect(() => {
-    dispatch(tempOrderActions.clearTempOrder());
+    if(tempOrder) {
+      dispatch(tempOrderActions.clearTempOrder());
+      dispatch(cartActions.clearCart())
+    }
     const accountId: string | null = localStorage.getItem('accountId');
-    console.log(accountId);
-    
+   
     if(accountId) {
       getOrder(accountId)
     } else {
-      // navigate('/');
+      navigate('/');
     }
   }, [])
 
