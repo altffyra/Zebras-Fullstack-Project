@@ -9,6 +9,8 @@ import { RootState } from '../../store';
 import { useEffect, useState } from 'react';
 import { User, Order } from '../../models/types';
 import {actions as orderActions} from '../../features/orderReducer';
+import { actions as tempOrderActions } from '../../features/tempOrderReducer';
+
 
 const Account = () => {
   const navigate = useNavigate();
@@ -16,6 +18,7 @@ const Account = () => {
   const [loading, setLoading] = useState<boolean>(false);
   
   useEffect(() => {
+    dispatch(tempOrderActions.clearTempOrder());
     const accountId: string | null = localStorage.getItem('accountId');
     if(accountId) {
       getOrder(accountId)
@@ -31,6 +34,11 @@ const Account = () => {
     dispatch(orderActions.getOrders(data));
     setLoading(false)
   }
+
+const handleLogout: () => void = () => {
+    localStorage.removeItem('accountId')
+    navigate('/menu')
+}
     
   
   
@@ -44,6 +52,7 @@ const Account = () => {
             <div className='loading'></div>
             : ''
         }
+      <button className='btn-logout' onClick={handleLogout}>Logga ut</button>
       <div className="headline">
           <h1>Konto</h1>
       </div>
