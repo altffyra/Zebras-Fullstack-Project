@@ -11,12 +11,11 @@ div .menu-wrapper {
     }
 
     .menu-header--category {
-        padding-left: 17em;
         max-width: 100vw;
         display: flex;
         justify-content: space-evenly;
         box-shadow: 0 .25em .25em rgba(0, 0, 0, 0.25);
-        overflow-x: auto;
+
     }
 
     h1 {
@@ -157,8 +156,7 @@ div .menu-wrapper {
             width: 90%;
     
             .menu-header--category {
-                padding-left: 0;
-                overflow-x: hidden;
+
 
                 & > h2 {
                     cursor: pointer;
