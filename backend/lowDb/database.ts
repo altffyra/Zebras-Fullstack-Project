@@ -75,15 +75,19 @@ async function updateOrder(updatedOrder: Order, id:number) {
 }
 
 async function authenticateLogin(ID:any){
+      
     if(!db.data) {
         db.data = defaultData
     }
+
     const authreply:User[] = await db.data.users
-    let filter = authreply.find((user:User) => user.accountId == ID.accountID);
-    if (filter != undefined && filter.admin == true)
-    return authreply
-    else
-    return []
+    let filter: User[] = authreply.filter((user:User) => user.accountId == ID);
+
+    if (filter != undefined && filter[0].admin == true) {
+      return filter;
+    } else {
+      return [];
+    }
 }
 
 // // USER FUNCTIONS
@@ -165,6 +169,28 @@ export async function updateUser(accountId:string, updatedUser:User) {
       db.data.users[userIndex] = updatedUser; 
       await db.write()
       return true
+}
+
+export async function checkLock(orderId: string) {
+
+      if( !db.data ) {
+            db.data = defaultData
+      }
+
+      const filterOrders: Order[] = [...db.data.orders];
+      const foundOrder: Order[] = filterOrders.filter(order => order.id == orderId)
+      const orderIndex: number = db.data.orders.findIndex(order => order.id == orderId)
+
+      console.log(orderIndex);
+
+      if (foundOrder.length === 0 && foundOrder[0].locked === true) {
+            return
+      }
+
+      db.data.orders[orderIndex].locked = true;
+      db.write();
+      return foundOrder[0];
+
 }
 
 

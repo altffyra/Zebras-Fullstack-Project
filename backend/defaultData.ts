@@ -30,7 +30,7 @@ export const data: Schema = {
                   "email": "ricky@rickshaw.se",
                   "accountId": "4859",
                   "phoneNumber": "070000004",
-                  "admin": false,
+                  "admin": true,
                   "password": ""
             },
             {
