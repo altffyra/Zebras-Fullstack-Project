@@ -20,6 +20,25 @@
         box-shadow: variables.$boxShadow;
     }
 
+    .order-user {
+        margin: 0 1em;
+        @include variables.flexContainer();
+        background-color: variables.$darkRed;     
+        
+        .user-headline {
+            align-self: center;
+            padding: 1em;
+            font-weight: 700;
+        }
+
+        .user {
+            background-color: variables.$dropdownRed;     
+            @include variables.flexContainer();
+            gap: 1em;
+            padding: 1em;       
+        }
+    }
+
     .order-cart {
         @include variables.flexContainer();
         background-color: variables.$dropdownRed;

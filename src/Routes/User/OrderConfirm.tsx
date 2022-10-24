@@ -34,6 +34,15 @@ const OrderConfirm = () => {
         <div className='headline'>
           <h1>Orderbekräftelse</h1>
         </div>
+
+        <div className="order-user">
+          <p className='user-headline'>Beställare</p>
+          <div className="user">
+            <p>Namn : {confirmedOrder.user.name}</p>
+            <p>Email : {confirmedOrder.user.email}</p>
+            <p>Tel.nr : {confirmedOrder.user.phoneNumber}</p>
+          </div>
+        </div>
         
         <div className='time-container'>
           <p>Maten klar att hämtas : Kl. {orderDone}</p>
