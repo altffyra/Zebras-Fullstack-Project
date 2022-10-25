@@ -153,10 +153,7 @@ export async function createOrder(orderData: Order) {
 }
 
 export async function getUser(accountId: string) {
-      
-}
-
-export async function updateUser(accountId:string, updatedUser:User) {
+      await db.read()
       if( !db.data ) {
             db.data = defaultData
       }
@@ -165,7 +162,21 @@ export async function updateUser(accountId:string, updatedUser:User) {
       if(userIndex == -1) {
             return false
       }
+      return db.data.users[userIndex]
+}
+
+export async function updateUser(accountId:string, updatedUser:User) {
+      if( !db.data ) {
+            db.data = defaultData
+      }
+      const userIndex: number = db.data.users.findIndex(user => user.accountId === accountId)
+      if(userIndex == -1) {
+            return false
+      }
       
+      if(!updatedUser.password) {
+            updatedUser.password = db.data.users[userIndex].password
+      }
       db.data.users[userIndex] = updatedUser; 
       await db.write()
       return true

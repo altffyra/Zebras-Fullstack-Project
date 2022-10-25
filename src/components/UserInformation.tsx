@@ -1,7 +1,7 @@
 import '../styles/_userInformation.scss';
 import { useDispatch } from 'react-redux';
 import { User } from '../models/types';
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import {actions as userActions} from '../features/userReducer';
 
 type UserInformationProps = {
@@ -10,13 +10,22 @@ type UserInformationProps = {
 
 const UserInformation = (props: UserInformationProps) => {
     const dispatch = useDispatch();
-
     const [update, setUpdate] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
-    const [userName, setUserName] = useState<string>(props.user.name);
-    const [userEmail, setUserEmail] = useState<string>(props.user.email);
-    const [userPhone, setUserPhone] = useState<string>(props.user.phoneNumber);
+    const [userName, setUserName] = useState<string>('');
+    const [userEmail, setUserEmail] = useState<string>('');
+    const [userPhone, setUserPhone] = useState<string>('');
+    const [oldPassword, setOldPassword] = useState<string>('');
+    const [newPassword, setnewPassword] = useState<string>('');
+    const [passwordError, setPasswordError] = useState<boolean>(false)
 
+    useEffect(() => {
+        if(props.user) {
+            setUserName(props.user.name)
+            setUserEmail(props.user.email)
+            setUserPhone(props.user.phoneNumber)
+        }
+    }, [props.user])
 
     const handleUpdate: () => void = () => {
         setUpdate(true);
@@ -28,16 +37,30 @@ const UserInformation = (props: UserInformationProps) => {
     }
 
     async function updateUser() {
-
-        setLoading(true);
+        setPasswordError(false)      
+        
         const updatedUser: User = {
             name: userName,
             email: userEmail,
             phoneNumber : userPhone,
             accountId : props.user.accountId,
         };
+        console.log('Old pw ' +oldPassword);
+        console.log(props.user.password);
+        console.log('New pw ' + newPassword);
+        
 
-
+        if(newPassword.length > 0) {
+            updatedUser.password = newPassword
+            if(oldPassword != props.user.password) {
+                setPasswordError(true)
+                return
+            }
+        } 
+        
+        
+        
+        setLoading(true);
         const response = await fetch(`/api/user/${props.user.accountId}`, {
             method: 'PUT',
             body: JSON.stringify(updatedUser),
@@ -64,8 +87,20 @@ const UserInformation = (props: UserInformationProps) => {
         setUserPhone(e.target.value);
     };
 
+    const handleOldPassword: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
+        setOldPassword(e.target.value);
+    };
+    const handleNewPassword: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
+        setnewPassword(e.target.value);
+    };
     const handleCancel: (e:FormEvent) => void = (e) => {
         e.preventDefault();
+        setUserName(props.user.name)
+        setUserEmail(props.user.email)
+        setUserPhone(props.user.phoneNumber)
+        setnewPassword('')
+        setOldPassword('')
+        setPasswordError(false)
         setUpdate(false);
     };
 
@@ -75,7 +110,13 @@ const UserInformation = (props: UserInformationProps) => {
             <div className='loading'></div>
             : ''
         }
+        <div className='headline-user'>
         <h2>Mina Uppgifter</h2>
+            {passwordError ?
+                <p className='wrong-password'>Fel gammalt lösenord</p>
+                : ''
+            }
+        </div>
         {!update 
             ?
             <section className='user-container'>
@@ -107,6 +148,14 @@ const UserInformation = (props: UserInformationProps) => {
                 <div className='user-info'>
                     <label htmlFor="username">Tel.nr : </label>
                     <input type="number" name="phonenum" id="phonenum" defaultValue={props.user.phoneNumber} onChange={(e) => handlePhone(e)} />
+                </div>
+                <div className='user-info'>
+                    <label htmlFor="oldpw">Gammalt Lösen : </label>
+                    <input type="text" name="oldpw" id="oldpw" onChange={(e) => handleOldPassword(e)} />
+                </div>
+                <div className='user-info'>
+                    <label htmlFor="oldpw">Nytt Lösen : </label>
+                    <input type="text" name="newpw" id="newpw" onChange={(e) => handleNewPassword(e)} />
                 </div>
                 <div className="button-container">
                     <button className='cancel-btn' onClick={(e) => handleCancel(e)}>Avbryt</button>

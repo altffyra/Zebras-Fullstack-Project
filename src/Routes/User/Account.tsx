@@ -34,11 +34,18 @@ const Account = () => {
   }, [])
 
   async function getOrder(accountId:string) {
-    setLoading(true)
-    const response = await fetch(`/api/order/user/${accountId}`);
-    const data = await response.json();      
+    setLoading(true)    
+    const orderResponse = await fetch(`/api/order/user/${accountId}`);
+    const orderData = await orderResponse.json();   
+       
+    if(!user) {
+      const userResponse = await fetch(`/api/user/${accountId}`);
+      const userData = await userResponse.json();      
+      dispatch(userActions.setUser(userData))
+    } 
     
-    dispatch(orderActions.getOrders(data));
+    dispatch(orderActions.getOrders(orderData));
+        
     setLoading(false)
   }
 
