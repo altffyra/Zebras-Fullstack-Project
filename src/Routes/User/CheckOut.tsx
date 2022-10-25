@@ -18,7 +18,7 @@ const CheckOut = (props: Props) => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [userMessage, setMessage] = useState<string>();
+  const [userMessage, setMessage] = useState<string>("");
   const [orderLocked, setOrderLocked] = useState<boolean>(false);
 
   const user: User = useSelector((state: RootState) => state.user);
@@ -45,12 +45,17 @@ const CheckOut = (props: Props) => {
   })
  
 const orderCheck:Boolean =  tempOrder.length> 0 ? true :false 
-
+let orderDefault:string |undefined = ""
 useEffect(() => {
   if(orderCheck){
     setUser(tempOrder[0].user)
+    if (tempOrder[0].userComment)
+    {
+      setMessage(tempOrder[0].userComment)
+    }
   } else {
     setUser(user)
+
   }
 
 }, [])
@@ -187,6 +192,7 @@ async function updateOrder() {
             onChange={(e) => changeMessages(e)}
             className="input-comment"
             placeholder="Är det något vi behöver veta? Här kan du lämna en kommentar till personalen."
+            value= {userMessage}
           ></textarea>
         </div>
         <div className="buttonsDiv">
