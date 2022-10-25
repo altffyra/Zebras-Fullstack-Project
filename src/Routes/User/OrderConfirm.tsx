@@ -2,7 +2,7 @@ import '../../styles/_orderConfirm.scss';
 import Nav from '../../components/Nav';
 import OrderItems from '../../components/OrderItems';
 import { Order } from '../../models/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
@@ -13,8 +13,14 @@ const OrderConfirm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
   const [loading, setLoading] = useState<boolean>(false);
+  useEffect(() => {
+    dispatch(cartActions.clearCart())
+  }, [])
 
   const confirmedOrder: Order = useSelector((state: RootState) => state.orders)[0];
+  const qwe: Order[] = useSelector((state: RootState) => state.orders)
+  console.log(qwe);
+  
   const orderItemsEl = confirmedOrder.cart.cartItems.map(item => <OrderItems item={item} key={item.name} />)
   const orderDone:string | undefined = confirmedOrder.orderCompleted?.slice(10)
 

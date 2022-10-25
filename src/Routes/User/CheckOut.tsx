@@ -19,6 +19,8 @@ const CheckOut = (props: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const [userMessage, setMessage] = useState<string>();
+  const [orderLocked, setOrderLocked] = useState<boolean>(false);
+
   const user: User = useSelector((state: RootState) => state.user);
   const cart: CartProps = useSelector((state: RootState) => state.cart);
   const tempOrder: Order[] = useSelector((state: RootState) => state.tempOrder);
@@ -41,11 +43,14 @@ const CheckOut = (props: Props) => {
     phoneNumber: user.phoneNumber,
     accountId:user.accountId
   })
-
+ 
+const orderCheck:Boolean =  tempOrder.length> 0 ? true :false 
 
 useEffect(() => {
   if(orderCheck){
     setUser(tempOrder[0].user)
+  } else {
+    setUser(user)
   }
 
 }, [])
@@ -53,7 +58,7 @@ useEffect(() => {
 
 
 async function updateOrder() {
-
+  setOrderLocked(false)
 
 
   const updatedOrder:Order = {
@@ -66,7 +71,7 @@ async function updateOrder() {
     adminComment: tempOrder[0].adminComment,
     locked: tempOrder[0].locked,
     completed: tempOrder[0].completed
-  }
+  }   
     const tempOrderId = tempOrder[0].id
     const response = await fetch(`/api/order/${tempOrderId}`, {
       method: "PUT",
@@ -77,13 +82,17 @@ async function updateOrder() {
     });
     console.log(response)
     const datasave = await response.json();
-    if (datasave.locked = true){
+    console.log(datasave.locked);
+    if (datasave.locked){
       
+      setOrderLocked(true)
+      
+    } else {
+      console.log('RÄTT');
+      dispatch(orderActions.makeOrders(datasave));
+      navigate("/OrderConfirm");
 
-    } else
-
-    dispatch(orderActions.makeOrders(datasave));
-    navigate("/OrderConfirm");
+    }
   
 }
 
@@ -104,6 +113,8 @@ async function updateOrder() {
         body: JSON.stringify(data),
       });
       const datasave = await response.json();
+      console.log(datasave.user);
+      
       dispatch(orderActions.makeOrders(datasave));
       navigate("/OrderConfirm");
 
@@ -116,9 +127,8 @@ async function updateOrder() {
       ...userCredentials,
       [e.target.name]: e.target.value
      
-    })
+    })      
   }
- const orderCheck:Boolean =  tempOrder.length> 0 ? true :false 
 
   function changeMessages(e: React.ChangeEvent<HTMLTextAreaElement>) {
     setMessage(e.target.value);
@@ -199,6 +209,10 @@ async function updateOrder() {
   return (
     <main>
       <Nav />
+      {orderLocked ?
+        <p>DEN ÄR LÅST HAHAHAH too slow</p>
+        : ''
+      }
       <div className="checkout-wrapper">
         <figure className="checkout-header--info">
           <img src={mainmeal} alt="" />
