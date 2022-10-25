@@ -44,7 +44,7 @@ const SignUp = (props: Props) => {
       dispatch(userActions.setUser(data.user))
       console.log(data)
       localStorage.setItem('accountId', (data.user.accountId))
-      navigate('/')
+      navigate('/Menu')
     } else {
       setLoading(false)
       setAlreadyExist(true)

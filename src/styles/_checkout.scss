@@ -10,35 +10,25 @@
     max-width: 90vw;
     margin: 0 auto;
     margin-top: 12vh;
+    gap:2em;
 
     .divider{
         @include variables.divider
     }
 
 
-    .checkout-header--info {
-        position: relative;
-        @include variables.flexBox($justify: center, $align: center);
-        padding:0 0rem 1rem 0rem;
-        img {
-            width: 100%;
-        }
-    
             .checkout-header--text {
-                padding: 0em 1em;
-                position: absolute;
-                background-color: variables.$yellowSenap;
+
+               @include  variables.headerTitle();
                 
         
             }
         
-    }
 
     .current-order{
         @include variables.flexBox;
         flex-direction: column;
         @include variables.sectionTop($bg: variables.$dropdownRed);
-        margin-bottom: 3rem;
 
         .order-top{
             width:100%;
@@ -111,7 +101,7 @@
                 @include variables.flexBox;
                 flex-direction: column;
                 @include variables.sectionTop($bg: variables.$dropdownRed);
-                margin-bottom: 3rem;
+                margin-bottom: 2rem;
                 font-size: 1.75rem; 
 
                 .Account-top{
@@ -123,13 +113,17 @@
                     
                 }
                 .Account-info-main{
+
                 width: 100%;
-                justify-content: flex-start;
                 font-size: 1.5rem;
                 padding:1rem 1rem 1rem 0.5rem;
 
                 .User-info{
+                    @include variables.flexBox;
                     padding:1rem;
+                    justify-content: space-between;
+                    width: 100%;
+                    align-self: flex-end;
                 }
 
                 }

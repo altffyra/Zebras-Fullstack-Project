@@ -167,7 +167,7 @@ async function updateOrder(e:FormEvent) {
             <div className="divider"></div>
             <p className="User-info">E-post: <input name="email" value={userCredentials.email} required onChange={(e) => changeCredentials(e)}></input></p>
             <div className="divider"></div>
-            <p className="User-info">Telefonnummer: <input type="number" name="phoneNumber" required value={userCredentials.phoneNumber} onChange={(e) => changeCredentials(e)}></input></p>
+            <p className="User-info">Tel.nr: <input type="number" name="phoneNumber" required value={userCredentials.phoneNumber} onChange={(e) => changeCredentials(e)}></input></p>
           </div>
         </div>
         <div className="Comment-wrapper">
@@ -201,13 +201,11 @@ async function updateOrder(e:FormEvent) {
         : ''
       }
       <div className="checkout-wrapper">
-        <figure className="checkout-header--info">
-          <img src={mainmeal} alt="" />
-
-          <section className="checkout-header--text">
+        
+              <section className="checkout-header--text" style= {{"backgroundImage": `url(${mainmeal})`}}>
             <h1>Kassa</h1>
           </section>
-        </figure>
+      
 
         <section className="current-order">
           <section className="order-top"> Order</section>
