@@ -179,7 +179,6 @@ async function updateOrder(e:FormEvent) {
             value={userMessage}
             className="input-comment"
             placeholder="Är det något vi behöver veta? Här kan du lämna en kommentar till personalen."
-            value= {userMessage}
           ></textarea>
         </div>
         <div className="buttonsDiv">
