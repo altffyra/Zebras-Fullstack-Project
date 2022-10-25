@@ -37,6 +37,7 @@ const Account = () => {
     setLoading(true)
     const response = await fetch(`/api/order/user/${accountId}`);
     const data = await response.json();      
+    
     dispatch(orderActions.getOrders(data));
     setLoading(false)
   }

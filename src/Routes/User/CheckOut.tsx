@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState , useEffect } from "react";
+import React, { ChangeEvent, useState , useEffect, FormEventHandler, FormEvent } from "react";
 import Nav from "../../components/Nav";
 import mainmeal from "../../assets/menu/mainmeal.svg";
 import "../../styles/_checkout.scss";
@@ -48,6 +48,7 @@ const orderCheck:Boolean =  tempOrder.length> 0 ? true :false
 let orderDefault:string |undefined = ""
 useEffect(() => {
   if(orderCheck){
+    
     setUser(tempOrder[0].user)
     if (tempOrder[0].userComment)
     {
@@ -64,10 +65,13 @@ console.log(user);
 
 
 
-async function updateOrder() {
+async function updateOrder(e:FormEvent) {
+  e.preventDefault();
   setOrderLocked(false)
 
-
+  if(userCredentials.name.length < 1 || userCredentials.email.length < 1 || userCredentials.phoneNumber.length < 1) {
+    return
+  }
   const updatedOrder:Order = {
     cart: cart,
     user: userCredentials,
@@ -102,8 +106,11 @@ async function updateOrder() {
   
 }
 
-  async function sendOrder() {
-
+  async function sendOrder(e:FormEvent) {
+    e.preventDefault();
+    if(userCredentials.name.length < 1 || userCredentials.email.length < 1 || userCredentials.phoneNumber.length < 1) {
+      return
+    }
       let data = {
         cart: cart,
         user: userCredentials,
@@ -146,42 +153,21 @@ async function updateOrder() {
     navigate("/Menu")
   }
 
-
-
- const nameCheck =  orderCheck? (<div className="Account-info-main">
-            <p className="User-info">Namn: <input name="name" defaultValue={tempOrder[0].user.name} onChange={(e) => changeCredentials(e)}></input></p>
-            <div className="divider"></div>
-            <p className="User-info">E-post: <input name="email" defaultValue={tempOrder[0].user.email} onChange={(e) => changeCredentials(e)}></input></p>
-            <div className="divider"></div>
-            <p className="User-info">Telefonnummer: <input type="number" name="phoneNumber" defaultValue={tempOrder[0].user.phoneNumber} onChange={(e) => changeCredentials(e)}></input></p>
-          </div>) : (<div className="Account-info-main">
-            <p className="User-info">Namn: <input name="name" defaultValue={user.name} onChange={(e) => changeCredentials(e)}></input></p>
-            <div className="divider"></div>
-            <p className="User-info">E-post: <input name="email" defaultValue={user.email} onChange={(e) => changeCredentials(e)}></input></p>
-            <div className="divider"></div>
-            <p className="User-info">Telefonnummer: <input type="number" name="phoneNumber" defaultValue={user.phoneNumber} onChange={(e) => changeCredentials(e)}></input></p>
-          </div>)
-
-
-
-
-
-
   const notLoggedInElem =
     user.accountId == "" ? (
       <NotLoggedIn setUser={setUser} />
     ) : (
-      <div className="LoggedIn">
+      <form className="LoggedIn">
         <div className="Account-info">
           <div className="Account-top">
             <p className="Account-top-p">Mina uppgifter</p>
           </div>
           <div className="Account-info-main">
-            <p className="User-info">Namn: <input name="name" value={userCredentials.name} onChange={(e) => changeCredentials(e)}></input></p>
+            <p className="User-info">Namn: <input name="name" value={userCredentials.name} required onChange={(e) => changeCredentials(e)}></input></p>
             <div className="divider"></div>
-            <p className="User-info">E-post: <input name="email" value={userCredentials.email} onChange={(e) => changeCredentials(e)}></input></p>
+            <p className="User-info">E-post: <input name="email" value={userCredentials.email} required onChange={(e) => changeCredentials(e)}></input></p>
             <div className="divider"></div>
-            <p className="User-info">Telefonnummer: <input type="number" name="phoneNumber" value={userCredentials.phoneNumber} onChange={(e) => changeCredentials(e)}></input></p>
+            <p className="User-info">Telefonnummer: <input type="number" name="phoneNumber" required value={userCredentials.phoneNumber} onChange={(e) => changeCredentials(e)}></input></p>
           </div>
         </div>
         <div className="Comment-wrapper">
@@ -190,21 +176,22 @@ async function updateOrder() {
           </div>
           <textarea
             onChange={(e) => changeMessages(e)}
+            value={userMessage}
             className="input-comment"
             placeholder="Är det något vi behöver veta? Här kan du lämna en kommentar till personalen."
             value= {userMessage}
           ></textarea>
         </div>
         <div className="buttonsDiv">
-          <button onClick={backBtn} className="back-btn">Tillbaka </button>
+          <button type="submit" onClick={backBtn} className="back-btn">Tillbaka </button>
           { orderCheck? (<button onClick={updateOrder} className="order-btn">
             Updatera{" "}
-          </button>): <button onClick={sendOrder} className="order-btn">
+          </button>): <button type="submit" onClick={sendOrder} className="order-btn">
             Beställ{" "}
           </button> } 
 
         </div>
-      </div>
+      </form>
     );
 
   return (
