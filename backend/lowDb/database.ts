@@ -5,6 +5,8 @@ import { User, Schema, Order, LoginCreds } from './dbinterface';
 import { data as defaultData } from '../defaultData.js';
 import dayjs from 'dayjs';
 import { uuid } from 'uuidv4';
+import ShortUniqueId from 'short-unique-id';
+const uid = new ShortUniqueId({ length: 8 });
 
 
 export const started = dayjs().format('YYYY-MM-DD HH:mm');
@@ -196,7 +198,7 @@ export async function createOrderInfo() {
       const orderInfo = {
             started: started,
             completed: dayjs().add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm'),
-            id: uuid()
+            id: uid()
       }
 
       return orderInfo
