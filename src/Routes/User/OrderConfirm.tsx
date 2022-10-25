@@ -29,13 +29,6 @@ const OrderConfirm = () => {
     dispatch(tempOrderActions.setTempOrder(confirmedOrder))
     navigate('/menu');
   }
-
-  let orderId = confirmedOrder.id;
-  let indexDash = orderId?.indexOf('-');
-  
-  if(indexDash != -1) {    
-    orderId = orderId?.slice(0, indexDash)
-  }
   
   return (
     <section className="confirmed">
@@ -63,7 +56,7 @@ const OrderConfirm = () => {
         
         <div className='order-cart'>
           <div className='order-header'>
-            <p className='order-title'>Order {orderId}</p>
+            <p className='order-title'>Order {confirmedOrder.id}</p>
             <div className='list-titles'>
               <p>Rätt</p>
               <p>Antal</p>
