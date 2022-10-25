@@ -45,10 +45,7 @@ const UserInformation = (props: UserInformationProps) => {
             phoneNumber : userPhone,
             accountId : props.user.accountId,
         };
-        console.log('Old pw ' +oldPassword);
-        console.log(props.user.password);
-        console.log('New pw ' + newPassword);
-        
+       
 
         if(newPassword.length > 0) {
             updatedUser.password = newPassword
@@ -56,9 +53,7 @@ const UserInformation = (props: UserInformationProps) => {
                 setPasswordError(true)
                 return
             }
-        } 
-        
-        
+        }
         
         setLoading(true);
         const response = await fetch(`/api/user/${props.user.accountId}`, {
