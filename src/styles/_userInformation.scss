@@ -5,13 +5,26 @@
     .loading {
         @include variables.loader();
     }
-    h2 {
-        text-align: center;
-        margin: 1em 0;
+
+    .headline-user {
+        position: relative;
+
+        h2 {
+            text-align: center;
+            margin: 1em 0;
+        }
+        .wrong-password {
+            position: absolute;
+            left : 0;
+            bottom: -1.5em;
+            color: variables.$dropdownRed;
+            font-size: 0.8em;
+        }
     }
     input {
         outline: none;
         border: none;
+        box-shadow: variables.$boxShadow;
     }
     .user-container {
         @include variables.flexContainer();
@@ -29,6 +42,7 @@
             @include variables.flexContainer(row);
             justify-content: space-between;
             gap: 2em;
+            margin-top: 1em;
             button {
                 flex: 1;
             }

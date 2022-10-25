@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
 import { User, LoginCreds, Order } from "../lowDb/dbinterface";
-import db, { findUser, createAccount, findAccount, updateUser,getUsers } from "../lowDb/database.js";
+import db, { findUser, createAccount, findAccount, updateUser,getUsers, getUser } from "../lowDb/database.js";
 import { data as defaultData } from '../defaultData.js'
 import { isValidUser } from "../validators/validUser.js";
 import { uuid } from "uuidv4";
@@ -114,6 +114,17 @@ userRoute.post('/login', async (req, res) => {
   //  "id":""
   //} 
 
+//   GET USER
+userRoute.get('/:id', async (req, res) => {
+    const id:string = req.params.id;
+    const user = await getUser(id)
+    if(!user) {
+        res.status(400).send({error: true})
+        return
+    }
+    res.status(200).send(user)
+})
+
   // UPDATE USER
   type IdObject = { id: string };
   type IdParam = Request<IdObject>;
@@ -125,11 +136,6 @@ userRoute.post('/login', async (req, res) => {
         res.status(400).send({success: false})
     }
     res.status(200).send({success: true})
-  })
-
-  userRoute.get('/', async(req, res) => {
-    const lol = await getUsers()
-    res.send(lol)
   })
 
 
