@@ -22,7 +22,6 @@ const OrderItem = (props: OrderItemProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const orderItem = order.cart.cartItems.map(item => <OrderItems key={item.name} item={item} />)
-  const tempOrder: Order[] = useSelector((state: RootState) => state.tempOrder);
 
   const changeOrder: () => void = async () => {
     dispatch(cartActions.changeOrder(order.cart))
@@ -30,10 +29,16 @@ const OrderItem = (props: OrderItemProps) => {
     navigate('/menu')
   }
 
+  let orderId = order.id;
+  let indexDash = orderId?.indexOf('-');
+  if(indexDash != -1) {
+    orderId = orderId?.slice(indexDash)
+  }
+
   return (
     <section className='order-overlay'>
       <div className="order-container">
-        <h2>Order {order.id}</h2>
+        <h2>Order {orderId}</h2>
         <div className='user-information'>
           <p>Beställare</p>
           <p>Namn : {order.user.name}</p>

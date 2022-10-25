@@ -119,6 +119,7 @@ orderRoute.post("/", async (req, res) => {
       orderObj.orderPlaced = orderInfo.started;
       orderObj.orderCompleted = orderInfo.completed;
       orderObj.id = orderInfo.id
+      console.log(orderObj);
 
       await createOrder(orderObj)
       res.status(200).send(orderObj)
