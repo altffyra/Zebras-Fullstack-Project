@@ -6,6 +6,7 @@ import { actions as userActions } from '../../features/userReducer'
 import { User } from '../../models/types';
 import '../../styles/_userForm.scss'
 import { v4 as uuid } from 'uuid';
+import formLogo from '../../assets/formLogo.svg'
 
 type Props = {}
 
@@ -43,8 +44,8 @@ const SignUp = (props: Props) => {
       setLoading(false)
       dispatch(userActions.setUser(data.user))
       console.log(data)
-      localStorage.setItem('accountId', (data.user.accountId))
-      navigate('/Menu')
+      localStorage.setItem('accountId', JSON.stringify(data.user.accountId))
+      navigate('/menu')
     } else {
       setLoading(false)
       setAlreadyExist(true)
@@ -79,23 +80,33 @@ const SignUp = (props: Props) => {
   };
 
   return (
-    <div className='userForm'>
+    <div className='signup'>
       {loading ? 
             <div className='loading'></div>
             : ''
         }
-       <button className='smallBtn' onClick={()=>navigate(-1)}>Tillbaka</button>
-      <figure className='formLogo'></figure>
-      <form>
-        <label htmlFor="username">Användarnamn</label>
-        <input type="text" name='username' required onChange={(e)=> {handleName(e)}} />
-        <label htmlFor="password">Lösenord</label>
-        <input type="password" name="password" required onChange={(e)=>{handlePassword(e)}} />
-        <label htmlFor="email">Email</label>
-        <input type="email" name="email" required onChange={(e)=>{handleEmail(e)}} />
-        <label htmlFor="phonNumber">Telefonnummer</label>
-        <input type="number" name="phoneNumber" required onChange={(e)=>{handlePhone(e)}} />
-        <button className='bigBtn signupBtn' onClick={(e)=>{handleSubmit(e)}}>Skapa konto</button>
+       <button className='small__btn' onClick={()=>navigate(-1)}>Tillbaka</button>
+      <figure className='form__logo'>
+        <img src={ formLogo } alt="logo" />
+      </figure>
+      <form className='userForm'>
+        <div>
+          <input className='form__input' placeholder=' ' type="text" name='username' required onChange={(e)=> {handleName(e)}} />
+          <label className='form__label form__label--info' htmlFor="username">Användarnamn</label>
+        </div>
+        <div>
+          <input className='form__input' placeholder=' ' type="password" name="password" required onChange={(e)=>{handlePassword(e)}} />
+          <label className='form__label form__label--info' htmlFor="password">Lösenord</label>
+        </div>
+        <div>
+          <input className='form__input' placeholder=' ' type="email" name="email" required onChange={(e)=>{handleEmail(e)}} />
+          <label className='form__label form__label--info' htmlFor="email">Email</label>
+        </div>
+        <div>
+          <input className='form__input' placeholder=' ' type="number" name="phoneNumber" required onChange={(e)=>{handlePhone(e)}} />
+          <label className='form__label form__label--info' htmlFor="phonNumber">Telefonnummer</label>
+        </div>
+        <button className='big__btn signup__btn' onClick={(e)=>{handleSubmit(e)}}>Skapa konto</button>
       </form>
       {alreadyExist ? 
         <p>Konto finns redan</p>
