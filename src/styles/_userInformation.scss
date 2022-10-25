@@ -34,10 +34,6 @@
             @include variables.flexContainer(row);
             justify-content: space-between;
         }
-        .change-btn {
-            @include buttons.bigBtn($pad: 0.6em 4em);
-            align-self: center;
-        }
         .button-container {
             @include variables.flexContainer(row);
             justify-content: space-between;
@@ -45,6 +41,10 @@
             margin-top: 1em;
             button {
                 flex: 1;
+            }
+            .change-btn {
+                @include buttons.bigBtn($pad: 0.6em 2em, $bg: variables.$dropdownRed);
+                align-self: center;
             }
             .update-btn {
                 @include buttons.bigBtn($pad: 0.6em 2em, $bg: variables.$acceptBtnGreen);

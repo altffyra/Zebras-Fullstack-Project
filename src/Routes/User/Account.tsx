@@ -25,7 +25,7 @@ const Account = () => {
       dispatch(cartActions.clearCart())
     }
     const accountId: string | null = localStorage.getItem('accountId');
-   
+    
     if(accountId) {
       getOrder(accountId)
     } else {
@@ -37,10 +37,13 @@ const Account = () => {
     setLoading(true)    
     const orderResponse = await fetch(`/api/order/user/${accountId}`);
     const orderData = await orderResponse.json();   
-       
-    if(!user) {
+    
+    if(user.name == '') {
+      console.log('he');
+      
       const userResponse = await fetch(`/api/user/${accountId}`);
       const userData = await userResponse.json();      
+      console.log(userData);
       dispatch(userActions.setUser(userData))
     } 
     

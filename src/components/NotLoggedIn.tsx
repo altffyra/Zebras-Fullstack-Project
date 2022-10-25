@@ -61,7 +61,7 @@ const NotLoggedIn = (props: Props) => {
             setLoading(false);
             dispatch(userActions.setUser(data.user))      
             props.setUser(data.user)    
-            localStorage.setItem('accountId', (data.user.accountId))
+            localStorage.setItem('accountId', data.user.accountId)
       }
 
     }

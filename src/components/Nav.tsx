@@ -7,12 +7,12 @@ const Nav = () => {
     const [menuOpen, setMenuOpen] = useState<boolean>(false);
     const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
+    const accountId = localStorage.getItem('accountId')
     useEffect(() => {
-        const accountId = localStorage.getItem('accountId')
         if(accountId) {
             setLoggedIn(true)
         }
-    }, []);
+    }, [accountId]);
 
     const handleMenu: () => void = () => {
         setMenuOpen(!menuOpen);       
