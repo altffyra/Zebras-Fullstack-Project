@@ -12,7 +12,7 @@ import { actions as tempOrderActions } from '../../features/tempOrderReducer';
 const OrderConfirm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const [loading, setLoading] = useState<boolean>(false);
+
   useEffect(() => {
     dispatch(cartActions.clearCart())
   }, [])
@@ -33,10 +33,6 @@ const OrderConfirm = () => {
   return (
     <section className="confirmed">
       <Nav />
-        {loading ? 
-            <div className='loading'></div>
-            : ''
-        }
         <div className='headline'>
           <h1>Orderbekräftelse</h1>
         </div>

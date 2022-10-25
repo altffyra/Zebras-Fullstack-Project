@@ -6,9 +6,6 @@
     gap: 2em;
     color: variables.$fontLight;
 
-    .loading {
-        @include variables.loader();
-    }
     .headline {
         @include variables.headerTitle();
     }
