@@ -3,10 +3,12 @@ import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { actions as userActions } from '../features/userReducer'
 import { useSelector, useDispatch } from 'react-redux';
-import { User, Order } from '../models/types'
-import { RootState } from '../store';
-import { actions as tempOrderActions } from '../features/tempOrderReducer';
-import { actions as cartActions } from '../features/cartReducer';
+import { User } from '../models/types'
+import '../styles/_userForm.scss'
+import formLogo from '../assets/formLogo.svg'
+
+
+
 
   const LoginView = () => {
     const dispatch = useDispatch();
@@ -14,17 +16,10 @@ import { actions as cartActions } from '../features/cartReducer';
     const [loading, setLoading] = useState<boolean>(false);
     const [userName, setUserName] = useState<string>('')
     const [userPassword, setUserPassword] = useState<string>('')
-
+    const [errorMsg, setErrorMsg] = useState<boolean>(false)
 
     const navigate = useNavigate()
-    
-    const tempOrder: Order | undefined =  useSelector((state: RootState) => state.tempOrder)[0];
-    useEffect(() => {
-      if(tempOrder) {
-        dispatch(tempOrderActions.clearTempOrder());
-        dispatch(cartActions.clearCart())
-      }
-    }, [])
+
 
     async function userLogin() {
       setLoading(true)
@@ -44,13 +39,14 @@ import { actions as cartActions } from '../features/cartReducer';
       if( data.success ) {
             setLoading(false);
             dispatch(userActions.setUser(data.user))
-            console.log(data);
-            
-            localStorage.setItem('accountId', (data.user.accountId))
+            localStorage.setItem('accountId', JSON.stringify(data.user.accountId))
             if( data.user.admin) {
               navigate('/AdminPage')
             }
-            navigate('/')
+            navigate('/menu')
+      } else {
+        setLoading(false)
+        setErrorMsg(true)
       }
 
     }
@@ -71,22 +67,33 @@ import { actions as cartActions } from '../features/cartReducer';
 
 
   return (
-    <div className='userForm'>
+    <div className='login'>
       {loading ? 
             <div className='loading'></div>
             : ''
         }
-       <button className='smallBtn' onClick={()=>navigate(-1)}>Tillbaka</button>
-      <figure className='formLogo'></figure>
-      <form>
-        <label htmlFor="username">Användarnamn</label>
-        <input type="text" name='username' required onChange={(e)=> {handleName(e)}} />
-        <label htmlFor="password">Lösenord</label>
-        <input type="password" name="password" required onChange={(e)=>{handlePassword(e)}} />
-        
-        <button className='bigBtn loginBtn' onClick={(e)=>{handleSubmit(e)}}>Logga in</button>
-        <p>Inget konto? <a href="/Signup">Skapa här!</a></p>
+       <button className='small__btn' onClick={()=>navigate(-1)}>Tillbaka</button>
+      <figure className='form__logo'>
+        <img src={ formLogo } alt="logo" />
+      </figure>
+      <form className='userForm'>
+        <div>
+          <input className='form__input' placeholder=' ' type="text" name='username' required onChange={(e)=> {handleName(e)}} />
+          <label className='form__label form__label--info' placeholder=' ' htmlFor="username">Användarnamn</label>
+        </div>
+        <div>
+          <input className='form__input' placeholder=' ' type="password" name="password" required onChange={(e)=>{handlePassword(e)}} />
+          <label className='form__label form__label--info' placeholder=' ' htmlFor="password">Lösenord</label>
+        </div>
+        <p>Inget konto? <a href="/SignUp"> Skapa </a></p>
+        <div>
+          <button className='big__btn login__btn' onClick={(e)=>{handleSubmit(e)}}>Logga in</button>
+        </div>
       </form>
+      {errorMsg ? 
+        <p>Inloggning misslyckades</p>
+        : ''
+      }
     </div>
   )
 }
