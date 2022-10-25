@@ -85,8 +85,8 @@ const SignUp = (props: Props) => {
             <div className='loading'></div>
             : ''
         }
-       <button className='smallBtn' onClick={()=>navigate(-1)}>Tillbaka</button>
-      <figure className='formLogo'>
+       <button className='small__btn' onClick={()=>navigate(-1)}>Tillbaka</button>
+      <figure className='form__logo'>
         <img src={ formLogo } alt="logo" />
       </figure>
       <form className='form'>
@@ -106,7 +106,7 @@ const SignUp = (props: Props) => {
           <label className='form__label' htmlFor="phonNumber">Telefonnummer</label>
           <input className='form__input' type="number" name="phoneNumber" required onChange={(e)=>{handlePhone(e)}} />
         </div>
-        <button className='bigBtn signupBtn' onClick={(e)=>{handleSubmit(e)}}>Skapa konto</button>
+        <button className='big__btn signup__btn' onClick={(e)=>{handleSubmit(e)}}>Skapa konto</button>
       </form>
       {alreadyExist ? 
         <p>Konto finns redan</p>

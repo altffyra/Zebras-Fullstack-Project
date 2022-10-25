@@ -4,6 +4,9 @@ import { useNavigate } from 'react-router-dom'
 import { actions as userActions } from '../features/userReducer'
 import { useSelector, useDispatch } from 'react-redux';
 import { User } from '../models/types'
+import '../styles/_userForm.scss'
+import formLogo from '../assets/formLogo.svg'
+
 
 
 
@@ -67,16 +70,23 @@ import { User } from '../models/types'
             <div className='loading'></div>
             : ''
         }
-       <button className='smallBtn' onClick={()=>navigate(-1)}>Tillbaka</button>
-      <figure className='formLogo'></figure>
-      <form className='form'>
-        <label htmlFor="username">Användarnamn</label>
-        <input type="text" name='username' required onChange={(e)=> {handleName(e)}} />
-        <label htmlFor="password">Lösenord</label>
-        <input type="password" name="password" required onChange={(e)=>{handlePassword(e)}} />
-        
-        <button className='bigBtn loginBtn' onClick={(e)=>{handleSubmit(e)}}>Logga in</button>
-        <p>Inget konto? <a href="/Signup">Skapa här!</a></p>
+       <button className='small__btn' onClick={()=>navigate(-1)}>Tillbaka</button>
+      <figure className='form__logo'>
+        <img src={ formLogo } alt="logo" />
+      </figure>
+      <form className='form' onSubmit={() => console.log('loggain')}>
+      <div>
+          <label className='form__label' htmlFor="username">Användarnamn</label>
+          <input className='form__input' type="text" name='username' required onChange={(e)=> {handleName(e)}} />
+        </div>
+        <div>
+          <label className='form__label' htmlFor="password">Lösenord</label>
+          <input className='form__input' type="password" name="password" required onChange={(e)=>{handlePassword(e)}} />
+        </div>
+        <p>Inget konto? <a href="/SignUp"> Skapa </a></p>
+        <div>
+            <button type="submit" className='big__btn login__btn'>Logga in</button>
+        </div>
       </form>
     </div>
   )

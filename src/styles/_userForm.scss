@@ -13,7 +13,7 @@
       .loading {
             @include variables.loader();
       }
-      .smallBtn {
+      .small__btn {
             @include buttons.smallBtn();
             position: absolute;
             top: 1rem;
@@ -81,6 +81,12 @@
                         position: relative;
                         
                     }
+                  .big__btn {
+                        @include buttons.bigBtn($bg: #377395);
+                  }
+                  .big__btn .login__btn {
+                        background-color: variables.$acceptBtnGreen;
+                  }
             }
 
 }
