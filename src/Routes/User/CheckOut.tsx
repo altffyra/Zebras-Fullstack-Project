@@ -24,8 +24,8 @@ const CheckOut = (props: Props) => {
   const tempOrder: Order[] = useSelector((state: RootState) => state.tempOrder);
 
   const cartItemEl = cart.cartItems.map((item, index) => (
-    <div className="cartmodule">
-      <div key={item.name} className="cart-item">
+    <div key={item.name} className="cartmodule">
+      <div  className="cart-item">
         <p className="item-name">{item.name}</p>{" "}
         <p className="item-amount">{item.amount} st</p> {" "}
         <p className="item-price">{item.price} kr</p>{" "}
@@ -50,11 +50,11 @@ useEffect(() => {
 
 }, [])
 
+console.log(user);
+
 
 
 async function updateOrder() {
-
-
 
   const updatedOrder:Order = {
     cart: cart,
@@ -88,7 +88,7 @@ async function updateOrder() {
 }
 
   async function sendOrder() {
-    
+
       let data = {
         cart: cart,
         user: userCredentials,
@@ -126,6 +126,9 @@ async function updateOrder() {
 
 
 
+  function backBtn(){
+    navigate("/Menu")
+  }
 
 
 
@@ -148,18 +151,9 @@ async function updateOrder() {
 
 
 
-
-
-
-
-
-
-
-
-
   const notLoggedInElem =
     user.accountId == "" ? (
-      <NotLoggedIn />
+      <NotLoggedIn setUser={setUser} />
     ) : (
       <div className="LoggedIn">
         <div className="Account-info">
@@ -185,7 +179,7 @@ async function updateOrder() {
           ></textarea>
         </div>
         <div className="buttonsDiv">
-          <button className="back-btn">Tillbaka </button>
+          <button onClick={backBtn} className="back-btn">Tillbaka </button>
           { orderCheck? (<button onClick={updateOrder} className="order-btn">
             Updatera{" "}
           </button>): <button onClick={sendOrder} className="order-btn">
