@@ -174,9 +174,6 @@ export async function updateUser(accountId:string, updatedUser:User) {
             return false
       }
       
-      if(!updatedUser.password) {
-            updatedUser.password = db.data.users[userIndex].password
-      }
       db.data.users[userIndex] = updatedUser; 
       await db.write()
       return true
