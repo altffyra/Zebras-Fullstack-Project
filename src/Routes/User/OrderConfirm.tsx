@@ -2,7 +2,7 @@ import '../../styles/_orderConfirm.scss';
 import Nav from '../../components/Nav';
 import OrderItems from '../../components/OrderItems';
 import { Order } from '../../models/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
@@ -12,9 +12,15 @@ import { actions as tempOrderActions } from '../../features/tempOrderReducer';
 const OrderConfirm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    dispatch(cartActions.clearCart())
+  }, [])
 
   const confirmedOrder: Order = useSelector((state: RootState) => state.orders)[0];
+  const qwe: Order[] = useSelector((state: RootState) => state.orders)
+  console.log(qwe);
+  
   const orderItemsEl = confirmedOrder.cart.cartItems.map(item => <OrderItems item={item} key={item.name} />)
   const orderDone:string | undefined = confirmedOrder.orderCompleted?.slice(10)
 
@@ -23,21 +29,10 @@ const OrderConfirm = () => {
     dispatch(tempOrderActions.setTempOrder(confirmedOrder))
     navigate('/menu');
   }
-
-  let orderId = confirmedOrder.id;
-  let indexDash = orderId?.indexOf('-');
-  
-  if(indexDash != -1) {    
-    orderId = orderId?.slice(0, indexDash)
-  }
   
   return (
     <section className="confirmed">
       <Nav />
-        {loading ? 
-            <div className='loading'></div>
-            : ''
-        }
         <div className='headline'>
           <h1>Orderbekräftelse</h1>
         </div>
@@ -57,7 +52,7 @@ const OrderConfirm = () => {
         
         <div className='order-cart'>
           <div className='order-header'>
-            <p className='order-title'>Order {orderId}</p>
+            <p className='order-title'>Order {confirmedOrder.id}</p>
             <div className='list-titles'>
               <p>Rätt</p>
               <p>Antal</p>

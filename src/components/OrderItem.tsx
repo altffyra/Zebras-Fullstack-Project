@@ -29,16 +29,10 @@ const OrderItem = (props: OrderItemProps) => {
     navigate('/menu')
   }
 
-  let orderId = order.id;
-  let indexDash = orderId?.indexOf('-');
-  if(indexDash != -1) {
-    orderId = orderId?.slice(indexDash)
-  }
-
   return (
     <section className='order-overlay'>
       <div className="order-container">
-        <h2>Order {orderId}</h2>
+        <h2>Order {order.id}</h2>
         <div className='user-information'>
           <p>Beställare</p>
           <p>Namn : {order.user.name}</p>
