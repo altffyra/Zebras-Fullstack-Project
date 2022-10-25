@@ -4,16 +4,10 @@ import { fileURLToPath } from 'url';
 import { User, Schema, Order, LoginCreds } from './dbinterface';
 import { data as defaultData } from '../defaultData.js';
 import dayjs from 'dayjs';
+import { uuid } from 'uuidv4';
 
 
 export const started = dayjs().format('YYYY-MM-DD HH:mm');
-const now = dayjs()
-export const newtime = now.add(23, 'minutes');
-
-export const completed = newtime.toString()
-
-
-
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -195,6 +189,17 @@ export async function checkLock(orderId: string) {
       db.write();
       return foundOrder[0];
 
+}
+
+export async function createOrderInfo() {
+      const randomNum: number = Math.ceil(Math.random() * 30)
+      const orderInfo = {
+            started: started,
+            completed: dayjs().add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm'),
+            id: uuid()
+      }
+
+      return orderInfo
 }
 
 

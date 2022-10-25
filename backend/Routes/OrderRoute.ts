@@ -3,7 +3,7 @@ import express, { NextFunction, Request, Response } from "express";
  app.use(express.json());
  const orderRoute = express.Router();
  import {User, Order} from '../lowDb/dbinterface'
- import db, {authenticateLogin, getOrders,checkOrder, checkUser, updateOrder, createOrder, checkLock} from '../lowDb/database.js'
+ import db, {authenticateLogin, getOrders,checkOrder, createOrderInfo, updateOrder, createOrder, checkLock} from '../lowDb/database.js'
  import { isValidCart, isValidUpdatedOrder } from "../validators/validOrder.js";
  import { isValidUser, isValidGuest } from "../validators/validUser.js";
 
@@ -110,11 +110,18 @@ orderRoute.post("/", async (req, res) => {
   const person = func == isValidUser ? 'user' : 'guest'
 
   
- if (func(orderObj.user)) {
+  if (func(orderObj.user)) {
     if(isValidCart(orderObj)) {
-      await createOrder(orderObj)
-      res.status(200).send('Order placed')
+      orderObj.locked = false;
+      orderObj.completed = false;
+      
+      const orderInfo = await createOrderInfo();
+      orderObj.orderPlaced = orderInfo.started;
+      orderObj.orderCompleted = orderInfo.completed;
+      orderObj.id = orderInfo.id
 
+      await createOrder(orderObj)
+      res.status(200).send(orderObj)
     } else {
       res.status(400).send('Bad cart')
     }
@@ -166,6 +173,7 @@ orderRoute.get("/", async (req:IdParam, res:Response) => {
     res.sendStatus(404);
   }
 });
+
   
 
 
