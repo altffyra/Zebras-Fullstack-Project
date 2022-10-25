@@ -2,9 +2,9 @@
 @use 'buttons';
 @use 'sass:color';
 
-.userForm {
-      width: 80vw;
-      height: 100vh;
+.signup, .login, .login--checkout {
+      width: 100%;
+      height: calc(100vh - 6em);
       margin: 0 auto;
       @include variables.flexContainer();
       align-items: center;
@@ -19,36 +19,26 @@
             top: 1rem;
             left: 1rem;
       }
-      .formLogo {
-            
+      .formLogo {       
             img {
                   width: 100%;
                   height: 100%;
             }
-            // background-image: url('../assets/formLogo.svg');
-            
-            // background-size:contain ;
-            // background-position: center;
-            // background-repeat: no-repeat;
-
-
             box-shadow: variables.$boxShadow;
-
       }
-            .form {
+            .userForm {
                   @include variables.flexContainer();
                   align-items: center;
                   justify-items: center;
                   gap: 3em;
-                  .form--name, .form--email {
+                  .form--info {
                       position: relative;
                       display: flex;    
                   }
                   
                   .form__label {
                       position: absolute;
-                      top: -15px;
-                      // left: 5px;
+
                       font-size: 1.2rem;
                       font-weight: 400;
                       transition: all 0.5s;    
@@ -61,6 +51,7 @@
                       border-bottom: 2px solid black;
                       outline: none;
                       font-size: 1.2rem;
+                      z-index: 1;
                   }
                   
                   
@@ -81,12 +72,43 @@
                         position: relative;
                         
                     }
-                  .big__btn {
+                  .big__btn.signup__btn {
                         @include buttons.bigBtn($bg: #377395);
+                        
                   }
-                  .big__btn .login__btn {
-                        background-color: variables.$acceptBtnGreen;
+                  
+                  .button__container {
+                        box-sizing: border-box;
+                        @include variables.flexContainer(row);
+                        justify-content: center;
+                        max-height: 3em;
+
+                        .big__btn.guest__btn {
+                              @include buttons.bigBtn($bg: transparent, $pad: .432em .7em);
+                              color: variables.$fontDark;
+                              // width: 50%;
+                              outline: 1px solid black;
+                          }
+                        .big__btn.login__btn {
+                        @include buttons.bigBtn($bg: variables.$acceptBtnGreen);
+                              width: 50%;
+                        }
                   }
+                  .big__btn.login__btn {
+                  @include buttons.bigBtn($bg: variables.$acceptBtnGreen);
+
+                  }
+
             }
 
+}
+.login--checkout {
+      height: 100%;
+}
+
+@media screen and (min-width: 786px) {
+      .userForm {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
 }

@@ -45,7 +45,7 @@ const SignUp = (props: Props) => {
       dispatch(userActions.setUser(data.user))
       console.log(data)
       localStorage.setItem('accountId', JSON.stringify(data.user.accountId))
-      navigate('/')
+      navigate('/menu')
     } else {
       setLoading(false)
       setAlreadyExist(true)
@@ -80,7 +80,7 @@ const SignUp = (props: Props) => {
   };
 
   return (
-    <div className='userForm'>
+    <div className='signup'>
       {loading ? 
             <div className='loading'></div>
             : ''
@@ -89,22 +89,22 @@ const SignUp = (props: Props) => {
       <figure className='form__logo'>
         <img src={ formLogo } alt="logo" />
       </figure>
-      <form className='form'>
+      <form className='userForm'>
         <div>
-          <label className='form__label' htmlFor="username">Användarnamn</label>
-          <input className='form__input' type="text" name='username' required onChange={(e)=> {handleName(e)}} />
+          <input className='form__input' placeholder=' ' type="text" name='username' required onChange={(e)=> {handleName(e)}} />
+          <label className='form__label form__label--info' htmlFor="username">Användarnamn</label>
         </div>
         <div>
-          <label className='form__label' htmlFor="password">Lösenord</label>
-          <input className='form__input' type="password" name="password" required onChange={(e)=>{handlePassword(e)}} />
+          <input className='form__input' placeholder=' ' type="password" name="password" required onChange={(e)=>{handlePassword(e)}} />
+          <label className='form__label form__label--info' htmlFor="password">Lösenord</label>
         </div>
         <div>
-          <label className='form__label' htmlFor="email">Email</label>
-          <input className='form__input' type="email" name="email" required onChange={(e)=>{handleEmail(e)}} />
+          <input className='form__input' placeholder=' ' type="email" name="email" required onChange={(e)=>{handleEmail(e)}} />
+          <label className='form__label form__label--info' htmlFor="email">Email</label>
         </div>
         <div>
-          <label className='form__label' htmlFor="phonNumber">Telefonnummer</label>
-          <input className='form__input' type="number" name="phoneNumber" required onChange={(e)=>{handlePhone(e)}} />
+          <input className='form__input' placeholder=' ' type="number" name="phoneNumber" required onChange={(e)=>{handlePhone(e)}} />
+          <label className='form__label form__label--info' htmlFor="phonNumber">Telefonnummer</label>
         </div>
         <button className='big__btn signup__btn' onClick={(e)=>{handleSubmit(e)}}>Skapa konto</button>
       </form>

@@ -16,6 +16,7 @@ import formLogo from '../assets/formLogo.svg'
     const [loading, setLoading] = useState<boolean>(false);
     const [userName, setUserName] = useState<string>('')
     const [userPassword, setUserPassword] = useState<string>('')
+    const [errorMsg, setErrorMsg] = useState<boolean>(false)
 
     const navigate = useNavigate()
 
@@ -42,9 +43,10 @@ import formLogo from '../assets/formLogo.svg'
             if( data.user.admin) {
               navigate('/AdminPage')
             }
+            navigate('/menu')
       } else {
         setLoading(false)
-        
+        setErrorMsg(true)
       }
 
     }
@@ -65,7 +67,7 @@ import formLogo from '../assets/formLogo.svg'
 
 
   return (
-    <div className='userForm'>
+    <div className='login'>
       {loading ? 
             <div className='loading'></div>
             : ''
@@ -74,20 +76,24 @@ import formLogo from '../assets/formLogo.svg'
       <figure className='form__logo'>
         <img src={ formLogo } alt="logo" />
       </figure>
-      <form className='form' onSubmit={() => console.log('loggain')}>
-      <div>
-          <label className='form__label' htmlFor="username">Användarnamn</label>
-          <input className='form__input' type="text" name='username' required onChange={(e)=> {handleName(e)}} />
+      <form className='userForm'>
+        <div>
+          <input className='form__input' placeholder=' ' type="text" name='username' required onChange={(e)=> {handleName(e)}} />
+          <label className='form__label form__label--info' placeholder=' ' htmlFor="username">Användarnamn</label>
         </div>
         <div>
-          <label className='form__label' htmlFor="password">Lösenord</label>
-          <input className='form__input' type="password" name="password" required onChange={(e)=>{handlePassword(e)}} />
+          <input className='form__input' placeholder=' ' type="password" name="password" required onChange={(e)=>{handlePassword(e)}} />
+          <label className='form__label form__label--info' placeholder=' ' htmlFor="password">Lösenord</label>
         </div>
         <p>Inget konto? <a href="/SignUp"> Skapa </a></p>
         <div>
-            <button type="submit" className='big__btn login__btn'>Logga in</button>
+          <button className='big__btn login__btn' onClick={(e)=>{handleSubmit(e)}}>Logga in</button>
         </div>
       </form>
+      {errorMsg ? 
+        <p>Inloggning misslyckades</p>
+        : ''
+      }
     </div>
   )
 }
