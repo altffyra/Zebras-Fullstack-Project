@@ -13,9 +13,9 @@ const UserInformation = (props: UserInformationProps) => {
 
     const [update, setUpdate] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
-    const [userName, setUserName] = useState<string>('');
-    const [userEmail, setUserEmail] = useState<string>('');
-    const [userPhone, setUserPhone] = useState<string>('');
+    const [userName, setUserName] = useState<string>(props.user.name);
+    const [userEmail, setUserEmail] = useState<string>(props.user.email);
+    const [userPhone, setUserPhone] = useState<string>(props.user.phoneNumber);
 
 
     const handleUpdate: () => void = () => {
