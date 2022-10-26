@@ -84,6 +84,34 @@ function makeAdminComment(e: ChangeEvent<HTMLTextAreaElement>) {
   setAdminComment(e.target.value )
   console.log(adminComment);
 }
+async function completeOrder() {
+  if (order) {
+    let completedOrder: Order = order
+    completedOrder.completed = true;
+
+    const orderId = order?.id
+    const response = await fetch(`/api/order/admin/${orderId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(completedOrder),
+    });
+    console.log(response)
+    const datasave = await response.json();
+    console.log(datasave.locked);
+    if (datasave.locked){
+      
+      setOrderLocked(true)
+      
+    } else {
+      // dispatch(orderActions.makeOrders(datasave));
+      // navigate("/OrderConfirm");
+
+    }
+  }
+
+}
 async function updateOrder(e:FormEvent) {
   e.preventDefault();
 
@@ -107,8 +135,8 @@ async function updateOrder(e:FormEvent) {
     }   
 
     console.log(updatedOrder);
-      const orderId = order?.id
-      // const response = await fetch(`/api/order/${orderId}`, {
+      // const orderId = order?.id
+      // const response = await fetch(`/api/order/admin/${orderId}`, {
       //   method: "PUT",
       //   headers: {
       //     "Content-Type": "application/json",
@@ -123,11 +151,11 @@ async function updateOrder(e:FormEvent) {
       //   setOrderLocked(true)
         
       // } else {
-        // dispatch(orderActions.makeOrders(datasave));
-        // navigate("/OrderConfirm");
+      //   dispatch(orderActions.makeOrders(datasave));
+      //   navigate("/OrderConfirm");
   
-      }
-  // }
+      // }
+  }
 
   
 }
@@ -137,61 +165,102 @@ async function updateOrder(e:FormEvent) {
   const desertArr = menu.filter(item => item.type == 'Efterrätt')
 
 
-  const cartItemEl = cart.cartItems.map((item, index) => <CartItem item={item} key={index} handleAmount={handleAmount} />);
+  const cartItemEl = cart.cartItems.map((item, index) => <CartItem locked={order?.locked} item={item} key={index} handleAmount={handleAmount} />);
   
 
   return (
-    <form>
-      <div>
-        <button>Tillbaka</button>
-        {order?.locked ? <img src={locked} alt="" /> : ''}
-      </div>
-      <h1>Order {order?.id}</h1>
-      <div>
-        <h3>Maträtt</h3>
-        {cartItemEl}
-        <p>Totalt: {cart.totalPrice} kr</p>
-      </div>
-      <div>
-        <button onClick={(e) => toggleMenu(e)}>Lägg till</button>
-        {showMenu ? 
+    <section>
         <div>
-          <AdminMenu menu={entreeArry} type='Förrätt'/>
-          <AdminMenu menu={mainCourseArr} type='Huvudrätt'/>
-          <AdminMenu menu={vegArr} type='Vegetariskt'/>
-          <AdminMenu menu={desertArr} type='Efterrätt'/>
+          <button>Tillbaka</button>
+          {order?.locked ? <img src={locked} alt="" /> : ''}
         </div>
-        : ''
-        }
-      </div>
-      <div>
-        <p>Beställare</p>
+        {!order?.locked ? 
+      <form>
+        <h1>Order {order?.id}</h1>
         <div>
-          <label htmlFor="">Namn</label>
-          <input type="text" name="name" id="" value={user.name} onChange={(e) => changeCredentials(e)}/>
+          <h3>Maträtt</h3>
+          {cartItemEl}
+          <p>Totalt: {cart.totalPrice} kr</p>
         </div>
         <div>
-          <label htmlFor="">Email</label>
-          <input type="text" name="email" id="" value={user.email} onChange={(e) => changeCredentials(e)}/>
+          <button onClick={(e) => toggleMenu(e)}>Lägg till</button>
+          {showMenu ? 
+          <div>
+            <AdminMenu menu={entreeArry} type='Förrätt'/>
+            <AdminMenu menu={mainCourseArr} type='Huvudrätt'/>
+            <AdminMenu menu={vegArr} type='Vegetariskt'/>
+            <AdminMenu menu={desertArr} type='Efterrätt'/>
+          </div>
+          : ''
+          }
         </div>
         <div>
-          <label htmlFor="">Tel.nr</label>
-          <input type="number" name="phoneNumber" id="" value={user.phoneNumber} onChange={(e) => changeCredentials(e)} />
+          <p>Beställare</p>
+          <div>
+            <label htmlFor="">Namn</label>
+            <input type="text" name="name" id="" value={user.name} onChange={(e) => changeCredentials(e)}/>
+          </div>
+          <div>
+            <label htmlFor="">Email</label>
+            <input type="text" name="email" id="" value={user.email} onChange={(e) => changeCredentials(e)}/>
+          </div>
+          <div>
+            <label htmlFor="">Tel.nr</label>
+            <input type="number" name="phoneNumber" id="" value={user.phoneNumber} onChange={(e) => changeCredentials(e)} />
+          </div>
         </div>
-      </div>
 
-      <div>
-        <h2>Kundkommentar</h2>
-        <textarea name="" id="" readOnly value={order?.userComment}></textarea>
-      </div>
+        <div>
+          <h2>Kundkommentar</h2>
+          <textarea name="" id="" readOnly value={order?.userComment}></textarea>
+        </div>
 
-      <div>
-        <p>Lägg kommentar till kocken?</p>
-        <textarea name="admin-comment" id="admin-comment" onChange={(e) => makeAdminComment(e)}></textarea>
-      </div>
+        <div>
+          <p>Lägg kommentar till kocken?</p>
+          <textarea name="admin-comment" id="admin-comment" onChange={(e) => makeAdminComment(e)}></textarea>
+        </div>
 
-      <button type='submit' onClick={updateOrder}>Lås & skicka</button>
-    </form>
+        <button type='submit' onClick={updateOrder}>Lås & skicka</button>
+      </form>
+      :
+      <section>
+        <h1>Order {order?.id}</h1>
+        <div>
+          <h3>Maträtt</h3>
+          {cartItemEl}
+          <p>Totalt: {cart.totalPrice} kr</p>
+        </div>
+
+        <div>
+          <p>Beställare</p>
+          <div>
+            <p>Namn</p>
+            <p>{user.name}</p>
+          </div>
+          <div>
+            <p>Email</p>
+            <p>{user.email}</p>
+          </div>
+          <div>
+            <p>Tel.nr</p>
+            <p>{user.phoneNumber}</p>
+          </div>
+        </div>
+
+        <div>
+          <h2>Kundkommentar</h2>
+          <textarea name="" id="" readOnly value={order?.userComment}></textarea>
+        </div>
+
+        <div>
+          <p>Kommentar till kocken</p>
+          <textarea name="admin-comment" id="admin-comment" readOnly value={order?.adminComment}></textarea>
+        </div>
+        <button onClick={completeOrder}>Order avslutad</button>
+
+    </section>
+      }
+    </section>
   )
 }
 

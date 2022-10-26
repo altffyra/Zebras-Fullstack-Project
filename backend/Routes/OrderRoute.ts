@@ -160,6 +160,39 @@ orderRoute.put("/:id", async (req:IdParam, res:Response) => {
   }
 });
 
+// Change order Admin (OBS lägg till auth)
+orderRoute.put("/admin/:id", async (req:IdParam, res:Response) => {
+  const id:string = req.params.id;  
+  let updatedOrder: Order = req.body;
+  
+  const foundIndex: number = await checkOrder(id);
+  if(foundIndex === -1) {
+    res.status(400).send('No order with that id')
+    return
+  }
+  if(isValidGuest(updatedOrder.user)) {
+    if(isValidCart(updatedOrder)) {    
+      if(isValidUpdatedOrder(updatedOrder)) {        
+          const checkedOrder: boolean = await updateOrder(updatedOrder, foundIndex)
+          console.log(checkedOrder);
+          
+          if(!checkedOrder) {
+            res.send({locked: true})
+            return
+          }
+          res.status(200).send(updatedOrder)
+      } else {
+        res.status(400).send('Bad placed order')
+      }
+    } else {
+      res.status(400).send('Bad order')
+    }
+  } else {
+    res.status(400).send('Bad user')
+  }
+});
+
+
 // GET ALL FOR TESTING
 orderRoute.get("/", async (req:IdParam, res:Response) => {
   const id:string = req.params.id;
