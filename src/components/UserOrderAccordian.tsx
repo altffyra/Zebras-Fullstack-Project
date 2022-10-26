@@ -9,7 +9,7 @@ type UserOrderAccordian = {
 }
 
 const UserOrderAccordian = (props: UserOrderAccordian) => {
-    const [dropActive, setDropActive] = useState<boolean>(false);
+    const [dropActive, setDropActive] = useState<boolean>(true);
     const cssActive = dropActive ? 'active' : '';
 
     const ordersEl = props.orders.map(order => <SingleUserOrders key={order.id} order={order} />);

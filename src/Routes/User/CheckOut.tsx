@@ -27,7 +27,6 @@ const CheckOut = (props: Props) => {
   const [loading, setLoading] = useState<boolean>(false);
 
   const [userMessage, setMessage] = useState<string>("");
-  const [orderLocked, setOrderLocked] = useState<boolean>(false);
 
   const user: User = useSelector((state: RootState) => state.user);
   const cart: CartProps = useSelector((state: RootState) => state.cart);
@@ -65,22 +64,25 @@ const CheckOut = (props: Props) => {
   }, []);
 
 const [errorElement, showError] = useState<boolean>(false)
-const errorMessages = {title:"" ,message:""};
-
-
+const [errorMessages, makeError] = useState({title:"" ,message:""})
 const showAlert = errorElement? <Alert errorTitle={errorMessages.title}  errorMessage={errorMessages.message} showError={showError}/>:"";
-
+let tempObject = {title:"" ,message:""}
 
   async function updateOrder(e: FormEvent) {
     e.preventDefault();
-    setOrderLocked(false);
 
     if (
       userCredentials.name.length < 1 ||
       userCredentials.email.length < 1 ||
       userCredentials.phoneNumber.length < 1
     ) {
-      return;
+      tempObject.title = "Inga personuppgifter"
+      tempObject.message = "Ordern går inte skicka utan personuppgifter"
+      makeError(tempObject)
+      console.log(errorMessages);
+      
+      showError(true)
+      return
     }
     const updatedOrder: Order = {
       cart: cart,
@@ -104,13 +106,12 @@ const showAlert = errorElement? <Alert errorTitle={errorMessages.title}  errorMe
     console.log(response);
     const datasave = await response.json();
     if (datasave.locked) {
-      setOrderLocked(true);
 
       errorMessages.title = "Ordern är låst"
       errorMessages.message = "Ordern går inte ändra för ändringstiden har löpt ut"
       showError(true)
     } 
-    
+
     
     else {
       dispatch(orderActions.makeOrders(datasave));
@@ -125,6 +126,12 @@ const showAlert = errorElement? <Alert errorTitle={errorMessages.title}  errorMe
       userCredentials.email.length < 1 ||
       userCredentials.phoneNumber.length < 1
     ) {
+      tempObject.title = "Inga personuppgifter"
+      tempObject.message = "Ordern går inte skicka utan personuppgifter"
+      makeError(tempObject)
+      console.log(errorMessages);
+      
+      showError(true)
       return;
     }
     let data = {
@@ -236,7 +243,6 @@ const showAlert = errorElement? <Alert errorTitle={errorMessages.title}  errorMe
   return (
     <main>
       <Nav />
-      {orderLocked ? <p>DEN ÄR LÅST HAHAHAH too slow</p> : ""}
       <div className="checkout-wrapper">
         <section
           className="checkout-header--text"
