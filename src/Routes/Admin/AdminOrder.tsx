@@ -1,11 +1,13 @@
 import '../../styles/_adminorder.scss';
 import { useParams } from 'react-router-dom';
-import { User, Order, CartProps } from '../../models/types';
+import { User, Order, CartProps, MenuItems } from '../../models/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import CartItem from '../../components/CartItem';
+import AdminMenu from '../../components/AdminMenu';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import {actions as cartActions} from '../../features/cartReducer';
+import {actions as menuActions} from '../../features/menuReducer';
 import locked from '../../assets/locked.png';
 
 
@@ -28,7 +30,8 @@ const AdminOrder = () => {
   });
   const [ loading, setLoading ] = useState<boolean>(false);
   const [ adminComment, setAdminComment ] = useState<string>('');
-  const [ orderLocked, setOrderLocked ] = useState<boolean>(false)
+  const [ orderLocked, setOrderLocked ] = useState<boolean>(false);
+  const [ showMenu, setShowMenu ] = useState<boolean>(false);
 
 
   const { id } = useParams<keyof MyParams>() as MyParams;
@@ -36,6 +39,7 @@ const AdminOrder = () => {
 
   let order:Order | undefined = useSelector((state: RootState) => state.orders.find(order => order.id === id));
   let cart:CartProps | undefined = useSelector((state: RootState) => state.cart);
+  let menu:MenuItems [] | undefined = useSelector((state: RootState) => state.menu);
 
   useEffect(() => {
     if (order?.cart) {
@@ -43,7 +47,19 @@ const AdminOrder = () => {
       dispatch(cartActions.changeOrder(order?.cart));
       setUser(order.user)
     }
+    async function getMenu() {
+      const response = await fetch('/api/menu');
+      const data = await response.json();      
+      dispatch(menuActions.getMenu(data));
+    }
+    getMenu();
   }, [])
+
+const toggleMenu: (e:FormEvent) => void = (e) => {
+  setShowMenu(!showMenu);
+  e.preventDefault();
+}
+  
 
   const handleAmount: (e:ChangeEvent<HTMLSelectElement>, itemName: string) => void = (e, itemName) => {
 
@@ -115,6 +131,10 @@ async function updateOrder(e:FormEvent) {
 
   
 }
+  const entreeArry = menu.filter(item => item.type == 'Förrätt')
+  const vegArr = menu.filter(item => item.type == 'Veg')
+  const mainCourseArr = menu.filter(item => item.type != 'Förrätt' && item.type != 'Veg' && item.type != 'Efterrätt')
+  const desertArr = menu.filter(item => item.type == 'Efterrätt')
 
 
   const cartItemEl = cart.cartItems.map((item, index) => <CartItem item={item} key={index} handleAmount={handleAmount} />);
@@ -130,9 +150,20 @@ async function updateOrder(e:FormEvent) {
       <div>
         <h3>Maträtt</h3>
         {cartItemEl}
-        {cart.totalPrice}
+        <p>Totalt: {cart.totalPrice} kr</p>
       </div>
-
+      <div>
+        <button onClick={(e) => toggleMenu(e)}>Lägg till</button>
+        {showMenu ? 
+        <div>
+          <AdminMenu menu={entreeArry} type='Förrätt'/>
+          <AdminMenu menu={mainCourseArr} type='Huvudrätt'/>
+          <AdminMenu menu={vegArr} type='Vegetariskt'/>
+          <AdminMenu menu={desertArr} type='Efterrätt'/>
+        </div>
+        : ''
+        }
+      </div>
       <div>
         <p>Beställare</p>
         <div>
