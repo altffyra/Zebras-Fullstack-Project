@@ -21,7 +21,7 @@ function App() {
         <Route path="/" element={<LandingView />} />
         <Route path="/login" element={ <LoginView />}/> 
         {/* Admin */}
-        <Route path="/AdminOrder" element={ <AdminOrder />}/>
+        <Route path="/AdminOrder/:id" element={ <AdminOrder />}/>
         <Route path="/AdminPage" element={ <AdminPage />}/>
         {/* USER */}
         <Route path="/Account" element={ <Account />}/>
