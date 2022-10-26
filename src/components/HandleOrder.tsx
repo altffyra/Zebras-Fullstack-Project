@@ -1,12 +1,64 @@
-import React from 'react'
+import appertizer from '../assets/menu/appertizer.svg';
+import '../styles/_handleOrder.scss';
+import UserOrderAccordian from './UserOrderAccordian';
+import { Order } from '../models/types';
+import { useEffect, useState } from 'react';
+
 
 type Props = {}
 
 const HandleOrder = (props: Props) => {
+
+    const foodImg = appertizer;
+
+    const [orders, setOrders] = useState<Order[]>();
+    
+    //const checkId = localStorage.getItem('accountId');
+
+    async function getOrders() {
+        const response = await fetch('api/order/admin/orders',
+        {
+            headers: {
+                "Content-Type": "application/json",
+                "accountID": "4859" //JSON.stringify({ checkId })
+            }
+        });
+        const data = await response.json();     
+        setOrders(data);
+        console.log(data); 
+    }
+
+    {/*
+        const activeOrders: Order[] = '';
+    const notPickedUp: Order[] = '';
+    const finishedOrders: Order[] = '';
+    //skicka med dessa i UserOrderAccordin orders={ ? }
+*/}
+
   return (
-    <div>
-        <div className='handleOrderHeader'><h1>Administration</h1></div>
-        <div className='handleOrderTop'> <button className='admin-buttonSmall'>Tillbaks</button> <button className='admin-buttonSmall'>Logga ut </button>   </div>
+    <div className="admin_page--wrapper">
+        <div className="menu-wrapper">
+            <section className="menu-header" style={{'backgroundImage':`url(${foodImg})`}}>
+                <h1>ADMINISTRATION: </h1>
+            </section>
+        </div>
+
+        <div className="admin_button--container">
+            <button className='admin-buttonSmall'>Logga ut </button>
+        </div>
+
+        <section className="user-search">
+            <div className="search-container">
+                <input type="text" name="search" id="search-user" placeholder="Sök ordernummer" />
+                <label htmlFor="search" >SÖK</label>
+            </div>
+        </section>
+        <button onClick={ getOrders }>hej</button>
+        {/*
+        < UserOrderAccordian orderType={'Ohanterade'} orders={activeOrders}/>
+        < UserOrderAccordian orderType={'Ej hämtade'} orders={notPickedUp}/>
+        < UserOrderAccordian orderType={'Avslutade'} orders={finishedOrders}/>
+        */}
         <div className='informationTitles'> <p>Order</p> <p>Info</p> </div>
         <article >
             <div className='classification'> 
