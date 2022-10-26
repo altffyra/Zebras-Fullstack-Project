@@ -3,6 +3,7 @@ import '../styles/_handleOrder.scss';
 import UserOrderAccordian from './UserOrderAccordian';
 import { Order } from '../models/types';
 import { useEffect, useState } from 'react';
+import Nav from './Nav';
 
 
 type Props = {}
@@ -49,21 +50,27 @@ const HandleOrder = (props: Props) => {
 
   return (
     <div className="admin_page--wrapper">
+
+        < Nav/>
+
         <div className="menu-wrapper">
             <section className="menu-header" style={{'backgroundImage':`url(${foodImg})`}}>
-                <h1>ADMINISTRATION: </h1>
+                <h1>ADMINISTRATION </h1>
             </section>
         </div>
 
         <div className="admin_button--container">
+        <button className='admin-buttonSmall'>Tillbaka </button>
             <button className='admin-buttonSmall'>Logga ut </button>
         </div>
 
-        <section className="user-search">
-            <div className="search-container">
-                <input type="text" name="search" id="search-user" placeholder="Sök ordernummer" />
-                <label htmlFor="search" >SÖK</label>
-            </div>
+        <section className="search">
+            <section className="user-search">
+                <div className="search-container">
+                    <input type="text" name="search" id="search-user" placeholder="Sök ordernummer" />
+                    <label htmlFor="search" >SÖK</label>
+                </div>
+            </section>
         </section>
 
         <section className="user-orders">
