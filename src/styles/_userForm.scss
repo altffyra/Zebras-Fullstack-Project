@@ -2,10 +2,9 @@
 @use 'buttons';
 @use 'sass:color';
 
-.userForm {
-      // @include variables.gridContainer(15);
-      width: 80vw;
-      height: 100vh;
+.signup, .login, .login--checkout {
+      width: 100%;
+      height: calc(100vh - 6em);
       margin: 0 auto;
       @include variables.flexContainer();
       align-items: center;
@@ -14,48 +13,102 @@
       .loading {
             @include variables.loader();
       }
-      .smallBtn {
+      .small__btn {
             @include buttons.smallBtn();
             position: absolute;
             top: 1rem;
             left: 1rem;
       }
-
-      .formLogo {
-            // grid-area: 3 / 2 / 6 / 5;
-            width: 60%;
-            height: 19%;
-
-            background-image: url('../assets/formLogo.svg');
-            
-            background-size:contain ;
-            background-position: center;
-            background-repeat: no-repeat;
-            border: none;
-
+      .formLogo {       
+            img {
+                  width: 100%;
+                  height: 100%;
+            }
             box-shadow: variables.$boxShadow;
-
       }
-            form {
-                  // grid-area: 7 / 2 / 14 / 5;
-
-
+            .userForm {
                   @include variables.flexContainer();
-                  label {
-                        margin-top: 1em
+                  align-items: center;
+                  justify-items: center;
+                  gap: 3em;
+                  .form--info {
+                      position: relative;
+                      display: flex;    
                   }
-                  .bigBtn {
-                        @include buttons.bigBtn();
-                        background-color: #377395;
-                        margin-top: 1em;
+                  
+                  .form__label {
+                      position: absolute;
+
+                      font-size: 1.2rem;
+                      font-weight: 400;
+                      transition: all 0.5s;    
                   }
-                  .loginBtn {
-                        background: variables.$acceptBtnGreen;
+                  
+                  .form__input {
+                      width: 100%;
+                      background: transparent;
+                      border: none;
+                      border-bottom: 2px solid black;
+                      outline: none;
+                      font-size: 1.2rem;
+                      z-index: 1;
                   }
-                  p {
-                        margin: 0 auto;
+                  
+                  
+                  .form__input:focus {
+                      border-color: rgb(0, 0, 0);
                   }
+                  
+                  .form__input:focus ~ .form__label,
+                  .form__input:not(:placeholder-shown)~ .form__label {
+                      top: -20px;
+                      left: 0;
+                      font-size: 1rem;
+                      color: rgb(0, 0, 0);
+                  }
+                  & > div {
+                        @include variables.flexContainer();
+                        align-items: center;
+                        position: relative;
+                        
+                    }
+                  .big__btn.signup__btn {
+                        @include buttons.bigBtn($bg: #377395);
+                        
+                  }
+                  
+                  .button__container {
+                        box-sizing: border-box;
+                        @include variables.flexContainer(row);
+                        justify-content: center;
+                        max-height: 3em;
+
+                        .big__btn.guest__btn {
+                              @include buttons.bigBtn($bg: transparent, $pad: .432em .7em);
+                              color: variables.$fontDark;
+                              // width: 50%;
+                              outline: 1px solid black;
+                          }
+                        .big__btn.login__btn {
+                        @include buttons.bigBtn($bg: variables.$acceptBtnGreen);
+                              width: 50%;
+                        }
+                  }
+                  .big__btn.login__btn {
+                  @include buttons.bigBtn($bg: variables.$acceptBtnGreen);
+
+                  }
+
             }
 
+}
+.login--checkout {
+      height: 100%;
+}
 
+@media screen and (min-width: 786px) {
+      .userForm {
+        max-width: 1000px;
+        margin: 0 auto;
+      }
 }
