@@ -1,10 +1,12 @@
-import React from 'react'
+import HandleOrder from '../../components/HandleOrder';
 
 type Props = {}
 
 const AdminPage = (props: Props) => {
   return (
-    <div>AdminPage</div>
+    <div className="admin_wrapper">
+      < HandleOrder />
+    </div>
   )
 }
 
