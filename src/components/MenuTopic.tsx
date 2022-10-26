@@ -11,20 +11,22 @@ type Props = {
 const MenuTopic = ({ foodImg, topic, menuArray }: Props) => {
 
     const menuItemsEl = menuArray.map((item, index) => <MenuItem item={item} key={index} />)
+    let cssId : string = ''
     
+    if(topic == 'Förrätt') {
+        cssId = 'entree'
+    } else if(topic == 'Vegetarisk') {
+        cssId = 'veg'
+    } else if(topic == 'Efterrätt') {
+        cssId = 'desert'
+    }
 
 
     return (
         <section className="menu-header--container">
-
-            <figure className="menu-header--info">
-            <img src={foodImg} alt="" />
-            <section className="menu-header--text">
-                <section className="menu-header--flex">
-                <h1>{topic}</h1>
-                </section>
+            <section className='menu-topic' style={{'backgroundImage':`url(${foodImg})`}}>
+                <h1 id={cssId}>{topic}</h1>
             </section>
-            </figure>
             {topic == 'Huvudrätt' ? 
                 <>
                     <MenuMainCourse menuArr={menuArray} type={'Kött'} />

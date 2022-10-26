@@ -1,4 +1,4 @@
-import './Menu.scss';
+import '../../styles/_menu.scss';
 import appertizer from '../../assets/menu/appertizer.svg';
 import mainmeal from '../../assets/menu/mainmeal.svg';
 import veg from '../../assets/menu/veg.svg';
@@ -16,9 +16,6 @@ type Props = {}
 
 const Menu = (props: Props) => {
 const dispatch = useDispatch();
-  const appertizerImg = appertizer;
-  const vegImg = veg;
-  const dessImg = dessert;
 
   useEffect(() => {
     async function getMenu() {
@@ -36,34 +33,37 @@ const dispatch = useDispatch();
   const mainCourseArr = menu.filter(item => item.type != 'Förrätt' && item.type != 'Veg' && item.type != 'Efterrätt')
   const desertArr = menu.filter(item => item.type == 'Efterrätt')
 
+  const handleLink: (id:string) => void = (id) => {
+
+    const elemendId:Element | null= document.querySelector(`#${id}`);
+    if(elemendId) {
+      const y = elemendId.getBoundingClientRect().top + window.pageYOffset - 90;
+      window.scrollTo({top: y, behavior: 'smooth'})
+      // elemendId.scrollIntoView({
+      //     behavior: 'smooth'
+      //   });
+    }
+};
+
   return (
     <div className="menu-wrapper">
-      <section className="menu-nav--container">
         <Nav />
-      </section>
-
-      <section className="menu-header--container">
-
-        <figure className="menu-header--info">
-          <img src={mainmeal} alt="" />
-          <section className="menu-header--text">
-            <section className="menu-header--flex">
-              <h1>MENY</h1>
-            </section>
+          <section className="menu-header" style={{'backgroundImage':`url(${mainmeal  })`}}>
+            <h1>MENY</h1>
           </section>
-        </figure>
-
         <section className="menu-header--category">
-          <h2>KÖTT</h2>
-          <h2>FISK</h2>
-          <h2>FÅGEL</h2>
+          <h2 onClick={() => handleLink('entree')}>Förrätter</h2>
+          <h2 onClick={() => handleLink('meat')}>Kött</h2>
+          <h2 onClick={() => handleLink('fish')}>Fisk</h2>
+          <h2 onClick={() => handleLink('bird')}>Fågel</h2>
+          <h2 onClick={() => handleLink('veg')}>Vegetarisk</h2>
+          <h2 onClick={() => handleLink('desert')}>Efterrätter</h2>
         </section>
-      </section>
 
-      < MenuTopic topic={'Förrätt'} foodImg={appertizerImg} menuArray={entreeArry}/>
+      < MenuTopic topic={'Förrätt'} foodImg={appertizer} menuArray={entreeArry}/>
       < MenuTopic topic={'Huvudrätt'} foodImg={mainmeal} menuArray={mainCourseArr}/>
-      < MenuTopic topic={'Vegetarisk'} foodImg={vegImg} menuArray={vegArr}/>
-      < MenuTopic topic={'Efterrätt'} foodImg={dessImg} menuArray={desertArr}/>
+      < MenuTopic topic={'Vegetarisk'} foodImg={veg} menuArray={vegArr}/>
+      < MenuTopic topic={'Efterrätt'} foodImg={dessert} menuArray={desertArr}/>
 
       {cart.cartItems.length > 0 
       ?

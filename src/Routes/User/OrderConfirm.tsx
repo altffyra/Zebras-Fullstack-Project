@@ -2,44 +2,57 @@ import '../../styles/_orderConfirm.scss';
 import Nav from '../../components/Nav';
 import OrderItems from '../../components/OrderItems';
 import { Order } from '../../models/types';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
 import { actions as cartActions } from '../../features/cartReducer';
+import { actions as tempOrderActions } from '../../features/tempOrderReducer';
 
 const OrderConfirm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {
+    dispatch(cartActions.clearCart())
+  }, [])
 
   const confirmedOrder: Order = useSelector((state: RootState) => state.orders)[0];
+  const qwe: Order[] = useSelector((state: RootState) => state.orders)
+  console.log(qwe);
+  
   const orderItemsEl = confirmedOrder.cart.cartItems.map(item => <OrderItems item={item} key={item.name} />)
   const orderDone:string | undefined = confirmedOrder.orderCompleted?.slice(10)
 
   const changeOrder: () => void = () => {
     dispatch(cartActions.changeOrder(confirmedOrder.cart));
-    navigate('/checkout');
+    dispatch(tempOrderActions.setTempOrder(confirmedOrder))
+    navigate('/menu');
   }
   
   return (
     <section className="confirmed">
       <Nav />
-        {loading ? 
-            <div className='loading'></div>
-            : ''
-        }
         <div className='headline'>
           <h1>Orderbekräftelse</h1>
         </div>
-        
         <div className='time-container'>
           <p>Maten klar att hämtas : Kl. {orderDone}</p>
         </div>
 
+        <div className="order-user">
+          <p className='user-headline'>Beställare</p>
+          <div className="user">
+            <p>Namn : {confirmedOrder.user.name}</p>
+            <p>Email : {confirmedOrder.user.email}</p>
+            <p>Tel.nr : {confirmedOrder.user.phoneNumber}</p>
+          </div>
+        </div>
+        
+        
         <div className='order-cart'>
           <div className='order-header'>
-            <p className='order-title'>Order {confirmedOrder.id}</p>
+            <p className='order-title'>Order ID: {confirmedOrder.id}</p>
             <div className='list-titles'>
               <p>Rätt</p>
               <p>Antal</p>

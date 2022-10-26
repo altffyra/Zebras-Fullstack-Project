@@ -6,9 +6,6 @@
     gap: 2em;
     color: variables.$fontLight;
 
-    .loading {
-        @include variables.loader();
-    }
     .headline {
         @include variables.headerTitle();
     }
@@ -18,6 +15,25 @@
         padding: 1em;
         background-color: variables.$dropdownRed;        
         box-shadow: variables.$boxShadow;
+    }
+
+    .order-user {
+        margin: 0 1em;
+        @include variables.flexContainer();
+        background-color: variables.$darkRed;     
+        box-shadow: variables.$boxShadow;
+        .user-headline {
+            align-self: center;
+            padding: 1em;
+            font-weight: 700;
+        }
+
+        .user {
+            background-color: variables.$dropdownRed;     
+            @include variables.flexContainer();
+            gap: 1em;
+            padding: 1em;       
+        }
     }
 
     .order-cart {
@@ -82,6 +98,7 @@
         span {
             color: variables.$navBackground;
             text-decoration: underline;
+            cursor: pointer;
         }
     }
 

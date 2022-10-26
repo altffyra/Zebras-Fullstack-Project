@@ -4,14 +4,12 @@ import { fileURLToPath } from 'url';
 import { User, Schema, Order, LoginCreds } from './dbinterface';
 import { data as defaultData } from '../defaultData.js';
 import dayjs from 'dayjs';
+import { uuid } from 'uuidv4';
+import ShortUniqueId from 'short-unique-id';
+const uid = new ShortUniqueId({ length: 8 });
 
 
 export const started = dayjs().format('YYYY-MM-DD HH:mm');
-export const newtime = dayjs().add(23, 'minutes');
-export const completed = newtime.toString()
-
-
-
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -63,7 +61,9 @@ async function updateOrder(updatedOrder: Order, id:number) {
 
       if (updatedOrder.orderPlaced != undefined)
             //@ts-ignore
-          {  if(updatedOrder.orderPlaced < db.data.orders[id].orderCompleted || db.data.orders[id].locked === true) {
+          {  if(updatedOrder.orderPlaced > db.data.orders[id].orderCompleted || db.data.orders[id].locked === true) {
+            db.data.orders[id].locked = true
+            await db.write()
             return false
             }
       }
@@ -75,15 +75,19 @@ async function updateOrder(updatedOrder: Order, id:number) {
 }
 
 async function authenticateLogin(ID:any){
+      
     if(!db.data) {
         db.data = defaultData
     }
+
     const authreply:User[] = await db.data.users
-    let filter = authreply.find((user:User) => user.accountId == ID.accountID);
-    if (filter != undefined && filter.admin == true)
-    return authreply
-    else
-    return []
+    let filter: User[] = authreply.filter((user:User) => user.accountId == ID);
+
+    if (filter != undefined && filter[0].admin == true) {
+      return filter;
+    } else {
+      return [];
+    }
 }
 
 // // USER FUNCTIONS
@@ -126,6 +130,20 @@ export async function findAccount(userData:LoginCreds) {
       return filterAccount
 }
 
+export async function checkUser(id: string) {
+      await db.read()
+      if( !db.data ) {
+        db.data = defaultData
+        }
+        let found = db.data.users.find(user => user.accountId === id)
+        if(found) {
+            return found
+        } else {
+            return {success: false}
+        }
+
+}
+
 export async function createOrder(orderData: Order) {
       await db.read()
       if ( !db.data ) {
@@ -136,10 +154,7 @@ export async function createOrder(orderData: Order) {
 }
 
 export async function getUser(accountId: string) {
-      
-}
-
-export async function updateUser(accountId:string, updatedUser:User) {
+      await db.read()
       if( !db.data ) {
             db.data = defaultData
       }
@@ -148,10 +163,54 @@ export async function updateUser(accountId:string, updatedUser:User) {
       if(userIndex == -1) {
             return false
       }
+      return db.data.users[userIndex]
+}
+
+export async function updateUser(accountId:string, updatedUser:User) {
+      if( !db.data ) {
+            db.data = defaultData
+      }
+      const userIndex: number = db.data.users.findIndex(user => user.accountId === accountId)
+      if(userIndex == -1) {
+            return false
+      }
       
       db.data.users[userIndex] = updatedUser; 
       await db.write()
       return true
+}
+
+export async function checkLock(orderId: string) {
+
+      if( !db.data ) {
+            db.data = defaultData
+      }
+
+      const filterOrders: Order[] = [...db.data.orders];
+      const foundOrder: Order[] = filterOrders.filter(order => order.id == orderId)
+      const orderIndex: number = db.data.orders.findIndex(order => order.id == orderId)
+
+      console.log(orderIndex);
+
+      if (foundOrder.length === 0 && foundOrder[0].locked === true) {
+            return
+      }
+
+      db.data.orders[orderIndex].locked = true;
+      db.write();
+      return foundOrder[0];
+
+}
+
+export async function createOrderInfo() {
+      const randomNum: number = Math.ceil(Math.random() * 30)
+      const orderInfo = {
+            started: started,
+            completed: dayjs().add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm'),
+            id: uid()
+      }
+
+      return orderInfo
 }
 
 

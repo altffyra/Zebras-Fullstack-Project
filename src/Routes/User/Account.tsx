@@ -9,28 +9,54 @@ import { RootState } from '../../store';
 import { useEffect, useState } from 'react';
 import { User, Order } from '../../models/types';
 import {actions as orderActions} from '../../features/orderReducer';
+import { actions as tempOrderActions } from '../../features/tempOrderReducer';
+import { actions as cartActions } from '../../features/cartReducer';
+import { actions as userActions } from '../../features/userReducer';
 
 const Account = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(false);
-  
+
+  const tempOrder: Order | undefined =  useSelector((state: RootState) => state.tempOrder)[0];
   useEffect(() => {
+    if(tempOrder) {
+      dispatch(tempOrderActions.clearTempOrder());
+      dispatch(cartActions.clearCart())
+    }
     const accountId: string | null = localStorage.getItem('accountId');
+    
     if(accountId) {
       getOrder(accountId)
     } else {
-      // navigate('/');
+      navigate('/');
     }
   }, [])
 
   async function getOrder(accountId:string) {
-    setLoading(true)
-    const response = await fetch(`/api/order/user/${accountId}`);
-    const data = await response.json();      
-    dispatch(orderActions.getOrders(data));
+    setLoading(true)    
+    const orderResponse = await fetch(`/api/order/user/${accountId}`);
+    const orderData = await orderResponse.json();   
+    
+    if(user.name == '') {
+      console.log('he');
+      
+      const userResponse = await fetch(`/api/user/${accountId}`);
+      const userData = await userResponse.json();      
+      console.log(userData);
+      dispatch(userActions.setUser(userData))
+    } 
+    
+    dispatch(orderActions.getOrders(orderData));
+        
     setLoading(false)
   }
+
+const handleLogout: () => void = () => {
+    dispatch(userActions.logOut());
+    localStorage.removeItem('accountId')
+    navigate('/menu')
+}
     
   
   
@@ -44,6 +70,7 @@ const Account = () => {
             <div className='loading'></div>
             : ''
         }
+      <button className='btn-logout' onClick={handleLogout}>Logga ut</button>
       <div className="headline">
           <h1>Konto</h1>
       </div>
