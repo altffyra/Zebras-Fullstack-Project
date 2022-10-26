@@ -1,16 +1,18 @@
-import React from 'react'
+import React, { FormEvent } from 'react'
 import { CartItems, MenuItems } from '../models/types';
 import {actions as cartActions} from '../features/cartReducer';
 import { useDispatch } from 'react-redux';
 
 type Props = {
     item: MenuItems
+    toggleMenu: (e:FormEvent) => void;
 }
 
 const AdminMenuItem = (props: Props) => {
     const dispatch = useDispatch();
 
-    const AddItemToCart = () => {
+    const AddItemToCart: (e:FormEvent) => void = (e) => {
+        props.toggleMenu(e)
         const cartObject: CartItems = {
           name: props.item.name,
           price: props.item.price,
@@ -20,9 +22,9 @@ const AdminMenuItem = (props: Props) => {
       }
 
   return (
-    <div>
+    <div className='menu-item'>
         <p>{props.item.name}</p>
-        <p onClick={AddItemToCart}>+</p>
+        <p className='add-plus' onClick={(e) => AddItemToCart(e)}>+</p>
     </div>
   )
 }

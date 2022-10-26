@@ -167,33 +167,37 @@ async function updateOrder(e:FormEvent) {
   
 
   return (
-    <section>
-        <div>
+    <section className='admin-order'>
+        <div className='top-btn'>
           <button onClick={() => navigate('/AdminPage')}>Tillbaka</button>
           {order?.locked ? <img src={locked} alt="" /> : ''}
         </div>
         {!order?.locked ? 
-      <form>
+      <form className='order-form'>
         <h1>Order {order?.id}</h1>
-        <div>
-          <h3>Maträtt</h3>
+        <div className='order-cart'>
+          <div className="headline-cart">
+            <h3 className='flex-4'>Maträtt</h3>
+            <h3>Antal</h3>
+            <h3>Pris</h3>
+          </div>
           {cartItemEl}
-          <p>Totalt: {cart.totalPrice} kr</p>
+          <p className='total-price'>Totalt: {cart.totalPrice} kr</p>
         </div>
-        <div>
-          <button onClick={(e) => toggleMenu(e)}>Lägg till</button>
+        <div className='add-item'>
+          <button onClick={(e) => toggleMenu(e)}>{!showMenu ? 'Lägg till' : 'Stäng'}</button>
           {showMenu ? 
-          <div>
-            <AdminMenu menu={entreeArry} type='Förrätt'/>
-            <AdminMenu menu={mainCourseArr} type='Huvudrätt'/>
-            <AdminMenu menu={vegArr} type='Vegetariskt'/>
-            <AdminMenu menu={desertArr} type='Efterrätt'/>
+          <div className='menu-container'>
+            <AdminMenu menu={entreeArry} type='Förrätt' toggleMenu={toggleMenu}/>
+            <AdminMenu menu={mainCourseArr} type='Huvudrätt' toggleMenu={toggleMenu}/>
+            <AdminMenu menu={vegArr} type='Vegetariskt' toggleMenu={toggleMenu}/>
+            <AdminMenu menu={desertArr} type='Efterrätt' toggleMenu={toggleMenu}/>
           </div>
           : ''
           }
         </div>
-        <div>
-          <p>Beställare</p>
+        <div className='user-info'>
+          <h3>Beställare</h3>
           <div>
             <label htmlFor="">Namn</label>
             <input type="text" name="name" id="" value={user.name} onChange={(e) => changeCredentials(e)}/>
@@ -209,28 +213,31 @@ async function updateOrder(e:FormEvent) {
         </div>
 
         <div>
-          <h2>Kundkommentar</h2>
+          <h3>Kundkommentar</h3>
           <textarea name="" id="" readOnly value={order?.userComment}></textarea>
         </div>
 
         <div>
-          <p>Lägg kommentar till kocken?</p>
+          <h3>Lägg kommentar till kocken?</h3>
           <textarea name="admin-comment" id="admin-comment" onChange={(e) => makeAdminComment(e)}></textarea>
         </div>
 
-        <button type='submit' onClick={updateOrder}>Lås & skicka</button>
+        <button type='submit' className='btn-submit' onClick={updateOrder}>Lås & skicka</button>
       </form>
       :
-      <section>
+      <section className='locked-order'>
         <h1>Order {order?.id}</h1>
-        <div>
-          <h3>Maträtt</h3>
+        <div className='order-cart'>
+        <div className="headline-cart">
+            <h3 className='flex-4'>Maträtt</h3>
+            <h3 className='flex-1'>Pris</h3>
+          </div>
           {cartItemEl}
-          <p>Totalt: {cart.totalPrice} kr</p>
+          <p className='total-price'>Totalt: {cart.totalPrice} kr</p>
         </div>
 
-        <div>
-          <p>Beställare</p>
+        <div className='user-info'>
+          <h3>Beställare</h3>
           <div>
             <p>Namn</p>
             <p>{user.name}</p>
@@ -246,15 +253,15 @@ async function updateOrder(e:FormEvent) {
         </div>
 
         <div>
-          <h2>Kundkommentar</h2>
+          <h3>Kundkommentar</h3>
           <textarea name="" id="" readOnly value={order?.userComment}></textarea>
         </div>
 
         <div>
-          <p>Kommentar till kocken</p>
+          <h3>Kommentar till kocken</h3>
           <textarea name="admin-comment" id="admin-comment" readOnly value={order?.adminComment}></textarea>
         </div>
-        <button onClick={completeOrder}>Order avslutad</button>
+        <button className='btn-submit' onClick={completeOrder}>Order avslutad</button>
 
     </section>
       }

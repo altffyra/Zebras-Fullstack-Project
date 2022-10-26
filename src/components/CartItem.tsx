@@ -11,7 +11,7 @@ const CartItem = (props:CartItemsProps) => {
     const itemPrice: number = props.item.price * props.item.amount;
     return (
         <section className="cart-item">
-            <p>{props.item.name}</p>
+            <p className='item-name'>{props.item.name}</p>
             {!props.locked ?
                 <select name="amount" id="" value={props.item.amount} onChange={(e) => props.handleAmount(e, props.item.name)}>
                     <option value="0">0</option>
@@ -27,7 +27,7 @@ const CartItem = (props:CartItemsProps) => {
                     <option value="10">10</option>
                 </select> : '' }
 
-            <p>{itemPrice} kr</p>
+            <p className='item-price'>{itemPrice} kr</p>
         </section>
 
     
