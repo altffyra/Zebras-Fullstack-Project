@@ -1,16 +1,21 @@
 @use 'buttons';
+@use 'variables';
 
-div .menu-wrapper {
-    margin: 0;
-}
-
-.admin_button--container {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    margin-right: 4rem;
-    height: 4rem;
-    .admin-buttonSmall {
-        @include buttons.smallBtn();
+.admin_page--wrapper {
+    
+    .menu-wrapper {
+        margin: 0;
+    }
+    
+    .admin_button--container {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        margin-right: 4rem;
+        height: 4rem;
+        .admin-buttonSmall {
+            @include buttons.smallBtn();
+        }
     }
 }
+

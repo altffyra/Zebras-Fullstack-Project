@@ -14,30 +14,36 @@ const HandleOrder = (props: Props) => {
     const [orders, setOrders] = useState<Order[]>();
     
     let checkId: string | null = localStorage.getItem('accountId');
-    let activeOrders: Order[] = [];
     let finishedOrders: Order[] = [];
+    let activeOrders: Order[] = [];
 
-    async function getOrders() {
-        if (checkId === 'null') {
-            return
-        } else {
-            const response = await fetch('api/order/admin/orders',
-            {
-                headers: {
-                    "accountID": `${checkId}`
-                }
-            });
-            const data = await response.json();     
-            setOrders(data);
-        } 
-    }
+    useEffect(() => {
+        async function getOrders() {
+            if (checkId === 'null') {
+                return
+            } else {
+                const response = await fetch('api/order/admin/orders',
+                {
+                    headers: {
+                        "accountID": `${checkId}`
+                    }
+                });
+                const data = await response.json();     
+                setOrders(data);
+            } 
+        }
+        getOrders();
+        
+    }, []);
+
+
 
     if (orders !== undefined) {
-        activeOrders = orders.filter(order => !order.completed);
-        //  ON HOLD:                const notPickedUp: Order[] | undefined = orders?.filter(order => ??? );
-        finishedOrders = orders.filter(order => order.completed);
-    }
+        activeOrders = orders.filter((order) => !order.completed);
+        finishedOrders = orders.filter((order) => order.completed);
 
+        //  ON HOLD:                const notPickedUp: Order[] | undefined = orders?.filter(order => ??? );
+    }
 
 
 
@@ -59,12 +65,13 @@ const HandleOrder = (props: Props) => {
                 <label htmlFor="search" >SÖK</label>
             </div>
         </section>
-        <button onClick={ getOrders }>hej</button>
 
-        < UserOrderAccordian orderType={'Ohanterade'} orders={activeOrders}/>
-        {/* ON HOLD:   < UserOrderAccordian orderType={'Ej hämtade'} orders={notPickedUp}/>*/}
-        < UserOrderAccordian orderType={'Avslutade'} orders={finishedOrders}/>
+        <section className="user-orders">
+            { orders !== undefined ? < UserOrderAccordian key={1} orderType={'Ohanterade'} orders={ activeOrders }/> : <p></p> }
+            { orders !== undefined ? < UserOrderAccordian key={2} orderType={'Avslutade'} orders={ finishedOrders }/> : <p></p> }
+        </section>
 
+        {/*
         <div className='informationTitles'> <p>Order</p> <p>Info</p> </div>
         <article >
             <div className='classification'> 
@@ -90,6 +97,7 @@ const HandleOrder = (props: Props) => {
             Här mappas avslutade ut
             
         </article>
+        */}
 
 
 
