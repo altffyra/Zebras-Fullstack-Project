@@ -7,7 +7,7 @@ type CartItemsProps = {
 }
 
 const CartItem = (props:CartItemsProps) => {
-    
+    const itemPrice: number = props.item.price * props.item.amount;
     return (
         <section className="cart-item">
             <p>{props.item.name}</p>
@@ -24,7 +24,7 @@ const CartItem = (props:CartItemsProps) => {
                 <option value="9">9</option>
                 <option value="10">10</option>
             </select>
-            <p>{props.item.price} kr</p>
+            <p>{itemPrice} kr</p>
         </section>
 
     
