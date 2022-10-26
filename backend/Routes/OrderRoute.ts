@@ -3,7 +3,7 @@ import express, { NextFunction, Request, Response } from "express";
  app.use(express.json());
  const orderRoute = express.Router();
  import {User, Order} from '../lowDb/dbinterface'
- import db, {authenticateLogin, getOrders,checkOrder, createOrderInfo, updateOrder, createOrder, checkLock} from '../lowDb/database.js'
+ import db, {authenticateLogin, getOrders,checkOrder, createOrderInfo, updateOrder, createOrder, checkLock, adminUpdateOrder} from '../lowDb/database.js'
  import { isValidCart, isValidUpdatedOrder } from "../validators/validOrder.js";
  import { isValidUser, isValidGuest } from "../validators/validUser.js";
 
@@ -160,7 +160,7 @@ orderRoute.put("/:id", async (req:IdParam, res:Response) => {
   }
 });
 
-// Change order Admin (OBS lägg till auth)
+// CHANGE ADMIN ORDER (OBS lägg till auth)
 orderRoute.put("/admin/:id", async (req:IdParam, res:Response) => {
   const id:string = req.params.id;  
   let updatedOrder: Order = req.body;
@@ -173,14 +173,10 @@ orderRoute.put("/admin/:id", async (req:IdParam, res:Response) => {
   if(isValidGuest(updatedOrder.user)) {
     if(isValidCart(updatedOrder)) {    
       if(isValidUpdatedOrder(updatedOrder)) {        
-          const checkedOrder: boolean = await updateOrder(updatedOrder, foundIndex)
-          console.log(checkedOrder);
-          
-          if(!checkedOrder) {
-            res.send({locked: true})
-            return
-          }
-          res.status(200).send(updatedOrder)
+          const allOrders: Order[] = await adminUpdateOrder(updatedOrder, foundIndex)
+
+        
+          res.status(200).send(allOrders)
       } else {
         res.status(400).send('Bad placed order')
       }
