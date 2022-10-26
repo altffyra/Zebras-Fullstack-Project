@@ -13,19 +13,21 @@ const HandleOrder = (props: Props) => {
 
     const [orders, setOrders] = useState<Order[]>();
     
-    //const checkId = localStorage.getItem('accountId');
+    let checkId: string | null = localStorage.getItem('accountId');
 
     async function getOrders() {
-        const response = await fetch('api/order/admin/orders',
-        {
-            headers: {
-                "Content-Type": "application/json",
-                "accountID": "4859" //JSON.stringify({ checkId })
-            }
-        });
-        const data = await response.json();     
-        setOrders(data);
-        console.log(data); 
+        if (checkId === 'null') {
+            return
+        } else {
+            const response = await fetch('api/order/admin/orders',
+            {
+                headers: {
+                    "accountID": `${checkId}`
+                }
+            });
+            const data = await response.json();     
+            setOrders(data);
+        } 
     }
 
     {/*
