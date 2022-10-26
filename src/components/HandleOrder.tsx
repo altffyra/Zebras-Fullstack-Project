@@ -14,6 +14,8 @@ const HandleOrder = (props: Props) => {
     const [orders, setOrders] = useState<Order[]>();
     
     let checkId: string | null = localStorage.getItem('accountId');
+    let activeOrders: Order[] = [];
+    let finishedOrders: Order[] = [];
 
     async function getOrders() {
         if (checkId === 'null') {
@@ -30,12 +32,14 @@ const HandleOrder = (props: Props) => {
         } 
     }
 
-    {/*
-        const activeOrders: Order[] = '';
-    const notPickedUp: Order[] = '';
-    const finishedOrders: Order[] = '';
-    //skicka med dessa i UserOrderAccordin orders={ ? }
-*/}
+    if (orders !== undefined) {
+        activeOrders = orders.filter(order => !order.completed);
+        //  ON HOLD:                const notPickedUp: Order[] | undefined = orders?.filter(order => ??? );
+        finishedOrders = orders.filter(order => order.completed);
+    }
+
+
+
 
   return (
     <div className="admin_page--wrapper">
@@ -56,11 +60,11 @@ const HandleOrder = (props: Props) => {
             </div>
         </section>
         <button onClick={ getOrders }>hej</button>
-        {/*
+
         < UserOrderAccordian orderType={'Ohanterade'} orders={activeOrders}/>
-        < UserOrderAccordian orderType={'Ej hämtade'} orders={notPickedUp}/>
+        {/* ON HOLD:   < UserOrderAccordian orderType={'Ej hämtade'} orders={notPickedUp}/>*/}
         < UserOrderAccordian orderType={'Avslutade'} orders={finishedOrders}/>
-        */}
+
         <div className='informationTitles'> <p>Order</p> <p>Info</p> </div>
         <article >
             <div className='classification'> 
@@ -72,7 +76,7 @@ const HandleOrder = (props: Props) => {
 
         <article >
             <div className='classification'> 
-                <h1>Hanterade</h1> 
+                <h1>Ej hämtade</h1> 
                 <div className='dot-orange'></div>  
             </div>
             Här mappas hanterade ut
