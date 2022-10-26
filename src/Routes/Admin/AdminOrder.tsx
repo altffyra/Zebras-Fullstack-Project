@@ -1,5 +1,5 @@
 import '../../styles/_adminorder.scss';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { User, Order, CartProps, MenuItems } from '../../models/types';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
@@ -8,6 +8,7 @@ import AdminMenu from '../../components/AdminMenu';
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import {actions as cartActions} from '../../features/cartReducer';
 import {actions as menuActions} from '../../features/menuReducer';
+import {actions as orderActions} from '../../features/orderReducer';
 import locked from '../../assets/locked.png';
 
 
@@ -22,6 +23,10 @@ type UpdatedItemProps = {
 
 
 const AdminOrder = () => {
+  const { id } = useParams<keyof MyParams>() as MyParams;
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [user, setUser] = useState<User>({
     name: '',
     email: '',
@@ -34,8 +39,7 @@ const AdminOrder = () => {
   const [ showMenu, setShowMenu ] = useState<boolean>(false);
 
 
-  const { id } = useParams<keyof MyParams>() as MyParams;
-  const dispatch = useDispatch();
+
 
   let order:Order | undefined = useSelector((state: RootState) => state.orders.find(order => order.id === id));
   let cart:CartProps | undefined = useSelector((state: RootState) => state.cart);
@@ -97,18 +101,15 @@ async function completeOrder() {
       },
       body: JSON.stringify(completedOrder),
     });
-    console.log(response)
-    const datasave = await response.json();
-    console.log(datasave.locked);
-    if (datasave.locked){
-      
-      setOrderLocked(true)
-      
-    } else {
-      // dispatch(orderActions.makeOrders(datasave));
-      // navigate("/OrderConfirm");
 
-    }
+    const datasave = await response.json();
+
+    if (response.ok) {
+      dispatch(orderActions.getOrders(datasave));
+      navigate("/AdminPage");
+
+    } 
+
   }
 
 }
@@ -135,26 +136,23 @@ async function updateOrder(e:FormEvent) {
     }   
 
     console.log(updatedOrder);
-      // const orderId = order?.id
-      // const response = await fetch(`/api/order/admin/${orderId}`, {
-      //   method: "PUT",
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify(updatedOrder),
-      // });
-      // console.log(response)
-      // const datasave = await response.json();
-      // console.log(datasave.locked);
-      // if (datasave.locked){
-        
-      //   setOrderLocked(true)
-        
-      // } else {
-      //   dispatch(orderActions.makeOrders(datasave));
-      //   navigate("/OrderConfirm");
-  
-      // }
+      const orderId = order?.id
+      const response = await fetch(`/api/order/admin/${orderId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedOrder),
+      });
+      const datasave = await response.json();
+
+      // christians uppgift att fixa check!
+      if (response.ok) {
+        dispatch(orderActions.getOrders(datasave));
+        navigate("/AdminPage");
+
+      } 
+
   }
 
   
@@ -171,7 +169,7 @@ async function updateOrder(e:FormEvent) {
   return (
     <section>
         <div>
-          <button>Tillbaka</button>
+          <button onClick={() => navigate('/AdminPage')}>Tillbaka</button>
           {order?.locked ? <img src={locked} alt="" /> : ''}
         </div>
         {!order?.locked ? 
