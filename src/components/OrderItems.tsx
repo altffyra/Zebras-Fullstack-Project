@@ -2,7 +2,7 @@ import '../styles/_orderItems.scss';
 import { CartItems } from '../models/types';
 
 type OrderItemProps = {
-    item: CartItems
+    item: CartItems;
 }
 
 const OrderItems = (props: OrderItemProps) => {
@@ -16,6 +16,6 @@ const OrderItems = (props: OrderItemProps) => {
         <div className='divider'></div>
       </section>
     )
-  }
+  };
   
-  export default OrderItems
+  export default OrderItems;

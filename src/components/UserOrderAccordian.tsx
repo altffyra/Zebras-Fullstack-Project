@@ -34,6 +34,6 @@ const UserOrderAccordian = (props: UserOrderAccordian) => {
             </div>
         </div>
     )
-  }
+  };
   
-  export default UserOrderAccordian
+  export default UserOrderAccordian;

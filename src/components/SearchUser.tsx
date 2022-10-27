@@ -1,4 +1,4 @@
-import { ChangeEvent, useState, KeyboardEvent } from "react"
+import { ChangeEvent, useState, KeyboardEvent } from "react";
 import { Order } from '../models/types';
 import SingleUserOrders from "./SingleUserOrder";
 
@@ -13,21 +13,21 @@ const SearchUser = (props: SearchUserProps) => {
 
     const handleInput: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
         setSearch(e.target.value);
-    }
+    };
 
     const handleSearch: () => void = () => {
         if(search.length > 0) {
             setOrder(undefined);
-            setSearched(false)
+            setSearched(false);
             const foundOrder: Order | undefined  = props.orders.find(order => order.id === search)
             if(foundOrder) {
                 setOrder(foundOrder);
             } else {
-                setSearched(true)
-            }
+                setSearched(true);
+            };
             setSearch('');
-        }
-    }
+        };
+    };
 
     const handleEnter: (e: KeyboardEvent) => void = (e) => {
         if(e.key == 'Enter' && search.length > 0) {       
@@ -57,6 +57,6 @@ const SearchUser = (props: SearchUserProps) => {
         </article>
       </section>
     )
-  }
+  };
   
-  export default SearchUser
+  export default SearchUser;

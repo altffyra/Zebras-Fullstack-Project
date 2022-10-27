@@ -19,40 +19,41 @@ const UserInformation = (props: UserInformationProps) => {
     const [oldPassword, setOldPassword] = useState<string>('');
     const [newPassword, setnewPassword] = useState<string>('');
     const [newPasswordAgain, setnewPasswordAgain] = useState<string>('');
-    const [passwordError, setPasswordError] = useState<boolean>(false)
+    const [passwordError, setPasswordError] = useState<boolean>(false);
 
     useEffect(() => {
         if(props.user) {
-            setUserName(props.user.name)
-            setUserEmail(props.user.email)
-            setUserPhone(props.user.phoneNumber)
+            setUserName(props.user.name);
+            setUserEmail(props.user.email);
+            setUserPhone(props.user.phoneNumber);
         }
-    }, [props.user])
+    }, [props.user]);
 
     const handleUpdate: () => void = () => {
         setUpdate(true);
     };
 
     const handlePassword: () => void = () => {
-        setUpdate(true)
+        setUpdate(true);
         setUpdatePassword(true);
     };
 
     const handleSubmit: (e: FormEvent) => void = (e) => {
         e.preventDefault();
         updateUser();
-    }
+    };
 
     const handleSubmitPassword: (e: FormEvent) => void = (e) => {
         e.preventDefault();
         changePassword();
-    }
+    };
+
     async function changePassword() {
-        setPasswordError(false)
+        setPasswordError(false);
         if(newPassword != newPasswordAgain || oldPassword != props.user.password) {
-            setPasswordError(true)
-            return
-        } 
+            setPasswordError(true);
+            return;
+        };
 
         const updatedUser: User = {
             name: userName,
@@ -79,7 +80,7 @@ const UserInformation = (props: UserInformationProps) => {
 
 
     async function updateUser() {
-        setPasswordError(false)      
+        setPasswordError(false);      
         
         const updatedUser: User = {
             name: userName,
@@ -128,15 +129,15 @@ const UserInformation = (props: UserInformationProps) => {
     };
     const handleCancel: (e:FormEvent) => void = (e) => {
         e.preventDefault();
-        setUserName(props.user.name)
-        setUserEmail(props.user.email)
-        setUserPhone(props.user.phoneNumber)
-        setnewPassword('')
-        setnewPasswordAgain('')
-        setOldPassword('')
-        setPasswordError(false)
+        setUserName(props.user.name);
+        setUserEmail(props.user.email);
+        setUserPhone(props.user.phoneNumber);
+        setnewPassword('');
+        setnewPasswordAgain('');
+        setOldPassword('');
+        setPasswordError(false);
         setUpdate(false);
-        setUpdatePassword(false)
+        setUpdatePassword(false);
     };
 
     return (
@@ -156,15 +157,15 @@ const UserInformation = (props: UserInformationProps) => {
             ?
             <section className='user-container'>
                 <div className='user-info'>
-                    <p>Namn : </p>
+                    <p>Namn: </p>
                     <p>{props.user.name}</p>
                 </div>
                 <div className='user-info'>
-                    <p>Email : </p>
+                    <p>Email: </p>
                     <p>{props.user.email}</p>
                 </div>
                 <div className='user-info'>
-                    <p>Tel.nr : </p>
+                    <p>Tel.nr: </p>
                     <p>{props.user.phoneNumber}</p>
                 </div>
                 <div className="button-container">
@@ -178,15 +179,15 @@ const UserInformation = (props: UserInformationProps) => {
         {   !updatePassword && update ? 
           <form className='user-container' onSubmit={(e) => handleSubmit(e) }>
                 <div className='user-info'>
-                    <label htmlFor="username">Namn : </label>
+                    <label htmlFor="username">Namn: </label>
                     <input type="text" name="username" id="username" defaultValue={props.user.name} onChange={(e) => handleName(e)} />
                 </div>
                 <div className='user-info'>
-                    <label htmlFor="email">Email : </label>
+                    <label htmlFor="email">Email: </label>
                     <input type="email" name="email" id="email" defaultValue={props.user.email} onChange={(e) => handleEmail(e)} />
                 </div>
                 <div className='user-info'>
-                    <label htmlFor="username">Tel.nr : </label>
+                    <label htmlFor="username">Tel.nr: </label>
                     <input type="number" name="phonenum" id="phonenum" defaultValue={props.user.phoneNumber} onChange={(e) => handlePhone(e)} />
                 </div>
                 <div className="button-container">
@@ -199,11 +200,11 @@ const UserInformation = (props: UserInformationProps) => {
             {updatePassword && update? 
             <form className='user-container' onSubmit={(e) => handleSubmitPassword(e) }>
                     <div className='user-info'>
-                    <label htmlFor="oldpw">Gammalt Lösen : </label>
+                    <label htmlFor="oldpw">Gammalt Lösen: </label>
                     <input type="text" name="oldpw" id="oldpw" onChange={(e) => handleOldPassword(e)} />
                 </div>
                 <div className='user-info'>
-                    <label htmlFor="newpw">Nytt Lösen : </label>
+                    <label htmlFor="newpw">Nytt Lösen: </label>
                     <input type="text" name="newpw" id="newpw" onChange={(e) => handleNewPassword(e)} />
                 </div>
                 <div className='user-info'>
@@ -220,6 +221,6 @@ const UserInformation = (props: UserInformationProps) => {
         }
       </section>
     )
-  }
+  };
   
-  export default UserInformation
+  export default UserInformation;

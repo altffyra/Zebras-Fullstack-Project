@@ -18,6 +18,6 @@ const UserOrders = (props: UserOrdersProps) => {
         <UserOrderAccordian orderType={'Tidigare ordrar'} orders={completedOrders} />
       </section>
     )
-  }
+  };
   
-  export default UserOrders
+  export default UserOrders;
