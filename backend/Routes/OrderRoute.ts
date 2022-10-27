@@ -3,11 +3,9 @@ import express, { NextFunction, Request, Response } from "express";
  app.use(express.json());
  const orderRoute = express.Router();
  import {User, Order} from '../lowDb/dbinterface'
- import db, {authenticateLogin, getOrders,checkOrder, createOrderInfo, updateOrder, createOrder, checkLock, adminUpdateOrder} from '../lowDb/database.js'
+ import { authenticateLogin, getOrders,checkOrder, createOrderInfo, updateOrder, createOrder, checkLock, adminUpdateOrder} from '../lowDb/database.js'
  import { isValidCart, isValidUpdatedOrder } from "../validators/validOrder.js";
  import { isValidUser, isValidGuest } from "../validators/validUser.js";
-
-
 
  const auth = async function (req:Request, res:Response, next:NextFunction) {
   
@@ -27,7 +25,6 @@ import express, { NextFunction, Request, Response } from "express";
      }
  };
 
-
 // SEARCH ORDER
 orderRoute.get('/:id', async (req:IdParam, res:Response) => {
   const id:string = req.params.id;  
@@ -41,13 +38,10 @@ orderRoute.get('/:id', async (req:IdParam, res:Response) => {
   }
 })
 
+type IdObject = { id: string };
+type IdParam = Request<IdObject>;
 
-
-
- // GET ORDER
- type IdObject = { id: string };
- type IdParam = Request<IdObject>;
-
+// // GET USER ORDERS
  orderRoute.get("/user/:id", async (req:IdParam, res:Response) => {
      const id:string = req.params.id;
      let resOrders = await getOrders()
@@ -81,22 +75,6 @@ orderRoute.put("/admin/orders/:id", auth, async (req:Request, res:Response) => {
     res.send('Order is already locked');
 });
 
-
-// // GET USER ORDERS
- type nameObject = { name: string };
- type nameParam = Request<nameObject>;
-
- orderRoute.get("/:name", async (req:nameParam, res:Response) => {
-     const name:string = req.params.name;
-     let resOrders = await getOrders()
-     let filter = resOrders.filter((order:Order) => order.user.name == name);
-   if (filter.length > 0) {
-     res.send(filter);
-   } else {
-     res.sendStatus(404);
-   }
-   
- });
 
 // // MAKE ORDER
 orderRoute.post("/", async (req, res) => {
@@ -191,34 +169,5 @@ orderRoute.put("/admin/:id", async (req:IdParam, res:Response) => {
     res.status(400).send('Bad user')
   }
 });
-
-
-// GET ALL FOR TESTING
-orderRoute.get("/", async (req:IdParam, res:Response) => {
-  const id:string = req.params.id;
-  let resOrders = await getOrders()
-  if (resOrders.length > 0) {
-    res.send(resOrders);
-  } else {
-    res.sendStatus(404);
-  }
-});
-
   
-
-
-// //{user: (account ID/guest), cartItems: [] , orderPlaced: , userComment: , adminComment: , locked: , completed: , id:  }
-
-
-
-
-
-
-
-
-
-
-
-
-
 export default orderRoute

@@ -1,6 +1,6 @@
 import express, { Request, Response } from "express";
-import { User, LoginCreds, Order } from "../lowDb/dbinterface";
-import db, { findUser, createAccount, findAccount, updateUser,getUsers, getUser } from "../lowDb/database.js";
+import { User, LoginCreds } from "../lowDb/dbinterface";
+import db, { findUser, createAccount, findAccount, updateUser, getUser } from "../lowDb/database.js";
 import { data as defaultData } from '../defaultData.js'
 import { isValidUser } from "../validators/validUser.js";
 import { uuid } from "uuidv4";
@@ -8,11 +8,8 @@ const app = express();
 app.use(express.json());
 const userRoute = express.Router();
 
-
 // SIGNUP
-
 userRoute.post('/signup', async (req, res) => {
-
     const userData: User = req.body
     const resObj = {
         success: true,
@@ -79,28 +76,6 @@ userRoute.post('/login', async (req, res) => {
     
     res.json(resObj)
 })
-
-// UPDATE USER
-
-//user{name: , email: , accountId: , accountID: , phoneNumber: ,admin: , }
-
-
-
-//{
-  //  "cart": {[cartItems:[ ],  "totalPrice": 0}
-  //  "user": { "name": "",
-  //  "email": "",
-  //  "accountId": "",
-  //  "phoneNumber": "",
-  //  "admin": false },
-
-  //  "userComment": "",
-  //  "adminComment": "",
-  //  "locked": false,
-  //  "completed": false,
-  //  "orderPlaced": "",
-  //  "id":""
-  //} 
 
 //   GET USER
 userRoute.get('/:id', async (req, res) => {

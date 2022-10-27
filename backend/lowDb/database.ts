@@ -4,30 +4,22 @@ import { fileURLToPath } from 'url';
 import { User, Schema, Order, LoginCreds } from './dbinterface';
 import { data as defaultData } from '../defaultData.js';
 import dayjs from 'dayjs';
-import { uuid } from 'uuidv4';
 import ShortUniqueId from 'short-unique-id';
 const uid = new ShortUniqueId({ length: 8 });
-
 
 export const started = dayjs().format('YYYY-MM-DD HH:mm');
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-
 const file = join(__dirname, 'db.json')
 const adapter = new JSONFile<Schema>(file)
 const db = new Low(adapter)
-await db.read()
-
-
 
 await db.read()
 if( !db.data ) {
       db.data = defaultData
       db.write()
 }
-
-
 
 async function getMenu(){
       if( !db.data ) {
@@ -213,7 +205,6 @@ export async function checkLock(orderId: string) {
       db.data.orders[orderIndex].locked = true;
       db.write();
       return foundOrder[0];
-
 }
 
 export async function createOrderInfo() {
@@ -227,16 +218,6 @@ export async function createOrderInfo() {
       return orderInfo
 }
 
-
-
-// // PUSHA IN OBJECT
-// // menu.push('hello world')
-
-
-
-
-
-
 export {getMenu, getOrders, authenticateLogin, checkOrder, updateOrder, getUsers, adminUpdateOrder }
-// newUser, findUser, getUsers
+
 export default db
