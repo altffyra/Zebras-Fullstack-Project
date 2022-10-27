@@ -14,7 +14,7 @@ import { RootState } from "../../store";
 import { CartProps, MenuItems, User, Order } from "../../models/types";
 import { useNavigate } from "react-router-dom";
 import { actions as orderActions } from "../../features/orderReducer";
-import Alert from '../../components/Alert'
+import Alert from "../../components/Alert";
 import "../../styles/_alert.scss";
 
 const CheckOut = () => {
@@ -58,26 +58,34 @@ const CheckOut = () => {
     }
   }, []);
 
-const [errorElement, showError] = useState<boolean>(false)
-const [errorMessages, makeError] = useState({title:"" ,message:""})
-const showAlert = errorElement? <Alert errorTitle={errorMessages.title}  errorMessage={errorMessages.message} showError={showError}/>:"";
-let tempObject = {title:"" ,message:""}
+  const [errorElement, showError] = useState<boolean>(false);
+  const [errorMessages, makeError] = useState({ title: "", message: "" });
+  const showAlert = errorElement ? (
+    <Alert
+      errorTitle={errorMessages.title}
+      errorMessage={errorMessages.message}
+      showError={showError}
+    />
+  ) : (
+    ""
+  );
+  let tempObject = { title: "", message: "" };
 
   async function updateOrder(e: FormEvent) {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
 
     if (
       userCredentials.name.length < 1 ||
       userCredentials.email.length < 1 ||
       userCredentials.phoneNumber.length < 1
     ) {
-      setLoading(false)
-      tempObject.title = "Inga personuppgifter"
-      tempObject.message = "Ordern går inte skicka utan personuppgifter"
-      makeError(tempObject)
-      showError(true)
-      return
+      setLoading(false);
+      tempObject.title = "Inga personuppgifter";
+      tempObject.message = "Ordern går inte skicka utan personuppgifter";
+      makeError(tempObject);
+      showError(true);
+      return;
     }
     const updatedOrder: Order = {
       cart: cart,
@@ -98,44 +106,44 @@ let tempObject = {title:"" ,message:""}
       },
       body: JSON.stringify(updatedOrder),
     });
-    if (!response.ok){
-      setLoading(false)
-      tempObject.title = "Ordern ej skickad"
-      tempObject.message = "Något gick fel med beställningen, töm ordern ock försök igen"
-      makeError(tempObject)
-      showError(true)
+    if (!response.ok) {
+      setLoading(false);
+      tempObject.title = "Ordern ej skickad";
+      tempObject.message =
+        "Något gick fel med beställningen, töm ordern ock försök igen";
+      makeError(tempObject);
+      showError(true);
     }
 
     const datasave = await response.json();
     if (datasave.locked) {
-      setLoading(false)
-      tempObject.title = "Ordern är låst"
-      tempObject.message = "Ordern går inte ändra för ändringstiden har löpt ut"
-      makeError(tempObject)
-      showError(true)
-    } 
-
-    
-    else {
-      setLoading(false)
+      setLoading(false);
+      tempObject.title = "Ordern är låst";
+      tempObject.message =
+        "Ordern går inte ändra för ändringstiden har löpt ut";
+      makeError(tempObject);
+      showError(true);
+    } else {
+      setLoading(false);
       dispatch(orderActions.makeOrders(datasave));
       navigate("/OrderConfirm");
     }
   }
 
   async function sendOrder(e: FormEvent) {
-    setLoading(true)
+    setLoading(true);
     e.preventDefault();
     if (
       userCredentials.name.length < 1 ||
       userCredentials.email.length < 1 ||
       userCredentials.phoneNumber.length < 1
     ) {
-      setLoading(false)
-      tempObject.title = "Inga personuppgifter"
-      tempObject.message = "Ordern går inte skicka utan personuppgifter, fyll i och skicka igen"
-      makeError(tempObject)
-      showError(true)
+      setLoading(false);
+      tempObject.title = "Inga personuppgifter";
+      tempObject.message =
+        "Ordern går inte skicka utan personuppgifter, fyll i och skicka igen";
+      makeError(tempObject);
+      showError(true);
       return;
     }
     let data = {
@@ -153,7 +161,7 @@ let tempObject = {title:"" ,message:""}
     });
     const datasave = await response.json();
 
-    setLoading(false)
+    setLoading(false);
     dispatch(orderActions.makeOrders(datasave));
     navigate("/OrderConfirm");
   }
@@ -247,10 +255,7 @@ let tempObject = {title:"" ,message:""}
     <main>
       <Nav />
       <div className="checkout-wrapper">
-      {loading ? 
-            <div className='loading'></div>
-            : ''
-        }
+        {loading ? <div className="loading"></div> : ""}
         <section
           className="checkout-header--text"
           style={{ backgroundImage: `url(${mainmeal})` }}

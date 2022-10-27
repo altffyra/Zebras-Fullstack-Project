@@ -1,129 +1,134 @@
-@use 'sass:color';
+@use "sass:color";
 
-
-$darkRed:#541412;
-$yellowSenap: #D69F3A;
-$primaryBackground: #F8D4BA;
-$acceptBtnGreen: #53BC8A;
-$dropdownRed: #6C2623;
-$fontLight: #FFFFFF;
+$darkRed: #541412;
+$yellowSenap: #d69f3a;
+$primaryBackground: #f8d4ba;
+$acceptBtnGreen: #53bc8a;
+$dropdownRed: #6c2623;
+$fontLight: #ffffff;
 $fontDark: #000000;
 $navBackground: #377395;
 $boxShadow: 2px 2px 6px 1px rgba(0, 0, 0, 0.25);
-$primaryFont: 'Roboto', sans-serif;
-$headerFont: 'Rock Salt', cursive;
+$primaryFont: "Roboto", sans-serif;
+$headerFont: "Rock Salt", cursive;
 
 @mixin loader() {
-      position: fixed;
-      left: 0; 
-      right: 0; 
-      top: 0;
-      bottom: 0;
-      width: 4em;
-      height: 4em;
-      margin: auto;
-      border-radius: 50px;
-      border: 0.5em solid color.scale($darkRed, $lightness: 80%);
-      &:after {
-          content: '';
-          position: absolute;
-          top: -0.5em; 
-          left: -0.5em;
-          bottom: -0.5em;
-          right: -0.5em;
-          border-radius: 50px;
-          border: 0.5em solid transparent;
-          border-top-color: $yellowSenap;
-          -webkit-animation: spin 1s linear infinite;
-          animation: spin 1s linear infinite;
-          @keyframes spin {
-              0%{ -webkit-transform: rotate(0deg); tranform: rotate(0deg);}
-            100%{ -webkit-transform: rotate(360deg); tranform: rotate(360deg);}
-        }
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 4em;
+  height: 4em;
+  margin: auto;
+  border-radius: 50px;
+  border: 0.5em solid color.scale($darkRed, $lightness: 80%);
+  &:after {
+    content: "";
+    position: absolute;
+    top: -0.5em;
+    left: -0.5em;
+    bottom: -0.5em;
+    right: -0.5em;
+    border-radius: 50px;
+    border: 0.5em solid transparent;
+    border-top-color: $yellowSenap;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+    @keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+        tranform: rotate(0deg);
       }
+      100% {
+        -webkit-transform: rotate(360deg);
+        tranform: rotate(360deg);
+      }
+    }
+  }
 }
 
 @mixin sectionTop($bg: $darkRed) {
-      background: $bg;
-      color: $fontLight;
+  background: $bg;
+  color: $fontLight;
 }
 
 @mixin flexContainer($dir: column) {
-      display: flex;
-      flex-direction: $dir;
+  display: flex;
+  flex-direction: $dir;
 }
 
 @mixin flexBox($justify: center, $align: center) {
-      display: flex;
-      justify-content: $justify;
-      align-items: $align;
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
 }
 
-@mixin headerTitle($image: url('../assets/about-us.jpg'))  {
-      background-image: $image;
-      background-size: cover;
-      background-position: center;
-      width: 100%;
-      display: grid;
-      place-items: center;
-      padding: 1em;
+@mixin headerTitle($image: url("../assets/about-us.jpg")) {
+  background-image: $image;
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 1em;
 
-      h1 {
-            color:$fontDark;
-            padding: 0.4em;
-            background-color: $yellowSenap;
-      }
+  h1 {
+    color: $fontDark;
+    padding: 0.4em;
+    background-color: $yellowSenap;
+  }
 }
 
 @mixin dropDownActive {
-      transition: all 300ms;
-      .active {
-        transform: rotateZ(90deg);
-    }
+  transition: all 300ms;
+  .active {
+    transform: rotateZ(90deg);
+  }
 }
 
 @mixin gridContainer($rows: 5) {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-template-rows: repeat($rows, 1fr);
-      grid-column-gap: 0px;
-      grid-row-gap: 0px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat($rows, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
 }
 
 @mixin accordianHeader() {
-      background-color: $darkRed;
-      color: $fontLight;
-      box-shadow: $boxShadow;
-      h2 {
-            font-family: $primaryFont;
-            padding: 1em;
-      }
+  background-color: $darkRed;
+  color: $fontLight;
+  box-shadow: $boxShadow;
+  h2 {
+    font-family: $primaryFont;
+    padding: 1em;
+  }
 }
 
 @mixin accordianMenu($bg: $dropdownRed, $fontCol: $fontLight) {
-      box-shadow: $boxShadow;
-      .dropdown {
-            color: $fontCol;
-            background-color: $bg;
-            padding: 1em;
-            display: none;
-            max-height: 0%;
-            height: 100%;
-            overflow: hidden;
-            transition: 500ms;
-      }
-      .active {
-            max-height: 100vh;
-            display: block;
-            overflow: hidden;
-            transition: 500ms;
-      }
+  box-shadow: $boxShadow;
+  .dropdown {
+    color: $fontCol;
+    background-color: $bg;
+    padding: 1em;
+    display: none;
+    max-height: 0%;
+    height: 100%;
+    overflow: hidden;
+    transition: 500ms;
+  }
+  .active {
+    max-height: 100vh;
+    display: block;
+    overflow: hidden;
+    transition: 500ms;
+  }
 }
 
 @mixin divider($bg: $fontLight) {
-      width: 90%;
-      height: 0.1rem;
-      background-color: $bg;
-      opacity: 70%;
-      margin: 0 auto;
+  width: 90%;
+  height: 0.1rem;
+  background-color: $bg;
+  opacity: 70%;
+  margin: 0 auto;
 }

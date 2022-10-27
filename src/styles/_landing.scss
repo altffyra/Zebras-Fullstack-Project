@@ -1,157 +1,149 @@
-@use 'variables';
-@use 'buttons';
-@use 'sass:color';
+@use "variables";
+@use "buttons";
+@use "sass:color";
 
 .landing {
-    @include variables.gridContainer($rows: 10);
-    background-color: variables.$primaryBackground;
+  @include variables.gridContainer($rows: 10);
+  background-color: variables.$primaryBackground;
 
-    & > figure {
-        margin-block-start: 0;
-        margin-block-end: 0;
-        margin-inline-start: 0;
-        margin-inline-end: 0;
-        background-size: cover;
-        background-repeat: no-repeat;
+  & > figure {
+    margin-block-start: 0;
+    margin-block-end: 0;
+    margin-inline-start: 0;
+    margin-inline-end: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  & > section {
+    @include variables.flexBox();
+    flex-direction: column;
+    padding: 1em;
+    font-weight: 300;
+
+    h3 {
+      font-family: variables.$headerFont;
     }
+  }
 
-    & > section {
-        @include variables.flexBox();
-        flex-direction: column;
-        padding: 1em;
-        font-weight: 300;
+  & > * .border {
+    border-bottom: 1px solid variables.$yellowSenap;
+    border-right: 1px solid variables.$yellowSenap;
+    padding-right: 1em;
+    margin-bottom: 0.5em;
+  }
 
-        h3 {
-            font-family: variables.$headerFont;
-        }
+  .hero {
+    grid-area: 1 / 1 / 4 / 6;
+    background-image: url("../assets/hero.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-x: center;
+    background-position-y: center;
+    position: relative;
+
+    button {
+      @include buttons.smallBtn($pad: 1em 2em, $bg: black);
+      border: 2px solid variables.$yellowSenap;
+      color: variables.$yellowSenap;
+      background: rgba(50, 50, 50, 0.5);
+      position: absolute;
+      bottom: 20em;
+      font-family: variables.$headerFont;
     }
+  }
 
-    & >* .border {
-        border-bottom: 1px solid variables.$yellowSenap;
-        border-right: 1px solid variables.$yellowSenap;
-        padding-right: 1em;
-        margin-bottom: .5em;
+  .about-us {
+    grid-area: 4 / 1 / 5 / 6;
+    background-color: black;
+    color: variables.$fontLight;
+  }
 
+  .about-us-img {
+    grid-area: 5 / 1 / 6 / 6;
+    background-image: url("../assets/chef-cooking.jpg");
+    background-position-y: 60%;
+  }
+
+  .our-food-img {
+    grid-area: 7 / 1 / 8 / 6;
+    background-image: url("../assets/food.jpg");
+    background-position-y: 60%;
+  }
+
+  .our-food {
+    grid-area: 6 / 1 / 7 / 6;
+    background-color: variables.$darkRed;
+    color: variables.$fontLight;
+  }
+
+  .our-goal {
+    grid-area: 8 / 1 / 9 / 6;
+    background-color: black;
+    color: variables.$fontLight;
+  }
+
+  .our-goal-img {
+    grid-area: 9 / 1 / 10 / 6;
+    background-image: url("../assets/our-goal.jpg");
+    background-position-y: center;
+  }
+
+  .map {
+    grid-area: 10 / 1 / 11 / 6;
+
+    iframe {
+      width: 100%;
+      margin-bottom: 1em;
+      margin-top: 1em;
     }
-
-    .hero {
-        grid-area: 1 / 1 / 4 / 6;
-        background-image: url('../assets/hero.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position-x: center;
-        background-position-y: center;
-        position: relative;
-
-        button {
-            @include buttons.smallBtn($pad: 1em 2em, $bg: black);
-            border: 2px solid variables.$yellowSenap;
-            color: variables.$yellowSenap;
-            background: rgba(50, 50, 50, 0.5);
-            position: absolute;
-            bottom: 20em;
-            font-family: variables.$headerFont;
-
-        }
-    }
-
-    .about-us {
-        grid-area: 4 / 1 / 5 / 6;
-        background-color: black;
-        color: variables.$fontLight;
-    }
-
-    .about-us-img {
-        grid-area: 5 / 1 / 6 / 6;
-        background-image: url('../assets/chef-cooking.jpg');
-        background-position-y: 60%;
-
-
-    }
-
-    .our-food-img {
-        grid-area: 7 / 1 / 8 / 6;
-        background-image: url('../assets/food.jpg');
-        background-position-y: 60%;
-    }
-
-    .our-food {
-        grid-area: 6 / 1 / 7 / 6;
-        background-color: variables.$darkRed;
-        color: variables.$fontLight;
-    }
-
-    .our-goal {
-        grid-area: 8 / 1 / 9 / 6;
-        background-color: black;
-        color: variables.$fontLight;
-    }
-
-    .our-goal-img {
-        grid-area: 9 / 1 / 10 / 6;
-        background-image: url('../assets/our-goal.jpg');
-        background-position-y: center;
-    }
-
-    .map {
-        grid-area: 10 / 1 / 11 / 6;
-
-        iframe {
-            width: 100%;
-            margin-bottom: 1em;
-            margin-top: 1em;
-
-        }
-
-
-    }
-
+  }
 }
 
 @media screen and (min-width: 786px) {
-    .landing {
-        @include variables.gridContainer($rows: 10);
-        .hero {
-            grid-area: 1 / 1 / 4 / 6;
+  .landing {
+    @include variables.gridContainer($rows: 10);
+    .hero {
+      grid-area: 1 / 1 / 4 / 6;
 
-            button {
-                bottom: 10em;
-                cursor: pointer;
-            }
-        }
-
-        .about-us {
-            grid-area: 4 / 1 / 6 / 3;
-        }
-
-        .about-us-img {
-            grid-area: 4 / 3 / 6 / 6;
-            background-position-x: center;
-            background-position-y: center;
-        }
-
-        .our-food-img {
-            grid-area: 6 / 1 / 8 / 4;
-            background-position-x: center;
-            background-position-y: center;
-        }
-
-        .our-food {
-            grid-area: 6 / 4 / 8 / 6;
-        }
-
-        .our-goal {
-            grid-area: 8 / 1 / 10 / 3;
-        }
-
-        .our-goal-img {
-            grid-area: 8 / 3 / 10 / 6;
-            background-position-x: center;
-            background-position-y: center;
-        }
-
-        .map {
-            grid-area: 10 / 1 / 11 / 6;
-        }
+      button {
+        bottom: 10em;
+        cursor: pointer;
+      }
     }
+
+    .about-us {
+      grid-area: 4 / 1 / 6 / 3;
+    }
+
+    .about-us-img {
+      grid-area: 4 / 3 / 6 / 6;
+      background-position-x: center;
+      background-position-y: center;
+    }
+
+    .our-food-img {
+      grid-area: 6 / 1 / 8 / 4;
+      background-position-x: center;
+      background-position-y: center;
+    }
+
+    .our-food {
+      grid-area: 6 / 4 / 8 / 6;
+    }
+
+    .our-goal {
+      grid-area: 8 / 1 / 10 / 3;
+    }
+
+    .our-goal-img {
+      grid-area: 8 / 3 / 10 / 6;
+      background-position-x: center;
+      background-position-y: center;
+    }
+
+    .map {
+      grid-area: 10 / 1 / 11 / 6;
+    }
+  }
 }

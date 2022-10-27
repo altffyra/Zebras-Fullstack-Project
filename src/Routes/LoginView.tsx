@@ -1,9 +1,7 @@
-import React from "react";
-import { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { actions as userActions } from "../features/userReducer";
-import { useSelector, useDispatch } from "react-redux";
-import { User } from "../models/types";
+import { useDispatch } from "react-redux";
 import "../styles/_userForm.scss";
 import formLogo from "../assets/formLogo.svg";
 import Alert from "../components/Alert";

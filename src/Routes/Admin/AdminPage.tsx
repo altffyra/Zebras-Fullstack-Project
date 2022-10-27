@@ -1,13 +1,13 @@
-import HandleOrder from '../../components/HandleOrder';
+import HandleOrder from "../../components/HandleOrder";
 
-type Props = {}
+type Props = {};
 
 const AdminPage = (props: Props) => {
   return (
     <div className="admin_wrapper">
-      < HandleOrder />
+      <HandleOrder />
     </div>
-  )
-}
+  );
+};
 
-export default AdminPage
+export default AdminPage;

@@ -1,21 +1,15 @@
-import e from "cors";
-import React, { SetStateAction } from "react";
 
 type Props = {
   errorTitle: string | null;
   errorMessage: string | null;
-  showError: <SetStateAction>(Boolean: any) => any
+  showError: <SetStateAction>(Boolean: any) => any;
 };
 
 const Alert = (props: Props) => {
-
-  function closeError(e:any) :void{
-    e.preventDefault()
-    props.showError(false)
-
+  function closeError(e: any): void {
+    e.preventDefault();
+    props.showError(false);
   }
-
-
 
   return (
     <div className="blurrDiv">
@@ -25,7 +19,9 @@ const Alert = (props: Props) => {
         </div>
         <p className="errorMessage">{props.errorTitle}</p>
         <p className="errorClarification">{props.errorMessage}</p>
-        <button onClick={(e)=> closeError(e)} className="errorOk">OK</button>
+        <button onClick={(e) => closeError(e)} className="errorOk">
+          OK
+        </button>
       </div>
     </div>
   );

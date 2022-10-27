@@ -1,76 +1,77 @@
-@use 'variables';
-@use 'buttons';
+@use "variables";
+@use "buttons";
 
 .order-overlay {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    background-color: gray;
-    left: 0;
-    top: 0;
-    z-index: 10000;
-    display: grid;
-    place-content: center;
-    
-    .order-container {
-        @include variables.flexContainer();
-        gap: 1em;
-        padding: 1em;
-        width: 90vw;
-        background-color: variables.$fontLight;
-        box-shadow: variables.$boxShadow;
-        border-radius: 0.4em;
-        h2 {
-            font-family: variables.$primaryFont;
-        }
-        
-        .user-information {
-            @include variables.flexContainer();
-            gap: 0.4em;
-            p {
-                &:first-child {
-                    font-size: 1.2em;
-                    font-weight: 700;
-                    margin-bottom: 0.4em;
-                }
-            }
-        }
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: gray;
+  left: 0;
+  top: 0;
+  z-index: 10000;
+  display: grid;
+  place-content: center;
 
-        .divider {
-            @include variables.divider(variables.$fontDark)
-        }
-
-        .order-information {
-            @include variables.flexContainer();
-            gap: 1em;
-
-            .order-title {
-                font-size: 1.2em;
-                font-weight: 700;
-            }
-            
-        }
-
-        .button-container {
-            @include variables.flexContainer(row);
-            justify-content: space-evenly;
-            margin: 1em 0;
-            .btn-close {
-                @include buttons.bigBtn($pad: 0.6em 2em);
-            }
-            
-            .btn-change {
-                @include buttons.bigBtn($pad: 0.6em 2em, $bg: variables.$acceptBtnGreen);
-
-            }
-        }
+  .order-container {
+    @include variables.flexContainer();
+    gap: 1em;
+    padding: 1em;
+    width: 90vw;
+    background-color: variables.$fontLight;
+    box-shadow: variables.$boxShadow;
+    border-radius: 0.4em;
+    h2 {
+      font-family: variables.$primaryFont;
     }
+
+    .user-information {
+      @include variables.flexContainer();
+      gap: 0.4em;
+      p {
+        &:first-child {
+          font-size: 1.2em;
+          font-weight: 700;
+          margin-bottom: 0.4em;
+        }
+      }
+    }
+
+    .divider {
+      @include variables.divider(variables.$fontDark);
+    }
+
+    .order-information {
+      @include variables.flexContainer();
+      gap: 1em;
+
+      .order-title {
+        font-size: 1.2em;
+        font-weight: 700;
+      }
+    }
+
+    .button-container {
+      @include variables.flexContainer(row);
+      justify-content: space-evenly;
+      margin: 1em 0;
+      .btn-close {
+        @include buttons.bigBtn($pad: 0.6em 2em);
+      }
+
+      .btn-change {
+        @include buttons.bigBtn(
+          $pad: 0.6em 2em,
+          $bg: variables.$acceptBtnGreen
+        );
+      }
+    }
+  }
 }
 
 @media screen and (min-width: 786px) {
-    .order-overlay {
-        .order-container {
-            max-width: 1000px;
-        }
+  .order-overlay {
+    .order-container {
+      max-width: 1000px;
     }
+  }
 }

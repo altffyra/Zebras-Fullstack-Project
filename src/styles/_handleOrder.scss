@@ -1,61 +1,53 @@
-@use 'buttons';
-@use 'variables';
+@use "buttons";
+@use "variables";
 
 .admin_page--wrapper {
+  width: 100%;
+  padding: 1em;
 
-    width: 100%;
-    padding: 1em;
-    
-    .menu-wrapper {
+  .menu-wrapper {
+    margin-top: 12vh;
 
-        margin-top: 12vh;
-
-        .menu-header {
-
-            h1 {
-                padding: 0.4em 1em;
-                font-size: 1.2em;
-            }
-
-        }
-
+    .menu-header {
+      h1 {
+        padding: 0.4em 1em;
+        font-size: 1.2em;
+      }
     }
-    
-    .admin_button--container {
-        display: flex;
-        @include variables.flexBox($justify: space-between, $align: center);
-        margin: 1em 2em;
-        height: 4rem;
-        .admin-buttonSmall {
-            @include buttons.smallBtn();
-        }
-    }
+  }
 
-    .search {
-        width: 50%;
-        margin: 0;
-        padding: 0 4em 2em 2em;
-
-        .search-container {
-            min-width: 13em;
-            input {
-                width: 100%;
-                flex: 5;
-                outline: none;
-            }
-        }
+  .admin_button--container {
+    display: flex;
+    @include variables.flexBox($justify: space-between, $align: center);
+    margin: 1em 2em;
+    height: 4rem;
+    .admin-buttonSmall {
+      @include buttons.smallBtn();
     }
+  }
+
+  .search {
+    width: 50%;
+    margin: 0;
+    padding: 0 4em 2em 2em;
+
+    .search-container {
+      min-width: 13em;
+      input {
+        width: 100%;
+        flex: 5;
+        outline: none;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 786px) {
-    .search {
-        .search-container {
-            label {
-                min-width: 3em;
-            }
-        }
+  .search {
+    .search-container {
+      label {
+        min-width: 3em;
+      }
     }
+  }
 }
-
-
-
