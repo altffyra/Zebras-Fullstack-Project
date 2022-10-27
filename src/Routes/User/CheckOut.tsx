@@ -133,7 +133,7 @@ let tempObject = {title:"" ,message:""}
     ) {
       setLoading(false)
       tempObject.title = "Inga personuppgifter"
-      tempObject.message = "Ordern går inte skicka utan personuppgifter"
+      tempObject.message = "Ordern går inte skicka utan personuppgifter, fyll i och skicka igen"
       makeError(tempObject)
       showError(true)
       return;

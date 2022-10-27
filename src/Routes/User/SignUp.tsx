@@ -7,6 +7,9 @@ import { User } from '../../models/types';
 import '../../styles/_userForm.scss'
 import { v4 as uuid } from 'uuid';
 import formLogo from '../../assets/formLogo.svg'
+import Alert from '../../components/Alert'
+import "../../styles/_alert.scss";
+
 
 type Props = {}
 
@@ -19,6 +22,11 @@ const SignUp = (props: Props) => {
   const [userPassword, setUserPassword] = useState<string>('');
   const [loading, setLoading] = useState(false)
   const [alreadyExist, setAlreadyExist] = useState<boolean>(false)
+  
+  const [errorElement, showError] = useState<boolean>(false)
+const [errorMessages, makeError] = useState({title:"" ,message:""})
+const showAlert = errorElement? <Alert errorTitle={errorMessages.title}  errorMessage={errorMessages.message} showError={showError}/>:"";
+let tempObject = {title:"" ,message:""}
 
   const navigate = useNavigate();
 
@@ -31,6 +39,18 @@ const SignUp = (props: Props) => {
     password: userPassword
   }
   async function addUser() {
+    if (
+      newUser.name.length < 1 ||
+      newUser.email.length < 1 ||
+      newUser.phoneNumber.length < 1
+    ) {
+      setLoading(false)
+      tempObject.title = "Inga personuppgifter"
+      tempObject.message = "Ordern går inte skicka utan personuppgifter, fyll i och skicka igen"
+      makeError(tempObject)
+      showError(true)
+      return
+    }
     setLoading(true)
     setAlreadyExist(false)
     const response = await fetch('http://localhost:8000/api/user/signup', {
@@ -112,7 +132,7 @@ const SignUp = (props: Props) => {
         <p>Konto finns redan</p>
         : ''
       }
-
+    {showAlert}
     </div>
   )
 }

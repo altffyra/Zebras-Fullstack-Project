@@ -10,11 +10,12 @@
     height: 100%;
     top:0;
     left:0;
-    @include variables.flexBox()
+    @include variables.flexBox();
+    z-index: 40;
 }
 
 .alert{
-    z-index: 4;
+    z-index: 41;
 border-radius: 10px;
 background-color: white;
 width:90%;

@@ -5,6 +5,9 @@ import {User, Order} from "../models/types";
 import {actions as userActions} from '../features/userReducer';
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Alert from '../components/Alert'
+import "../styles/_alert.scss";
+
 
 
 type Props = {
@@ -12,6 +15,13 @@ type Props = {
 }
 
 const NotLoggedIn = (props: Props) => {
+
+  const [errorElement, showError] = useState<boolean>(false)
+  const [errorMessages, makeError] = useState({title:"" ,message:""})
+  const showAlert = errorElement? <Alert errorTitle={errorMessages.title}  errorMessage={errorMessages.message} showError={showError}/>:"";
+  let tempObject = {title:"" ,message:""}
+  
+
 
     event?.preventDefault();
     const tempOrder: Order[] = useSelector((state: RootState) => state.tempOrder);
@@ -38,6 +48,14 @@ const NotLoggedIn = (props: Props) => {
         name: userName,
         password: userPassword
       };
+      if (userCreds.name == '' || userCreds.password== ''){
+        tempObject.title = "Inga personuppgifter"
+        tempObject.message = "Kan inte logga in utan personuppgifer"
+        makeError(tempObject)
+        showError(true)
+        setLoading(false)
+        return
+      }
 
       const response = await fetch('/api/user/login', {
         method: 'POST',
@@ -94,6 +112,7 @@ const NotLoggedIn = (props: Props) => {
           </div>
         </form>
       </section>
+      {showAlert}
     </div>
   )
 };

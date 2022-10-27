@@ -6,6 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { User } from '../models/types'
 import '../styles/_userForm.scss'
 import formLogo from '../assets/formLogo.svg'
+import Alert from '../components/Alert'
+import "../styles/_alert.scss";
 
 
 
@@ -20,13 +22,27 @@ import formLogo from '../assets/formLogo.svg'
 
     const navigate = useNavigate()
 
+    const [errorElement, showError] = useState<boolean>(false)
+    const [errorMessages, makeError] = useState({title:"" ,message:""})
+    const showAlert = errorElement? <Alert errorTitle={errorMessages.title}  errorMessage={errorMessages.message} showError={showError}/>:"";
+    let tempObject = {title:"" ,message:""}
 
     async function userLogin() {
       setLoading(true)
 
+      
+
       let userCreds = {
         name: userName,
         password: userPassword
+      }
+      if (userCreds.name == '' || userCreds.password== ''){
+        tempObject.title = "Inga personuppgifter"
+        tempObject.message = "Kan inte logga in utan personuppgifer"
+        makeError(tempObject)
+        showError(true)
+        setLoading(false)
+        return
       }
 
       const response = await fetch('http://localhost:8000/api/user/login', {
@@ -94,6 +110,7 @@ import formLogo from '../assets/formLogo.svg'
         <p>Inloggning misslyckades</p>
         : ''
       }
+      {showAlert}
     </div>
   )
 }
