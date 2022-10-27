@@ -5,8 +5,7 @@ import { Order } from '../models/types';
 import { useEffect, useState } from 'react';
 import Nav from './Nav';
 
-
-type Props = {}
+type Props = {};
 
 const HandleOrder = (props: Props) => {
 
@@ -40,17 +39,13 @@ const HandleOrder = (props: Props) => {
 
     console.log(orders);
 
+  if (orders !== undefined) {
+    activeOrders = orders.filter((order) => !order.completed);
+    notPickedUpOrders = orders.filter((order) => order.locked && !order.completed);
+    finishedOrders = orders.filter((order) => order.completed);
 
-    if (orders !== undefined) {
-        activeOrders = orders.filter((order) => !order.completed);
-        finishedOrders = orders.filter((order) => order.completed);
-        notPickedUpOrders = orders.filter((order) => !order.completed && order.locked);
-
-        //  ON HOLD:                const notPickedUp: Order[] | undefined = orders?.filter(order => ??? );
-
-    }
-
-
+    //  ON HOLD:                const notPickedUp: Order[] | undefined = orders?.filter(order => ??? );
+  }
 
   return (
     <div className="admin_page--wrapper">
@@ -85,39 +80,8 @@ const HandleOrder = (props: Props) => {
             { orders !== undefined ? < AdminOrderAccordian key={3} orderType={'Avslutade'} orders={ finishedOrders }/> : <p></p> }
         </section>
 
-        {/*
-        <div className='informationTitles'> <p>Order</p> <p>Info</p> </div>
-        <article >
-            <div className='classification'> 
-                <h1>Ohanterade</h1> 
-                <div className='dot-green'></div>  
-            </div>
-            Här mappas ohanterade ut
-        </article>
-
-        <article >
-            <div className='classification'> 
-                <h1>Ej hämtade</h1> 
-                <div className='dot-orange'></div>  
-            </div>
-            Här mappas hanterade ut
-        </article>
-
-        <article >
-            <div className='classification'> 
-                <h1>Avslutade</h1> 
-                <div className='dot-red'></div>  
-            </div>
-            Här mappas avslutade ut
-            
-        </article>
-        */}
-
-
-
-
     </div>
-  )
-}
+  );
+};
 
-export default HandleOrder
+export default HandleOrder;
