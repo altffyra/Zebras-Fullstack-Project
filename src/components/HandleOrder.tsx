@@ -3,14 +3,12 @@ import '../styles/_handleOrder.scss';
 import AdminOrderAccordian from './AdminOrderAccordian';
 import { Order } from '../models/types';
 import { useEffect, useState } from 'react';
-import Nav from './Nav';
 
-type Props = {};
-
-const HandleOrder = (props: Props) => {
+const HandleOrder = () => {
 
     const foodImg = appertizer;
 
+    const [ loading, setLoading ] = useState<boolean>(false);
     const [orders, setOrders] = useState<Order[]>();
     
     let checkId: string | null = localStorage.getItem('accountId');
@@ -23,6 +21,7 @@ const HandleOrder = (props: Props) => {
             if (checkId === 'null') {
                 return
             } else {
+                setLoading(true)
                 const response = await fetch('api/order/admin/orders',
                 {
                     headers: {
@@ -30,6 +29,7 @@ const HandleOrder = (props: Props) => {
                     }
                 });
                 const data = await response.json();     
+                setLoading(true)
                 setOrders(data);
             } 
         }
@@ -37,47 +37,37 @@ const HandleOrder = (props: Props) => {
         
     }, []);
 
-    console.log(orders);
-
   if (orders !== undefined) {
     activeOrders = orders.filter((order) => !order.completed);
     notPickedUpOrders = orders.filter((order) => order.locked && !order.completed);
     finishedOrders = orders.filter((order) => order.completed);
 
-    //  ON HOLD:                const notPickedUp: Order[] | undefined = orders?.filter(order => ??? );
   }
 
   return (
     <div className="admin_page--wrapper">
+        {loading ? <div className="loading"></div> : ""}
 
-        <div className="menu-wrapper">
-            <section className="menu-header" style={{'backgroundImage':`url(${foodImg})`}}>
-                <h1>ADMINISTRATION </h1>
-            </section>
-        </div>
-
-        <div className="admin_button--container">
-            <button className='admin-buttonSmall'>Tillbaka </button>
-            <button className='admin-buttonSmall'>Logga ut </button>
-        </div>
-
-        <section className="search">
-            <section className="user-search">
-                <div className="search-container">
-                    <input type="text" name="search" id="search-user" placeholder="Sök ordernummer" />
-                    <label htmlFor="search" >SÖK</label>
-                </div>
-            </section>
+        <section className="menu-header" style={{'backgroundImage':`url(${foodImg})`}}>
+            <h1>ADMINISTRATION </h1>
         </section>
+
+        <button className='admin-buttonSmall'>Logga ut </button>
+
+        <div className="search-container">
+            <input type="text" name="search" id="search-user" placeholder="Sök ordernummer" />
+            <label htmlFor="search" >SÖK</label>
+        </div>
+        
         <section className="label-container">
             <p>Order</p>
             <p>Info</p>
         </section>
 
         <section className="user-orders">
-            { orders !== undefined ? < AdminOrderAccordian key={1} orderType={'Ohanterade'} orders={ activeOrders }/> : <p></p> }
-            { orders !== undefined ? < AdminOrderAccordian key={2} orderType={'Ej hämtade'} orders={ notPickedUpOrders }/> : <p></p> }
-            { orders !== undefined ? < AdminOrderAccordian key={3} orderType={'Avslutade'} orders={ finishedOrders }/> : <p></p> }
+            < AdminOrderAccordian  orderType={'Ohanterade'} orders={ activeOrders }/> 
+            < AdminOrderAccordian  orderType={'Ej hämtade'} orders={ notPickedUpOrders }/> 
+            < AdminOrderAccordian  orderType={'Avslutade'} orders={ finishedOrders }/> 
         </section>
 
     </div>

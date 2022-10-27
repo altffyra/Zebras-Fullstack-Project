@@ -1,51 +1,49 @@
 @use "buttons";
 @use "variables";
+@use 'sass:color';
 
 .admin_page--wrapper {
-
     width: 100%;
+    @include variables.flexContainer();
     padding: 0 1em;
-    
-    .menu-wrapper {
+    gap: 2em;
 
-        margin-top: 0;
-
-    .menu-header {
-      h1 {
-        padding: 0.4em 1em;
-        font-size: 1.2em;
-      }
+    .loader {
+        @include variables.loader();
     }
-  }
-
-  .admin_button--container {
-    display: flex;
-    @include variables.flexBox($justify: space-between, $align: center);
-    margin: 1em 2em;
-    height: 4rem;
     .admin-buttonSmall {
-      @include buttons.smallBtn();
+        align-self: flex-end;
+        @include buttons.smallBtn();
     }
-  }
+    
+    .menu-header {
+        @include variables.headerTitle();
+    }
 
-    .search {
-        width: 50%;
-        margin: 0;
-        padding: 0 4em 0 2em;
 
-        .search-container {
-
-            min-width: 13em;
-
-            input {
-
-                width: 100%;
-                flex: 5;
-                outline: none;
-
-            }
+    .search-container {
+        @include variables.flexContainer(row);
+        box-shadow: variables.$boxShadow;
+        input {
+          flex: 5;
+          outline: none;
         }
-    }
+        label {
+          color: variables.$fontLight;
+          flex: 1;
+          padding: 0.4em 0;
+          text-align: center;
+          background-color: variables.$navBackground;
+          transition: all 300ms;
+          &:hover {
+            background-color: color.scale(
+              variables.$navBackground,
+              $lightness: 40%
+            );
+          }
+        }
+      }
+    
 
     .label-container {
 
@@ -60,7 +58,7 @@
     }
 
     .user-orders {
-
+        margin: 0 2em;
         .orderlist {
 
             .single-order {
@@ -114,12 +112,11 @@
 
 }
 
-@media screen and (max-width: 786px) {
-
-    .search {
+@media screen and (min-width: 786px) {
+    .admin_page--wrapper { 
         .search-container {
-            label {
-                min-width: 3em;
+            input {
+                flex: 9;
             }
         }
     }
