@@ -84,7 +84,7 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
         </section>
 
         <section className="single-order__bottom">
-          { allItems }
+          <p>{ allItems }</p>
         </section>
 
       </section>

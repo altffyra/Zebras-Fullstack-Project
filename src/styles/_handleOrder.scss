@@ -73,13 +73,16 @@
                 .single-order__top {
                     display: flex;
                     justify-content: space-between;
+                    margin-bottom: 1em;
 
-                    p {
-                        padding: 1em 0;
+                    .single-order__id {
+                        p {
+                            margin-top: 1em;
+                        }
                     }
     
                     .single-order__locks {
-                        padding: 1em 0;
+                        margin: 1em 0;
                         margin-right: 1em;
                     }
 
@@ -87,7 +90,7 @@
 
                 .single-order__bottom {
                     p {
-                        padding-bottom: 1em;
+                        margin: 0 0 1em 0.5em;
                     }
                 }
 
