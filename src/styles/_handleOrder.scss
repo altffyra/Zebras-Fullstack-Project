@@ -2,11 +2,13 @@
 @use "variables";
 
 .admin_page--wrapper {
-  width: 100%;
-  padding: 1em;
 
-  .menu-wrapper {
-    margin-top: 12vh;
+    width: 100%;
+    padding: 0 1em;
+    
+    .menu-wrapper {
+
+        margin-top: 0;
 
     .menu-header {
       h1 {
@@ -26,28 +28,99 @@
     }
   }
 
-  .search {
-    width: 50%;
-    margin: 0;
-    padding: 0 4em 2em 2em;
+    .search {
+        width: 50%;
+        margin: 0;
+        padding: 0 4em 0 2em;
 
-    .search-container {
-      min-width: 13em;
-      input {
-        width: 100%;
-        flex: 5;
-        outline: none;
-      }
+        .search-container {
+
+            min-width: 13em;
+
+            input {
+
+                width: 100%;
+                flex: 5;
+                outline: none;
+
+            }
+        }
     }
-  }
+
+    .label-container {
+
+        display: flex;
+        justify-content: space-between;
+        margin: 2em 2em 1em 2em;
+
+        p {
+            font-weight: bold;
+        }
+
+    }
+
+    .user-orders {
+
+        .orderlist {
+
+            .single-order {
+
+                border-bottom: 1.5px solid black;
+
+                .single-order__top {
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 1em;
+
+                    .single-order__id {
+
+                        display: flex;
+
+                        p {
+                            margin-top: 1em;
+                        }
+
+                        img {
+                            margin: 0.9em 0 0 1em;
+                            height: fit-content;
+                        }
+                    }
+    
+                    .single-order__locks {
+                        margin: 0.8em 1.5em;
+                    }
+
+                }
+
+                .single-order__bottom {
+                    p {
+                        margin: 0 0 1em 0.5em;
+                    }
+                }
+
+            }
+
+            .accordian-header {
+
+                .order-symbol {
+                    margin-left: auto;
+                }
+
+            }
+
+        }
+
+    }
+
 }
 
 @media screen and (max-width: 786px) {
-  .search {
-    .search-container {
-      label {
-        min-width: 3em;
-      }
+
+    .search {
+        .search-container {
+            label {
+                min-width: 3em;
+            }
+        }
     }
-  }
 }
