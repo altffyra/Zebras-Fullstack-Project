@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '../../store';
 import { useEffect, useState } from 'react';
 import { User, Order } from '../../models/types';
-import {actions as orderActions} from '../../features/orderReducer';
+import { actions as orderActions } from '../../features/orderReducer';
 import { actions as tempOrderActions } from '../../features/tempOrderReducer';
 import { actions as cartActions } from '../../features/cartReducer';
 import { actions as userActions } from '../../features/userReducer';
@@ -38,28 +38,22 @@ const Account = () => {
     const orderResponse = await fetch(`/api/order/user/${accountId}`);
     const orderData = await orderResponse.json();   
     
-    if(user.name == '') {
-      console.log('he');
-      
+    if(user.name == '') {      
       const userResponse = await fetch(`/api/user/${accountId}`);
       const userData = await userResponse.json();      
-      console.log(userData);
       dispatch(userActions.setUser(userData))
     } 
     
-    dispatch(orderActions.getOrders(orderData));
-        
+    dispatch(orderActions.getOrders(orderData));        
     setLoading(false)
   }
 
-const handleLogout: () => void = () => {
-    dispatch(userActions.logOut());
-    localStorage.removeItem('accountId')
-    navigate('/menu')
-}
-    
-  
-  
+  const handleLogout: () => void = () => {
+      dispatch(userActions.logOut());
+      localStorage.removeItem('accountId')
+      navigate('/menu')
+  }
+
  const user:User = useSelector((state: RootState) => state.user);
  const orders:Order[] = useSelector((state: RootState) => state.orders);
 
@@ -67,9 +61,9 @@ const handleLogout: () => void = () => {
     <section className='account-page'>
       <Nav />
       {loading ? 
-            <div className='loading'></div>
-            : ''
-        }
+        <div className='loading'></div>
+        : ''
+      }
       <button className='btn-logout' onClick={handleLogout}>Logga ut</button>
       <div className="headline">
           <h1>Konto</h1>

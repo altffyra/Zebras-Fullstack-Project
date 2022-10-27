@@ -78,7 +78,6 @@ const UserInformation = (props: UserInformationProps) => {
         };
     };
 
-
     async function updateUser() {
         setPasswordError(false);      
         
