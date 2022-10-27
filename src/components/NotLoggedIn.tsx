@@ -20,7 +20,6 @@ const NotLoggedIn = (props: Props) => {
     const [userName, setUserName] = useState<string>('');
     const [userPassword, setUserPassword] = useState<string>('');
 
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -29,7 +28,6 @@ const NotLoggedIn = (props: Props) => {
       if (tempOrder !== undefined && tempOrder.length > 0  ){
         dispatch(userActions.setUser(tempOrder[0].user));
        };
-    
     };
   
 
@@ -54,7 +52,6 @@ const NotLoggedIn = (props: Props) => {
             props.setUser(data.user);   
             localStorage.setItem('accountId', data.user.accountId);
       };
-
     };
 
     const handleName: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
@@ -69,7 +66,6 @@ const NotLoggedIn = (props: Props) => {
     const handleSubmit: (e: FormEvent) => void = (e) => {
       e.preventDefault();
     
-      
       userLogin();
     };
     

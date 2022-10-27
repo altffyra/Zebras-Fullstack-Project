@@ -2,11 +2,9 @@ import '../styles/_orderItem.scss';
 import { Order } from '../models/types';
 import OrderItems from '../components/OrderItems';
 import { useNavigate } from 'react-router-dom';
-
 import { useDispatch } from "react-redux";
 import {actions as cartActions} from '../features/cartReducer';
 import { actions as setTempOrderaction } from "../features/tempOrderReducer";
-
 
 
 type OrderItemProps = {
@@ -18,7 +16,6 @@ const OrderItem = (props: OrderItemProps) => {
 
   const { order } = props;
   
-
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const orderItem = order.cart.cartItems.map(item => <OrderItems key={item.name} item={item} />)
