@@ -1,4 +1,4 @@
-import React from "react";
+
 import { useNavigate } from "react-router-dom";
 import Nav from "../components/Nav";
 import "../styles/_landing.scss";
@@ -10,9 +10,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { actions as tempOrderActions } from "../features/tempOrderReducer";
 import { actions as cartActions } from "../features/cartReducer";
 
-type Props = {};
 
-const LandingView = (props: Props) => {
+const LandingView = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
