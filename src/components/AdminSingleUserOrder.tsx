@@ -49,23 +49,44 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
     
         if (response.ok) {
           setLoading(false)
-  
+
         }
       }
+  
+  const allItems = props.order.cart.cartItems.map((item) => {
+    return <p>{ item.name }</p>
+  });
+
+
 
     return (
       <section className="single-order">
-        <p onClick={showOrderOverlay} >Order {props.order.orderPlaced}</p>
-        {props.order.locked 
-        ? 
-            <img src={lockedIcon} alt="locked icon" onClick={lockOrder}/>
-        :
-            <img src={unlockedIcon} alt="unlocked icon" onClick={lockOrder}/>
-        }
-      {showOrder ? 
-        <OrderItem order={props.order} showOrderOverlay={showOrderOverlay} />  
-        : ''
-      }
+
+        <section className="single-order__top">
+
+          <section className="single-order__id">
+            <p onClick={showOrderOverlay} >Order {props.order.id}</p>
+          </section>
+
+          <section className="single-order__locks">
+            {props.order.locked 
+            ? 
+                <img src={lockedIcon} alt="locked icon" onClick={lockOrder}/>
+            :
+                <img src={unlockedIcon} alt="unlocked icon" onClick={lockOrder}/>
+            }
+            {showOrder ? 
+              <OrderItem order={props.order} showOrderOverlay={showOrderOverlay} />  
+              : ''
+            }
+          </section>
+
+        </section>
+
+        <section className="single-order__bottom">
+          { allItems }
+        </section>
+
       </section>
     )
   }

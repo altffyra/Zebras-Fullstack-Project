@@ -4,11 +4,11 @@
 .admin_page--wrapper {
 
     width: 100%;
-    padding: 1em;
+    padding: 0 1em;
     
     .menu-wrapper {
 
-        margin-top: 12vh;
+        margin-top: 0;
 
         .menu-header {
 
@@ -34,21 +34,64 @@
     .search {
         width: 50%;
         margin: 0;
-        padding: 0 4em 2em 2em;
+        padding: 0 4em 0 2em;
 
         .search-container {
+
             min-width: 13em;
+
             input {
+
                 width: 100%;
                 flex: 5;
                 outline: none;
+
             }
         }
+    }
+
+    .label-container {
+
+        display: flex;
+        justify-content: space-between;
+        margin: 2em 2em 1em 2em;
+
+        p {
+            font-weight: bold;
+        }
+
     }
 
     .user-orders {
 
         .orderlist {
+
+            .single-order {
+
+                border-bottom: 1.5px solid black;
+
+                .single-order__top {
+                    display: flex;
+                    justify-content: space-between;
+
+                    p {
+                        padding: 1em 0;
+                    }
+    
+                    .single-order__locks {
+                        padding: 1em 0;
+                        margin-right: 1em;
+                    }
+
+                }
+
+                .single-order__bottom {
+                    p {
+                        padding-bottom: 1em;
+                    }
+                }
+
+            }
 
             .accordian-header {
 
@@ -65,6 +108,7 @@
 }
 
 @media screen and (max-width: 786px) {
+
     .search {
         .search-container {
             label {

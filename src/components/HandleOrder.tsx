@@ -53,8 +53,6 @@ const HandleOrder = (props: Props) => {
   return (
     <div className="admin_page--wrapper">
 
-        < Nav/>
-
         <div className="menu-wrapper">
             <section className="menu-header" style={{'backgroundImage':`url(${foodImg})`}}>
                 <h1>ADMINISTRATION </h1>
@@ -62,7 +60,7 @@ const HandleOrder = (props: Props) => {
         </div>
 
         <div className="admin_button--container">
-        <button className='admin-buttonSmall'>Tillbaka </button>
+            <button className='admin-buttonSmall'>Tillbaka </button>
             <button className='admin-buttonSmall'>Logga ut </button>
         </div>
 
@@ -73,6 +71,10 @@ const HandleOrder = (props: Props) => {
                     <label htmlFor="search" >SÖK</label>
                 </div>
             </section>
+        </section>
+        <section className="label-container">
+            <p>Order</p>
+            <p>Info</p>
         </section>
 
         <section className="user-orders">
