@@ -9,9 +9,15 @@ type CartItemsProps = {
 
 const CartItem = (props:CartItemsProps) => {
     const itemPrice: number = props.item.price * props.item.amount;
+
+    const dotsCss: string = props.locked ? 'cart-dots' : 'cart-item'
     return (
-        <section className="cart-item">
+        <section className={dotsCss}>
             <p className='item-name'>{props.item.name}</p>
+            {props.locked ?
+                <div className='dots'></div>
+            : ''
+            }
             {!props.locked ?
                 <select name="amount" id="" value={props.item.amount} onChange={(e) => props.handleAmount(e, props.item.name)}>
                     <option value="0">0</option>

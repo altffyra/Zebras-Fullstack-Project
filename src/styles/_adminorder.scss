@@ -30,6 +30,9 @@
                 .flex-4 {
                     flex: 4;
                 }
+                h3 {
+                    flex: 1;
+                }
                 .flex-1{
                     flex: 1;     
                     text-align: end;            
@@ -50,6 +53,21 @@
 
                 select, p {
                     flex: 1;
+                }
+
+                .dots {
+                    flex: 1;
+                    border-bottom: 1px dotted black;
+                }
+            }
+
+            .cart-dots {
+                @include variables.flexContainer(row);
+                justify-content: space-between;
+                gap: 1em;
+                .dots {
+                    flex: 1;
+                    border-bottom: 1px dotted black;
                 }
             }
 

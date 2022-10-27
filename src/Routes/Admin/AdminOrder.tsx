@@ -178,8 +178,8 @@ async function updateOrder(e:FormEvent) {
         <div className='order-cart'>
           <div className="headline-cart">
             <h3 className='flex-4'>Maträtt</h3>
-            <h3>Antal</h3>
-            <h3>Pris</h3>
+            <h3 className='flex-1'>Antal</h3>
+            <h3 className='flex-1'>Pris</h3>
           </div>
           {cartItemEl}
           <p className='total-price'>Totalt: {cart.totalPrice} kr</p>
