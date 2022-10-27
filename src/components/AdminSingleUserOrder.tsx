@@ -3,6 +3,7 @@ import lockedIcon from '../assets/locked.png'
 import unlockedIcon from '../assets/unlocked.png'
 import OrderItem from './OrderItem'
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 type SingleUserOrderProps = {
     order: Order;
@@ -11,6 +12,7 @@ type SingleUserOrderProps = {
 const SingleUserOrders = (props: SingleUserOrderProps) => {
   const [showOrder, setShowOrder] = useState<boolean>(false);
   const [ loading, setLoading ] = useState<boolean>(false);
+
 
   const showOrderOverlay: () => void = () => {
     setShowOrder(!showOrder)
