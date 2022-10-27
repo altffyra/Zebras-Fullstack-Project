@@ -3,7 +3,7 @@ import lockedIcon from '../assets/locked.png'
 import unlockedIcon from '../assets/unlocked.png'
 import OrderItem from './OrderItem'
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import message from '../assets/message.png';
 
 type SingleUserOrderProps = {
     order: Order;
@@ -66,6 +66,11 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
 
           <section className="single-order__id">
             <p onClick={showOrderOverlay} >Order {props.order.id}</p>
+            { props.order.userComment !== ""
+            ?
+              <img src={message} alt="" />
+            :
+            '' }
           </section>
 
           <section className="single-order__locks">

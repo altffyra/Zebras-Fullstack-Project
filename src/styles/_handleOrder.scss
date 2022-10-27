@@ -76,8 +76,16 @@
                     margin-bottom: 1em;
 
                     .single-order__id {
+
+                        display: flex;
+
                         p {
                             margin-top: 1em;
+                        }
+
+                        img {
+                            margin: 0.9em 0 0 1em;
+                            height: fit-content;
                         }
                     }
     
