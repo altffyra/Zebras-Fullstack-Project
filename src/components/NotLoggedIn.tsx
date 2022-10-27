@@ -92,7 +92,7 @@ const NotLoggedIn = (props: Props) => {
 
 
   return (
-    <div className='login'>
+    <div className='login-checkout'>
     <section className="flex-container">
       <form className='form' onSubmit={() => console.log('loggain')}>
         <div>

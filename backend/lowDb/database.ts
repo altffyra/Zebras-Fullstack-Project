@@ -94,11 +94,14 @@ async function authenticateLogin(ID:any){
     const authreply:User[] = await db.data.users
     let filter: User[] = authreply.filter((user:User) => user.accountId == ID);
 
-    if (filter != undefined && filter[0].admin == true) {
-      return filter;
-    } else {
+    if(filter[0].admin) {
+      if (filter != undefined && filter[0].admin == true) {
+            return filter;
+          } else {
+            return [];
+          }
+      }
       return [];
-    }
 }
 
 // // USER FUNCTIONS

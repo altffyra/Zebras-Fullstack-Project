@@ -51,18 +51,18 @@
             gap:1rem;
 
             .item-name {
-                font-size: 1.5rem;
+                font-size: 1rem;
                 flex: 3;
 
             }
             .item-amount {
-                font-size: 1.2em;
+                font-size: 1em;
                 flex: 1;
             }
 
             .item-price {
                 text-align: right;
-                font-size: 1.5rem;
+                font-size: 1rem;
                 flex: 1;
 
             }
@@ -76,7 +76,7 @@
             width:100%;
             display: flex;
             flex-direction: row;
-            font-size: 1.75rem; 
+            font-size: 1.4rem; 
             margin-top: 8rem;
             .total{
                 width:100%;
