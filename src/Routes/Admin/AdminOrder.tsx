@@ -127,7 +127,7 @@ async function completeOrder() {
 
 
     } 
-
+   
   }
 
 }
@@ -178,7 +178,7 @@ async function updateOrder(e:FormEvent) {
         navigate("/AdminPage");
 
       } 
-
+      
   }
 
   
@@ -194,6 +194,7 @@ async function updateOrder(e:FormEvent) {
 
   return (
     <section className='admin-order'>
+      {showAlert}
             {loading ? 
             <div className='loading'></div>
             : ''
