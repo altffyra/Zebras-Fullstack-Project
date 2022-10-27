@@ -4,6 +4,7 @@ import unlockedIcon from '../assets/unlocked.png'
 import OrderItem from './OrderItem'
 import { useState } from 'react';
 import message from '../assets/message.png';
+import { useNavigate } from 'react-router-dom';
 
 type SingleUserOrderProps = {
     order: Order;
@@ -12,6 +13,8 @@ type SingleUserOrderProps = {
 const SingleUserOrders = (props: SingleUserOrderProps) => {
   const [showOrder, setShowOrder] = useState<boolean>(false);
   const [ loading, setLoading ] = useState<boolean>(false);
+
+  const navigate = useNavigate();
 
 
   const showOrderOverlay: () => void = () => {
@@ -54,13 +57,17 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
       }
   
   const allItems = props.order.cart.cartItems.map((item) => {
-    return <p>{ item.name }</p>
+    return <p key={ item.name }>{ item.name }</p>
   });
+
+  const navigateOrder = () => {
+    navigate(`/AdminOrder/${ props.order.id }`);
+  }
 
 
 
     return (
-      <section className="single-order">
+      <section className="single-order" onClick={navigateOrder}>
 
         <section className="single-order__top">
 

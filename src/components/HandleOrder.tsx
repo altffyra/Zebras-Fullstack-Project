@@ -82,7 +82,7 @@ const HandleOrder = (props: Props) => {
         <section className="user-orders">
             { orders !== undefined ? < AdminOrderAccordian key={1} orderType={'Ohanterade'} orders={ activeOrders }/> : <p></p> }
             { orders !== undefined ? < AdminOrderAccordian key={2} orderType={'Ej hämtade'} orders={ notPickedUpOrders }/> : <p></p> }
-            { orders !== undefined ? < AdminOrderAccordian key={2} orderType={'Avslutade'} orders={ finishedOrders }/> : <p></p> }
+            { orders !== undefined ? < AdminOrderAccordian key={3} orderType={'Avslutade'} orders={ finishedOrders }/> : <p></p> }
         </section>
 
         {/*
