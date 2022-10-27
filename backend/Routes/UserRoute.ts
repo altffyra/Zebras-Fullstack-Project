@@ -55,7 +55,7 @@ userRoute.post('/login', async (req, res) => {
     const userData: LoginCreds = req.body
 
     const resObj = {
-        success: true,
+        success: false,
         user: {
             name: '',
             email: '',
@@ -67,26 +67,16 @@ userRoute.post('/login', async (req, res) => {
         message: 'No credentials'
     }
 
-    console.log('userData: ', userData);
     const foundAccount = await findAccount(userData)
-    let account = foundAccount[0]
-    console.log('account: ', account)
-    if( foundAccount.length < 0) {
-        resObj.success = false
-        resObj.message = `Account <${userData.name}> not found.`
-    }
-    if( foundAccount.length > 0 && foundAccount.length < 2) {
+
+    if( foundAccount.length === 1) {
+        let account = foundAccount[0]
         if( userData.name === account.name && userData.password === account.password) {
             resObj.success = true
             resObj.user = account
-
-            resObj.message = `${account.name} logged in!`
-        } else {
-            resObj.success = false
-            resObj.message = 'Failed to log in, check name and password'
-        }
-        console.log(resObj)
-    }
+        } 
+    } 
+    
     res.json(resObj)
 })
 
