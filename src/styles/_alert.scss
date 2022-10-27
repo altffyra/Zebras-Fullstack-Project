@@ -49,6 +49,7 @@
     padding-bottom: 1.5rem;
     font-size: 1rem;
     width: 70%;
+    text-align: center;
   }
   .errorOk {
     @include buttons.bigBtn($pad: 0.5em 2em, $bg: variables.$acceptBtnGreen);
