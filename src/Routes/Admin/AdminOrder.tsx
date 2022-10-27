@@ -10,15 +10,13 @@ import {actions as cartActions} from '../../features/cartReducer';
 import {actions as menuActions} from '../../features/menuReducer';
 import {actions as orderActions} from '../../features/orderReducer';
 import locked from '../../assets/locked.png';
-import Alert from '../../components/Alert'
+import Alert from '../../components/Alert';
 import "../../styles/_alert.scss";
-
-
-
 
 type MyParams = {
   id: string;
 };
+
 type UpdatedItemProps = {
   name: string;
   amount: number;
@@ -40,13 +38,12 @@ const AdminOrder = () => {
   const [ adminComment, setAdminComment ] = useState<string>('');
   const [ orderLocked, setOrderLocked ] = useState<boolean>(false);
   const [ showMenu, setShowMenu ] = useState<boolean>(false);
-
-  const [errorElement, showError] = useState<boolean>(false)
-  const [errorMessages, makeError] = useState({title:"" ,message:""})
-  const showAlert = errorElement? <Alert errorTitle={errorMessages.title}  errorMessage={errorMessages.message} showError={showError}/>:"";
-  let tempObject = {title:"" ,message:""}
-  
-
+  const [errorElement, showError] = useState<boolean>(false);
+  const [errorMessages, makeError] = useState({title:"" ,message:""});
+  const showAlert = errorElement ?
+    <Alert errorTitle={errorMessages.title} errorMessage={errorMessages.message} showError={showError}/>
+    : " " ;
+  let tempObject = {title:"", message:""};
 
   let order:Order | undefined = useSelector((state: RootState) => state.orders.find(order => order.id === id));
   let cart:CartProps | undefined = useSelector((state: RootState) => state.cart);
@@ -56,7 +53,7 @@ const AdminOrder = () => {
     if (order?.cart) {
       dispatch(cartActions.clearCart());
       dispatch(cartActions.changeOrder(order?.cart));
-      setUser(order.user)
+      setUser(order.user);
     }
     async function getMenu() {
       const response = await fetch('/api/menu');
@@ -64,7 +61,7 @@ const AdminOrder = () => {
       dispatch(menuActions.getMenu(data));
     }
     getMenu();
-  }, [])
+  }, []);
 
 const toggleMenu: (e:FormEvent) => void = (e) => {
   setShowMenu(!showMenu);
@@ -73,31 +70,27 @@ const toggleMenu: (e:FormEvent) => void = (e) => {
   
 
   const handleAmount: (e:ChangeEvent<HTMLSelectElement>, itemName: string) => void = (e, itemName) => {
-
     const updatedItem: UpdatedItemProps = {
         name : itemName,
         amount : parseInt(e.target.value)
-    }        
+    }; 
 
     dispatch(cartActions.updateAmount(updatedItem));
-}
+};
 
 function changeCredentials(e: ChangeEvent<HTMLInputElement>) {
   setUser({
     ...user,
     [e.target.name]: e.target.value 
-  })
-
-   
-}
+  });
+};
 
 function makeAdminComment(e: ChangeEvent<HTMLTextAreaElement>) {
-  setAdminComment(e.target.value )
+  setAdminComment(e.target.value );
+};
 
-}
 async function completeOrder() {
-
-  setLoading(true)
+  setLoading(true);
   if (order) {
     let completedOrder: Order = order
     completedOrder.completed = true;
@@ -114,33 +107,29 @@ async function completeOrder() {
     const datasave = await response.json();
 
     if(!response.ok){
-    tempObject.title = "Ordern ej ändrad"
-      tempObject.message = "Något gick fel, försök igen"
-      makeError(tempObject)
-      showError(true)
-      setLoading(false)
-    }
+    tempObject.title = "Ordern ej ändrad";
+      tempObject.message = "Något gick fel, försök igen";
+      makeError(tempObject);
+      showError(true);
+      setLoading(false);
+    };
     if (response.ok) {
       dispatch(orderActions.getOrders(datasave));
-      setLoading(false)
+      setLoading(false);
       navigate("/AdminPage");
+    };
+  };
+};
 
-
-    } 
-   
-  }
-
-}
 async function updateOrder(e:FormEvent) {
   e.preventDefault();
 
   if (cart) {
-
-    setOrderLocked(false)
-    setLoading(true)
+    setOrderLocked(false);
+    setLoading(true);
     if(user.name.length < 1 || user.email.length < 1 || user.phoneNumber.length < 1) {
-      return
-    }
+      return;
+    };
     const updatedOrder:Order = {
       cart: cart,
       user: user,
@@ -151,10 +140,8 @@ async function updateOrder(e:FormEvent) {
       adminComment: adminComment,
       locked: true,
       completed: order?.completed
-    }   
-
-
-      const orderId = order?.id
+    };
+      const orderId = order?.id;
       const response = await fetch(`/api/order/admin/${orderId}`, {
         method: "PUT",
         headers: {
@@ -165,29 +152,25 @@ async function updateOrder(e:FormEvent) {
       const datasave = await response.json();
 
       if(!response.ok){
-        setLoading(false)
-        tempObject.title = "Ordern ej ändrad"
-          tempObject.message = "Något gick fel, försök igen"
-          makeError(tempObject)
-          showError(true)
-        }
+        setLoading(false);
+        tempObject.title = "Ordern ej ändrad";
+          tempObject.message = "Något gick fel, försök igen";
+          makeError(tempObject);
+          showError(true);
+        };
 
       if (response.ok) {
-        setLoading(false)
+        setLoading(false);
         dispatch(orderActions.getOrders(datasave));
         navigate("/AdminPage");
+      };
+  };
+};
 
-      } 
-      
-  }
-
-  
-}
-  const entreeArry = menu.filter(item => item.type == 'Förrätt')
-  const vegArr = menu.filter(item => item.type == 'Veg')
-  const mainCourseArr = menu.filter(item => item.type != 'Förrätt' && item.type != 'Veg' && item.type != 'Efterrätt')
-  const desertArr = menu.filter(item => item.type == 'Efterrätt')
-
+  const entreeArry = menu.filter(item => item.type == 'Förrätt');
+  const vegArr = menu.filter(item => item.type == 'Veg');
+  const mainCourseArr = menu.filter(item => item.type != 'Förrätt' && item.type != 'Veg' && item.type != 'Efterrätt');
+  const desertArr = menu.filter(item => item.type == 'Efterrätt');
 
   const cartItemEl = cart.cartItems.map((item, index) => <CartItem locked={order?.locked} item={item} key={index} handleAmount={handleAmount} />);
   

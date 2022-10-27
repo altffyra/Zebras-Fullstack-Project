@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import {actions as cartActions} from '../features/cartReducer';
 import { actions as tempOrderActions } from "../features/tempOrderReducer";
 import { RootState } from '../store';
+
 type CartProp = {
     cart: CartProps;
 }
@@ -18,6 +19,7 @@ type UpdatedItemProps = {
 }
 
 const Cart = (props: CartProp) => {
+
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [active, setActive] = useState<boolean>(false)
@@ -32,29 +34,27 @@ const Cart = (props: CartProp) => {
         if(props.cart.cartItems.length == 0) {
             setActive(false)
         }
-    }, [props.cart.cartItems.length])
+    }, [props.cart.cartItems.length]);
 
     const activeCss: string = active ? 'active' : '';
     const cartCss: string = active ? 'active-cart' : 'closed-cart';
 
     const handleCheckout: () => void = () => {
-        navigate('/checkout')
-    }    
+        navigate('/checkout');
+    };  
 
     const handleCancelUpdate: () => void = () => {
         dispatch(tempOrderActions.clearTempOrder());
-        dispatch(cartActions.clearCart())
-    } 
+        dispatch(cartActions.clearCart());
+    };
     
     const handleAmount: (e:ChangeEvent<HTMLSelectElement>, itemName: string) => void = (e, itemName) => {
-
         const updatedItem: UpdatedItemProps = {
             name : itemName,
             amount : parseInt(e.target.value)
-        }        
-
+        };  
         dispatch(cartActions.updateAmount(updatedItem));
-    }
+    };
 
     let amountOfProducts: number = 0;
 
@@ -91,6 +91,6 @@ const Cart = (props: CartProp) => {
             </div>
         </section>
     )
-}
+};
 
 export default Cart;
