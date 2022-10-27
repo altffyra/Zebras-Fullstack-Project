@@ -140,7 +140,11 @@ orderRoute.put("/:id", async (req:IdParam, res:Response) => {
   }
   if(isValidGuest(updatedOrder.user)) {
     if(isValidCart(updatedOrder)) {    
-      if(isValidUpdatedOrder(updatedOrder)) {        
+      if(isValidUpdatedOrder(updatedOrder)) {      
+          if(updatedOrder.completed) {
+            res.send({locked: true})
+            return
+          }
           const checkedOrder: boolean = await updateOrder(updatedOrder, foundIndex)
           console.log(checkedOrder);
           

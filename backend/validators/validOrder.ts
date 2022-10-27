@@ -56,7 +56,7 @@ export function isValidUpdatedOrder(order:Order) : boolean {
 		return false
 	}
 	if(order.hasOwnProperty('completed')) {
-		if (typeof order.completed !== 'boolean' || order.completed == true) {
+		if (typeof order.completed !== 'boolean') {
 			return false
 		}
 	} else {

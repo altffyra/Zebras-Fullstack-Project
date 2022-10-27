@@ -21,7 +21,7 @@ const initialState: Order[] = [
   
       userComment: "Tål inte saker",
       adminComment: "Ge vatten bara",
-      locked: true,
+      locked: false,
       completed: false,
       orderCompleted: "2022-04-17 22:45",
       orderPlaced: "2022-04-17 22:15",
