@@ -30,9 +30,6 @@
                 .flex-4 {
                     flex: 4;
                 }
-                h3 {
-                    flex: 1;
-                }
                 .flex-1{
                     flex: 1;     
                     text-align: end;            
@@ -115,7 +112,8 @@
                         justify-content: space-between;
                         align-items: center;
                         .add-plus {
-                            font-size: 1.4em;
+                            font-size: 1.8em;
+                            cursor: pointer;
                         }
                     }
                 }
@@ -152,8 +150,25 @@
         background-color: variables.$fontLight;
         box-shadow: variables.$boxShadow;
         padding: 2em 5em;
+        .top-btn {
+            button {
+                background-color: transparent;
+            }
+        }
         .btn-submit {
             align-self: center;
         }
-    }
+        .order-form, .locked-order {      
+            .add-item {
+
+                button {
+                    @include buttons.smallBtn($bg: variables.$navBackground);
+                    border: none;
+                    width: 100px;
+                    min-width: 1vw;
+                    color: variables.$fontLight;
+                }
+            }
+        }
+    }   
 }
