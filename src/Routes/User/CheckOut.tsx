@@ -79,8 +79,6 @@ let tempObject = {title:"" ,message:""}
       tempObject.title = "Inga personuppgifter"
       tempObject.message = "Ordern går inte skicka utan personuppgifter"
       makeError(tempObject)
-      console.log(errorMessages);
-      
       showError(true)
       return
     }
@@ -103,12 +101,18 @@ let tempObject = {title:"" ,message:""}
       },
       body: JSON.stringify(updatedOrder),
     });
-    console.log(response);
+    if (!response.ok){
+      tempObject.title = "Ordern ej skickad"
+      tempObject.message = "Något gick fel med beställningen, töm ordern ock försök igen"
+      makeError(tempObject)
+      showError(true)
+    }
+
     const datasave = await response.json();
     if (datasave.locked) {
-
-      errorMessages.title = "Ordern är låst"
-      errorMessages.message = "Ordern går inte ändra för ändringstiden har löpt ut"
+      tempObject.title = "Ordern är låst"
+      tempObject.message = "Ordern går inte ändra för ändringstiden har löpt ut"
+      makeError(tempObject)
       showError(true)
     } 
 
@@ -129,8 +133,6 @@ let tempObject = {title:"" ,message:""}
       tempObject.title = "Inga personuppgifter"
       tempObject.message = "Ordern går inte skicka utan personuppgifter"
       makeError(tempObject)
-      console.log(errorMessages);
-      
       showError(true)
       return;
     }
@@ -148,14 +150,13 @@ let tempObject = {title:"" ,message:""}
       body: JSON.stringify(data),
     });
     const datasave = await response.json();
-    console.log(datasave.user);
+
 
     dispatch(orderActions.makeOrders(datasave));
     navigate("/OrderConfirm");
   }
 
   function changeCredentials(e: ChangeEvent<HTMLInputElement>) {
-    console.log(userCredentials);
     setUser({
       ...userCredentials,
       [e.target.name]: e.target.value,
