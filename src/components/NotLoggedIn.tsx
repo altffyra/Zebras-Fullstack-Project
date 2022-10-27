@@ -14,7 +14,6 @@ type Props = {
 const NotLoggedIn = (props: Props) => {
 
     event?.preventDefault();
-    const user: User = useSelector((state: RootState) => state.user);
     const tempOrder: Order[] = useSelector((state: RootState) => state.tempOrder);
 
     const [loading, setLoading] = useState<boolean>(false);
@@ -74,19 +73,16 @@ const NotLoggedIn = (props: Props) => {
       userLogin();
     };
     
-    function backBtn(){
-      navigate("/Menu");
-    };
-
-
-
-
 
 
   return (
     <div className='login'>
+            {loading ? 
+            <div className='loading'></div>
+            : ''
+        }
       <section className="flex-container">
-        <form className='form' onSubmit={() => console.log('loggain')}>
+        <form className='form'>
           <div>
               <input className='form__input' placeholder=' ' type="text" name='username' required onChange={(e)=> handleName(e)} />
               <label className='form__label form--name' htmlFor="username">Användarnamn</label>
