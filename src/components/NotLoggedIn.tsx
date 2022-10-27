@@ -73,10 +73,10 @@ const NotLoggedIn = (props: Props) => {
 
   return (
     <div className='login'>
-            {loading ? 
-            <div className='loading'></div>
-            : ''
-        }
+      {loading ? 
+        <div className='loading'></div>
+        : ''
+      }
       <section className="flex-container">
         <form className='form'>
           <div>
