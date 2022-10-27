@@ -1,78 +1,75 @@
-import React from 'react'
-import { useState, useEffect, ChangeEvent, FormEvent } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { actions as userActions } from '../features/userReducer'
-import { useSelector, useDispatch } from 'react-redux';
-import { User } from '../models/types'
-import '../styles/_userForm.scss'
-import formLogo from '../assets/formLogo.svg'
+import { useState, ChangeEvent, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { actions as userActions } from '../features/userReducer';
+import { useDispatch } from 'react-redux';
+import '../styles/_userForm.scss';
+import formLogo from '../assets/formLogo.svg';
 
+type userLogin = {
+  name: string;
+  password: string;
+}
 
+const LoginView = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
+  const [loading, setLoading] = useState<boolean>(false);
+  const [userName, setUserName] = useState<string>('');
+  const [userPassword, setUserPassword] = useState<string>('');
+  const [errorMsg, setErrorMsg] = useState<boolean>(false);
 
-  const LoginView = () => {
-    const dispatch = useDispatch();
+  async function userLogin() {
+    setLoading(true);
 
-    const [loading, setLoading] = useState<boolean>(false);
-    const [userName, setUserName] = useState<string>('')
-    const [userPassword, setUserPassword] = useState<string>('')
-    const [errorMsg, setErrorMsg] = useState<boolean>(false)
-
-    const navigate = useNavigate()
-
-
-    async function userLogin() {
-      setLoading(true)
-
-      let userCreds = {
-        name: userName,
-        password: userPassword
-      }
-
-      const response = await fetch('http://localhost:8000/api/user/login', {
-        method: 'POST',
-        body: JSON.stringify(userCreds),
-        headers: { 'Content-Type': 'application/json' }
-      })
-      const data = await response.json();
-      console.log('response data: ', data)
-      if( data.success ) {
-            setLoading(false);
-            dispatch(userActions.setUser(data.user))
-            localStorage.setItem('accountId', JSON.stringify(data.user.accountId))
-            if( data.user.admin) {
-              navigate('/AdminPage')
-            }
-            navigate('/menu')
-      } else {
-        setLoading(false)
-        setErrorMsg(true)
-      }
-
-    }
-
-    const handleName: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
-      if( e.target.value !== ' ') {
-        setUserName(e.target.value);
-      }
-    };
-    const handlePassword: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
-      setUserPassword(e.target.value);
+    let userCreds: userLogin = {
+      name: userName,
+      password: userPassword
     };
 
-    const handleSubmit: (e: FormEvent) => void = (e) => {
-      e.preventDefault();
-      userLogin();
+    const response = await fetch('http://localhost:8000/api/user/login', {
+      method: 'POST',
+      body: JSON.stringify(userCreds),
+      headers: { 'Content-Type': 'application/json' }
+    })
+    const data = await response.json();
+    console.log('response data: ', data)
+    if( data.success ) {
+          setLoading(false);
+          dispatch(userActions.setUser(data.user))
+          localStorage.setItem('accountId', JSON.stringify(data.user.accountId))
+          if( data.user.admin) {
+            navigate('/AdminPage')
+          }
+          navigate('/menu')
+    } else {
+      setLoading(false)
+      setErrorMsg(true)
     }
+  };
+
+  const handleName: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
+    if( e.target.value !== ' ') {
+      setUserName(e.target.value);
+    }
+  };
+  const handlePassword: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
+    setUserPassword(e.target.value);
+  };
+
+  const handleSubmit: (e: FormEvent) => void = (e) => {
+    e.preventDefault();
+    userLogin();
+  };
 
 
   return (
     <div className='login'>
       {loading ? 
-            <div className='loading'></div>
-            : ''
-        }
-       <button className='small__btn' onClick={()=>navigate(-1)}>Tillbaka</button>
+        <div className='loading'></div>
+        : ''
+      }
+      <button className='small__btn' onClick={()=>navigate(-1)}>Tillbaka</button>
       <figure className='form__logo'>
         <img src={ formLogo } alt="logo" />
       </figure>
@@ -96,6 +93,6 @@ import formLogo from '../assets/formLogo.svg'
       }
     </div>
   )
-}
+};
 
 export default LoginView

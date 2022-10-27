@@ -72,29 +72,25 @@ const NotLoggedIn = (props: Props) => {
 
 
   return (
-    <div className='login'>
-      {loading ? 
-        <div className='loading'></div>
-        : ''
-      }
-      <section className="flex-container">
-        <form className='form'>
-          <div>
-              <input className='form__input' placeholder=' ' type="text" name='username' required onChange={(e)=> handleName(e)} />
-              <label className='form__label form--name' htmlFor="username">Användarnamn</label>
-          </div>
-          <div>
-              <input className='form__input' placeholder=' ' type="password" name="password" required onChange={(e)=>handlePassword(e)} />
-              <label className='form__label form--password' htmlFor="password">Lösenord</label>
-          </div>
-          <p>Inget konto? <span onClick={()=> navigate("/Signup")}>Skapa</span></p>
-          <div>
-              <button type="submit" className='login-btn' onClick={(e)=>{handleSubmit(e)}}>Logga in</button>
-              <button onClick={loginGuest} className='guest-btn'>Fortsätt som gäst</button>
-          </div>
-        </form>
-      </section>
-    </div>
+    <div className='login-checkout'>
+    <section className="flex-container">
+      <form className='form' onSubmit={() => console.log('loggain')}>
+        <div>
+            <input className='form__input' placeholder=' ' type="text" name='username' required onChange={(e)=> handleName(e)} />
+            <label className='form__label form--name' htmlFor="username">Användarnamn</label>
+        </div>
+        <div>
+            <input className='form__input' placeholder=' ' type="password" name="password" required onChange={(e)=>handlePassword(e)} />
+            <label className='form__label form--password' htmlFor="password">Lösenord</label>
+        </div>
+        <p>Inget konto? <span onClick={()=> navigate("/Signup")}>Skapa</span></p>
+        <div>
+            <button type="submit" className='login-btn' onClick={(e)=>{handleSubmit(e)}}>Logga in</button>
+            <button onClick={loginGuest} className='guest-btn'>Fortsätt som gäst</button>
+        </div>
+      </form>
+    </section>
+  </div>
   )
 };
 

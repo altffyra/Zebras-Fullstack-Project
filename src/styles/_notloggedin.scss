@@ -2,11 +2,11 @@
 @use 'variables';
 @use 'buttons';
 
-.login {
+.login-checkout {
     height: 100%;
     margin: 0 auto;
     width: 100%;
-
+    margin-top: 2em;
     .flex-container {
 
         .form {
@@ -22,10 +22,11 @@
             .form__label {
                 position: absolute;
                 top: -15px;
-                // left: 5px;
                 font-size: 1.2rem;
                 font-weight: 400;
-                transition: all 0.5s;    
+                transition: all 0.5s;   
+                z-index: 2; 
+                pointer-events: none; 
             }
             
             .form__input {
@@ -35,12 +36,31 @@
                 border-bottom: 2px solid black;
                 outline: none;
                 font-size: 1.2rem;
+                &:valid {
+                    background-color: transparent;
+                }
+                &:focus {
+                    border-color: rgb(0, 0, 0);
+                }
+            }
+
+
+            // for autofilled inputs
+            .form__input:-webkit-autofill {
+                box-shadow:0 0 0 50px variables.$primaryBackground inset; 
             }
             
-            
-            .form__input:focus {
-                border-color: rgb(0, 0, 0);
+            .form__input:-webkit-autofill:focus {
+                    box-shadow: 0 0 0 50px variables.$primaryBackground inset;
+            }  
+
+            .form__input:-webkit-autofill:not(:placeholder-shown)~ .form__label {
+                    top: -20px;
+                    left: 0;
+                    font-size: 1rem;
+                    color: variables.$fontDark;
             }
+            
             
             .form__input:focus ~ .form__label,
             .form__input:not(:placeholder-shown)~ .form__label {
