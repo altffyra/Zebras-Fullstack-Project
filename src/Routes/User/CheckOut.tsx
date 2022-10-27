@@ -14,14 +14,10 @@ import { RootState } from "../../store";
 import { CartProps, MenuItems, User, Order } from "../../models/types";
 import { useNavigate } from "react-router-dom";
 import { actions as orderActions } from "../../features/orderReducer";
-import { actions as setTempOrder } from "../../features/tempOrderReducer";
-import { actions as userActions } from "../../features/userReducer";
 import Alert from '../../components/Alert'
 import "../../styles/_alert.scss";
 
-type Props = {};
-
-const CheckOut = (props: Props) => {
+const CheckOut = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = useState<boolean>(false);
@@ -51,7 +47,6 @@ const CheckOut = (props: Props) => {
   });
 
   const orderCheck: Boolean = tempOrder.length > 0 ? true : false;
-  let orderDefault: string | undefined = "";
   useEffect(() => {
     if (orderCheck) {
       setUser(tempOrder[0].user);
@@ -70,12 +65,14 @@ let tempObject = {title:"" ,message:""}
 
   async function updateOrder(e: FormEvent) {
     e.preventDefault();
+    setLoading(true)
 
     if (
       userCredentials.name.length < 1 ||
       userCredentials.email.length < 1 ||
       userCredentials.phoneNumber.length < 1
     ) {
+      setLoading(false)
       tempObject.title = "Inga personuppgifter"
       tempObject.message = "Ordern går inte skicka utan personuppgifter"
       makeError(tempObject)
@@ -102,6 +99,7 @@ let tempObject = {title:"" ,message:""}
       body: JSON.stringify(updatedOrder),
     });
     if (!response.ok){
+      setLoading(false)
       tempObject.title = "Ordern ej skickad"
       tempObject.message = "Något gick fel med beställningen, töm ordern ock försök igen"
       makeError(tempObject)
@@ -110,6 +108,7 @@ let tempObject = {title:"" ,message:""}
 
     const datasave = await response.json();
     if (datasave.locked) {
+      setLoading(false)
       tempObject.title = "Ordern är låst"
       tempObject.message = "Ordern går inte ändra för ändringstiden har löpt ut"
       makeError(tempObject)
@@ -118,18 +117,21 @@ let tempObject = {title:"" ,message:""}
 
     
     else {
+      setLoading(false)
       dispatch(orderActions.makeOrders(datasave));
       navigate("/OrderConfirm");
     }
   }
 
   async function sendOrder(e: FormEvent) {
+    setLoading(true)
     e.preventDefault();
     if (
       userCredentials.name.length < 1 ||
       userCredentials.email.length < 1 ||
       userCredentials.phoneNumber.length < 1
     ) {
+      setLoading(false)
       tempObject.title = "Inga personuppgifter"
       tempObject.message = "Ordern går inte skicka utan personuppgifter"
       makeError(tempObject)
@@ -151,7 +153,7 @@ let tempObject = {title:"" ,message:""}
     });
     const datasave = await response.json();
 
-
+    setLoading(false)
     dispatch(orderActions.makeOrders(datasave));
     navigate("/OrderConfirm");
   }
@@ -245,6 +247,10 @@ let tempObject = {title:"" ,message:""}
     <main>
       <Nav />
       <div className="checkout-wrapper">
+      {loading ? 
+            <div className='loading'></div>
+            : ''
+        }
         <section
           className="checkout-header--text"
           style={{ backgroundImage: `url(${mainmeal})` }}

@@ -4,6 +4,11 @@
 
 .admin-order {
     margin: 1em;
+
+    .loading {
+        @include variables.loader();
+    }
+
     .top-btn {
         @include variables.flexContainer(row);
         justify-content: space-between;

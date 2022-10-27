@@ -10,6 +10,9 @@ import {actions as cartActions} from '../../features/cartReducer';
 import {actions as menuActions} from '../../features/menuReducer';
 import {actions as orderActions} from '../../features/orderReducer';
 import locked from '../../assets/locked.png';
+import Alert from '../../components/Alert'
+import "../../styles/_alert.scss";
+
 
 
 
@@ -38,7 +41,11 @@ const AdminOrder = () => {
   const [ orderLocked, setOrderLocked ] = useState<boolean>(false);
   const [ showMenu, setShowMenu ] = useState<boolean>(false);
 
-
+  const [errorElement, showError] = useState<boolean>(false)
+  const [errorMessages, makeError] = useState({title:"" ,message:""})
+  const showAlert = errorElement? <Alert errorTitle={errorMessages.title}  errorMessage={errorMessages.message} showError={showError}/>:"";
+  let tempObject = {title:"" ,message:""}
+  
 
 
   let order:Order | undefined = useSelector((state: RootState) => state.orders.find(order => order.id === id));
@@ -80,15 +87,17 @@ function changeCredentials(e: ChangeEvent<HTMLInputElement>) {
     ...user,
     [e.target.name]: e.target.value 
   })
-  console.log(user);
+
    
 }
 
 function makeAdminComment(e: ChangeEvent<HTMLTextAreaElement>) {
   setAdminComment(e.target.value )
-  console.log(adminComment);
+
 }
 async function completeOrder() {
+
+  setLoading(true)
   if (order) {
     let completedOrder: Order = order
     completedOrder.completed = true;
@@ -104,9 +113,18 @@ async function completeOrder() {
 
     const datasave = await response.json();
 
+    if(!response.ok){
+    tempObject.title = "Ordern ej ändrad"
+      tempObject.message = "Något gick fel, försök igen"
+      makeError(tempObject)
+      showError(true)
+      setLoading(false)
+    }
     if (response.ok) {
       dispatch(orderActions.getOrders(datasave));
+      setLoading(false)
       navigate("/AdminPage");
+
 
     } 
 
@@ -119,7 +137,7 @@ async function updateOrder(e:FormEvent) {
   if (cart) {
 
     setOrderLocked(false)
-  
+    setLoading(true)
     if(user.name.length < 1 || user.email.length < 1 || user.phoneNumber.length < 1) {
       return
     }
@@ -135,7 +153,7 @@ async function updateOrder(e:FormEvent) {
       completed: order?.completed
     }   
 
-    console.log(updatedOrder);
+
       const orderId = order?.id
       const response = await fetch(`/api/order/admin/${orderId}`, {
         method: "PUT",
@@ -146,8 +164,16 @@ async function updateOrder(e:FormEvent) {
       });
       const datasave = await response.json();
 
-      // christians uppgift att fixa check!
+      if(!response.ok){
+        setLoading(false)
+        tempObject.title = "Ordern ej ändrad"
+          tempObject.message = "Något gick fel, försök igen"
+          makeError(tempObject)
+          showError(true)
+        }
+
       if (response.ok) {
+        setLoading(false)
         dispatch(orderActions.getOrders(datasave));
         navigate("/AdminPage");
 
@@ -168,6 +194,10 @@ async function updateOrder(e:FormEvent) {
 
   return (
     <section className='admin-order'>
+            {loading ? 
+            <div className='loading'></div>
+            : ''
+        }
         <div className='top-btn'>
           <button onClick={() => navigate('/AdminPage')}>Tillbaka</button>
           {order?.locked ? <img src={locked} alt="" /> : ''}

@@ -12,6 +12,10 @@
     margin-top: 12vh;
     gap:2em;
 
+    .loading {
+        @include variables.loader();
+    }
+
     .divider{
         @include variables.divider
     }
