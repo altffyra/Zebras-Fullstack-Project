@@ -7,6 +7,10 @@
     font-family: 'Rock Salt';
     background-color: variables.$primaryBackground;
 
+    .loading {
+        @include variables.loader()
+    }
+    
     .menu-nav--container {
         margin-bottom: 4em;
     }

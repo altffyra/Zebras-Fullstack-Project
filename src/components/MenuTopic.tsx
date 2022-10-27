@@ -21,7 +21,6 @@ const MenuTopic = ({ foodImg, topic, menuArray }: Props) => {
         cssId = 'desert'
     }
 
-
     return (
         <section className="menu-header--container">
             <section className='menu-topic' style={{'backgroundImage':`url(${foodImg})`}}>
@@ -37,9 +36,7 @@ const MenuTopic = ({ foodImg, topic, menuArray }: Props) => {
                 <>
                     {menuItemsEl}
                 </>
-            }
-            
-
+            }           
         </section>
     )
 }

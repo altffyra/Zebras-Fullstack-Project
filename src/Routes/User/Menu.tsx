@@ -12,16 +12,18 @@ import { CartProps, MenuItems } from '../../models/types';
 import {actions as menuActions} from '../../features/menuReducer';
 import Nav from '../../components/Nav';
 
-type Props = {}
 
-const Menu = (props: Props) => {
+const Menu = () => {
 const dispatch = useDispatch();
+const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     async function getMenu() {
+      setLoading(true);
       const response = await fetch('/api/menu');
       const data = await response.json();      
       dispatch(menuActions.getMenu(data));
+      setLoading(false);
     }
     getMenu();
   }, []);
@@ -39,26 +41,27 @@ const dispatch = useDispatch();
     if(elemendId) {
       const y = elemendId.getBoundingClientRect().top + window.pageYOffset - 90;
       window.scrollTo({top: y, behavior: 'smooth'})
-      // elemendId.scrollIntoView({
-      //     behavior: 'smooth'
-      //   });
     }
 };
 
   return (
     <div className="menu-wrapper">
-        <Nav />
-          <section className="menu-header" style={{'backgroundImage':`url(${mainmeal  })`}}>
-            <h1>MENY</h1>
-          </section>
-        <section className="menu-header--category">
-          <h2 onClick={() => handleLink('entree')}>Förrätter</h2>
-          <h2 onClick={() => handleLink('meat')}>Kött</h2>
-          <h2 onClick={() => handleLink('fish')}>Fisk</h2>
-          <h2 onClick={() => handleLink('bird')}>Fågel</h2>
-          <h2 onClick={() => handleLink('veg')}>Vegetarisk</h2>
-          <h2 onClick={() => handleLink('desert')}>Efterrätter</h2>
-        </section>
+      <Nav />
+      {loading ? 
+          <div className='loading'></div>
+          : ''
+      }
+      <section className="menu-header" style={{'backgroundImage':`url(${mainmeal  })`}}>
+        <h1>MENY</h1>
+      </section>
+      <section className="menu-header--category">
+        <h2 onClick={() => handleLink('entree')}>Förrätter</h2>
+        <h2 onClick={() => handleLink('meat')}>Kött</h2>
+        <h2 onClick={() => handleLink('fish')}>Fisk</h2>
+        <h2 onClick={() => handleLink('bird')}>Fågel</h2>
+        <h2 onClick={() => handleLink('veg')}>Vegetarisk</h2>
+        <h2 onClick={() => handleLink('desert')}>Efterrätter</h2>
+      </section>
 
       < MenuTopic topic={'Förrätt'} foodImg={appertizer} menuArray={entreeArry}/>
       < MenuTopic topic={'Huvudrätt'} foodImg={mainmeal} menuArray={mainCourseArr}/>
@@ -66,10 +69,10 @@ const dispatch = useDispatch();
       < MenuTopic topic={'Efterrätt'} foodImg={dessert} menuArray={desertArr}/>
 
       {cart.cartItems.length > 0 
-      ?
-        <Cart cart={cart}/>
-      : 
-        ''
+        ?
+          <Cart cart={cart}/>
+        : 
+          ''
       }
     </div>
   )
