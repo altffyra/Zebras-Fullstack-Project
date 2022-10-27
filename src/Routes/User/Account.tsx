@@ -38,38 +38,35 @@ const Account = () => {
   async function getOrder(accountId: string) {
     setLoading(true);
     const orderResponse = await fetch(`/api/order/user/${accountId}`);
-    const orderData = await orderResponse.json();
-
-    if (user.name == "") {
-      console.log("he");
-
+    const orderData = await orderResponse.json();   
+    
+    if(user.name == '') {      
       const userResponse = await fetch(`/api/user/${accountId}`);
-      const userData = await userResponse.json();
-      console.log(userData);
-      dispatch(userActions.setUser(userData));
-    }
-
-    dispatch(orderActions.getOrders(orderData));
-
-    setLoading(false);
+      const userData = await userResponse.json();      
+      dispatch(userActions.setUser(userData))
+    } 
+    
+    dispatch(orderActions.getOrders(orderData));        
+    setLoading(false)
   }
 
   const handleLogout: () => void = () => {
-    dispatch(userActions.logOut());
-    localStorage.removeItem("accountId");
-    navigate("/menu");
-  };
+      dispatch(userActions.logOut());
+      localStorage.removeItem('accountId')
+      navigate('/menu')
+  }
 
-  const user: User = useSelector((state: RootState) => state.user);
-  const orders: Order[] = useSelector((state: RootState) => state.orders);
+ const user:User = useSelector((state: RootState) => state.user);
+ const orders:Order[] = useSelector((state: RootState) => state.orders);
 
   return (
     <section className="account-page">
       <Nav />
-      {loading ? <div className="loading"></div> : ""}
-      <button className="btn-logout" onClick={handleLogout}>
-        Logga ut
-      </button>
+      {loading ? 
+        <div className='loading'></div>
+        : ''
+      }
+      <button className='btn-logout' onClick={handleLogout}>Logga ut</button>
       <div className="headline">
         <h1>Konto</h1>
       </div>

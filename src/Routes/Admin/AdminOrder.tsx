@@ -33,10 +33,9 @@ const AdminOrder = () => {
     phoneNumber: "",
     accountId: "",
   });
-  const [loading, setLoading] = useState<boolean>(false);
-  const [adminComment, setAdminComment] = useState<string>("");
-  const [orderLocked, setOrderLocked] = useState<boolean>(false);
-  const [showMenu, setShowMenu] = useState<boolean>(false);
+  const [ loading, setLoading ] = useState<boolean>(false);
+  const [ adminComment, setAdminComment ] = useState<string>('');
+  const [ showMenu, setShowMenu ] = useState<boolean>(false);
   const [errorElement, showError] = useState<boolean>(false);
   const [errorMessages, makeError] = useState({ title: "", message: "" });
   const showAlert = errorElement ? (
@@ -105,10 +104,10 @@ const AdminOrder = () => {
   async function completeOrder() {
     setLoading(true);
     if (order) {
-      let completedOrder: Order = order;
+      let completedOrder: Order = order
       completedOrder.completed = true;
 
-      const orderId = order?.id;
+      const orderId = order?.id
       const response = await fetch(`/api/order/admin/${orderId}`, {
         method: "PUT",
         headers: {
@@ -120,69 +119,65 @@ const AdminOrder = () => {
       const datasave = await response.json();
 
       if (!response.ok) {
+        setLoading(false);
         tempObject.title = "Ordern ej ändrad";
         tempObject.message = "Något gick fel, försök igen";
         makeError(tempObject);
         showError(true);
-        setLoading(false);
       }
+
       if (response.ok) {
         dispatch(orderActions.getOrders(datasave));
         setLoading(false);
         navigate("/AdminPage");
-      }
-    }
-  }
+      };
+    };
+  };
 
-  async function updateOrder(e: FormEvent) {
+  async function updateOrder(e:FormEvent) {
     e.preventDefault();
 
     if (cart) {
-      setOrderLocked(false);
       setLoading(true);
-      if (
-        user.name.length < 1 ||
-        user.email.length < 1 ||
-        user.phoneNumber.length < 1
-      ) {
+      if(user.name.length < 1 || user.email.length < 1 || user.phoneNumber.length < 1) {
         return;
-      }
-      const updatedOrder: Order = {
+      };
+      const updatedOrder:Order = {
         cart: cart,
         user: user,
         orderPlaced: order?.orderPlaced,
-        orderCompleted: order?.orderCompleted,
+        orderCompleted: order?.orderCompleted, 
         id: order?.id,
         userComment: order?.userComment,
         adminComment: adminComment,
         locked: true,
-        completed: order?.completed,
+        completed: order?.completed
       };
-      const orderId = order?.id;
-      const response = await fetch(`/api/order/admin/${orderId}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedOrder),
-      });
-      const datasave = await response.json();
+        const orderId = order?.id;
+        const response = await fetch(`/api/order/admin/${orderId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedOrder),
+        });
+        const datasave = await response.json();
 
-      if (!response.ok) {
-        setLoading(false);
-        tempObject.title = "Ordern ej ändrad";
-        tempObject.message = "Något gick fel, försök igen";
-        makeError(tempObject);
-        showError(true);
-      }
+        if(!response.ok){
+          setLoading(false);
+          tempObject.title = "Ordern ej ändrad";
+            tempObject.message = "Något gick fel, försök igen";
+            makeError(tempObject);
+            showError(true);
+          };
 
-      if (response.ok) {
-        setLoading(false);
-        dispatch(orderActions.getOrders(datasave));
-        navigate("/AdminPage");
-      }
-    }
-  }
+        if (response.ok) {
+          setLoading(false);
+          dispatch(orderActions.getOrders(datasave));
+          navigate("/AdminPage");
+        };
+    };
+  };
 
   const entreeArry = menu.filter((item) => item.type == "Förrätt");
   const vegArr = menu.filter((item) => item.type == "Veg");
