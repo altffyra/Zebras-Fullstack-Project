@@ -1,3 +1,4 @@
+
 @use 'variables';
 @use 'buttons';
 
@@ -53,15 +54,15 @@
             & > div {
                 @include variables.flexContainer();
                 align-items: center;
-                
                 position: relative;
-            
                 
             }
+            
             span{
                 color: blue;
                 cursor: pointer;
             }
+
 
             .login-btn {
                 @include buttons.bigBtn($bg: variables.$acceptBtnGreen);

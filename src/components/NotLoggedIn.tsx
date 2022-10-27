@@ -92,8 +92,9 @@ const NotLoggedIn = (props: Props) => {
 
 
   return (
-    <div className='login--checkout'>
-      <form className='userForm' onSubmit={() => console.log('loggain')}>
+    <div className='login'>
+    <section className="flex-container">
+      <form className='form' onSubmit={() => console.log('loggain')}>
         <div>
             <input className='form__input' placeholder=' ' type="text" name='username' required onChange={(e)=> handleName(e)} />
             <label className='form__label form--name' htmlFor="username">Användarnamn</label>
@@ -108,6 +109,7 @@ const NotLoggedIn = (props: Props) => {
             <button onClick={loginGuest} className='guest-btn'>Fortsätt som gäst</button>
         </div>
       </form>
+    </section>
   </div>
   )
 }
