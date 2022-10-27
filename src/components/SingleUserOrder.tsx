@@ -1,7 +1,7 @@
 import { Order } from '../models/types';
-import lockedIcon from '../assets/locked.png'
-import unlockedIcon from '../assets/unlocked.png'
-import OrderItem from '../components/OrderItem'
+import lockedIcon from '../assets/locked.png';
+import unlockedIcon from '../assets/unlocked.png';
+import OrderItem from '../components/OrderItem';
 import { useState } from 'react';
 
 type SingleUserOrderProps = {
@@ -12,12 +12,12 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
   const [showOrder, setShowOrder] = useState<boolean>(false);
 
   const showOrderOverlay: () => void = () => {
-    setShowOrder(!showOrder)
-  }
+    setShowOrder(!showOrder);
+  };
 
     return (
       <section className="single-order">
-        <p onClick={showOrderOverlay} >Order {props.order.orderPlaced}</p>
+        <p onClick={showOrderOverlay} > Order {props.order.orderPlaced}</p>
         {props.order.completed 
         ? 
             <img src={lockedIcon} alt="locked icon" />
@@ -30,6 +30,6 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
       }
       </section>
     )
-  }
+  };
   
-  export default SingleUserOrders
+  export default SingleUserOrders;
