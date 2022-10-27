@@ -1,5 +1,5 @@
-import React, { FormEvent, useEffect } from 'react'
-import { CartItems, MenuItems } from '../models/types';
+import { FormEvent } from 'react'
+import { MenuItems } from '../models/types';
 import '../styles/_adminmenu.scss';
 import AdminMenuItem from './AdminMenuItem';
 

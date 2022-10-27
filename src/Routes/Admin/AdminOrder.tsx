@@ -36,7 +36,6 @@ const AdminOrder = () => {
   });
   const [ loading, setLoading ] = useState<boolean>(false);
   const [ adminComment, setAdminComment ] = useState<string>('');
-  const [ orderLocked, setOrderLocked ] = useState<boolean>(false);
   const [ showMenu, setShowMenu ] = useState<boolean>(false);
   const [errorElement, showError] = useState<boolean>(false);
   const [errorMessages, makeError] = useState({title:"" ,message:""});
@@ -63,11 +62,10 @@ const AdminOrder = () => {
     getMenu();
   }, []);
 
-const toggleMenu: (e:FormEvent) => void = (e) => {
-  setShowMenu(!showMenu);
-  e.preventDefault();
-}
-  
+  const toggleMenu: (e:FormEvent) => void = (e) => {
+    setShowMenu(!showMenu);
+    e.preventDefault();
+  }  
 
   const handleAmount: (e:ChangeEvent<HTMLSelectElement>, itemName: string) => void = (e, itemName) => {
     const updatedItem: UpdatedItemProps = {
@@ -76,96 +74,95 @@ const toggleMenu: (e:FormEvent) => void = (e) => {
     }; 
 
     dispatch(cartActions.updateAmount(updatedItem));
-};
-
-function changeCredentials(e: ChangeEvent<HTMLInputElement>) {
-  setUser({
-    ...user,
-    [e.target.name]: e.target.value 
-  });
-};
-
-function makeAdminComment(e: ChangeEvent<HTMLTextAreaElement>) {
-  setAdminComment(e.target.value );
-};
-
-async function completeOrder() {
-  setLoading(true);
-  if (order) {
-    let completedOrder: Order = order
-    completedOrder.completed = true;
-
-    const orderId = order?.id
-    const response = await fetch(`/api/order/admin/${orderId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(completedOrder),
-    });
-
-    const datasave = await response.json();
-
-    if(!response.ok){
-    tempObject.title = "Ordern ej ändrad";
-      tempObject.message = "Något gick fel, försök igen";
-      makeError(tempObject);
-      showError(true);
-      setLoading(false);
-    };
-    if (response.ok) {
-      dispatch(orderActions.getOrders(datasave));
-      setLoading(false);
-      navigate("/AdminPage");
-    };
   };
-};
 
-async function updateOrder(e:FormEvent) {
-  e.preventDefault();
+  function changeCredentials(e: ChangeEvent<HTMLInputElement>) {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value 
+    });
+  };
 
-  if (cart) {
-    setOrderLocked(false);
+  function makeAdminComment(e: ChangeEvent<HTMLTextAreaElement>) {
+    setAdminComment(e.target.value );
+  };
+
+  async function completeOrder() {
     setLoading(true);
-    if(user.name.length < 1 || user.email.length < 1 || user.phoneNumber.length < 1) {
-      return;
-    };
-    const updatedOrder:Order = {
-      cart: cart,
-      user: user,
-      orderPlaced: order?.orderPlaced,
-      orderCompleted: order?.orderCompleted, 
-      id: order?.id,
-      userComment: order?.userComment,
-      adminComment: adminComment,
-      locked: true,
-      completed: order?.completed
-    };
-      const orderId = order?.id;
+    if (order) {
+      let completedOrder: Order = order
+      completedOrder.completed = true;
+
+      const orderId = order?.id
       const response = await fetch(`/api/order/admin/${orderId}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedOrder),
+        body: JSON.stringify(completedOrder),
       });
+
       const datasave = await response.json();
 
       if(!response.ok){
+      tempObject.title = "Ordern ej ändrad";
+        tempObject.message = "Något gick fel, försök igen";
+        makeError(tempObject);
+        showError(true);
         setLoading(false);
-        tempObject.title = "Ordern ej ändrad";
-          tempObject.message = "Något gick fel, försök igen";
-          makeError(tempObject);
-          showError(true);
-        };
-
+      };
       if (response.ok) {
-        setLoading(false);
         dispatch(orderActions.getOrders(datasave));
+        setLoading(false);
         navigate("/AdminPage");
       };
+    };
   };
-};
+
+  async function updateOrder(e:FormEvent) {
+    e.preventDefault();
+
+    if (cart) {
+      setLoading(true);
+      if(user.name.length < 1 || user.email.length < 1 || user.phoneNumber.length < 1) {
+        return;
+      };
+      const updatedOrder:Order = {
+        cart: cart,
+        user: user,
+        orderPlaced: order?.orderPlaced,
+        orderCompleted: order?.orderCompleted, 
+        id: order?.id,
+        userComment: order?.userComment,
+        adminComment: adminComment,
+        locked: true,
+        completed: order?.completed
+      };
+        const orderId = order?.id;
+        const response = await fetch(`/api/order/admin/${orderId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedOrder),
+        });
+        const datasave = await response.json();
+
+        if(!response.ok){
+          setLoading(false);
+          tempObject.title = "Ordern ej ändrad";
+            tempObject.message = "Något gick fel, försök igen";
+            makeError(tempObject);
+            showError(true);
+          };
+
+        if (response.ok) {
+          setLoading(false);
+          dispatch(orderActions.getOrders(datasave));
+          navigate("/AdminPage");
+        };
+    };
+  };
 
   const entreeArry = menu.filter(item => item.type == 'Förrätt');
   const vegArr = menu.filter(item => item.type == 'Veg');

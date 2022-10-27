@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react'
+import { FormEvent } from 'react'
 import { CartItems, MenuItems } from '../models/types';
 import {actions as cartActions} from '../features/cartReducer';
 import { useDispatch } from 'react-redux';
