@@ -17,6 +17,7 @@ const HandleOrder = (props: Props) => {
     let checkId: string | null = localStorage.getItem('accountId');
     let finishedOrders: Order[] = [];
     let activeOrders: Order[] = [];
+    let notPickedUpOrders: Order[] = [];
 
     useEffect(() => {
         async function getOrders() {
@@ -43,6 +44,7 @@ const HandleOrder = (props: Props) => {
     if (orders !== undefined) {
         activeOrders = orders.filter((order) => !order.completed);
         finishedOrders = orders.filter((order) => order.completed);
+        notPickedUpOrders = orders.filter((order) => !order.completed && order.locked);
 
         //  ON HOLD:                const notPickedUp: Order[] | undefined = orders?.filter(order => ??? );
 
@@ -79,6 +81,7 @@ const HandleOrder = (props: Props) => {
 
         <section className="user-orders">
             { orders !== undefined ? < AdminOrderAccordian key={1} orderType={'Ohanterade'} orders={ activeOrders }/> : <p></p> }
+            { orders !== undefined ? < AdminOrderAccordian key={2} orderType={'Ej hämtade'} orders={ notPickedUpOrders }/> : <p></p> }
             { orders !== undefined ? < AdminOrderAccordian key={2} orderType={'Avslutade'} orders={ finishedOrders }/> : <p></p> }
         </section>
 
