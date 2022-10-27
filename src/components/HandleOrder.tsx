@@ -1,6 +1,6 @@
 import appertizer from '../assets/menu/appertizer.svg';
 import '../styles/_handleOrder.scss';
-import UserOrderAccordian from './UserOrderAccordian';
+import AdminOrderAccordian from './AdminOrderAccordian';
 import { Order } from '../models/types';
 import { useEffect, useState } from 'react';
 import Nav from './Nav';
@@ -37,6 +37,7 @@ const HandleOrder = (props: Props) => {
         
     }, []);
 
+    console.log(orders);
 
 
     if (orders !== undefined) {
@@ -44,6 +45,7 @@ const HandleOrder = (props: Props) => {
         finishedOrders = orders.filter((order) => order.completed);
 
         //  ON HOLD:                const notPickedUp: Order[] | undefined = orders?.filter(order => ??? );
+
     }
 
 
@@ -74,8 +76,8 @@ const HandleOrder = (props: Props) => {
         </section>
 
         <section className="user-orders">
-            { orders !== undefined ? < UserOrderAccordian key={1} orderType={'Ohanterade'} orders={ activeOrders }/> : <p></p> }
-            { orders !== undefined ? < UserOrderAccordian key={2} orderType={'Avslutade'} orders={ finishedOrders }/> : <p></p> }
+            { orders !== undefined ? < AdminOrderAccordian key={1} orderType={'Ohanterade'} orders={ activeOrders }/> : <p></p> }
+            { orders !== undefined ? < AdminOrderAccordian key={2} orderType={'Avslutade'} orders={ finishedOrders }/> : <p></p> }
         </section>
 
         {/*
