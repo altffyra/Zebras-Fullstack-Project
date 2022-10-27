@@ -22,8 +22,10 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
         setLoading(true)
 
         let updatedOrder = props.order
+        updatedOrder.locked = true
     
         const orderId = props.order.id
+
         const response = await fetch(`/api/order/admin/${orderId}`, {
           method: "PUT",
           headers: {
@@ -32,10 +34,6 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
           body: JSON.stringify(updatedOrder),
         });
         const datasave = await response.json();
-
-        if (datasave.locked) {
-          updatedOrder.locked = true
-        }
 
         {/*
         if(!response.ok){
@@ -51,7 +49,6 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
           setLoading(false)
   
         }
-    
       }
 
     return (
