@@ -7,7 +7,7 @@ export const data: Schema = {
                   "accountId": "1247",
                   "phoneNumber": "070000001",
                   "admin": false,
-                  "password": ""
+                  "password": "test"
             },
             {
                   "name": "Christian",
@@ -15,7 +15,7 @@ export const data: Schema = {
                   "accountId": "3467",
                   "phoneNumber": "070000002",
                   "admin": false,
-                  "password": ""
+                  "password": "test"
             },
             {
                   "name": "Julia",
@@ -23,7 +23,7 @@ export const data: Schema = {
                   "accountId": "2349",
                   "phoneNumber": "070000003",
                   "admin": false,
-                  "password": ""
+                  "password": "test"
             },
             {
                   "name": "Ricky",
@@ -31,7 +31,7 @@ export const data: Schema = {
                   "accountId": "4859",
                   "phoneNumber": "070000004",
                   "admin": true,
-                  "password": ""
+                  "password": "test"
             },
             {
                   "name": "Felix",

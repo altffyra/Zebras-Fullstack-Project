@@ -66,8 +66,9 @@ const LoginView = () => {
       localStorage.setItem("accountId", JSON.stringify(data.user.accountId));
       if (data.user.admin) {
         navigate("/AdminPage");
+      } else {
+        navigate("/menu");
       }
-      navigate("/menu");
     } else {
       setLoading(false);
       setErrorMsg(true);
