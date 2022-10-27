@@ -2,7 +2,7 @@ import '../../styles/_orderConfirm.scss';
 import Nav from '../../components/Nav';
 import OrderItems from '../../components/OrderItems';
 import { Order } from '../../models/types';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { RootState } from '../../store';
@@ -18,9 +18,7 @@ const OrderConfirm = () => {
   }, [])
 
   const confirmedOrder: Order = useSelector((state: RootState) => state.orders)[0];
-  const qwe: Order[] = useSelector((state: RootState) => state.orders)
-  console.log(qwe);
-  
+ 
   const orderItemsEl = confirmedOrder.cart.cartItems.map(item => <OrderItems item={item} key={item.name} />)
   const orderDone:string | undefined = confirmedOrder.orderCompleted?.slice(10)
 
@@ -47,8 +45,7 @@ const OrderConfirm = () => {
             <p>Email : {confirmedOrder.user.email}</p>
             <p>Tel.nr : {confirmedOrder.user.phoneNumber}</p>
           </div>
-        </div>
-        
+        </div>      
         
         <div className='order-cart'>
           <div className='order-header'>
@@ -69,14 +66,14 @@ const OrderConfirm = () => {
           </div>
         </div>
           <p className='change-order'>Blev det något tokigt? <span onClick={changeOrder}>Tryck här!</span></p>
-        {confirmedOrder.userComment ? 
-        <div className='order-comment'>
-          <p>Kommentar</p>
-          <p>{confirmedOrder.userComment}</p>
-        </div>
-        :
-        ''
-      }
+          {confirmedOrder.userComment ? 
+            <div className='order-comment'>
+            <p>Kommentar</p>
+            <p>{confirmedOrder.userComment}</p>
+          </div>
+            :
+            ''
+          }
 
       <div className='location'>
         <p>Hämtas på : </p>
@@ -85,8 +82,7 @@ const OrderConfirm = () => {
           <p>652 21 Karlstad</p>
         </div>
       </div>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8131.132788853451!2d13.520668944233146!3d59.369957206767886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465cb19d87d4c3c7%3A0x300ad4aa5764fa28!2sLambergskajen%2C%20652%2021%20Karlstad!5e0!3m2!1ssv!2sse!4v1665738091678!5m2!1ssv!2sse" loading="lazy" ></iframe>
-      
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8131.132788853451!2d13.520668944233146!3d59.369957206767886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x465cb19d87d4c3c7%3A0x300ad4aa5764fa28!2sLambergskajen%2C%20652%2021%20Karlstad!5e0!3m2!1ssv!2sse!4v1665738091678!5m2!1ssv!2sse" loading="lazy" ></iframe> 
     </section>
   )
 }
