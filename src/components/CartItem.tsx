@@ -35,9 +35,7 @@ const CartItem = (props:CartItemsProps) => {
 
             <p className='item-price'>{itemPrice} kr</p>
         </section>
-
-    
     )
-}
+};
 
 export default CartItem;
