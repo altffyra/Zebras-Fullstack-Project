@@ -99,16 +99,16 @@ const Search = () => {
       {searchError ? <p>Ingen order hittades på det ordernumret.</p> : ""}
       {found ? (
         <div className="order-container">
-          <h2>Order {searchedOrder.id}</h2>
+          <h2>Order: {searchedOrder.id}</h2>
           <div className="user-information">
-            <p>Beställare</p>
+            <p>Beställare:</p>
             <p>Namn : {searchedOrder.user.name}</p>
             <p>Email : {searchedOrder.user.email}</p>
             <p>Tel.nr : {searchedOrder.user.phoneNumber}</p>
           </div>
           <div className="divider"></div>
           <div className="order-information">
-            <p className="order-title">Order {searchedOrder.id}</p>
+            <p className="order-title">Varukorg:</p>
             {orderItem}
             <p>Totalt : {searchedOrder.cart.totalPrice} kr</p>
           </div>
