@@ -74,6 +74,17 @@ async function updateOrder(updatedOrder: Order, id:number) {
       return true
 }
 
+async function adminUpdateOrder(updatedOrder: Order, id:number) {
+      if( !db.data ) {
+            db.data = defaultData
+      }
+ 
+      db.data.orders[id] = updatedOrder;  
+      await db.write()
+      return db.data.orders
+}
+
+
 async function authenticateLogin(ID:any){
       
     if(!db.data) {
@@ -223,6 +234,6 @@ export async function createOrderInfo() {
 
 
 
-export {getMenu, getOrders, authenticateLogin, checkOrder, updateOrder, getUsers }
+export {getMenu, getOrders, authenticateLogin, checkOrder, updateOrder, getUsers, adminUpdateOrder }
 // newUser, findUser, getUsers
 export default db
