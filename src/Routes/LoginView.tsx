@@ -46,7 +46,7 @@ const LoginView = () => {
     };
     if (userCreds.name == "" || userCreds.password == "") {
       tempObject.title = "Inga personuppgifter";
-      tempObject.message = "Kan inte logga in utan personuppgifer";
+      tempObject.message = "Kan inte logga in utan personuppgifter";
       makeError(tempObject);
       showError(true);
       setLoading(false);
@@ -69,8 +69,13 @@ const LoginView = () => {
       }
       navigate("/menu");
     } else {
-      setLoading(false);
-      setErrorMsg(true);
+        tempObject.title = "Inloggningen misslyckades";
+        tempObject.message = "Du har anget fel användarnamn eller lösenord, försök igen";
+        makeError(tempObject);
+        showError(true);
+        setLoading(false);
+        return;
+      
     }
   }
 
@@ -150,7 +155,6 @@ const LoginView = () => {
           </button>
         </div>
       </form>
-      {errorMsg ? <p>Inloggning misslyckades</p> : ""}
       {showAlert}
     </div>
   );

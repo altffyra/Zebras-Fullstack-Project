@@ -72,7 +72,12 @@ const SignUp = () => {
       navigate("/menu");
     } else {
       setLoading(false);
-      setAlreadyExist(true);
+      tempObject.title = "Kontot finns redan.";
+      tempObject.message =
+        "Du kan inte skapa kontot för något av kontouppgifterna finns redan.";
+      makeError(tempObject);
+      showError(true);
+      return;
     }
   }
 
@@ -179,7 +184,6 @@ const SignUp = () => {
           Skapa konto
         </button>
       </form>
-      {alreadyExist ? <p>Konto finns redan</p> : ""}
       {showAlert}
     </div>
   );
