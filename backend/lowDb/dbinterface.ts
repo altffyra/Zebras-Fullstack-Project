@@ -54,3 +54,10 @@ export type Order = {
     orderCompleted?: string
     id?: string;
 }
+
+type defaultDictionaries = 'number' | 'alpha' | 'alpha_lower' | 'alpha_upper' | 'alphanum' | 'alphanum_lower' | 'alphanum_upper';
+
+export type ShortUniqueIdOptions = {
+    dictionary: string[] | defaultDictionaries;
+    length: number;
+  };

@@ -1,11 +1,19 @@
 import { join, dirname } from 'path';
 import { Low, JSONFile } from 'lowdb';
 import { fileURLToPath } from 'url';
-import { User, Schema, Order, LoginCreds } from './dbinterface';
+import { User, Schema, Order, LoginCreds, ShortUniqueIdOptions } from './dbinterface';
 import { data as defaultData } from '../defaultData.js';
 import dayjs from 'dayjs';
+
 import ShortUniqueId from 'short-unique-id';
-const uid = new ShortUniqueId({ length: 8 });
+
+
+const DEFAULT_OPTIONS: ShortUniqueIdOptions = {
+      dictionary: 'alpha_upper',
+      length: 10,
+    };
+
+const uid = new ShortUniqueId(DEFAULT_OPTIONS);
 
 export const started = dayjs().format('YYYY-MM-DD HH:mm');
 
