@@ -67,7 +67,7 @@ console.log(user);
 
 async function updateOrder(e:FormEvent) {
   e.preventDefault();
-  setOrderLocked(false)
+
 
   if(userCredentials.name.length < 1 || userCredentials.email.length < 1 || userCredentials.phoneNumber.length < 1) {
     return
@@ -93,7 +93,6 @@ async function updateOrder(e:FormEvent) {
     });
     console.log(response)
     const datasave = await response.json();
-    console.log(datasave.locked);
     if (datasave.locked){
       
       setOrderLocked(true)
@@ -196,10 +195,7 @@ async function updateOrder(e:FormEvent) {
   return (
     <main>
       <Nav />
-      {orderLocked ?
-        <p>DEN ÄR LÅST HAHAHAH too slow</p>
-        : ''
-      }
+
       <div className="checkout-wrapper">
         <figure className="checkout-header--info">
           <img src={mainmeal} alt="" />

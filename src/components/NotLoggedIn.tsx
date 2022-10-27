@@ -103,7 +103,7 @@ const NotLoggedIn = (props: Props) => {
             <input className='form__input' placeholder=' ' type="password" name="password" required onChange={(e)=>handlePassword(e)} />
             <label className='form__label form--password' htmlFor="password">Lösenord</label>
         </div>
-        <p>Inget konto? <a href="/SignUp"> Skapa </a></p>
+        <p>Inget konto? <span onClick={()=> navigate("/Signup")}>Skapa</span></p>
         <div>
             <button type="submit" className='login-btn' onClick={(e)=>{handleSubmit(e)}}>Logga in</button>
             <button onClick={loginGuest} className='guest-btn'>Fortsätt som gäst</button>
