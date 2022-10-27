@@ -72,6 +72,7 @@ $headerFont: "Rock Salt", cursive;
   display: grid;
   place-items: center;
   padding: 1em;
+  box-shadow: $boxShadow;
 
   h1 {
     color: $fontDark;
