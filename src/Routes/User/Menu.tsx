@@ -17,6 +17,10 @@ const Menu = () => {
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    const root:any = document.querySelector('#root');
+        root.scrollIntoView({
+        behavior: 'instant'
+      });
     async function getMenu() {
       setLoading(true);
       const response = await fetch("/api/menu");

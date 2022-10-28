@@ -77,7 +77,7 @@
       border: none;
       border-bottom: 2px solid black;
       outline: none;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       z-index: 1;
       &:valid {
         background-color: variables.$primaryBackground;
@@ -90,10 +90,12 @@
     // for autofilled inputs
     .form__input:-webkit-autofill {
       box-shadow: 0 0 0 50px variables.$primaryBackground inset;
+
     }
 
     .form__input:-webkit-autofill:focus {
       box-shadow: 0 0 0 50px variables.$primaryBackground inset;
+
     }
 
     .form__input:-webkit-autofill:not(:placeholder-shown) ~ .form__label {

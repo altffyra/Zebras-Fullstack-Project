@@ -22,6 +22,10 @@ const Account = () => {
     (state: RootState) => state.tempOrder
   )[0];
   useEffect(() => {
+    const root:any = document.querySelector('#root');
+    root.scrollIntoView({
+    behavior: 'instant'
+  });
     if (tempOrder) {
       dispatch(tempOrderActions.clearTempOrder());
       dispatch(cartActions.clearCart());
