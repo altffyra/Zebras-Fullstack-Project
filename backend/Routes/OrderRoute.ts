@@ -16,7 +16,7 @@ import express, { NextFunction, Request, Response } from "express";
      } 
 
    if (idhead)
-     {
+     {         
        const checklogin: User[] = await authenticateLogin(idhead)
        if (checklogin.length > 0) next();
         else 
@@ -67,8 +67,6 @@ orderRoute.put("/admin/orders/:id", auth, async (req:Request, res:Response) => {
   const orderId: string = req.params.id;
   const lockedOrder = await checkLock(orderId);
 
-  console.log(lockedOrder);
-
   if (lockedOrder != undefined && lockedOrder.locked === false) {
       res.send(lockedOrder);
     }
@@ -92,7 +90,6 @@ orderRoute.post("/", async (req, res) => {
       orderObj.orderPlaced = orderInfo.started;
       orderObj.orderCompleted = orderInfo.completed;
       orderObj.id = orderInfo.id
-      console.log(orderObj);
 
       await createOrder(orderObj)
       res.status(200).send(orderObj)
@@ -109,7 +106,6 @@ orderRoute.post("/", async (req, res) => {
 orderRoute.put("/:id", async (req:IdParam, res:Response) => {
   const id:string = req.params.id;  
   let updatedOrder: Order = req.body;
-  console.log(updatedOrder.user);
   
   const foundIndex: number = await checkOrder(id);
   if(foundIndex === -1) {
@@ -124,7 +120,6 @@ orderRoute.put("/:id", async (req:IdParam, res:Response) => {
             return
           }
           const checkedOrder: boolean = await updateOrder(updatedOrder, foundIndex)
-          console.log(checkedOrder);
           
           if(!checkedOrder) {
             res.send({locked: true})

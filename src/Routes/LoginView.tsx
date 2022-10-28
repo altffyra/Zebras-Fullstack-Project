@@ -59,11 +59,10 @@ const LoginView = () => {
       headers: { "Content-Type": "application/json" },
     });
     const data = await response.json();
-    console.log("response data: ", data);
     if (data.success) {
       setLoading(false);
       dispatch(userActions.setUser(data.user));
-      localStorage.setItem("accountId", JSON.stringify(data.user.accountId));
+      localStorage.setItem("accountId", data.user.accountId);
       if (data.user.admin) {
         navigate("/AdminPage");
       } else {

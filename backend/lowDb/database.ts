@@ -85,22 +85,25 @@ async function adminUpdateOrder(updatedOrder: Order, id:number) {
 }
 
 
-async function authenticateLogin(ID:any){
+async function authenticateLogin(ID:string){
       
     if(!db.data) {
         db.data = defaultData
     }
 
-    const authreply:User[] = await db.data.users
-    let filter: User[] = authreply.filter((user:User) => user.accountId == ID);
-
-    if(filter[0].admin) {
-      if (filter != undefined && filter[0].admin == true) {
-            return filter;
-          } else {
+    const authreply:User[] = [...db.data.users]
+    let filter: User[] | undefined = authreply.filter((user:User) => user.accountId == ID);
+    
+    if(filter.length > 0) {
+          if(filter[0].admin) {
+            if (filter != undefined && filter[0].admin == true) {
+                  return filter;
+                } else {
+                  return [];
+                }
+            }     
             return [];
-          }
-      }
+    }
       return [];
 }
 
@@ -111,7 +114,6 @@ async function getUsers() {
       db.data = defaultData
 }
     const allUsers: User[] = db.data.users
-    console.log('getUsers', allUsers)
     return allUsers
 }
 export async function createAccount(userData:User) {
@@ -130,7 +132,6 @@ export async function findUser(userData:User) {
       }
     let userExist = db.data.users.filter((user) => user.email === userData.email || user.name === userData.name)
 
-      console.log('userExist', userExist)
     return userExist
 }    
 
@@ -140,7 +141,6 @@ export async function findAccount(userData:LoginCreds) {
       db.data = defaultData
       }
       let filterAccount = db.data.users.filter((user)=> user.name === userData.name && user.password === userData.password)
-      console.log('filterAccount: ', filterAccount)
       return filterAccount
 }
 
@@ -203,8 +203,6 @@ export async function checkLock(orderId: string) {
       const filterOrders: Order[] = [...db.data.orders];
       const foundOrder: Order[] = filterOrders.filter(order => order.id == orderId)
       const orderIndex: number = db.data.orders.findIndex(order => order.id == orderId)
-
-      console.log(orderIndex);
 
       if (foundOrder.length === 0 && foundOrder[0].locked === true) {
             return

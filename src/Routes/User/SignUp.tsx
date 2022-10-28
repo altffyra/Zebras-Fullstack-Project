@@ -16,7 +16,6 @@ const SignUp = () => {
   const [userPhone, setUserPhone] = useState<string>("");
   const [userPassword, setUserPassword] = useState<string>("");
   const [loading, setLoading] = useState(false);
-  const [alreadyExist, setAlreadyExist] = useState<boolean>(false);
 
   const [errorElement, showError] = useState<boolean>(false);
   const [errorMessages, makeError] = useState({ title: "", message: "" });
@@ -56,8 +55,7 @@ const SignUp = () => {
       return;
     }
     setLoading(true);
-    setAlreadyExist(false);
-    const response = await fetch("http://localhost:8000/api/user/signup", {
+    const response = await fetch("/api/user/signup", {
       method: "POST",
       body: JSON.stringify(newUser),
       headers: { "Content-Type": "application/json" },
@@ -67,8 +65,7 @@ const SignUp = () => {
     if (data.success) {
       setLoading(false);
       dispatch(userActions.setUser(data.user));
-      console.log(data);
-      localStorage.setItem("accountId", JSON.stringify(data.user.accountId));
+      localStorage.setItem("accountId", data.user.accountId);
       navigate("/menu");
     } else {
       setLoading(false);

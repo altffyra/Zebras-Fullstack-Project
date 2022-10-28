@@ -1,6 +1,7 @@
 import { Order } from '../models/types';
 import lockedIcon from '../assets/locked.png'
 import unlockedIcon from '../assets/unlocked.png'
+import completeIcon from '../assets/complete.svg'
 import OrderItem from './OrderItem'
 import { useState } from 'react';
 import message from '../assets/message.png';
@@ -55,6 +56,40 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
 
         }
       }
+
+      async function handleComplete() {
+    
+        setLoading(true)
+
+        let updatedOrder = props.order
+        updatedOrder.completed = true
+    
+        const orderId = props.order.id
+
+        const response = await fetch(`/api/order/admin/${orderId}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(updatedOrder),
+        });
+        const datasave = await response.json();
+
+        {/*
+        if(!response.ok){
+          setLoading(false)
+          tempObject.title = "Ordern ej ändrad"
+            tempObject.message = "Något gick fel, försök igen"
+            makeError(tempObject)
+            showError(true)
+          }
+        */}
+    
+        if (response.ok) {
+          setLoading(false)
+
+        }
+      }
   
   const allItems = props.order.cart.cartItems.map((item) => {
     return <p key={ item.name }>{ item.name }</p>
@@ -81,11 +116,17 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
           </section>
 
           <section className="single-order__locks">
-            {props.order.locked 
+            {!props.order.locked && !props.order.completed
             ? 
-                <img src={lockedIcon} alt="locked icon" onClick={lockOrder}/>
-            :
                 <img src={unlockedIcon} alt="unlocked icon" onClick={lockOrder}/>
+            :
+                ''
+            }
+            {props.order.locked && !props.order.completed
+              ? 
+              <img src={completeIcon} alt="unlocked icon" onClick={handleComplete}/>
+              :
+                ''
             }
             {showOrder ? 
               <OrderItem order={props.order} showOrderOverlay={showOrderOverlay} />  
@@ -96,7 +137,7 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
         </section>
 
         <section className="single-order__bottom">
-          <p>{ allItems }</p>
+          { allItems }
         </section>
 
       </section>

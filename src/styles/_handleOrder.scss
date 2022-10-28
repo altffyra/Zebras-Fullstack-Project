@@ -44,8 +44,16 @@
         }
       }
 
+      .search-order {
+        @include variables.flexContainer(row);
+        justify-content: space-between;
+        padding: 0 1em;
+        p {
+            cursor: pointer;
+        }
+      }
+
     .user-orders {
-        margin: 0 2em;
         .orderlist {
 
             .single-order {
@@ -63,6 +71,7 @@
 
                         p {
                             margin-top: 1em;
+                            cursor: pointer;
                         }
 
                         img {
