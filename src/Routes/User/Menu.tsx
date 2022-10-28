@@ -29,6 +29,7 @@ const Menu = () => {
       setLoading(false);
     }
     getMenu();
+
   }, []);
 
   const cart: CartProps = useSelector((state: RootState) => state.cart);
@@ -57,7 +58,7 @@ const Menu = () => {
         className="menu-header"
         style={{ backgroundImage: `url(${mainmeal})` }}
       >
-        <h1>MENY</h1>
+        <h1>Meny</h1>
       </section>
       <section className="menu-header--category">
         <h2 onClick={() => handleLink("entree")}>Förrätter</h2>

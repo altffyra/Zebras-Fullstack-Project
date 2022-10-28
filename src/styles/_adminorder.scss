@@ -4,7 +4,7 @@
 
 .admin-order {
   margin: 1em;
-
+  width: 100%;
   .loading {
     @include variables.loader();
   }
@@ -154,6 +154,10 @@
     background-color: variables.$fontLight;
     box-shadow: variables.$boxShadow;
     padding: 2em 5em;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+
     .top-btn {
       button {
         background-color: transparent;

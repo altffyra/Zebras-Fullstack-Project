@@ -24,7 +24,6 @@ const LoginView = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [userName, setUserName] = useState<string>("");
   const [userPassword, setUserPassword] = useState<string>("");
-  const [errorMsg, setErrorMsg] = useState<boolean>(false);
 
   const [errorElement, showError] = useState<boolean>(false);
   const [errorMessages, makeError] = useState({ title: "", message: "" });

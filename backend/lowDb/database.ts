@@ -41,8 +41,20 @@ async function getOrders(){
       if( !db.data ) {
             db.data = defaultData
       }
-    const orderreply:Order[] = await db.data.orders
-    return orderreply
+      const orderCopy = [...db.data.orders]
+      orderCopy.forEach(order => {
+            if(order.orderCompleted) {
+                  if(order.orderCompleted < started) {
+                        order.locked = true
+                  }
+            }
+      })
+
+      db.data.orders = orderCopy;
+      await db.write()
+
+      const orderreply:Order[] = db.data.orders
+      return orderreply
 }
 
 async function checkOrder(id: string){

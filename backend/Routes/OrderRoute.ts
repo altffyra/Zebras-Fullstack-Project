@@ -54,6 +54,7 @@ type IdParam = Request<IdObject>;
 orderRoute.get("/admin/orders", auth, async (req:Request, res:Response) => {
 
   const resOrders: Order[] = await getOrders()
+
   if (resOrders.length > 0) {
     res.send(resOrders);
   } else {
@@ -138,7 +139,7 @@ orderRoute.put("/:id", async (req:IdParam, res:Response) => {
 });
 
 // CHANGE ADMIN ORDER (OBS lägg till auth)
-orderRoute.put("/admin/:id", async (req:IdParam, res:Response) => {
+orderRoute.put("/admin/:id", auth, async (req:IdParam, res:Response) => {
   const id:string = req.params.id;  
   let updatedOrder: Order = req.body;
   
