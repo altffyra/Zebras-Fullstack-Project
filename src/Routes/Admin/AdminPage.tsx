@@ -42,7 +42,7 @@ const AdminPage = () => {
                         "accountID": `${checkId}`
                     }
                 });
-                const data = await response.json();     
+                const data = await response.json(); 
                 setLoading(true)
                 dispatch(orderActions.getOrders(data));
                 setOrders(data);
@@ -106,7 +106,7 @@ const AdminPage = () => {
             {searchError ? <p>Ingen order hittades på det ordernumret.</p> : ""}
             {found ? 
               <div className='search-order'>
-                <p>Order {found.id}</p>
+                <p onClick={(() => navigate(`/AdminOrder/${found.id}`))}>Order {found.id}</p>
                 {found.locked ?
                  <img src={locked} alt="locked icon" />
                 

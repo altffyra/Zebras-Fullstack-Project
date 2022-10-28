@@ -2,8 +2,13 @@ import "../styles/_nav.scss";
 import { NavLink } from "react-router-dom";
 import { useState, useEffect } from "react";
 import logoDark from "../assets/logoDark.svg";
+import logoLight from "../assets/logoLight.svg";
 
-const Nav = () => {
+type NavProps = {
+  scrollTop?: boolean;
+}
+
+const Nav = (props: NavProps) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
@@ -17,9 +22,9 @@ const Nav = () => {
   const handleMenu: () => void = () => {
     setMenuOpen(!menuOpen);
   };
-
+const navCss = props.scrollTop ? 'nav-top' : ''
   return (
-    <header>
+    <header className={navCss}>
       <div className="menu-btn" onClick={handleMenu}>
         <span className={menuOpen ? "menu-btn--top" : ""}></span>
         <span className={menuOpen ? "menu-btn--mid" : ""}></span>
@@ -52,8 +57,8 @@ const Nav = () => {
         </ul>
       </nav>
       <div className="logo-container">
-        <h2 className="nav-headline">ROCKSALT</h2>
-        <img className="logo" src={logoDark} alt="Rocksalt logo" />
+        <h2 className="nav-headline">Rocksalt</h2>
+        <img className="logo" src={navCss ? logoLight : logoDark} alt="Rocksalt logo" />
       </div>
     </header>
   );

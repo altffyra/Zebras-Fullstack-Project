@@ -3,6 +3,7 @@
 
 .menu-wrapper {
   margin-top: 12vh;
+  width: 100%;
   @include variables.flexContainer($dir: column);
   font-family: "Rock Salt";
   background-color: variables.$primaryBackground;
@@ -172,12 +173,14 @@
 
 @media screen and (min-width: 786px) {
   .menu-wrapper {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
     .menu-header--category {
       overflow: hidden;
     }
 
     .menu-header--container {
-      // width: 90%;
       .menu-subheader--text {
         margin-left: 4em;
         font-size: 1.5em;
