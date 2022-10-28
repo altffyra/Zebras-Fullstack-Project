@@ -64,7 +64,7 @@ $headerFont: "Rock Salt", cursive;
   align-items: $align;
 }
 
-@mixin headerTitle($image: url("../assets/about-us.jpg")) {
+@mixin headerTitle($image: url("../assets/konto.svg")) {
   background-image: $image;
   background-size: cover;
   background-position: center;

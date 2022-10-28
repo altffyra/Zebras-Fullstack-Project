@@ -43,7 +43,7 @@ const AdminPage = () => {
                     }
                 });
                 const data = await response.json();     
-                setLoading(true)
+                setLoading(true);
                 dispatch(orderActions.getOrders(data));
                 setOrders(data);
             } 
