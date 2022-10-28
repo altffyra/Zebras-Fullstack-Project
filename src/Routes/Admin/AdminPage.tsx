@@ -42,10 +42,18 @@ const AdminPage = () => {
                         "accountID": `${checkId}`
                     }
                 });
-                const data = await response.json();     
-                setLoading(true);
-                dispatch(orderActions.getOrders(data));
-                setOrders(data);
+                const data = await response.json();  
+
+                if(data.error) {
+
+                  navigate('/')
+                  
+                } else {
+                  setLoading(true);
+                  dispatch(orderActions.getOrders(data));
+                  setOrders(data);
+
+                }
             } 
         }
         getOrders();
