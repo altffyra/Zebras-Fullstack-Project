@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { actions as userActions } from "../features/userReducer";
 import { useDispatch } from "react-redux";
 import "../styles/_userForm.scss";
-import formLogo from "../assets/formLogo.svg";
+import logo from "../assets/logo.svg";
+import fork from '../assets/fork.svg'
 import Alert from "../components/Alert";
 import "../styles/_alert.scss";
 
@@ -99,8 +100,9 @@ const LoginView = () => {
       <button className="small__btn" onClick={() => navigate(-1)}>
         Tillbaka
       </button>
-      <figure className="form__logo">
-        <img src={formLogo} alt="logo" />
+      <figure className="logo__container">
+        <h1>Rocksalt</h1>
+        <img src={fork} alt="logo" className="logo" />
       </figure>
       <form className="userForm">
         <div>

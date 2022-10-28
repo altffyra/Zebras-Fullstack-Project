@@ -7,25 +7,47 @@
   width: 100%;
   height: calc(100vh - 6em);
   margin: 0 auto;
-  padding: 1em;
   @include variables.flexContainer();
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   gap: 3rem;
+  position: relative;
 
   .loading {
     @include variables.loader();
   }
   .small__btn {
     @include buttons.smallBtn();
-    align-self: flex-start;
+    position: absolute;
+    top: 1em;
   }
-  .formLogo {
-    box-shadow: variables.$boxShadow;
+  .logo__container {
+    @include variables.flexContainer(row);
 
-    img {
-      width: 100%;
-      height: 100%;
+    h1 {
+      color: variables.$darkRed;
+    }
+    .logo {
+      animation: wiggle 1s infinite;
+    }
+  }
+  @keyframes wiggle {
+    0% {
+      transform: rotate(-5deg);
+    }
+    25% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(5deg);
+    }
+  
+    75% {
+      transform: rotate(0deg)
+    }
+  
+    100% {
+      transform: rotate(-5deg);
     }
   }
   .userForm {
@@ -41,7 +63,7 @@
     .form__label {
       position: absolute;
       color: variables.$fontDark;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       font-weight: 400;
       transition: all 0.5s;
       z-index: 2;
@@ -54,7 +76,7 @@
       border: none;
       border-bottom: 2px solid black;
       outline: none;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       z-index: 1;
       &:valid {
         background-color: variables.$primaryBackground;
@@ -124,8 +146,38 @@
 }
 
 @media screen and (min-width: 786px) {
-  .userForm {
-    max-width: 1000px;
-    //   margin: 0 auto;
+  .signup,
+  .login {
+    background-color: variables.$fontLight;
+    max-width: 40vw;
+    margin-top: 2em;
+    border-radius: 1em;
+    box-shadow: variables.$boxShadow;
+
+    .userForm {
+
+      .form__input {
+        background: variables.$fontLight;
+
+        &:valid {
+          background-color: variables.$fontLight;
+        }
+        &:active {
+          background-color: variables.$fontLight;
+        }
+      }
+  
+      // for autofilled inputs
+      .form__input:-webkit-autofill {
+        box-shadow: 0 0 0 50px variables.$fontLight inset;
+      }
+  
+      .form__input:-webkit-autofill:focus {
+        box-shadow: 0 0 0 50px variables.$fontLight inset;
+      }
+
+    }
+  
   }
+  
 }
