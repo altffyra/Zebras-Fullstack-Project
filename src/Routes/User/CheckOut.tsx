@@ -58,8 +58,13 @@ const CheckOut = () => {
     }
   }, []);
 
+type errorObj = {
+  title:string,
+  message:string
+}  
+
   const [errorElement, showError] = useState<boolean>(false);
-  const [errorMessages, makeError] = useState({ title: "", message: "" });
+  const [errorMessages, makeError] = useState<errorObj>({ title: "", message: "" });
   const showAlert = errorElement ? (
     <Alert
       errorTitle={errorMessages.title}
@@ -69,7 +74,7 @@ const CheckOut = () => {
   ) : (
     ""
   );
-  let tempObject = { title: "", message: "" };
+  let tempObject:errorObj = { title: "", message: "" };
 
   async function updateOrder(e: FormEvent) {
     e.preventDefault();
@@ -115,7 +120,7 @@ const CheckOut = () => {
       showError(true);
     }
 
-    const datasave = await response.json();
+    const datasave:Order = await response.json();
     if (datasave.locked) {
       setLoading(false);
       tempObject.title = "Ordern är låst";
@@ -146,7 +151,7 @@ const CheckOut = () => {
       showError(true);
       return;
     }
-    let data = {
+    let data:Order = {
       cart: cart,
       user: userCredentials,
       userComment: userMessage,
@@ -159,7 +164,7 @@ const CheckOut = () => {
       },
       body: JSON.stringify(data),
     });
-    const datasave = await response.json();
+    const datasave:Order = await response.json();
 
     setLoading(false);
     dispatch(orderActions.makeOrders(datasave));

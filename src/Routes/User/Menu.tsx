@@ -29,13 +29,13 @@ const Menu = () => {
 
   const cart: CartProps = useSelector((state: RootState) => state.cart);
   const menu: MenuItems[] = useSelector((state: RootState) => state.menu);
-  const entreeArry = menu.filter((item) => item.type == "Förrätt");
-  const vegArr = menu.filter((item) => item.type == "Veg");
-  const mainCourseArr = menu.filter(
+  const entreeArry:MenuItems[] = menu.filter((item) => item.type == "Förrätt");
+  const vegArr:MenuItems[] = menu.filter((item) => item.type == "Veg");
+  const mainCourseArr:MenuItems[] = menu.filter(
     (item) =>
       item.type != "Förrätt" && item.type != "Veg" && item.type != "Efterrätt"
   );
-  const desertArr = menu.filter((item) => item.type == "Efterrätt");
+  const desertArr:MenuItems[] = menu.filter((item) => item.type == "Efterrätt");
 
   const handleLink: (id: string) => void = (id) => {
     const elemendId: Element | null = document.querySelector(`#${id}`);
