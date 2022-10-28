@@ -50,7 +50,7 @@ const AdminPage = () => {
     }, []);
 
   if (orders !== undefined) {
-    activeOrders = orders.filter((order) => !order.completed);
+    activeOrders = orders.filter((order) => !order.completed && !order.locked);
     notPickedUpOrders = orders.filter((order) => order.locked && !order.completed);
     finishedOrders = orders.filter((order) => order.completed);
 

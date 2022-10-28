@@ -124,13 +124,15 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
             }
             {props.order.locked && !props.order.completed
               ? 
-              <img src={completeIcon} alt="unlocked icon" onClick={handleComplete}/>
+              <img src={completeIcon} alt="complete icon" onClick={handleComplete}/>
               :
                 ''
             }
-            {showOrder ? 
-              <OrderItem order={props.order} showOrderOverlay={showOrderOverlay} />  
-              : ''
+            {props.order.locked && props.order.completed
+              ? 
+                ''
+              :
+                ''
             }
           </section>
 
