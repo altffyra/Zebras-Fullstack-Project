@@ -43,6 +43,7 @@
     .order-information {
       @include variables.flexContainer();
       gap: 1em;
+      
 
       .order-title {
         font-size: 1.2em;
