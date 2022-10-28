@@ -20,7 +20,7 @@ userRoute.post('/signup', async (req, res) => {
             password: '',
             phoneNumber: '',
             accountId: '',
-            admin: false,
+            // admin: false,
         },
         message: `Konto skapat för: ${userData.name}`
     }
@@ -59,7 +59,7 @@ userRoute.post('/login', async (req, res) => {
             password: '',
             phoneNumber: '',
             accountId: '',
-            admin: false,
+            // admin: false,
         },
         message: 'No credentials'
     }

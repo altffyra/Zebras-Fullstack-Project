@@ -8,7 +8,7 @@ export type Schema= {
 export type MenuItem = {
     name: string;
     desc: string;
-    price: string;
+    price: number;
     allergies: string;
     type: string;
 }
@@ -29,7 +29,7 @@ export type User  = {
     email: string;
     accountId: string;
     phoneNumber: string;
-    admin: boolean;
+    admin?: boolean;
     password: string;
 }
 export type LoginCreds = {
