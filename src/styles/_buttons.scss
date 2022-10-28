@@ -12,7 +12,7 @@
   transition: all 300ms;
   cursor: pointer;
   &:hover {
-    background: color.scale($bg, $blackness: 40%);
+    background: color.scale($bg, $blackness: 30%);
   }
 }
 @mixin bigBtn(

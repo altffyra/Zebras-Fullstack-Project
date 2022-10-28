@@ -20,6 +20,7 @@
     @include buttons.smallBtn();
     position: absolute;
     top: 1em;
+    left: 1em
   }
   .logo__container {
     @include variables.flexContainer(row);
@@ -153,6 +154,10 @@
     margin-top: 2em;
     border-radius: 1em;
     box-shadow: variables.$boxShadow;
+
+    .small__btn {
+      @include buttons.smallBtn($bg: variables.$fontLight);
+    }
 
     .userForm {
 
