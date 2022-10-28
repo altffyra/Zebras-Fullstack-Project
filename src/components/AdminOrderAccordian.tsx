@@ -9,13 +9,14 @@ import symbol_red from '../assets/order_symbol--red.svg';
 type UserOrderAccordian = {
     orderType: string;
     orders: Order[];
+    updateAllOrders: (orders: Order[]) => void;
 }
 
 const UserOrderAccordian = (props: UserOrderAccordian) => {
     const [dropActive, setDropActive] = useState<boolean>(true);
     const cssActive = dropActive ? 'active' : '';
 
-    const ordersEl = props.orders.map(order => <AdminSingleUserOrders key={order.id} order={order} />);
+    const ordersEl = props.orders.map(order => <AdminSingleUserOrders key={order.id} order={order} updateAllOrders={ props.updateAllOrders }/>);
 
     const handleDropDown: () => void = () => {
         setDropActive(!dropActive);

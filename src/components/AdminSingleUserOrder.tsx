@@ -6,17 +6,34 @@ import OrderItem from './OrderItem'
 import { useState } from 'react';
 import message from '../assets/message.png';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from "react-redux";
+import { actions as orderActions } from '../features/orderReducer'
+import Alert from './Alert'
+
 
 type SingleUserOrderProps = {
     order: Order;
+    updateAllOrders: (orders: Order[]) => void;
 }
 
 const SingleUserOrders = (props: SingleUserOrderProps) => {
   const [showOrder, setShowOrder] = useState<boolean>(false);
   const [ loading, setLoading ] = useState<boolean>(false);
+  const [errorElement, showError] = useState<boolean>(false);
+  const [errorMessages, makeError] = useState({ title: "", message: "" });
+  const showAlert = errorElement ? (
+    <Alert
+      errorTitle={errorMessages.title}
+      errorMessage={errorMessages.message}
+      showError={showError}
+    />
+  ) : (
+    " "
+  );
+  let tempObject = { title: "", message: "" };
 
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
 
   const showOrderOverlay: () => void = () => {
     setShowOrder(!showOrder)
@@ -24,72 +41,90 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
 
 
   async function lockOrder() {
-    
-        setLoading(true)
-
-        let updatedOrder = props.order
-        updatedOrder.locked = true
-    
-        const orderId = props.order.id
-
-        const response = await fetch(`/api/order/admin/${orderId}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedOrder),
-        });
-        const datasave = await response.json();
-
-        {/*
-        if(!response.ok){
-          setLoading(false)
-          tempObject.title = "Ordern ej ändrad"
-            tempObject.message = "Något gick fel, försök igen"
-            makeError(tempObject)
-            showError(true)
-          }
-        */}
-    
-        if (response.ok) {
-          setLoading(false)
-
-        }
+    setLoading(true);
+    if (props.order) {
+      const completedOrder: Order = {
+        cart: props.order.cart,
+        user: props.order.user,
+        adminComment: props.order.adminComment,
+        userComment: props.order.userComment,
+        locked: true,
+        orderPlaced: props.order.orderPlaced,
+        orderCompleted: props.order.orderCompleted,
+        id: props.order.id,
+        completed : props.order.completed,
       }
 
-      async function handleComplete() {
-    
-        setLoading(true)
+      const orderId = props.order?.id
+      const response = await fetch(`/api/order/admin/${orderId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(completedOrder),
+      });
 
-        let updatedOrder = props.order
-        updatedOrder.completed = true
-    
-        const orderId = props.order.id
+      const datasave = await response.json();
 
-        const response = await fetch(`/api/order/admin/${orderId}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(updatedOrder),
-        });
-        const datasave = await response.json();
-
-        {/*
-        if(!response.ok){
-          setLoading(false)
-          tempObject.title = "Ordern ej ändrad"
-            tempObject.message = "Något gick fel, försök igen"
-            makeError(tempObject)
-            showError(true)
-          }
-        */}
-    
-        if (response.ok) {
-          setLoading(false)
-
-        }
+      if (!response.ok) {
+        setLoading(false);
+        tempObject.title = "Ordern ej ändrad";
+        tempObject.message = "Något gick fel, försök igen";
+        makeError(tempObject);
+        showError(true);
       }
+
+      if (response.ok) {
+        dispatch(orderActions.getOrders(datasave));
+        props.updateAllOrders(datasave)
+
+        setLoading(false);
+      };
+    };
+  }
+  
+    async function handleComplete() {
+  
+      setLoading(true);
+      if (props.order) {
+        const completedOrder: Order = {
+          cart: props.order.cart,
+          user: props.order.user,
+          adminComment: props.order.adminComment,
+          userComment: props.order.userComment,
+          locked: props.order.locked,
+          orderPlaced: props.order.orderPlaced,
+          orderCompleted: props.order.orderCompleted,
+          id: props.order.id,
+          completed : true,
+        }
+
+      const orderId = props.order?.id
+      const response = await fetch(`/api/order/admin/${orderId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(completedOrder),
+      });
+
+      const datasave = await response.json();
+
+      if (!response.ok) {
+        setLoading(false);
+        tempObject.title = "Ordern ej ändrad";
+        tempObject.message = "Något gick fel, försök igen";
+        makeError(tempObject);
+        showError(true);
+      }
+
+      if (response.ok) {
+        dispatch(orderActions.getOrders(datasave));
+        setLoading(false);
+        props.updateAllOrders(datasave)
+      };
+    };
+  }
   
   const allItems = props.order.cart.cartItems.map((item) => {
     return <p key={ item.name }>{ item.name }</p>
@@ -102,19 +137,22 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
 
 
     return (
-      <section className="single-order" onClick={navigateOrder}>
-
-        <section className="single-order__top">
-
-          <section className="single-order__id">
-            <p onClick={showOrderOverlay} >Order {props.order.id}</p>
-            { props.order.userComment !== ""
-            ?
-              <img src={message} alt="" />
-            :
-            '' }
-          </section>
-
+      <section className="single-order" >
+        {showAlert}
+        {loading ? <div className="loading"></div> : ""}
+          <div className='single-order__left' onClick={navigateOrder}>
+            <section className="single-order__id">
+              <p onClick={showOrderOverlay} >Order {props.order.id}</p>
+              { props.order.userComment !== ""
+              ?
+                <img src={message} alt="" />
+              :
+                '' }
+              </section>
+              <section className="single-order__bottom">
+                { allItems }
+            </section>
+          </div>
           <section className="single-order__locks">
             {!props.order.locked && !props.order.completed
             ? 
@@ -135,13 +173,6 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
                 ''
             }
           </section>
-
-        </section>
-
-        <section className="single-order__bottom">
-          { allItems }
-        </section>
-
       </section>
     )
   }

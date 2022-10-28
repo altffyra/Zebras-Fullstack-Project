@@ -19,13 +19,17 @@ const AdminPage = () => {
     const [orders, setOrders] = useState<Order[]>();
     const [searchId, setSearchId] = useState<string>("");
     const [searchError, setSearchError] = useState<boolean>(false);
-    const [found, setFound] = useState<Order>();
+    const [found, setFound] = useState<Order | undefined>();
+    const [allOrders, setAllOrders] = useState<Order[]>(useSelector((state: RootState) => state.orders))
     
     let checkId: string | null = localStorage.getItem('accountId');
     let finishedOrders: Order[] = [];
     let activeOrders: Order[] = [];
     let notPickedUpOrders: Order[] = [];
-    const allOrders: Order[] | undefined = useSelector((state: RootState) => state.orders)
+
+    const updateAllOrders:(orders: Order[]) => void = (orders) => {
+      setAllOrders(orders)
+    }
 
     useEffect(() => {
         async function getOrders() {
@@ -65,6 +69,8 @@ const AdminPage = () => {
     if (searchId.length <= 1) {
       return;
     }
+    setFound(undefined)
+
     setSearchError(false)
     const foundOrder: Order | undefined = allOrders.find(order => order.id == searchId)
     if(foundOrder) {
@@ -111,9 +117,9 @@ const AdminPage = () => {
               </div>
             : ''}
         <section className="user-orders">
-            < AdminOrderAccordian  orderType={'Ohanterade'} orders={ activeOrders }/> 
-            < AdminOrderAccordian  orderType={'Ej hämtade'} orders={ notPickedUpOrders }/> 
-            < AdminOrderAccordian  orderType={'Avslutade'} orders={ finishedOrders }/> 
+            < AdminOrderAccordian  orderType={'Ohanterade'} orders={ activeOrders } updateAllOrders={ updateAllOrders }/> 
+            < AdminOrderAccordian  orderType={'Ej hämtade'} orders={ notPickedUpOrders } updateAllOrders={ updateAllOrders }/> 
+            < AdminOrderAccordian  orderType={'Avslutade'} orders={ finishedOrders } updateAllOrders={ updateAllOrders }/> 
         </section>
 
     </div>
