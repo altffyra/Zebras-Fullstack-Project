@@ -104,8 +104,17 @@ const AdminOrder = () => {
   async function completeOrder() {
     setLoading(true);
     if (order) {
-      let completedOrder: Order = order
-      completedOrder.completed = true;
+      const completedOrder: Order = {
+        cart: order.cart,
+        user: order.user,
+        adminComment: order.adminComment,
+        userComment: order.userComment,
+        locked: order.locked,
+        orderPlaced: order.orderPlaced,
+        orderCompleted: order.orderCompleted,
+        id: order.id,
+        completed : true,
+      }
 
       const orderId = order?.id
       const response = await fetch(`/api/order/admin/${orderId}`, {
