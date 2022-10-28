@@ -60,7 +60,7 @@ const Menu = () => {
         <h2 onClick={() => handleLink("meat")}>Kött</h2>
         <h2 onClick={() => handleLink("fish")}>Fisk</h2>
         <h2 onClick={() => handleLink("bird")}>Fågel</h2>
-        <h2 onClick={() => handleLink("veg")}>Vegetarisk</h2>
+        <h2 onClick={() => handleLink("veg")}>Vegetariskt</h2>
         <h2 onClick={() => handleLink("desert")}>Efterrätter</h2>
       </section>
 
@@ -74,7 +74,7 @@ const Menu = () => {
         foodImg={mainmeal}
         menuArray={mainCourseArr}
       />
-      <MenuTopic topic={"Vegetarisk"} foodImg={veg} menuArray={vegArr} />
+      <MenuTopic topic={"Vegetariskt"} foodImg={veg} menuArray={vegArr} />
       <MenuTopic topic={"Efterrätt"} foodImg={dessert} menuArray={desertArr} />
 
       {cart.cartItems.length > 0 ? <Cart cart={cart} /> : ""}

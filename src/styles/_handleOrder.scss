@@ -57,13 +57,16 @@
         .orderlist {
 
             .single-order {
-
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 1em;
                 border-bottom: 1.5px solid black;
 
-                .single-order__top {
-                    display: flex;
-                    justify-content: space-between;
-                    margin-bottom: 1em;
+                .single-order__left {
+                    @include variables.flexContainer();
+                    gap: 1em;
+                    flex: 1;
+                    cursor: pointer;
 
                     .single-order__id {
 
@@ -71,7 +74,6 @@
 
                         p {
                             margin-top: 1em;
-                            cursor: pointer;
                         }
 
                         img {
@@ -80,15 +82,16 @@
                         }
                     }
     
-                    .single-order__locks {
-                        margin: 0.8em 1.5em;
-
-                        img {
-                            cursor: pointer;
-                        }
-                    }
-
                 }
+                .single-order__locks {
+                    margin: 0.8em 1.5em;
+                    align-self: center;
+                    img {
+                        cursor: pointer;
+                    }
+                }
+
+                
 
                 .single-order__bottom {
                     p {
