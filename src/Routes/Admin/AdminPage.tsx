@@ -2,20 +2,30 @@ import appertizer from '../../assets/menu/appertizer.svg';
 import '../../styles/_handleOrder.scss';
 import AdminOrderAccordian from '../../components/AdminOrderAccordian';
 import { Order } from '../../models/types';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState, KeyboardEvent } from 'react';
 import { useNavigate } from 'react-router-dom'
+import { actions as orderActions } from "../../features/orderReducer";
+import { RootState } from "../../store";
+import { useSelector, useDispatch } from "react-redux";
+import locked from '../../assets/locked.png';
+import unlocked from '../../assets/unlocked.png';
 
 const AdminPage = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const foodImg = appertizer;
 
     const [ loading, setLoading ] = useState<boolean>(false);
     const [orders, setOrders] = useState<Order[]>();
+    const [searchId, setSearchId] = useState<string>("");
+    const [searchError, setSearchError] = useState<boolean>(false);
+    const [found, setFound] = useState<Order>();
     
     let checkId: string | null = localStorage.getItem('accountId');
     let finishedOrders: Order[] = [];
     let activeOrders: Order[] = [];
     let notPickedUpOrders: Order[] = [];
+    const allOrders: Order[] | undefined = useSelector((state: RootState) => state.orders)
 
     useEffect(() => {
         async function getOrders() {
@@ -31,7 +41,7 @@ const AdminPage = () => {
                 });
                 const data = await response.json();     
                 setLoading(true)
-                // dispatcha ordrar
+                dispatch(orderActions.getOrders(data));
                 setOrders(data);
             } 
         }
@@ -49,7 +59,30 @@ const AdminPage = () => {
   const handleLogout: () => void = () => {
     localStorage.removeItem('accountId')
     navigate('/')
-}
+  }
+
+  const searchOrder: () => void = () => {
+    if (searchId.length <= 1) {
+      return;
+    }
+    setSearchError(false)
+    const foundOrder: Order | undefined = allOrders.find(order => order.id == searchId)
+    if(foundOrder) {
+      setFound(foundOrder)
+    } else {
+      setSearchError(true)
+    }
+  };
+
+  const handleInput: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
+    setSearchId(e.target.value);
+  };
+
+  const handleEnter: (e: KeyboardEvent) => void = (e) => {
+    if (e.key == "Enter") {
+      searchOrder();
+    }
+  };
 
   return (
     <div className="admin_page--wrapper">
@@ -62,12 +95,21 @@ const AdminPage = () => {
         <button className='admin-buttonSmall' onClick={handleLogout}>Logga ut </button>
 
         <div className="search-container">
-            <input type="text" name="search" id="search-user" placeholder="Sök ordernummer" />
-            <label htmlFor="search" >SÖK</label>
-            {/* state för ta emot 
-                funktion att söka och visa hittad
-              */}
+            <input type="text" name="search" id="search-user" placeholder="Sök ordernummer" onKeyUp={(e) => handleEnter(e)} onChange={(e) => handleInput(e)}/>
+            <label htmlFor="search" onClick={searchOrder}>SÖK</label>
         </div>
+            {searchError ? <p>Ingen order hittades på det ordernumret.</p> : ""}
+            {found ? 
+              <div className='search-order'>
+                <p>Order {found.id}</p>
+                {found.locked ?
+                 <img src={locked} alt="locked icon" />
+                
+                :
+                  <img src={unlocked} alt="unlocked icon" />
+                }
+              </div>
+            : ''}
         <section className="user-orders">
             < AdminOrderAccordian  orderType={'Ohanterade'} orders={ activeOrders }/> 
             < AdminOrderAccordian  orderType={'Ej hämtade'} orders={ notPickedUpOrders }/> 

@@ -19,8 +19,6 @@ const reducer = createReducer(initialState, {
     return initialState;
   },
   [makeOrders.toString()]: (state, action) => {
-    console.log(action.payload.user);
-
     const allOrders = [action.payload];
 
     return allOrders;
