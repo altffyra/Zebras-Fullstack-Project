@@ -360,9 +360,14 @@ const AdminOrder = () => {
               value={order?.adminComment}
             ></textarea>
           </div>
-          <button className="btn-submit" onClick={completeOrder}>
-            Order avslutad
-          </button>
+          {order.completed 
+            ? 
+              ''
+            :  
+              <button className="btn-submit" onClick={completeOrder}>
+                Order avslutad
+              </button>
+          }
         </section>
       )}
     </section>
