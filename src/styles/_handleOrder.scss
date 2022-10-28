@@ -82,6 +82,10 @@
     
                     .single-order__locks {
                         margin: 0.8em 1.5em;
+
+                        img {
+                            cursor: pointer;
+                        }
                     }
 
                 }

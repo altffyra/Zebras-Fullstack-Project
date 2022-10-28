@@ -87,7 +87,7 @@ export const data: Schema = {
           
               "userComment": "Jag har ont i magen",
               "adminComment": "",
-              "locked": false,
+              "locked": true,
               "completed": false,
               "orderPlaced": "2022-02-17 22:15",
               "orderCompleted": "2022-02-17 22:45",
