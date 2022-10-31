@@ -31,7 +31,7 @@ const UserOrderAccordian = (props: UserOrderAccordian) => {
         />
       </div>
       <div className={cssActive + " dropdown"}>
-        {props.orders.length > 0 ? ordersEl : "No orders"}
+        {props.orders.length > 0 ? ordersEl : "Inga ordrar"}
       </div>
     </div>
   );

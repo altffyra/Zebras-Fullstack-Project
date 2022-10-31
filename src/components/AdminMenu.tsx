@@ -1,6 +1,5 @@
 import { FormEvent } from "react";
 import { MenuItems } from "../models/types";
-import "../styles/_adminmenu.scss";
 import AdminMenuItem from "./AdminMenuItem";
 
 type Props = {

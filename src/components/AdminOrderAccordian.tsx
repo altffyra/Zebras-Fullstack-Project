@@ -43,7 +43,7 @@ const UserOrderAccordian = (props: UserOrderAccordian) => {
                 ? 
                     ordersEl
                 : 
-                    'No orders'
+                    'Inga ordrar'
                 }
             </div>
         </div>

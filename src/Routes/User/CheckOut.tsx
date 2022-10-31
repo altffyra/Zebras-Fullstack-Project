@@ -269,7 +269,7 @@ type errorObj = {
         </section>
 
         <section className="current-order">
-          <section className="order-top"> Order</section>
+          <p className="order-top"> Order</p>
           {cartItemEl}
           <section className="total-wrapper">
             <p className="total">Totalt:</p>{" "}

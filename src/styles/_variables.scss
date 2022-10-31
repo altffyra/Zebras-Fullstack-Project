@@ -116,13 +116,9 @@ $headerFont: "Rock Salt", cursive;
     max-height: 0%;
     height: 100%;
     overflow: hidden;
-    transition: 500ms;
   }
   .active {
-    max-height: 100vh;
     display: block;
-    overflow: hidden;
-    transition: 500ms;
   }
 }
 
