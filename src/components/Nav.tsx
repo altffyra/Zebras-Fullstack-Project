@@ -1,6 +1,6 @@
 import "../styles/_nav.scss";
 import { NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import logoDark from "../assets/logoDark.svg";
 import logoLight from "../assets/logoLight.svg";
 
@@ -22,16 +22,22 @@ const Nav = (props: NavProps) => {
   const handleMenu: () => void = () => {
     setMenuOpen(!menuOpen);
   };
+
+
+
+
+
 const navCss = props.scrollTop ? 'nav-top' : ''
   return (
-    <header className={navCss}>
+    <header className={navCss}      >
       <div className="menu-btn" onClick={handleMenu}>
-        <span className={menuOpen ? "menu-btn--top" : ""}></span>
+        <span className={menuOpen ? "menu-btn--top" : ""} ></span>
         <span className={menuOpen ? "menu-btn--mid" : ""}></span>
         <span className={menuOpen ? "menu-btn--bottom" : ""}></span>
       </div>
       <nav className={menuOpen ? "nav open" : "nav"}>
-        <ul className="link-container">
+        <ul className="link-container" >
+          
           <NavLink className="link" to="/">
             Hem
           </NavLink>
