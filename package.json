@@ -23,7 +23,8 @@
     "react-router-dom": "^6.4.2",
     "redux": "^4.2.0",
     "sass": "^1.55.0",
-    "short-unique-id": "^4.4.4"
+    "short-unique-id": "^4.4.4",
+    "uuidv4": "^6.2.13"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",

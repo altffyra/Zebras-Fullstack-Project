@@ -1,5 +1,5 @@
 import "./App.scss";
-import { Routes, BrowserRouter, Route } from "react-router-dom";
+import { Routes, HashRouter, Route } from "react-router-dom";
 import LandingView from "./Routes/LandingView";
 import LoginView from "./Routes/LoginView";
 import Error from "./Routes/Error";
@@ -15,7 +15,7 @@ import Search from "./Routes/User/Search";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<LandingView />} />
           <Route path="/login" element={<LoginView />} />
@@ -31,7 +31,7 @@ function App() {
           <Route path="/Search" element={<Search />} />
           <Route path="/*" element={<Error />} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </div>
   );
 }
