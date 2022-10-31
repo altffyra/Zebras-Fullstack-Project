@@ -8,7 +8,7 @@ import menuRoute from './Routes/MenuRoute.js'
 import cors from 'cors';
 
 const app = express();
-const PORT: number = 8123;
+const PORT = process.env.PORT || 8123;
 
 app.use(cors({ origin: "*" }));
 
