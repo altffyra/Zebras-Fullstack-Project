@@ -13,8 +13,7 @@ dist-ssr
 *.local
 
 #databasen
-backend/tsconfig.json
-backen/dist
+backend/dist
 
 
 # Editor directories and files
