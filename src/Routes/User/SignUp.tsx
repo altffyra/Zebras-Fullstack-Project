@@ -1,110 +1,191 @@
-import React from 'react'
-import { useState, ChangeEvent, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { actions as userActions } from '../../features/userReducer'
-import { User } from '../../models/types';
-import '../../styles/_userForm.scss'
-import { v4 as uuid } from 'uuid';
+import { useState, ChangeEvent, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { actions as userActions } from "../../features/userReducer";
+import { User } from "../../models/types";
+import "../../styles/_userForm.scss";
+import logo from "../../assets/logo.svg";
+import fork from '../../assets/fork.svg';
+import Alert from "../../components/Alert";
+import "../../styles/_alert.scss";
 
-type Props = {}
-
-const SignUp = (props: Props) => {
+const SignUp = () => {
   const dispatch = useDispatch();
 
-  const [userName, setUserName] = useState<string>('');
-  const [userEmail, setUserEmail] = useState<string>('');
-  const [userPhone, setUserPhone] = useState<string>('');
-  const [userPassword, setUserPassword] = useState<string>('');
-  const [loading, setLoading] = useState(false)
-  const [alreadyExist, setAlreadyExist] = useState<boolean>(false)
+  const [userName, setUserName] = useState<string>("");
+  const [userEmail, setUserEmail] = useState<string>("");
+  const [userPhone, setUserPhone] = useState<string>("");
+  const [userPassword, setUserPassword] = useState<string>("");
+  const [loading, setLoading] = useState(false);
+
+  const [errorElement, showError] = useState<boolean>(false);
+  const [errorMessages, makeError] = useState({ title: "", message: "" });
+  const showAlert = errorElement ? (
+    <Alert
+      errorTitle={errorMessages.title}
+      errorMessage={errorMessages.message}
+      showError={showError}
+    />
+  ) : (
+    ""
+  );
+  let tempObject = { title: "", message: "" };
 
   const navigate = useNavigate();
 
   const newUser: User = {
     name: userName,
     email: userEmail,
-    accountId: '',
+    accountId: "",
     phoneNumber: userPhone,
     admin: false,
-    password: userPassword
-  }
+    password: userPassword,
+  };
   async function addUser() {
-    setLoading(true)
-    setAlreadyExist(false)
-    const response = await fetch('http://localhost:8000/api/user/signup', {
-      method: 'POST',
+    if (
+      newUser.name.length < 1 ||
+      newUser.email.length < 1 ||
+      newUser.phoneNumber.length < 1
+    ) {
+      setLoading(false);
+      tempObject.title = "Inga personuppgifter";
+      tempObject.message =
+        "Kontot går inte att skapa utan personuppgifter, fyll i och skicka igen";
+      makeError(tempObject);
+      showError(true);
+      return;
+    }
+    setLoading(true);
+    const response = await fetch("/api/user/signup", {
+      method: "POST",
       body: JSON.stringify(newUser),
-      headers: { 'Content-Type': 'application/json' }
-    })
+      headers: { "Content-Type": "application/json" },
+    });
 
     const data = await response.json();
-    if( data.success ) {
-      setLoading(false)
-      dispatch(userActions.setUser(data.user))
-      console.log(data)
-      localStorage.setItem('accountId', (data.user.accountId))
-      navigate('/Menu')
+    if (data.success) {
+      setLoading(false);
+      dispatch(userActions.setUser(data.user));
+      localStorage.setItem("accountId", data.user.accountId);
+      navigate("/menu");
     } else {
-      setLoading(false)
-      setAlreadyExist(true)
-
+      setLoading(false);
+      tempObject.title = "Kontot finns redan.";
+      tempObject.message =
+        "Du kan inte skapa kontot för något av kontouppgifterna finns redan.";
+      makeError(tempObject);
+      showError(true);
+      return;
     }
-
-    
   }
 
   const handleSubmit: (e: FormEvent) => void = (e) => {
     e.preventDefault();
-    
+
     addUser();
-  }
+  };
 
   const handleName: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
-    if( e.target.value !== ' ') {
+    if (e.target.value !== " ") {
       setUserName(e.target.value);
     }
   };
 
   const handleEmail: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
-      setUserEmail(e.target.value);
+    setUserEmail(e.target.value);
   };
 
   const handlePassword: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
-      setUserPassword(e.target.value);
+    setUserPassword(e.target.value);
   };
 
   const handlePhone: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
-      setUserPhone(e.target.value);
+    setUserPhone(e.target.value);
   };
 
   return (
-    <div className='userForm'>
-      {loading ? 
-            <div className='loading'></div>
-            : ''
-        }
-       <button className='smallBtn' onClick={()=>navigate(-1)}>Tillbaka</button>
-      <figure className='formLogo'></figure>
-      <form>
-        <label htmlFor="username">Användarnamn</label>
-        <input type="text" name='username' required onChange={(e)=> {handleName(e)}} />
-        <label htmlFor="password">Lösenord</label>
-        <input type="password" name="password" required onChange={(e)=>{handlePassword(e)}} />
-        <label htmlFor="email">Email</label>
-        <input type="email" name="email" required onChange={(e)=>{handleEmail(e)}} />
-        <label htmlFor="phonNumber">Telefonnummer</label>
-        <input type="number" name="phoneNumber" required onChange={(e)=>{handlePhone(e)}} />
-        <button className='bigBtn signupBtn' onClick={(e)=>{handleSubmit(e)}}>Skapa konto</button>
+    <div className="signup">
+      {loading ? <div className="loading"></div> : ""}
+      <button className="small__btn" onClick={() => navigate(-1)}>
+        Tillbaka
+      </button>
+      <figure className="logo__container">
+        <h1>Rocksalt</h1>
+        <img src={fork} alt="logo" className="logo" />
+      </figure>
+      <form className="userForm">
+        <div>
+          <input
+            className="form__input"
+            placeholder=" "
+            type="text"
+            name="username"
+            required
+            onChange={(e) => {
+              handleName(e);
+            }}
+          />
+          <label className="form__label form__label--info" htmlFor="username">
+            Användarnamn
+          </label>
+        </div>
+        <div>
+          <input
+            className="form__input"
+            placeholder=" "
+            type="password"
+            name="password"
+            required
+            onChange={(e) => {
+              handlePassword(e);
+            }}
+          />
+          <label className="form__label form__label--info" htmlFor="password">
+            Lösenord
+          </label>
+        </div>
+        <div>
+          <input
+            className="form__input"
+            placeholder=" "
+            type="email"
+            name="email"
+            required
+            onChange={(e) => {
+              handleEmail(e);
+            }}
+          />
+          <label className="form__label form__label--info" htmlFor="email">
+            Email
+          </label>
+        </div>
+        <div>
+          <input
+            className="form__input"
+            placeholder=" "
+            type="number"
+            name="phoneNumber"
+            required
+            onChange={(e) => {
+              handlePhone(e);
+            }}
+          />
+          <label className="form__label form__label--info" htmlFor="phonNumber">
+            Telefonnummer
+          </label>
+        </div>
+        <button
+          className="big__btn signup__btn"
+          onClick={(e) => {
+            handleSubmit(e);
+          }}
+        >
+          Skapa konto
+        </button>
       </form>
-      {alreadyExist ? 
-        <p>Konto finns redan</p>
-        : ''
-      }
-
+      {showAlert}
     </div>
-  )
-}
+  );
+};
 
-export default SignUp
-
+export default SignUp;

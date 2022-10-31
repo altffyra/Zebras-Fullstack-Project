@@ -3,11 +3,9 @@ import express, { NextFunction, Request, Response } from "express";
  app.use(express.json());
  const orderRoute = express.Router();
  import {User, Order} from '../lowDb/dbinterface'
- import db, {authenticateLogin, getOrders,checkOrder, createOrderInfo, updateOrder, createOrder, checkLock} from '../lowDb/database.js'
+ import { authenticateLogin, getOrders,checkOrder, createOrderInfo, updateOrder, createOrder, checkLock, adminUpdateOrder} from '../lowDb/database.js'
  import { isValidCart, isValidUpdatedOrder } from "../validators/validOrder.js";
  import { isValidUser, isValidGuest } from "../validators/validUser.js";
-
-
 
  const auth = async function (req:Request, res:Response, next:NextFunction) {
   
@@ -18,7 +16,7 @@ import express, { NextFunction, Request, Response } from "express";
      } 
 
    if (idhead)
-     {
+     {         
        const checklogin: User[] = await authenticateLogin(idhead)
        if (checklogin.length > 0) next();
         else 
@@ -26,7 +24,6 @@ import express, { NextFunction, Request, Response } from "express";
       
      }
  };
-
 
 // SEARCH ORDER
 orderRoute.get('/:id', async (req:IdParam, res:Response) => {
@@ -41,13 +38,10 @@ orderRoute.get('/:id', async (req:IdParam, res:Response) => {
   }
 })
 
+type IdObject = { id: string };
+type IdParam = Request<IdObject>;
 
-
-
- // GET ORDER
- type IdObject = { id: string };
- type IdParam = Request<IdObject>;
-
+// // GET USER ORDERS
  orderRoute.get("/user/:id", async (req:IdParam, res:Response) => {
      const id:string = req.params.id;
      let resOrders = await getOrders()
@@ -60,6 +54,7 @@ orderRoute.get('/:id', async (req:IdParam, res:Response) => {
 orderRoute.get("/admin/orders", auth, async (req:Request, res:Response) => {
 
   const resOrders: Order[] = await getOrders()
+
   if (resOrders.length > 0) {
     res.send(resOrders);
   } else {
@@ -73,30 +68,12 @@ orderRoute.put("/admin/orders/:id", auth, async (req:Request, res:Response) => {
   const orderId: string = req.params.id;
   const lockedOrder = await checkLock(orderId);
 
-  console.log(lockedOrder);
-
   if (lockedOrder != undefined && lockedOrder.locked === false) {
       res.send(lockedOrder);
     }
     res.send('Order is already locked');
 });
 
-
-// // GET USER ORDERS
- type nameObject = { name: string };
- type nameParam = Request<nameObject>;
-
- orderRoute.get("/:name", async (req:nameParam, res:Response) => {
-     const name:string = req.params.name;
-     let resOrders = await getOrders()
-     let filter = resOrders.filter((order:Order) => order.user.name == name);
-   if (filter.length > 0) {
-     res.send(filter);
-   } else {
-     res.sendStatus(404);
-   }
-   
- });
 
 // // MAKE ORDER
 orderRoute.post("/", async (req, res) => {
@@ -114,7 +91,6 @@ orderRoute.post("/", async (req, res) => {
       orderObj.orderPlaced = orderInfo.started;
       orderObj.orderCompleted = orderInfo.completed;
       orderObj.id = orderInfo.id
-      console.log(orderObj);
 
       await createOrder(orderObj)
       res.status(200).send(orderObj)
@@ -123,7 +99,7 @@ orderRoute.post("/", async (req, res) => {
     }
 
   } else {
-    res.status(400).send('Bad '+ person)
+    res.status(401).send('Bad '+ person)
   }
 })
 
@@ -131,7 +107,6 @@ orderRoute.post("/", async (req, res) => {
 orderRoute.put("/:id", async (req:IdParam, res:Response) => {
   const id:string = req.params.id;  
   let updatedOrder: Order = req.body;
-  console.log(updatedOrder.user);
   
   const foundIndex: number = await checkOrder(id);
   if(foundIndex === -1) {
@@ -140,9 +115,12 @@ orderRoute.put("/:id", async (req:IdParam, res:Response) => {
   }
   if(isValidGuest(updatedOrder.user)) {
     if(isValidCart(updatedOrder)) {    
-      if(isValidUpdatedOrder(updatedOrder)) {        
+      if(isValidUpdatedOrder(updatedOrder)) {      
+          if(updatedOrder.completed) {
+            res.send({locked: true})
+            return
+          }
           const checkedOrder: boolean = await updateOrder(updatedOrder, foundIndex)
-          console.log(checkedOrder);
           
           if(!checkedOrder) {
             res.send({locked: true})
@@ -160,32 +138,32 @@ orderRoute.put("/:id", async (req:IdParam, res:Response) => {
   }
 });
 
-// GET ALL FOR TESTING
-orderRoute.get("/", async (req:IdParam, res:Response) => {
-  const id:string = req.params.id;
-  let resOrders = await getOrders()
-  if (resOrders.length > 0) {
-    res.send(resOrders);
+// CHANGE ADMIN ORDER (OBS lägg till auth)
+orderRoute.put("/admin/:id", auth, async (req:IdParam, res:Response) => {
+  const id:string = req.params.id;  
+  let updatedOrder: Order = req.body;
+  
+  const foundIndex: number = await checkOrder(id);
+  if(foundIndex === -1) {
+    res.status(400).send('No order with that id')
+    return
+  }
+  if(isValidGuest(updatedOrder.user)) {
+    if(isValidCart(updatedOrder)) {    
+      if(isValidUpdatedOrder(updatedOrder)) {        
+          const allOrders: Order[] = await adminUpdateOrder(updatedOrder, foundIndex)
+
+        
+          res.status(200).send(allOrders)
+      } else {
+        res.status(400).send('Bad placed order')
+      }
+    } else {
+      res.status(400).send('Bad order')
+    }
   } else {
-    res.sendStatus(404);
+    res.status(400).send('Bad user')
   }
 });
-
   
-
-
-// //{user: (account ID/guest), cartItems: [] , orderPlaced: , userComment: , adminComment: , locked: , completed: , id:  }
-
-
-
-
-
-
-
-
-
-
-
-
-
 export default orderRoute

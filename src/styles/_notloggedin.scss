@@ -1,76 +1,94 @@
-@use 'variables';
-@use 'buttons';
+@use "variables";
+@use "buttons";
 
-.login {
-    height: 100%;
-    margin: 0 auto;
-    width: 100%;
+.login-checkout {
+  height: 100%;
+  margin: 0 auto;
+  width: 100%;
+  margin-top: 2em;
+  .flex-container {
+    .form {
+      @include variables.flexContainer();
+      align-items: center;
+      justify-items: center;
+      gap: 3em;
+      .form--name,
+      .form--email {
+        position: relative;
+        display: flex;
+      }
 
-    .flex-container {
+      .form__label {
+        position: absolute;
+        top: -15px;
+        font-size: 1.2rem;
+        font-weight: 400;
+        transition: all 0.5s;
+        z-index: 2;
+        pointer-events: none;
+      }
 
-        .form {
-            @include variables.flexContainer();
-            align-items: center;
-            justify-items: center;
-            gap: 3em;
-            .form--name, .form--email {
-                position: relative;
-                display: flex;    
-            }
-            
-            .form__label {
-                position: absolute;
-                top: -15px;
-                // left: 5px;
-                font-size: 1.2rem;
-                font-weight: 400;
-                transition: all 0.5s;    
-            }
-            
-            .form__input {
-                width: 100%;
-                background: transparent;
-                border: none;
-                border-bottom: 2px solid black;
-                outline: none;
-                font-size: 1.2rem;
-            }
-            
-            
-            .form__input:focus {
-                border-color: rgb(0, 0, 0);
-            }
-            
-            .form__input:focus ~ .form__label,
-            .form__input:not(:placeholder-shown)~ .form__label {
-                top: -20px;
-                left: 0;
-                font-size: 1rem;
-                color: rgb(0, 0, 0);
-            }
+      .form__input {
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid black;
+        outline: none;
+        font-size: 1.2rem;
+        &:valid {
+          background-color: transparent;
+        }
+        &:focus {
+          border-color: rgb(0, 0, 0);
+        }
+      }
 
+      // for autofilled inputs
+      .form__input:-webkit-autofill {
+        box-shadow: 0 0 0 50px variables.$primaryBackground inset;
+      }
 
-            & > div {
-                @include variables.flexContainer();
-                align-items: center;
-                position: relative;
-                
-            }
+      .form__input:-webkit-autofill:focus {
+        box-shadow: 0 0 0 50px variables.$primaryBackground inset;
+      }
 
-            .login-btn {
-                @include buttons.bigBtn($bg: variables.$acceptBtnGreen);
-                margin-bottom: 1em;
-                width: 12em;
-            }
+      .form__input:-webkit-autofill:not(:placeholder-shown) ~ .form__label {
+        top: -20px;
+        left: 0;
+        font-size: 1rem;
+        color: variables.$fontDark;
+      }
 
-            .guest-btn {
-                @include buttons.bigBtn($bg: transparent);
-                color: variables.$fontDark;
-                border: 1px solid black;
-            }
+      .form__input:focus ~ .form__label,
+      .form__input:not(:placeholder-shown) ~ .form__label {
+        top: -20px;
+        left: 0;
+        font-size: 1rem;
+        color: rgb(0, 0, 0);
+      }
+
+      & > div {
+        @include variables.flexContainer();
+        align-items: center;
+        position: relative;
+      }
+
+      span {
+        color: blue;
+        cursor: pointer;
+      }
+
+      .login-btn {
+        @include buttons.bigBtn($bg: variables.$acceptBtnGreen);
+        margin-bottom: 1em;
+        width: 12em;
+      }
+
+      .guest-btn {
+        @include buttons.bigBtn($bg: transparent);
+        color: variables.$fontDark;
+        border: 1px solid black;
       }
     }
-    
-    
-
+  }
 }

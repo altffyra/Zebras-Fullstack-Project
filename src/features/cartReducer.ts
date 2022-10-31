@@ -3,21 +3,7 @@ import CartItem from "../components/CartItem";
 import { CartProps, CartItems } from "../models/types";
 
 const initialState: CartProps = {
-    cartItems: [
-        // {name:"1", price: 1, amount: 1},
-        // {name:"2", price: 1, amount: 1},
-        // {name:"3", price: 1, amount: 1},
-        // {name:"4", price: 1, amount: 1},
-        // {name:"5", price: 1, amount: 1},
-        // {name:"6", price: 1, amount: 1},
-        // {name:"7", price: 1, amount: 1},
-        // {name:"8", price: 1, amount: 1},
-        // {name:"9", price: 1, amount: 1},
-        // {name:"10", price: 1, amount: 1},
-        // {name:"11", price: 1, amount: 1},
-        // {name:"12", price: 1, amount: 1},
-        // {name:"13", price: 1, amount: 1}
-    ],
+    cartItems: [],
     totalPrice: 0
 };
 

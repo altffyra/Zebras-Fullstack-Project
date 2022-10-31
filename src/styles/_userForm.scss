@@ -1,61 +1,194 @@
-@use 'variables';
-@use 'buttons';
-@use 'sass:color';
+@use "variables";
+@use "buttons";
+@use "sass:color";
 
-.userForm {
-      // @include variables.gridContainer(15);
-      width: 80vw;
-      height: 100vh;
-      margin: 0 auto;
+.signup,
+.login {
+  width: 100%;
+  height: calc(100vh - 6em);
+  margin: 0 auto;
+  @include variables.flexContainer();
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 3rem;
+  position: relative;
+
+  .loading {
+    @include variables.loader();
+  }
+  .small__btn {
+    @include buttons.smallBtn();
+    position: absolute;
+    top: 1em;
+    left: 1em
+  }
+  .logo__container {
+    @include variables.flexContainer(row);
+
+    h1 {
+      color: variables.$darkRed;
+    }
+    .logo {
+      animation: wiggle 1s infinite;
+      animation-timing-function: linear;
+    }
+  }
+  @keyframes wiggle {
+    0% {
+      transform: rotate(-5deg);
+    }
+    25% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(5deg);
+    }
+  
+    75% {
+      transform: rotate(0deg)
+    }
+  
+    100% {
+      transform: rotate(-5deg);
+    }
+  }
+  .userForm {
+    @include variables.flexContainer();
+    align-items: center;
+    justify-items: center;
+    gap: 3em;
+    .form--info {
+      position: relative;
+      display: flex;
+    }
+
+    .form__label {
+      position: absolute;
+      color: variables.$fontDark;
+      font-size: 1.3rem;
+      font-weight: 400;
+      transition: all 0.5s;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .form__input {
+      width: 100%;
+      background: variables.$primaryBackground;
+      border: none;
+      border-bottom: 2px solid black;
+      outline: none;
+      font-size: 1.2rem;
+      z-index: 1;
+      &:valid {
+        background-color: variables.$primaryBackground;
+      }
+      &:active {
+        background-color: variables.$primaryBackground;
+      }
+    }
+
+    // for autofilled inputs
+    .form__input:-webkit-autofill {
+      box-shadow: 0 0 0 50px variables.$primaryBackground inset;
+
+    }
+
+    .form__input:-webkit-autofill:focus {
+      box-shadow: 0 0 0 50px variables.$primaryBackground inset;
+
+    }
+
+    .form__input:-webkit-autofill:not(:placeholder-shown) ~ .form__label {
+      top: -20px;
+      left: 0;
+      font-size: 1rem;
+      color: variables.$fontDark;
+    }
+
+    .form__input:focus {
+      border-color: rgb(0, 0, 0);
+    }
+
+    .form__input:focus ~ .form__label,
+    .form__input:not(:placeholder-shown) ~ .form__label {
+      top: -20px;
+      left: 0;
+      font-size: 1rem;
+      color: variables.$fontDark;
+    }
+    & > div {
       @include variables.flexContainer();
       align-items: center;
+      position: relative;
+    }
+    .big__btn.signup__btn {
+      @include buttons.bigBtn($bg: #377395);
+    }
+
+    .button__container {
+      box-sizing: border-box;
+      @include variables.flexContainer(row);
       justify-content: center;
-      gap: 3rem;
-      .loading {
-            @include variables.loader();
+      max-height: 3em;
+
+      .big__btn.guest__btn {
+        @include buttons.bigBtn($bg: transparent, $pad: 0.432em 0.7em);
+        color: variables.$fontDark;
+        // width: 50%;
+        outline: 1px solid black;
       }
-      .smallBtn {
-            @include buttons.smallBtn();
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
+      .big__btn.login__btn {
+        @include buttons.bigBtn($bg: variables.$acceptBtnGreen);
+        width: 50%;
+      }
+    }
+    .big__btn.login__btn {
+      @include buttons.bigBtn($bg: variables.$acceptBtnGreen);
+    }
+  }
+}
+
+@media screen and (min-width: 786px) {
+  .signup,
+  .login {
+    background-color: variables.$fontLight;
+    max-width: 40vw;
+    margin-top: 2em;
+    border-radius: 1em;
+    box-shadow: variables.$boxShadow;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+
+    .small__btn {
+      @include buttons.smallBtn($bg: variables.$fontLight);
+    }
+
+    .userForm {
+
+      .form__input {
+        background: variables.$fontLight;
+
+        &:valid {
+          background-color: variables.$fontLight;
+        }
+        &:active {
+          background-color: variables.$fontLight;
+        }
+      }
+  
+      // for autofilled inputs
+      .form__input:-webkit-autofill {
+        box-shadow: 0 0 0 50px variables.$fontLight inset;
+      }
+  
+      .form__input:-webkit-autofill:focus {
+        box-shadow: 0 0 0 50px variables.$fontLight inset;
       }
 
-      .formLogo {
-            // grid-area: 3 / 2 / 6 / 5;
-            width: 60%;
-            height: 19%;
-
-            background-image: url('../assets/formLogo.svg');
-            
-            background-size:contain ;
-            background-position: center;
-            background-repeat: no-repeat;
-            border: none;
-
-            box-shadow: variables.$boxShadow;
-
-      }
-            form {
-                  // grid-area: 7 / 2 / 14 / 5;
-
-
-                  @include variables.flexContainer();
-                  label {
-                        margin-top: 1em
-                  }
-                  .bigBtn {
-                        @include buttons.bigBtn();
-                        background-color: #377395;
-                        margin-top: 1em;
-                  }
-                  .loginBtn {
-                        background: variables.$acceptBtnGreen;
-                  }
-                  p {
-                        margin: 0 auto;
-                  }
-            }
-
-
+    }
+  
+  }
+  
 }

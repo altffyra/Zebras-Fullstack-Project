@@ -8,7 +8,7 @@ export type Schema= {
 export type MenuItem = {
     name: string;
     desc: string;
-    price: string;
+    price: number;
     allergies: string;
     type: string;
 }
@@ -29,7 +29,7 @@ export type User  = {
     email: string;
     accountId: string;
     phoneNumber: string;
-    admin: boolean;
+    admin?: boolean;
     password: string;
 }
 export type LoginCreds = {
@@ -54,3 +54,10 @@ export type Order = {
     orderCompleted?: string
     id?: string;
 }
+
+type defaultDictionaries = 'number' | 'alpha' | 'alpha_lower' | 'alpha_upper' | 'alphanum' | 'alphanum_lower' | 'alphanum_upper';
+
+export type ShortUniqueIdOptions = {
+    dictionary: string[] | defaultDictionaries;
+    length: number;
+  };

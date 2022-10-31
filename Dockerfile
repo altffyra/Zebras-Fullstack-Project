@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm build-backend
+RUN npm run build-backend
 
 RUN npm install
 

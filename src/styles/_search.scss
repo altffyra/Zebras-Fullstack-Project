@@ -1,89 +1,98 @@
-@use 'variables';
-@use 'buttons';
-@use 'sass:color';
+@use "variables";
+@use "buttons";
+@use "sass:color";
 
 .search {
-    margin-top: 12vh;
-    width: 100%;
+  margin-top: 12vh;
+  width: 100%;
+  @include variables.flexContainer();
+  gap: 2em;
+  padding: 1em;
+  .loading {
+    @include variables.loader();
+  }
+
+  .search-container {
+    @include variables.flexContainer(row);
+    box-shadow: variables.$boxShadow;
+    input {
+      flex: 5;
+      outline: none;
+    }
+    label {
+      color: variables.$fontLight;
+      flex: 1;
+      padding: 0.4em 0;
+      text-align: center;
+      background-color: variables.$lockColor;
+      transition: all 300ms;
+      &:hover {
+        background-color: color.scale(
+          variables.$lockColor,
+          $lightness: 40%
+        );
+      }
+    }
+  }
+
+  .order-container {
     @include variables.flexContainer();
-    gap: 2em;
+    gap: 1em;
     padding: 1em;
-    .loading {
-        @include variables.loader();
+    width: 100%;
+    background-color: variables.$fontLight;
+    box-shadow: variables.$boxShadow;
+    border-radius: 0.4em;
+
+    h2{
+        font-family: variables.$primaryFont;
+        text-align: center
     }
 
-    .search-container {
-        @include variables.flexContainer(row);
-        box-shadow: variables.$boxShadow;
-        input {
-            flex: 5;
-            outline: none;
+    .user-information {
+      @include variables.flexContainer();
+      gap: 0.4em;
+      p {
+        &:first-child {
+          font-size: 1.2em;
+          font-weight: 700;
+          margin-bottom: 0.4em;
         }
-        label {
-            color: variables.$fontLight;
-            flex: 1;
-            padding: 0.4em 0;
-            text-align: center;
-            background-color: variables.$navBackground;
-            transition: all 300ms;
-            &:hover {
-                background-color: color.scale(variables.$navBackground, $lightness: 40%);
-            }
-        }        
+      }
     }
 
-    .order-container {
-        @include variables.flexContainer();
-        gap: 1em;
-        padding: 1em;
+    .divider {
+      @include variables.divider(variables.$fontDark);
+    }
+
+    .order-information {
+      @include variables.flexContainer();
+      gap: 1em;
+
+      .order-title {
+        font-size: 1.2em;
+        font-weight: 700;
         width: 100%;
-        background-color: variables.$fontLight;
-        box-shadow: variables.$boxShadow;
-        border-radius: 0.4em;
-        
-        .user-information {
-            @include variables.flexContainer();
-            gap: 0.4em;
-            p {
-                &:first-child {
-                    font-size: 1.2em;
-                    font-weight: 700;
-                    margin-bottom: 0.4em;
-                }
-            }
-        }
+      }
+    }
 
-        .divider {
-            @include variables.divider(variables.$fontDark)
-        }
-
-        .order-information {
-            @include variables.flexContainer();
-            gap: 1em;
-
-            .order-title {
-                font-size: 1.2em;
-                font-weight: 700;
-            }
-            
-        }
-           
-        .btn-change {
-            @include buttons.bigBtn($pad: 0.6em 2em, $bg: variables.$acceptBtnGreen);
-            align-self: center;
-            margin: 1em;
-
-        }
-    }    
-
+    .btn-change {
+      @include buttons.bigBtn($pad: 0.6em 2em, $bg: variables.$acceptBtnGreen);
+      align-self: center;
+      margin: 1em;
+    }
+  }
 }
 
 @media screen and (min-width: 786px) {
-    .search {
-        .search-container {
-            input {
-                flex: 9;
-            }
-        }
+  .search {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    .search-container {
+      input {
+        flex: 9;
+      }
     }
+  }
 }

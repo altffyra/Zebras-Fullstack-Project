@@ -1,142 +1,137 @@
-@use 'variables';
+@use "variables";
 
 .confirmed {
-    margin-top: 12vh;
+  margin-top: 12vh;
+  @include variables.flexContainer();
+  gap: 2em;
+  color: variables.$fontLight;
+
+  .headline {
+    @include variables.headerTitle();
+  }
+
+  .time-container {
+    margin: 0 1em;
+    padding: 1em;
+    background-color: variables.$dropdownRed;
+    box-shadow: variables.$boxShadow;
+  }
+
+  .order-user {
+    margin: 0 1em;
     @include variables.flexContainer();
-    gap: 2em;
-    color: variables.$fontLight;
-
-    .headline {
-        @include variables.headerTitle();
+    background-color: variables.$darkRed;
+    box-shadow: variables.$boxShadow;
+    .user-headline {
+      align-self: center;
+      padding: 1em;
+      font-weight: 700;
     }
 
-    .time-container {
-        margin: 0 1em;
-        padding: 1em;
-        background-color: variables.$dropdownRed;        
-        box-shadow: variables.$boxShadow;
+    .user {
+      background-color: variables.$dropdownRed;
+      @include variables.flexContainer();
+      gap: 1em;
+      padding: 1em;
     }
+  }
 
-    .order-user {
-        margin: 0 1em;
-        @include variables.flexContainer();
-        background-color: variables.$darkRed;     
-        box-shadow: variables.$boxShadow;
-        .user-headline {
-            align-self: center;
-            padding: 1em;
-            font-weight: 700;
-        }
+  .order-cart {
+    @include variables.flexContainer();
+    background-color: variables.$dropdownRed;
+    gap: 1em;
+    margin: 0 1em;
 
-        .user {
-            background-color: variables.$dropdownRed;     
-            @include variables.flexContainer();
-            gap: 1em;
-            padding: 1em;       
-        }
-    }
+    box-shadow: variables.$boxShadow;
 
-    .order-cart {
-        @include variables.flexContainer();
-        background-color: variables.$dropdownRed;
-        gap: 1em;
-        margin: 0 1em;
-        
-        box-shadow: variables.$boxShadow;
-
-        .order-header {
-            @include variables.flexContainer();
-            gap: 1em;
-            padding: 1em;
-            background-color: variables.$darkRed;
-            box-shadow: variables.$boxShadow;
-            .order-title  {
-                font-size: 1.4em;
-                align-self: center
-            }
-            .list-titles {
-                @include variables.flexContainer(row);
-                gap: 1em;
-                justify-content: space-between;
-                position: relative;
-                
-                p {
-                    flex: 1;
-                    text-align: start;
-                    font-weight: 700;
-                    &:first-child {
-                        flex: 4;
-                    }
-                }
-    
-
-            }
-        }
-        .order-information {
-            @include variables.flexContainer();
-            padding: 0 1em;
-            gap: 2em;
-
-    
-        }
-        .order-price {
-            @include variables.flexContainer(row);
-            justify-content: space-between;
-            padding: 1em;
-            p {
-                &:first-child {
-                    font-weight: 700;
-                }
-            }
-        }
-    }
-
-    .change-order {
+    .order-header {
+      @include variables.flexContainer();
+      gap: 1em;
+      padding: 1em;
+      background-color: variables.$darkRed;
+      box-shadow: variables.$boxShadow;
+      .order-title {
+        font-size: 1.4em;
         align-self: center;
-        color: variables.$fontDark;
-        
-        span {
-            color: variables.$navBackground;
-            text-decoration: underline;
-            cursor: pointer;
-        }
-    }
-
-    .order-comment {
-        margin: 0 1em;
-        box-shadow: variables.$boxShadow;
-        p {
-            padding: 0.4em;
-            &:first-child {
-                font-weight: 700;
-                background-color: variables.$darkRed;
-                box-shadow: variables.$boxShadow;
-            }
-
-            &:last-child {
-                background-color: variables.$dropdownRed;
-            }
-        }
-    }
-
-    .location {
+      }
+      .list-titles {
         @include variables.flexContainer(row);
+        gap: 1em;
         justify-content: space-between;
-        align-self: center;
-        text-align: center;
-        width: 90%;
-        padding: 1em;
-        border: 1px solid variables.$fontDark;
-        border-radius: 0.4em;
-        background-color: variables.$fontLight;
-        color: variables.$fontDark;
-        box-shadow: variables.$boxShadow;
-    }
+        position: relative;
 
-    iframe {
-        align-self: center;
-        width: 90%;        
-        box-shadow: variables.$boxShadow;
+        p {
+          flex: 1;
+          text-align: start;
+          font-weight: 700;
+          &:first-child {
+            flex: 4;
+          }
+        }
+      }
     }
+    .order-information {
+      @include variables.flexContainer();
+      padding: 0 1em;
+      gap: 2em;
+    }
+    .order-price {
+      @include variables.flexContainer(row);
+      justify-content: space-between;
+      padding: 1em;
+      p {
+        &:first-child {
+          font-weight: 700;
+        }
+      }
+    }
+  }
 
+  .change-order {
+    align-self: center;
+    color: variables.$fontDark;
+
+    span {
+      color: variables.$lockColor;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  .order-comment {
+    margin: 0 1em;
+    box-shadow: variables.$boxShadow;
+    p {
+      padding: 0.4em;
+      &:first-child {
+        font-weight: 700;
+        background-color: variables.$darkRed;
+        box-shadow: variables.$boxShadow;
+      }
+
+      &:last-child {
+        background-color: variables.$dropdownRed;
+      }
+    }
+  }
+
+  .location {
+    @include variables.flexContainer(row);
+    justify-content: space-between;
+    align-self: center;
+    text-align: center;
+    width: 90%;
+    padding: 1em;
+    border: 1px solid variables.$fontDark;
+    border-radius: 0.4em;
+    background-color: variables.$fontLight;
+    color: variables.$fontDark;
+    box-shadow: variables.$boxShadow;
+  }
+
+  iframe {
+    align-self: center;
+    width: 90%;
+    box-shadow: variables.$boxShadow;
+  }
 }

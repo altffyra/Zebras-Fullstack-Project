@@ -1,157 +1,219 @@
-@use 'variables';
-@use 'buttons';
-@use 'sass:color';
+@use "variables";
+@use "buttons";
+@use "sass:color";
 
 .landing {
-    @include variables.gridContainer($rows: 10);
-    background-color: variables.$primaryBackground;
-
-    & > figure {
-        margin-block-start: 0;
-        margin-block-end: 0;
-        margin-inline-start: 0;
-        margin-inline-end: 0;
-        background-size: cover;
-        background-repeat: no-repeat;
+  width: 100%;
+  background-color: variables.$primaryBackground;
+  
+  .hero {
+    min-height: 100vh;
+    min-width: 100%;
+    position: relative;
+    display: grid;
+    place-items: center;  
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    }
+    .video-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 11;
+    } 
+    video::-webkit-media-controls {
+      display: none;
     }
 
-    & > section {
-        @include variables.flexBox();
-        flex-direction: column;
-        padding: 1em;
-        font-weight: 300;
 
-        h3 {
-            font-family: variables.$headerFont;
-        }
-    }
 
-    & >* .border {
-        border-bottom: 1px solid variables.$yellowSenap;
-        border-right: 1px solid variables.$yellowSenap;
-        padding-right: 1em;
-        margin-bottom: .5em;
-
-    }
-
-    .hero {
-        grid-area: 1 / 1 / 4 / 6;
-        background-image: url('../assets/hero.jpg');
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position-x: center;
-        background-position-y: center;
-        position: relative;
-
-        button {
-            @include buttons.smallBtn($pad: 1em 2em, $bg: black);
-            border: 2px solid variables.$yellowSenap;
-            color: variables.$yellowSenap;
-            background: rgba(50, 50, 50, 0.5);
-            position: absolute;
-            bottom: 20em;
-            font-family: variables.$headerFont;
-
-        }
-    }
-
-    .about-us {
-        grid-area: 4 / 1 / 5 / 6;
-        background-color: black;
+    .logo-container {
+      z-index: 12;
+      @include variables.flexContainer(row);
+      gap: 0.4em;
+      h2 {
         color: variables.$fontLight;
+        font-size: 3em;
+      }
+      .logo {
+        animation: wiggle 1s infinite;
+        height: 3em;
+        width: 3em;
+        align-self: center;
+      }
+      
+      @keyframes wiggle {
+        0% {
+          transform: rotate(-5deg);
+        }
+        25% {
+          transform: rotate(0deg);
+        }
+        50% {
+          transform: rotate(5deg);
+        }
+      
+        75% {
+          transform: rotate(0deg)
+        }
+      
+        100% {
+          transform: rotate(-5deg);
+        }
+      }
+
     }
-
-    .about-us-img {
-        grid-area: 5 / 1 / 6 / 6;
-        background-image: url('../assets/chef-cooking.jpg');
-        background-position-y: 60%;
-
-
+    button {
+      border: none;
+      padding: 0.8em 2.5em;
+      border-radius: 4px;
+      box-shadow: variables.$boxShadow;
+      color: variables.$fontDark;
+      border: 1px solid variables.$fontLight;
+      transition: all 1000ms;
+      cursor: pointer;
+      font-size: 2em;
+      color: variables.$fontLight;
+      background: transparent;
+      font-family: variables.$headerFont;
+      z-index: 12;
+      position: relative;
+      &:hover {
+        border: 4px solid variables.$yellowSenap;
+        color: variables.$yellowSenap;
+        backdrop-filter: blur(10px);
+        scale: 105%;
+      }
     }
+  }
 
-    .our-food-img {
-        grid-area: 7 / 1 / 8 / 6;
-        background-image: url('../assets/food.jpg');
-        background-position-y: 60%;
-    }
+  .about-page {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(7, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    padding: 0;
+      .about-us {
+        background-color: variables.$fontDark;
+        color: variables.$fontLight;
+        grid-area: 1 / 1 / 2 / 6;
+      }
 
-    .our-food {
-        grid-area: 6 / 1 / 7 / 6;
+      .about-us-img {
+        grid-area: 2 / 1 / 2 / 6;
+      }
+    
+      .our-food-img {        
+        grid-area: 4 / 1 / 4 / 6;
+      }
+    
+      .our-food {
         background-color: variables.$darkRed;
         color: variables.$fontLight;
-    }
-
-    .our-goal {
-        grid-area: 8 / 1 / 9 / 6;
+        grid-area: 3 / 1 / 3 / 6;
+      }
+    
+      .our-goal {
         background-color: black;
         color: variables.$fontLight;
-    }
-
-    .our-goal-img {
-        grid-area: 9 / 1 / 10 / 6;
-        background-image: url('../assets/our-goal.jpg');
-        background-position-y: center;
-    }
-
-    .map {
-        grid-area: 10 / 1 / 11 / 6;
-
-        iframe {
+        grid-area: 5 / 1 / 5 / 6; 
+        
+      }
+    
+      .our-goal-img {
+        grid-area: 6 / 1 / 6 / 6;
+      }
+ 
+      & > figure {
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat
+      }
+    
+      & > section {
+        @include variables.flexContainer();
+        align-items: center;
+        justify-content: center;
+        gap: 2em;
+        padding: 1em;
+        font-weight: 300;
+    
+        .border {
+          align-self: center;
+          border-bottom: 1px solid variables.$yellowSenap;
+          border-right: 1px solid variables.$yellowSenap;
+          padding-right: 1em;
+          margin-bottom: 0.5em;
+        }
+        
+        h3 {
+          font-family: variables.$headerFont;
+        }
+        p {
+          line-height: 1.5em;
+          padding: 0 2em;
+        }
+      }
+        .map {
+          grid-area: 7 / 1 / 7 / 6;
+          iframe {
             width: 100%;
             margin-bottom: 1em;
             margin-top: 1em;
-
+          }
         }
-
-
-    }
-
+      
+    } 
 }
 
+
 @media screen and (min-width: 786px) {
-    .landing {
-        @include variables.gridContainer($rows: 10);
-        .hero {
-            grid-area: 1 / 1 / 4 / 6;
+  .landing {
+    .about-page {
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      section, figure {
+        min-height: 40vh;
+      }
+      .about-us {
+        grid-area: 1 / 1 / 2 / 4;
+      }
+      .about-us-img {
+        grid-area: 1 / 4 / 2 / 6;
+      }
 
-            button {
-                bottom: 10em;
-                cursor: pointer;
-            }
-        }
+      .our-food-img {
+        grid-area: 2 / 1 / 3 / 3;
+      }
 
-        .about-us {
-            grid-area: 4 / 1 / 6 / 3;
-        }
+      .our-food {
+        grid-area: 2 / 3 / 3 / 6;
+      }
 
-        .about-us-img {
-            grid-area: 4 / 3 / 6 / 6;
-            background-position-x: center;
-            background-position-y: center;
-        }
+      .our-goal {
+        grid-area: 3 / 1 / 4 / 4; 
+      }
 
-        .our-food-img {
-            grid-area: 6 / 1 / 8 / 4;
-            background-position-x: center;
-            background-position-y: center;
-        }
-
-        .our-food {
-            grid-area: 6 / 4 / 8 / 6;
-        }
-
-        .our-goal {
-            grid-area: 8 / 1 / 10 / 3;
-        }
-
-        .our-goal-img {
-            grid-area: 8 / 3 / 10 / 6;
-            background-position-x: center;
-            background-position-y: center;
-        }
-
-        .map {
-            grid-area: 10 / 1 / 11 / 6;
-        }
+      .our-goal-img {
+        grid-area: 3 / 4 / 4 / 6;
+      }
+      .map {
+        grid-area: 4 / 1 / 5 / 6;
+      }
+ 
     }
+  }
 }

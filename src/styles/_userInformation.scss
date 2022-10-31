@@ -1,66 +1,69 @@
-@use 'variables';
-@use '_buttons';
+@use "variables";
+@use "_buttons";
 
 .user-information {
-    .loading {
-        @include variables.loader();
-    }
+  .loading {
+    @include variables.loader();
+  }
 
-    .headline-user {
-        position: relative;
+  .headline-user {
+    position: relative;
 
-        h2 {
-            text-align: center;
-            margin: 1em 0;
-        }
-        .wrong-password {
-            position: absolute;
-            left : 0;
-            bottom: -1.5em;
-            color: variables.$dropdownRed;
-            font-size: 0.8em;
-        }
+    h2 {
+      text-align: center;
+      margin: 1em 0;
     }
-    input {
-        outline: none;
-        border: none;
-        box-shadow: variables.$boxShadow;
+    .wrong-password {
+      position: absolute;
+      left: 0;
+      bottom: -1.5em;
+      color: variables.$dropdownRed;
+      font-size: 0.8em;
     }
-    .user-container {
-        @include variables.flexContainer();
-        gap: 1em;
-        width: 100%;
-        .user-info {
-            @include variables.flexContainer(row);
-            justify-content: space-between;
-        }
-        .button-container {
-            @include variables.flexContainer(row);
-            justify-content: space-between;
-            gap: 2em;
-            margin-top: 1em;
-            button {
-                flex: 1;
-            }
-            .change-btn {
-                @include buttons.bigBtn($pad: 0.6em 2em, $bg: variables.$dropdownRed);
-                align-self: center;
-            }
-            .update-btn {
-                @include buttons.bigBtn($pad: 0.6em 2em, $bg: variables.$acceptBtnGreen);
-            }
-            .cancel-btn {
-                @include buttons.bigBtn($pad: 0.6em 2em);
-            }
-        }
+  }
+  input {
+    outline: none;
+    border: none;
+    box-shadow: variables.$boxShadow;
+  }
+  .user-container {
+    @include variables.flexContainer();
+    gap: 1em;
+    width: 100%;
+    .user-info {
+      @include variables.flexContainer(row);
+      justify-content: space-between;
     }
+    .button-container {
+      @include variables.flexContainer(row);
+      justify-content: space-between;
+      gap: 2em;
+      margin-top: 1em;
+      button {
+        flex: 1;
+      }
+      .change-btn {
+        @include buttons.bigBtn($pad: 0.6em 2em, $bg: variables.$dropdownRed);
+        align-self: center;
+      }
+      .update-btn {
+        @include buttons.bigBtn(
+          $pad: 0.6em 2em,
+          $bg: variables.$acceptBtnGreen
+        );
+      }
+      .cancel-btn {
+        @include buttons.bigBtn($pad: 0.6em 2em);
+      }
+    }
+  }
 }
 
 @media screen and (min-width: 786px) {
-    .user-information {
-        margin: 0 1em;
-        .user-container {
-            gap: 2em;
-        }
+  .user-information {
+    margin: 0 1em;
+    .user-container {
+      gap: 2em;
     }
+  }
 }
