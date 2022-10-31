@@ -136,7 +136,7 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
   }
   
   const allItems = props.order.cart.cartItems.map((item) => {
-    return <p key={ item.name }>{ item.name }</p>
+    return <p key={ item.name }>{ item.name }  x {item.amount}</p>
   });
 
   const navigateOrder = () => {

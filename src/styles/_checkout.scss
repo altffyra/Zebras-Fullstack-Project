@@ -29,20 +29,21 @@
       width: 100%;
       max-width: 1800px;
       @include variables.sectionTop;
-      font-size: 2rem;
-      padding: 1rem;
+      font-size: 1.4em;
+      padding: 1em;
+      font-weight: 700;
     }
     .cartmodule {
       width: 100%;
       .cart-item {
-        padding: 1rem;
+        padding: 1em;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        gap: 1rem;
+        gap: 1em;
 
         .item-name {
-          font-size: 1rem;
+          font-size: 1em;
           flex: 3;
         }
         .item-amount {
@@ -52,22 +53,22 @@
 
         .item-price {
           text-align: right;
-          font-size: 1rem;
+          font-size: 1em;
           flex: 1;
         }
       }
     }
 
     .total-wrapper {
-      padding: 1rem 1rem 1rem 0.5rem;
+      padding: 1em 1em 1em 0.5em;
       width: 100%;
       display: flex;
       flex-direction: row;
-      font-size: 1.4rem;
-      margin-top: 8rem;
+      font-size: 1.4em;
+      margin-top: 1em;
       .total {
         width: 100%;
-        margin-left: 0.5rem;
+        margin-left: 0.5em;
       }
       .total-sum {
         text-align: right;
@@ -80,31 +81,31 @@
     @include variables.flexBox;
     flex-direction: column;
 
-    margin-bottom: 3rem;
+    margin-bottom: 3em;
 
     .Account-info {
       width: 100%;
       @include variables.flexBox;
       flex-direction: column;
       @include variables.sectionTop($bg: variables.$dropdownRed);
-      margin-bottom: 2rem;
-      font-size: 1.75rem;
+      margin-bottom: 2em;
 
       .Account-top {
         width: 100%;
         max-width: 1800px;
         @include variables.sectionTop;
-        font-size: 2rem;
-        padding: 1rem;
+        font-size: 1.4em;
+        font-weight: 700;
+        padding: 1em;
       }
       .Account-info-main {
         width: 100%;
-        font-size: 1.5rem;
-        padding: 1rem 1rem 1rem 0.5rem;
+        font-size: 1em;
+        padding: 1em 1em 1em 0.5em;
 
         .User-info {
           @include variables.flexBox;
-          padding: 1rem;
+          padding: 1em;
           justify-content: space-between;
           width: 100%;
           align-self: flex-end;
@@ -117,21 +118,22 @@
     @include variables.flexBox;
     flex-direction: column;
     @include variables.sectionTop($bg: variables.$dropdownRed);
-    margin-bottom: 3rem;
+    margin-bottom: 3em;
 
     .Comment-top {
       width: 100%;
       max-width: 1800px;
       @include variables.sectionTop;
-      font-size: 2rem;
-      padding: 1rem;
+      font-size: 1.4em;
+      font-weight: 700;
+      padding: 1em;
     }
 
     .input-comment {
-      margin: 1rem;
+      margin: 1em;
       width: 95%;
-      height: 12rem;
-      font-size: 1rem;
+      height: 12em;
+      font-size: 1em;
     }
   }
   .buttonsDiv {

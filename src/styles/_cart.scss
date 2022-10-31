@@ -69,7 +69,10 @@
     @include variables.flexContainer(row);
     justify-content: space-between;
     gap: 1em;
-    // border-bottom: 2px solid variables.$fontLight;
+
+    .item-price {
+      text-align: end;
+    }
     :first-child {
       flex: 3;
     }
@@ -127,6 +130,6 @@
     margin-right: auto;
     left: 0;
     right: 0;
-    text-align: center;
+    // text-align: center;
   }
 }
