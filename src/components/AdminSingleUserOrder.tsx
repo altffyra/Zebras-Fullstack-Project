@@ -31,6 +31,7 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
     " "
   );
   let tempObject = { title: "", message: "" };
+  let checkId: string | null = localStorage.getItem('accountId');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -59,13 +60,17 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
       const response = await fetch(`/api/order/admin/${orderId}`, {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
+          "accountID": `${checkId}`,
         },
         body: JSON.stringify(completedOrder),
       });
 
       const datasave = await response.json();
+      if(datasave.error) {
 
+        navigate('/')
+        
+      }
       if (!response.ok) {
         setLoading(false);
         tempObject.title = "Ordern ej ändrad";
@@ -103,13 +108,17 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
       const response = await fetch(`/api/order/admin/${orderId}`, {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
-        },
+          "accountID": `${checkId}`
+      },
         body: JSON.stringify(completedOrder),
       });
 
       const datasave = await response.json();
+      if(datasave.error) {
 
+        navigate('/')
+        
+      }
       if (!response.ok) {
         setLoading(false);
         tempObject.title = "Ordern ej ändrad";

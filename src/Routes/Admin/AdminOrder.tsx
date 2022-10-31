@@ -48,6 +48,7 @@ const AdminOrder = () => {
     " "
   );
   let tempObject = { title: "", message: "" };
+  let checkId: string | null = localStorage.getItem('accountId');
 
   let order: Order | undefined = useSelector((state: RootState) =>
     state.orders.find((order) => order.id === id)
@@ -120,13 +121,17 @@ const AdminOrder = () => {
       const response = await fetch(`/api/order/admin/${orderId}`, {
         method: "PUT",
         headers: {
-          "Content-Type": "application/json",
+          "accountID": `${checkId}`,
         },
         body: JSON.stringify(completedOrder),
       });
 
       const datasave = await response.json();
+      if(datasave.error) {
 
+        navigate('/')
+        
+      }
       if (!response.ok) {
         setLoading(false);
         tempObject.title = "Ordern ej ändrad";
@@ -166,12 +171,16 @@ const AdminOrder = () => {
         const response = await fetch(`/api/order/admin/${orderId}`, {
           method: "PUT",
           headers: {
-            "Content-Type": "application/json",
+            "accountID": `${checkId}`,
           },
           body: JSON.stringify(updatedOrder),
         });
         const datasave = await response.json();
-
+        if(datasave.error) {
+          
+          navigate('/')
+          
+        }
         if(!response.ok){
           setLoading(false);
           tempObject.title = "Ordern ej ändrad";

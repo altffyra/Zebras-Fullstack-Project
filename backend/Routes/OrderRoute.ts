@@ -71,7 +71,7 @@ orderRoute.put("/admin/orders/:id", auth, async (req:Request, res:Response) => {
   if (lockedOrder != undefined && lockedOrder.locked === false) {
       res.send(lockedOrder);
     }
-    res.send('Order is already locked');
+    res.sendStatus(404);
 });
 
 
