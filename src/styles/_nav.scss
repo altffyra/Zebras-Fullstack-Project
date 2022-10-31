@@ -62,7 +62,7 @@ header {
     }
   }
   .nav {
-    background: variables.$navBackground;
+    background: variables.$dropdownRed;
     inset: 0 100% 0 0;
     @include variables.flexContainer();
     justify-content: center;
@@ -168,6 +168,19 @@ header {
         }
         .divider {
           display: none;
+        }
+      }
+    }
+  }
+
+  .nav-top {
+    min-height: 5vh;
+    .nav {
+      .link-container {
+        .link {
+          &::after {
+            background: variables.$fontLight;
+          }        
         }
       }
     }

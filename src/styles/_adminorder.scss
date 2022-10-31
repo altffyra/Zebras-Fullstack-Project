@@ -85,7 +85,7 @@
     .add-item {
       position: relative;
       button {
-        @include buttons.smallBtn($bg: variables.$navBackground);
+        @include buttons.smallBtn($bg: variables.$lockColor);
         border: none;
         min-width: 20vw;
         color: variables.$fontLight;
@@ -170,7 +170,7 @@
     .locked-order {
       .add-item {
         button {
-          @include buttons.smallBtn($bg: variables.$navBackground);
+          @include buttons.smallBtn($bg: variables.$lockColor);
           border: none;
           width: 100px;
           min-width: 1vw;

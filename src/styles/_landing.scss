@@ -5,14 +5,23 @@
 .landing {
   width: 100%;
   background-color: variables.$primaryBackground;
-
+  
   .hero {
     min-height: 100vh;
     min-width: 100%;
     position: relative;
     display: grid;
     place-items: center;  
-    grid-area: 1 / 1 / 2 / 8;
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 10;
+    }
     .video-container {
       position: absolute;
       top: 0;
@@ -20,22 +29,27 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: 0;
+      z-index: 11;
     } 
     video::-webkit-media-controls {
       display: none;
     }
 
+
+
     .logo-container {
-      z-index: 2;
+      z-index: 12;
       @include variables.flexContainer(row);
       gap: 0.4em;
       h2 {
-        z-index: 2;
         color: variables.$fontLight;
+        font-size: 3em;
       }
       .logo {
         animation: wiggle 1s infinite;
+        height: 3em;
+        width: 3em;
+        align-self: center;
       }
       
       @keyframes wiggle {
@@ -60,54 +74,83 @@
 
     }
     button {
-      @include buttons.smallBtn($pad: 1em 2em, $bg: black);
-      border: 2px solid variables.$yellowSenap;
-      color: variables.$yellowSenap;
-      background: rgba(50, 50, 50, 0.5);
-      bottom: 20em;
+      border: none;
+      padding: 0.8em 2.5em;
+      border-radius: 4px;
+      box-shadow: variables.$boxShadow;
+      color: variables.$fontDark;
+      border: 1px solid variables.$fontLight;
+      transition: all 1000ms;
+      cursor: pointer;
+      font-size: 2em;
+      color: variables.$fontLight;
+      background: transparent;
       font-family: variables.$headerFont;
-      z-index: 2;
-    }
-
-    &:after {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.3);
-      z-index: 1;
+      z-index: 12;
+      position: relative;
+      &:hover {
+        border: 4px solid variables.$yellowSenap;
+        color: variables.$yellowSenap;
+        backdrop-filter: blur(10px);
+        scale: 105%;
+      }
     }
   }
 
-  .about-page{
+  .about-page {
     max-width: 1000px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: repeat(7, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
     padding: 0;
-    // .about-container {
-    //   @include variables.flexContainer(column);
-      
-      section, figure {
-        width: 100%;
-        height: 40vh;
-  
+      .about-us {
+        background-color: variables.$fontDark;
+        color: variables.$fontLight;
+        grid-area: 1 / 1 / 2 / 6;
       }
-      figure {
-        flex: 2;
+
+      .about-us-img {
+        grid-area: 2 / 1 / 2 / 6;
       }
-      section {
-        width: 100%;
+    
+      .our-food-img {        
+        grid-area: 4 / 1 / 4 / 6;
+      }
+    
+      .our-food {
+        background-color: variables.$darkRed;
+        color: variables.$fontLight;
+        grid-area: 3 / 1 / 3 / 6;
+      }
+    
+      .our-goal {
+        background-color: black;
+        color: variables.$fontLight;
+        grid-area: 5 / 1 / 5 / 6; 
+        
+      }
+    
+      .our-goal-img {
+        grid-area: 6 / 1 / 6 / 6;
+      }
+ 
+      & > figure {
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat
+      }
+    
+      & > section {
         @include variables.flexContainer();
+        align-items: center;
         justify-content: center;
         gap: 2em;
-        // padding: 2em;
-        flex: 3;
+        padding: 1em;
+        font-weight: 300;
+    
         .border {
           align-self: center;
           border-bottom: 1px solid variables.$yellowSenap;
@@ -115,95 +158,62 @@
           padding-right: 1em;
           margin-bottom: 0.5em;
         }
+        
+        h3 {
+          font-family: variables.$headerFont;
+        }
         p {
           line-height: 1.5em;
+          padding: 0 2em;
         }
       }
-      .about-us-img {
-        background-image: url("../assets/chef-cooking.svg");
-        background-position-y: 60%;
-        grid-area: 1 / 4 / 2 / 6;
-      }
-    
-      .our-food-img {
-        background-image: url("../assets/food.svg");
-        background-position: center;
-        background-size: cover;
-        grid-area: 2 / 1 / 3 / 3;
-      }
-    
-      .our-food {
-        background-color: variables.$darkRed;
-        color: variables.$fontLight;
-      }
-    
-      .our-goal {
-        background-color: black;
-        color: variables.$fontLight;
-        
-      }
-    
-      .our-goal-img {
-        background-image: url("../assets/our-goal.svg");
-        background-position-y: center;
-        grid-area: 3 / 4 / 4 / 6;
-      }
-    }
-    & > figure {
-      margin-block-start: 0;
-      margin-block-end: 0;
-      margin-inline-start: 0;
-      margin-inline-end: 0;
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
-  
-    & > section {
-      @include variables.flexBox();
-      flex-direction: column;
-      padding: 1em;
-      font-weight: 300;
-  
-      h3 {
-        font-family: variables.$headerFont;
-      }
-    }
-    
-  
-    .about-us {
-      background-color: black;
-      color: variables.$fontLight;
-      grid-area: 1 / 1 / 2 / 4;
-    }
+        .map {
+          grid-area: 7 / 1 / 7 / 6;
+          iframe {
+            width: 100%;
+            margin-bottom: 1em;
+            margin-top: 1em;
+          }
+        }
+      
+    } 
+}
 
-    .our-food {
-      grid-area: 2 / 3 / 3 / 6;
-    }
-
-    .our-goal {
-      grid-area: 3 / 1 / 4 / 4; 
-    }
-  
-  
-    .map {
-      grid-area: 4 / 1 / 5 / 6;
-      iframe {
-        width: 100%;
-        margin-bottom: 1em;
-        margin-top: 1em;
-      }
-    }
-    }
-
-// }
 
 @media screen and (min-width: 786px) {
   .landing {
-    .about-container {
-      flex-direction: row;
-      figure, section {
-        flex: 1;
+    .about-page {
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(4, 1fr);
+      section, figure {
+        min-height: 40vh;
       }
+      .about-us {
+        grid-area: 1 / 1 / 2 / 4;
+      }
+      .about-us-img {
+        grid-area: 1 / 4 / 2 / 6;
+      }
+
+      .our-food-img {
+        grid-area: 2 / 1 / 3 / 3;
+      }
+
+      .our-food {
+        grid-area: 2 / 3 / 3 / 6;
+      }
+
+      .our-goal {
+        grid-area: 3 / 1 / 4 / 4; 
+      }
+
+      .our-goal-img {
+        grid-area: 3 / 4 / 4 / 6;
+      }
+      .map {
+        grid-area: 4 / 1 / 5 / 6;
+      }
+ 
     }
   }
 }

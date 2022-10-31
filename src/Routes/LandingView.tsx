@@ -7,9 +7,11 @@ import { RootState } from "../store";
 import { useSelector, useDispatch } from "react-redux";
 import { actions as tempOrderActions } from "../features/tempOrderReducer";
 import { actions as cartActions } from "../features/cartReducer";
-import testVideo from '../assets/hero-video.mp4';
+import heroVideo from '../assets/hero-video.mp4';
 import logoLight from "../assets/logoLight.svg";
-
+import chefCooking from "../assets/chef-cooking.jpg"
+import foodImg from "../assets/food.jpg"
+import ourGoal from "../assets/our-goal.jpg"
 
 const LandingView = () => {
   const navigate = useNavigate();
@@ -66,7 +68,7 @@ const LandingView = () => {
       <Nav scrollTop={navCSS} />
       <section className="hero" >
       <video className="video-container" ref={videoRef} muted playsInline autoPlay loop  >
-            <source src={testVideo} type="video/mp4"/> 
+            <source src={heroVideo} type="video/mp4"/> 
         </video>
         <div className="logo-container">
           <h2>Rocksalt</h2>
@@ -85,9 +87,9 @@ const LandingView = () => {
             behöva sitta på en restaurang.
           </p>
         </section>
-        <figure className="about-us-img"></figure>
+        <figure className="about-us-img" style={{ backgroundImage: `url(${chefCooking})`}}></figure>
 
-        <figure className="our-food-img"></figure>
+        <figure className="our-food-img" style={{ backgroundImage: `url(${foodImg})`}}></figure>
         <section className="our-food">
           <div className="border">
             <h3>Vår mat</h3>
@@ -110,7 +112,7 @@ const LandingView = () => {
             ska få äta bra mat, även om man inte kan ta sig till en restaurang.
           </p>
         </section>
-        <figure className="our-goal-img"></figure>
+        <figure className="our-goal-img" style={{ backgroundImage: `url(${ourGoal})`}}></figure>
 
 
       <section className="map">
