@@ -12,6 +12,6 @@ RUN npm run build
 
 RUN npm run build-backend
 
-EXPOSE 8080
+EXPOSE 8123
 
 CMD ["npm","run", "start-backend"]
