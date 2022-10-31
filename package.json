@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "build-backend": "cd /app/backend/ && tsc",
+    "build-backend": "cd backend/ && tsc",
     "start-backend": "node backend/dist/server.js",
     "restart-backend": "npm run build-backend && npm run start-backend"
   },

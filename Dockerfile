@@ -8,9 +8,9 @@ RUN npm install
 
 COPY . .
 
-RUN npm run build-backend
-
 RUN npm run build
+
+RUN npm run build-backend
 
 EXPOSE 8080
 
