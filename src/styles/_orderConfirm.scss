@@ -5,6 +5,9 @@
   @include variables.flexContainer();
   gap: 2em;
   color: variables.$fontLight;
+  background-color: variables.$primaryBackground;
+  width:100%;
+  padding-bottom: 2em;
 
   .headline {
     @include variables.headerTitle();
@@ -133,5 +136,14 @@
     align-self: center;
     width: 90%;
     box-shadow: variables.$boxShadow;
+  }
+
+
+}
+@media screen and (min-width: 786px) {
+  .confirmed {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
   }
 }

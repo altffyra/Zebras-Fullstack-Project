@@ -120,6 +120,8 @@
         max-width: 1000px;
         margin-left: auto;
         margin-right: auto;
+        padding-bottom: 3em;
+        background-color: variables.$primaryBackground;
  
         .search-container {
             input {

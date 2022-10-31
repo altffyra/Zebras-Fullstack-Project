@@ -8,6 +8,7 @@
   margin-top: 12vh;
   gap: 2em;
   width: 100%;
+  background-color: variables.$primaryBackground;
   .loading {
     @include variables.loader();
   }
@@ -24,6 +25,7 @@
     @include variables.flexBox;
     flex-direction: column;
     @include variables.sectionTop($bg: variables.$dropdownRed);
+    margin:0 1em;
 
     .order-top {
       width: 100%;
@@ -32,6 +34,7 @@
       font-size: 1.4em;
       padding: 1em;
       font-weight: 700;
+      
     }
     .cartmodule {
       width: 100%;
@@ -80,7 +83,7 @@
   .LoggedIn {
     @include variables.flexBox;
     flex-direction: column;
-
+    margin:0 1em;
     margin-bottom: 3em;
 
     .Account-info {

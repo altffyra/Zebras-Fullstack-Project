@@ -143,7 +143,7 @@ const LoginView = () => {
           </label>
         </div>
         <p>
-          Inget konto? <a href="/SignUp"> Skapa </a>
+          Inget konto? <span onClick={()=> navigate("/SignUp")}> Skapa</span>
         </p>
         <div>
           <button

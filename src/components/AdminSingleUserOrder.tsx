@@ -60,6 +60,7 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
       const response = await fetch(`/api/order/admin/${orderId}`, {
         method: "PUT",
         headers: {
+          "Content-Type": "application/json",
           "accountID": `${checkId}`,
         },
         body: JSON.stringify(completedOrder),
@@ -108,8 +109,10 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
       const response = await fetch(`/api/order/admin/${orderId}`, {
         method: "PUT",
         headers: {
+          "Content-Type": "application/json",
           "accountID": `${checkId}`
       },
+        
         body: JSON.stringify(completedOrder),
       });
 
