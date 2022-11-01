@@ -60,6 +60,18 @@
     z-index: 1000;
   }
 
+  .remove-all {
+    align-self: flex-end;
+    padding: 1em 3em 0 0;
+    font-size: 0.8em;
+    color: color.scale(variables.$lockColor, $lightness: 20%);
+    cursor: pointer;
+    transition: all 400ms;
+    &:hover {
+      color: color.scale(variables.$yellowSenap, $lightness: 20%);
+    }
+  }
+
   .cart-item {
     position: relative;
     padding: 1em;
@@ -69,6 +81,21 @@
     @include variables.flexContainer(row);
     justify-content: space-between;
     gap: 1em;
+
+    .remove-item {
+      width: 1em;
+      height: 1em;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      cursor: pointer;
+      transition: all 400ms;
+      transform: rotateZ(0);
+      &:hover {
+        scale: 105%;
+        transform: rotateZ(90deg);
+      }
+    }
 
     .item-price {
       text-align: end;
@@ -130,13 +157,18 @@
     margin-right: auto;
     left: 0;
     right: 0;
-    // text-align: center;
+    .cart-item {
+
+      :first-child {
+        flex: 7;
+      }
+    }
   }
 }
 
 @media screen and (min-width: 1800px) {
   .cart{
     margin-right:5%;
-  max-width: 20%;
+    max-width: 20%;
   }
   }

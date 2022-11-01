@@ -2,7 +2,7 @@ import "../styles/_cart.scss";
 import dropDownLight from "../assets/dropDownLight.svg";
 import { CartProps, Order } from "../models/types";
 import CartItem from "./CartItem";
-import { useState, ChangeEvent, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { actions as cartActions } from "../features/cartReducer";
@@ -47,15 +47,8 @@ const Cart = (props: CartProp) => {
     dispatch(cartActions.clearCart());
   };
 
-  const handleAmount: (
-    e: ChangeEvent<HTMLSelectElement>,
-    itemName: string
-  ) => void = (e, itemName) => {
-    const updatedItem: UpdatedItemProps = {
-      name: itemName,
-      amount: parseInt(e.target.value),
-    };
-    dispatch(cartActions.updateAmount(updatedItem));
+  const handleRemoveAll: () => void = () => {
+    dispatch(cartActions.clearCart());
   };
 
   let amountOfProducts: number = 0;
@@ -65,7 +58,7 @@ const Cart = (props: CartProp) => {
   });
 
   const cartItemEl = props.cart.cartItems.map((item, index) => (
-    <CartItem item={item} key={index} handleAmount={handleAmount} />
+    <CartItem item={item} key={index} />
   ));
 
   return (
@@ -79,9 +72,10 @@ const Cart = (props: CartProp) => {
           </div>
         ) : (
           ""
-        )}
+          )}
       </div>
       <div className={cartCss}>
+        <p className="remove-all" onClick={handleRemoveAll}>Töm varukorg</p>
         {cartItemEl}
         <p className="total-price">Totalt : {props.cart.totalPrice} kr</p>
         <div className="button-container">

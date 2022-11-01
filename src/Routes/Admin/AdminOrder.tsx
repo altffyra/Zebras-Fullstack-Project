@@ -79,18 +79,6 @@ const AdminOrder = () => {
     e.preventDefault();
   };
 
-  const handleAmount: (
-    e: ChangeEvent<HTMLSelectElement>,
-    itemName: string
-  ) => void = (e, itemName) => {
-    const updatedItem: UpdatedItemProps = {
-      name: itemName,
-      amount: parseInt(e.target.value),
-    };
-
-    dispatch(cartActions.updateAmount(updatedItem));
-  };
-
   function changeCredentials(e: ChangeEvent<HTMLInputElement>) {
     setUser({
       ...user,
@@ -212,7 +200,6 @@ const AdminOrder = () => {
       locked={order?.locked}
       item={item}
       key={index}
-      handleAmount={handleAmount}
     />
   ));
 

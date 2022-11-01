@@ -277,7 +277,7 @@ type errorObj = {
           {cartItemEl}
           <section className="total-wrapper">
             <p className="total">Totalt:</p>{" "}
-            <p className="total-sum">{cart.totalPrice} kr.</p>
+            <p className="total-sum">{cart.totalPrice} kr</p>
           </section>
         </section>
 
