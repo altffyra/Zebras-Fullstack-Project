@@ -70,8 +70,7 @@
   }
 
   .menu-item {
-    display: flex;
-    flex-direction: column;
+    @include variables.flexContainer(row);
     width: 80%;
     margin: 1em auto 2em auto;
     border-bottom: 0.1em solid #050505;
@@ -83,6 +82,7 @@
 
     .tab-container {
       .desc {
+        max-width: 90%;
         margin-bottom: 1em;
         font-size: 0.9em;
       }
@@ -92,15 +92,17 @@
       }
     }
 
+    .menu-item--right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 0 2em auto;
+    }
+
     .menu-item--info {
       display: flex;
       position: relative;
 
-      .menu-item--right {
-        display: flex;
-        align-items: center;
-        margin: 0 0 0 auto;
-      }
 
       .menu-item--left {
         .menu-item--flex {
