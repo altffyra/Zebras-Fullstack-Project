@@ -5,8 +5,7 @@ import { Order } from '../../models/types';
 import { ChangeEvent, useEffect, useState, KeyboardEvent } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { actions as orderActions } from "../../features/orderReducer";
-import { RootState } from "../../store";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import locked from '../../assets/locked.png';
 import unlocked from '../../assets/unlocked.png';
 import { actions as userActions } from "../../features/userReducer";

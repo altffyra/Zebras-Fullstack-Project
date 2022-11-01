@@ -1,5 +1,4 @@
 import "../../styles/_search.scss";
-
 import OrderItems from "../../components/OrderItems";
 import Nav from "../../components/Nav";
 import { Order } from "../../models/types";

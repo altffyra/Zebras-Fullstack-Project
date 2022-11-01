@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { actions as userActions } from "../../features/userReducer";
 import { User } from "../../models/types";
 import "../../styles/_userForm.scss";
-import logo from "../../assets/logo.svg";
 import fork from '../../assets/fork.svg';
 import Alert from "../../components/Alert";
 import "../../styles/_alert.scss";

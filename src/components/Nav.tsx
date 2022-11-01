@@ -37,7 +37,7 @@ const Nav = (props: NavProps) => {
   const handleLogout: () => void = () => {
     dispatch(userActions.logOut());
     localStorage.removeItem('accountId')
-    if(location.pathname == '/Account' || '/account') {
+    if(location.pathname == '/Account') {
       navigate('/menu')      
     }
   }
