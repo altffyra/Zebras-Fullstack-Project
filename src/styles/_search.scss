@@ -50,11 +50,7 @@
         text-align: center
     }
 
-    .order-time {
-      margin: 0 1em;
-    }
-
-    .user-information {
+    .user-info {
       @include variables.flexContainer();
       gap: 0.4em;
       p {
@@ -73,7 +69,6 @@
     .order-information {
       @include variables.flexContainer();
       gap: 1em;
-      margin: 0 1em;
 
       .order-title {
         font-size: 1.2em;
@@ -83,7 +78,6 @@
     }
 
     .comment {
-      margin: 0 1em;
       h3 {
         margin-bottom: 1em;
         font-family: variables.$primaryFont;

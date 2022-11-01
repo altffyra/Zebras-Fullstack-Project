@@ -34,7 +34,7 @@ const OrderItem = (props: OrderItemProps) => {
           <p>Order lagd : {order.orderPlaced}</p>
           <p>Order ca. klar : {order.orderCompleted}</p>
         </div>
-        <div className="user-information">
+        <div className="user-info">
           <p>Beställare</p>
           <p>Namn : {order.user.name}</p>
           <p>Email : {order.user.email}</p>
