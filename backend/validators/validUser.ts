@@ -1,6 +1,5 @@
 import { User, Guest } from "../lowDb/dbinterface";
 
-
 export function isValidUser(userData:User) {
      
       let userObj = {

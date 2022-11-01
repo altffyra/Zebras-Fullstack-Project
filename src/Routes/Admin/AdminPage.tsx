@@ -5,8 +5,7 @@ import { Order } from '../../models/types';
 import { ChangeEvent, useEffect, useState, KeyboardEvent } from 'react';
 import { useNavigate } from 'react-router-dom'
 import { actions as orderActions } from "../../features/orderReducer";
-import { RootState } from "../../store";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import locked from '../../assets/locked.png';
 import unlocked from '../../assets/unlocked.png';
 import { actions as userActions } from "../../features/userReducer";
@@ -110,7 +109,7 @@ const AdminPage = () => {
         <button className='admin-buttonSmall' onClick={handleLogout}>Logga ut </button>
 
         <div className="search-container">
-            <input type="text" name="search" id="search-user" placeholder="Sök ordernummer" onKeyUp={(e) => handleEnter(e)} onChange={(e) => handleInput(e)}/>
+            <input type="text" name="search" id="search-user" placeholder="Sök på order id" onKeyUp={(e) => handleEnter(e)} onChange={(e) => handleInput(e)}/>
             <label htmlFor="search" onClick={searchOrder}>SÖK</label>
         </div>
             {searchError ? <p>Ingen order hittades på det ordernumret.</p> : ""}

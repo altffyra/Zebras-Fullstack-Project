@@ -1,5 +1,4 @@
 import "../../styles/_search.scss";
-
 import OrderItems from "../../components/OrderItems";
 import Nav from "../../components/Nav";
 import { Order } from "../../models/types";
@@ -86,7 +85,7 @@ const Search = () => {
         <input
           type="text"
           name="search"
-          placeholder="Sök ordernummer"
+          placeholder="Sök på order id"
           value={searchId}
           id="search"
           onKeyUp={(e) => handleEnter(e)}
@@ -99,20 +98,20 @@ const Search = () => {
       {searchError ? <p>Ingen order hittades på det ordernumret.</p> : ""}
       {found ? (
         <div className="order-container">
-          <h2>Order: {searchedOrder.id}</h2>
+          <h2>Order {searchedOrder.id}</h2>
           <div className="order-time">
             <p>Order lagd : {searchedOrder.orderPlaced}</p>
             <p>Order ca. klar : {searchedOrder.orderCompleted}</p>
           </div>
-          <div className="user-information">
-            <p>Beställare:</p>
+          <div className="user-info">
+            <p>Beställare</p>
             <p>Namn : {searchedOrder.user.name}</p>
             <p>Email : {searchedOrder.user.email}</p>
             <p>Tel.nr : {searchedOrder.user.phoneNumber}</p>
           </div>
           <div className="divider"></div>
           <div className="order-information">
-            <p className="order-title">Varukorg:</p>
+            <p className="order-title">Varukorg</p>
             {orderItem}
             <p>Totalt : {searchedOrder.cart.totalPrice} kr</p>
           </div>

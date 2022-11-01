@@ -1,12 +1,10 @@
 import { Order } from '../models/types';
-import lockedIcon from '../assets/locked.png'
 import unlockedIcon from '../assets/unlocked.png'
 import completeIcon from '../assets/complete.svg'
-import OrderItem from './OrderItem'
 import { useState } from 'react';
 import message from '../assets/message.png';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { actions as orderActions } from '../features/orderReducer'
 import Alert from './Alert'
 

@@ -44,7 +44,7 @@ const SearchUser = (props: SearchUserProps) => {
           type="text"
           name="search"
           id="search-user"
-          placeholder="Sök ordernummer"
+          placeholder="Sök på order id"
           value={search}
           onKeyUp={(e) => {
             handleEnter(e);

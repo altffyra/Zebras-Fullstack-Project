@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { actions as userActions } from "../features/userReducer";
 import { useDispatch } from "react-redux";
 import "../styles/_userForm.scss";
-import logo from "../assets/logo.svg";
 import fork from '../assets/fork.svg'
 import Alert from "../components/Alert";
 import "../styles/_alert.scss";
