@@ -85,7 +85,7 @@ const Search = () => {
         <input
           type="text"
           name="search"
-          placeholder="Sök ordernummer"
+          placeholder="Sök på order id"
           value={searchId}
           id="search"
           onKeyUp={(e) => handleEnter(e)}

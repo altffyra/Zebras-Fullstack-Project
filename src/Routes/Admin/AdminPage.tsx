@@ -109,7 +109,7 @@ const AdminPage = () => {
         <button className='admin-buttonSmall' onClick={handleLogout}>Logga ut </button>
 
         <div className="search-container">
-            <input type="text" name="search" id="search-user" placeholder="Sök ordernummer" onKeyUp={(e) => handleEnter(e)} onChange={(e) => handleInput(e)}/>
+            <input type="text" name="search" id="search-user" placeholder="Sök på order id" onKeyUp={(e) => handleEnter(e)} onChange={(e) => handleInput(e)}/>
             <label htmlFor="search" onClick={searchOrder}>SÖK</label>
         </div>
             {searchError ? <p>Ingen order hittades på det ordernumret.</p> : ""}
