@@ -9,6 +9,7 @@ import { RootState } from "../../store";
 import { useSelector, useDispatch } from "react-redux";
 import locked from '../../assets/locked.png';
 import unlocked from '../../assets/unlocked.png';
+import { actions as userActions } from "../../features/userReducer";
 
 const AdminPage = () => {
     const dispatch = useDispatch();
@@ -69,6 +70,7 @@ const AdminPage = () => {
 
   const handleLogout: () => void = () => {
     localStorage.removeItem('accountId')
+    dispatch(userActions.logOut())
     navigate('/')
   }
 
