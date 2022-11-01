@@ -223,7 +223,7 @@ type errorObj = {
             <p className="User-info">
               Tel.nr:{" "}
               <input
-                type="number"
+                type="text"
                 name="phoneNumber"
                 required
                 value={userCredentials.phoneNumber}

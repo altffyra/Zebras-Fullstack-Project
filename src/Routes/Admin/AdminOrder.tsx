@@ -292,7 +292,7 @@ const AdminOrder = () => {
             <div>
               <label htmlFor="">Tel.nr</label>
               <input
-                type="number"
+                type="text"
                 name="phoneNumber"
                 id=""
                 value={user.phoneNumber}

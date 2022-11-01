@@ -162,7 +162,7 @@ const SignUp = () => {
           <input
             className="form__input"
             placeholder=" "
-            type="number"
+            type="text"
             name="phoneNumber"
             required
             onChange={(e) => {
