@@ -51,7 +51,7 @@ const MenuItem = ({ item }: Props) => {
         <section className="menu-item--info">
           <section className="menu-item--left">
             <section className="menu-item--flex">
-              <p>
+              <p className="menu-item--bold">
                 {item.name}{" "}
                 {item.allergies ? (
                   <img
@@ -75,7 +75,7 @@ const MenuItem = ({ item }: Props) => {
                 ""
               )}
             </section>
-            <p>{item.price} kr</p>
+            <p className="menu-item--bold">{item.price} kr</p>
           </section>
         </section>
         <section className="menu-item--vector" onClick={tabFood}>
