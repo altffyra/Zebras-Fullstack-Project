@@ -12,6 +12,7 @@ import logoLight from "../assets/logoLight.svg";
 import chefCooking from "../assets/chef-cooking.jpg"
 import foodImg from "../assets/food.jpg"
 import ourGoal from "../assets/our-goal.jpg"
+import vector from '../assets/menu/white-vector.svg';
 
 const LandingView = () => {
   const navigate = useNavigate();
@@ -67,14 +68,21 @@ const LandingView = () => {
     <main className="landing" onScroll={()=>console.log("Scrolled")}>
       <Nav scrollTop={navCSS} />
       <section className="hero" >
-      <video className="video-container" ref={videoRef} muted playsInline autoPlay loop  >
+        <video className="video-container" ref={videoRef} muted playsInline autoPlay loop  >
             <source src={heroVideo} type="video/mp4"/> 
         </video>
         <div className="logo-container">
-          <h2>Rocksalt</h2>
+          <div className="logo-text">
+            <h2>Rocksalt</h2>
+            <p>take-away</p>
+          </div>
           <img src={logoLight} alt="rocksalt logo" className="logo" />
         </div>
         <button onClick={goToMenu}>Meny</button>
+        <figure className="arrows">
+          <img src={vector} alt="" className="small-arrow"/>
+          <img src={vector} alt="" className="big-arrow"/>
+        </figure>
       </section>
       <section className="about-page">
         <section className="about-us" >
@@ -82,9 +90,7 @@ const LandingView = () => {
             <h3>Om oss</h3>
           </div>
           <p>
-            Rocksalt grundades av Christian Johnsson år 2022 med idén om att
-            personer ska kunna få god och vällagad restaurangmat utan besväret att
-            behöva sitta på en restaurang.
+            Rocksalt Take-Away grundades av John Christiansson, hösten 2022. Efter år av pandemi föddes idén om att alla ska kunna få njuta av vällagad restaurangmat utan att behöva sitta och trängas på en restaurang.
           </p>
         </section>
         <figure className="about-us-img" style={{ backgroundImage: `url(${chefCooking})`}}></figure>
