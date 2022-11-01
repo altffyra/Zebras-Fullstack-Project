@@ -90,7 +90,9 @@ const LandingView = () => {
             <h3>Om oss</h3>
           </div>
           <p>
-            Rocksalt Take-Away grundades av John Christiansson, hösten 2022. Efter år av pandemi föddes idén om att alla ska kunna få njuta av vällagad restaurangmat utan att behöva sitta och trängas på en restaurang.
+            Rocksalt take-away grundades av John Christiansson, hösten 2021. Efter år av
+            pandemi föddes idén om att alla ska kunna få njuta av vällagad restaurangmat
+            utan att behöva sitta och trängas på en restaurang.
           </p>
         </section>
         <figure className="about-us-img" style={{ backgroundImage: `url(${chefCooking})`}}></figure>
@@ -110,12 +112,9 @@ const LandingView = () => {
         </section>
 
         <section className="our-goal">
-          <div className="border">
-            <h3>Vårt mål</h3>
-          </div>
+          <p className="quote">"Rocksalt har den bästa take-away maten i hela Sverige!"</p>
           <p>
-            Vår grundare Christian Johnsson har som mål att alla i hela världen
-            ska få äta bra mat, även om man inte kan ta sig till en restaurang.
+           - New York Times, 2022
           </p>
         </section>
         <figure className="our-goal-img" style={{ backgroundImage: `url(${ourGoal})`}}></figure>
