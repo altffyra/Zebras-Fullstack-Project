@@ -100,6 +100,10 @@ const Search = () => {
       {found ? (
         <div className="order-container">
           <h2>Order: {searchedOrder.id}</h2>
+          <div className="order-time">
+            <p>Order lagd : {searchedOrder.orderPlaced}</p>
+            <p>Order ca. klar : {searchedOrder.orderCompleted}</p>
+          </div>
           <div className="user-information">
             <p>Beställare:</p>
             <p>Namn : {searchedOrder.user.name}</p>
@@ -111,6 +115,15 @@ const Search = () => {
             <p className="order-title">Varukorg:</p>
             {orderItem}
             <p>Totalt : {searchedOrder.cart.totalPrice} kr</p>
+          </div>
+          <div className="comment">
+            <h3>Kundkommentar</h3>
+            {searchedOrder.userComment ? <p>{searchedOrder?.userComment}</p> : '-'}
+          </div>
+
+          <div className="comment">
+            <h3>Kommentar till kocken</h3>
+            {searchedOrder.adminComment ? <p>{searchedOrder?.adminComment}</p> : '-'}
           </div>
           {!searchedOrder.locked ? (
             <button className="btn-change" onClick={changeOrder}>

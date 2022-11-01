@@ -142,11 +142,6 @@ orderRoute.put("/:id", async (req:IdParam, res:Response) => {
 orderRoute.put("/admin/:id", auth, async (req:Request, res:Response) => {
   const id:string = req.params.id;  
   let updatedOrder: Order = req.body;
-  console.log(req);
-  
-  console.log(req.body);
-  console.log(id);
-
   const foundIndex: number = await checkOrder(id);
   if(foundIndex === -1) {
     res.status(400).send('No order with that id')
@@ -154,22 +149,22 @@ orderRoute.put("/admin/:id", auth, async (req:Request, res:Response) => {
   }
 
   res.status(200)
-  // if(isValidGuest(updatedOrder.user)) {
-  //   if(isValidCart(updatedOrder)) {    
-  //     if(isValidUpdatedOrder(updatedOrder)) {        
-  //         const allOrders: Order[] = await adminUpdateOrder(updatedOrder, foundIndex)
+  if(isValidGuest(updatedOrder.user)) {
+    if(isValidCart(updatedOrder)) {    
+      if(isValidUpdatedOrder(updatedOrder)) {        
+          const allOrders: Order[] = await adminUpdateOrder(updatedOrder, foundIndex)
 
         
-  //         res.status(200).send(allOrders)
-  //     } else {
-  //       res.status(400).send('Bad placed order')
-  //     }
-  //   } else {
-  //     res.status(400).send('Bad order')
-  //   }
-  // } else {
-  //   res.status(400).send('Bad user')
-  // }
+          res.status(200).send(allOrders)
+      } else {
+        res.status(400).send('Bad placed order')
+      }
+    } else {
+      res.status(400).send('Bad order')
+    }
+  } else {
+    res.status(400).send('Bad user')
+  }
 });
   
 export default orderRoute

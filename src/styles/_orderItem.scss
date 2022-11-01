@@ -14,7 +14,7 @@
 
   .order-container {
     @include variables.flexContainer();
-    gap: 1em;
+    gap: 2em;
     padding: 1em;
     width: 90vw;
     background-color: variables.$fontLight;
@@ -55,6 +55,13 @@
       }
     }
 
+    .comment {
+      margin: 0 1em;
+      h3 {
+        margin-bottom: 1em;
+        font-family: variables.$primaryFont;
+      }
+    }
     .button-container {
       @include variables.flexContainer(row);
       justify-content: space-evenly;

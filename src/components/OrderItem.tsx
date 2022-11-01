@@ -46,6 +46,14 @@ const OrderItem = (props: OrderItemProps) => {
           {orderItem}
           <p>Totalt : {order.cart.totalPrice} kr</p>
         </div>
+        <div className="comment">
+          <h3>Kundkommentar</h3>
+          {order.adminComment ? <p>{order?.adminComment}</p> : '-'}
+        </div>
+        <div className="comment">
+          <h3>Kommentar till kocken</h3>
+          {order.adminComment ? <p>{order?.adminComment}</p> : '-'}
+        </div>
         <div className="button-container">
           <button className="btn-close" onClick={props.showOrderOverlay}>
             Stäng

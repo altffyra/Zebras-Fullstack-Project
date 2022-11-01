@@ -38,7 +38,7 @@
 
   .order-container {
     @include variables.flexContainer();
-    gap: 1em;
+    gap: 2em;
     padding: 1em;
     width: 100%;
     background-color: variables.$fontLight;
@@ -48,6 +48,10 @@
     h2{
         font-family: variables.$primaryFont;
         text-align: center
+    }
+
+    .order-time {
+      margin: 0 1em;
     }
 
     .user-information {
@@ -69,11 +73,20 @@
     .order-information {
       @include variables.flexContainer();
       gap: 1em;
+      margin: 0 1em;
 
       .order-title {
         font-size: 1.2em;
         font-weight: 700;
         width: 100%;
+      }
+    }
+
+    .comment {
+      margin: 0 1em;
+      h3 {
+        margin-bottom: 1em;
+        font-family: variables.$primaryFont;
       }
     }
 

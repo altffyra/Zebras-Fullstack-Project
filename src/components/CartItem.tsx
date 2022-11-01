@@ -13,7 +13,7 @@ const CartItem = (props: CartItemsProps) => {
   const dotsCss: string = props.locked ? "cart-dots" : "cart-item";
   return (
     <section className={dotsCss}>
-      <p className="item-name">{props.item.name}</p>
+      <p className="item-name">{props.item.name} {props.locked ? `x ${props.item.amount}` : ''}</p>
       {props.locked ? <div className="dots"></div> : ""}
       {!props.locked ? (
         <select
