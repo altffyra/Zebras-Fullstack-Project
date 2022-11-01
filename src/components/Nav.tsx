@@ -30,12 +30,14 @@ const Nav = (props: NavProps) => {
     }
   }, [accountId]);
 
+
   const handleMenu: () => void = () => {
     setMenuOpen(!menuOpen);
   };
 
   const handleLogout: () => void = () => {
     dispatch(userActions.logOut());
+    setLoggedIn(false);
     localStorage.removeItem('accountId')
     if(location.pathname == '/Account') {
       navigate('/menu')      
