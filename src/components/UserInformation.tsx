@@ -3,9 +3,15 @@ import { useDispatch } from "react-redux";
 import { User } from "../models/types";
 import { useState, ChangeEvent, FormEvent, useEffect } from "react";
 import { actions as userActions } from "../features/userReducer";
+import Alert from "../components/Alert";
 
 type UserInformationProps = {
   user: User;
+};
+
+type errorType = {
+  title: string;
+  message: string;
 };
 
 const UserInformation = (props: UserInformationProps) => {
@@ -19,7 +25,20 @@ const UserInformation = (props: UserInformationProps) => {
   const [oldPassword, setOldPassword] = useState<string>("");
   const [newPassword, setnewPassword] = useState<string>("");
   const [newPasswordAgain, setnewPasswordAgain] = useState<string>("");
-  const [passwordError, setPasswordError] = useState<boolean>(false);
+
+  const [errorElement, showError] = useState<boolean>(false);
+  const [errorMessages, makeError] = useState({ title: "", message: "" });
+  const showAlert = errorElement ? (
+    <Alert
+      errorTitle={errorMessages.title}
+      errorMessage={errorMessages.message}
+      showError={showError}
+    />
+  ) : (
+    ""
+  );
+
+  let tempObject: errorType = { title: "", message: "" };
 
   useEffect(() => {
     if (props.user) {
@@ -49,16 +68,19 @@ const UserInformation = (props: UserInformationProps) => {
   };
 
   async function changePassword() {
-    setPasswordError(false);
     if (newPassword != newPasswordAgain || oldPassword != props.user.password) {
-      setPasswordError(true);
+      tempObject.title = "Ändringen misslyckades";
+      tempObject.message = "Lösenorden stämmer inte överrens, försök igen";
+      makeError(tempObject);
+      showError(true);
+      setLoading(false);
       return;
     }
 
     const updatedUser: User = {
-      name: userName,
-      email: userEmail,
-      phoneNumber: userPhone,
+      name: props.user.name,
+      email: props.user.email,
+      phoneNumber: props.user.phoneNumber,
       accountId: props.user.accountId,
       password: newPassword,
     };
@@ -72,15 +94,21 @@ const UserInformation = (props: UserInformationProps) => {
 
     const data = await response.json();
     if (data.success) {
+      setUpdatePassword(false);
       setUpdate(false);
       setLoading(false);
       dispatch(userActions.setUser(updatedUser));
+    } else {
+      tempObject.title = "Ändringen misslyckades";
+      tempObject.message = "Något fel med kopplingen till serven, försök igen";
+      makeError(tempObject);
+      showError(true);
+      setLoading(false);
+      return;
     }
   }
 
   async function updateUser() {
-    setPasswordError(false);
-
     const updatedUser: User = {
       name: userName,
       email: userEmail,
@@ -98,9 +126,16 @@ const UserInformation = (props: UserInformationProps) => {
 
     const data = await response.json();
     if (data.success) {
-      setUpdate(false);
+      setUpdate(false)
       setLoading(false);
       dispatch(userActions.setUser(updatedUser));
+    } else {
+      tempObject.title = "Ändringen misslyckades";
+      tempObject.message = "Något fel med kopplingen till serven, försök igen";
+      makeError(tempObject);
+      showError(true);
+      setLoading(false);
+      return;
     }
   }
 
@@ -136,7 +171,6 @@ const UserInformation = (props: UserInformationProps) => {
     setnewPassword("");
     setnewPasswordAgain("");
     setOldPassword("");
-    setPasswordError(false);
     setUpdate(false);
     setUpdatePassword(false);
   };
@@ -146,11 +180,6 @@ const UserInformation = (props: UserInformationProps) => {
       {loading ? <div className="loading"></div> : ""}
       <div className="headline-user">
         <h2>Mina Uppgifter</h2>
-        {passwordError ? (
-          <p className="wrong-password">Fel gammalt lösenord</p>
-        ) : (
-          ""
-        )}
       </div>
       {!update && !updatePassword ? (
         <section className="user-container">
@@ -267,6 +296,7 @@ const UserInformation = (props: UserInformationProps) => {
       ) : (
         ""
       )}
+      {showAlert}
     </section>
   );
 };

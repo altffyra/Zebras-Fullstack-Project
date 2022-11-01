@@ -37,9 +37,10 @@
     @include variables.flexContainer();
     .user-search {
       @include variables.flexContainer();
-
+      
       .search-container {
         @include variables.flexContainer(row);
+        box-shadow: variables.$boxShadow;
         margin-top: 2em;
         input {
           flex: 9;

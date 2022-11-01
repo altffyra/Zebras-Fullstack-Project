@@ -16,7 +16,7 @@ const MenuTopic = ({ foodImg, topic, menuArray }: Props) => {
 
   if (topic == "Förrätt") {
     cssId = "entree";
-  } else if (topic == "Vegetarisk") {
+  } else if (topic == "Vegetariskt") {
     cssId = "veg";
   } else if (topic == "Efterrätt") {
     cssId = "desert";

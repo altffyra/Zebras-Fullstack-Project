@@ -70,7 +70,7 @@ const LoginView = () => {
       }
     } else {
         tempObject.title = "Inloggningen misslyckades";
-        tempObject.message = "Du har anget fel användarnamn eller lösenord, försök igen";
+        tempObject.message = "Du har angett fel användarnamn eller lösenord, försök igen";
         makeError(tempObject);
         showError(true);
         setLoading(false);
