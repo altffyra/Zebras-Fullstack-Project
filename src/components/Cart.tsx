@@ -58,6 +58,8 @@ const Cart = (props: CartProp) => {
     dispatch(cartActions.updateAmount(updatedItem));
   };
 
+
+
   let amountOfProducts: number = 0;
 
   props.cart.cartItems.forEach((item) => {
@@ -92,9 +94,17 @@ const Cart = (props: CartProp) => {
           ) : (
             ""
           )}
-          <button className="btn-checkout" onClick={handleCheckout}>
+
+          {tempOrder.length > 0 ? (
+            <button className="btn-checkout" onClick={handleCheckout}>
+              Uppdatera
+            </button>
+          ) : (
+            <button className="btn-checkout" onClick={handleCheckout}>
             Kassa
           </button>
+          )}
+          
         </div>
       </div>
     </section>

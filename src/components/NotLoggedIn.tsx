@@ -37,10 +37,10 @@ const NotLoggedIn = (props: Props) => {
   const dispatch = useDispatch();
 
   function loginGuest() {
-    dispatch(userActions.setGuest());
     if (tempOrder !== undefined && tempOrder.length > 0) {
       dispatch(userActions.setUser(tempOrder[0].user));
-    }
+    } 
+    dispatch(userActions.setGuest());
   }
 
   async function userLogin() {
@@ -133,11 +133,12 @@ const NotLoggedIn = (props: Props) => {
             >
               Logga in
             </button>
-            <button onClick={loginGuest} className="guest-btn">
-              Fortsätt som gäst
-            </button>
+
           </div>
         </form>
+        <button onClick={loginGuest} className="guest-btn">
+              Fortsätt som gäst
+            </button>
       </section>
       {showAlert}
     </div>

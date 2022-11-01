@@ -8,6 +8,7 @@
   left: 0;
   background-color: variables.$dropdownRed;
   width: 100vw;
+  max-height: 50vh;
   @include variables.flexContainer();
   align-items: center;
   z-index: 99999;
@@ -55,7 +56,6 @@
   .active-cart {
     width: 100%;
     @include variables.flexContainer();
-    max-height: 94vh;
     overflow-y: auto;
     z-index: 1000;
   }
@@ -125,18 +125,20 @@
 
 @media screen and (min-width: 786px) {
   .cart {
+
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
     left: 0;
     right: 0;
-    // text-align: center;
+
   }
 }
 
-@media screen and (min-width: 1800px) {
+@media screen and (min-width: 2000px) {
   .cart{
     margin-right:5%;
   max-width: 20%;
+  max-height: 88%;
   }
   }
