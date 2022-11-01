@@ -56,21 +56,21 @@ export const data: Schema = {
             "cartItems": [
               {
                 "name": "Vitlöksbröd",
-                "price": 99,
+                "price": 39,
                 "amount": 1
               },
               {
                 "name": "Marulksgryta",
-                "price": 280,
+                "price": 200,
                 "amount": 1
               },
               {
                 "name": "Krispig pankoblomkål",
-                "price": 349,
+                "price": 109,
                 "amount": 1
               }
             ],
-            "totalPrice": 728
+            "totalPrice": 348
           },
           "user": {
             "name": "Felix",
@@ -92,21 +92,21 @@ export const data: Schema = {
             "cartItems": [
               {
                 "name": "Toast Skagen",
-                "price": 225,
+                "price": 142,
                 "amount": 2
               },
               {
                 "name": "Krämig laxpasta",
-                "price": 349,
+                "price": 129,
                 "amount": 1
               },
               {
                 "name": "Hot fudge brownie",
-                "price": 120,
+                "price": 69,
                 "amount": 1
               }
             ],
-            "totalPrice": 919
+            "totalPrice": 482
           },
           "user": {
             "name": "Jens Andersson",
@@ -127,16 +127,16 @@ export const data: Schema = {
             "cartItems": [
               {
                 "name": "Grillad Harissa Kyckling",
-                "price": 399,
+                "price": 149,
                 "amount": 2
               },
               {
                 "name": "Kryddiga grillost-tacos",
-                "price": 289,
+                "price": 179,
                 "amount": 1
               }
             ],
-            "totalPrice": 1087
+            "totalPrice": 477
           },
           "user": {
             "name": "Pelle Jönsson",
@@ -157,21 +157,21 @@ export const data: Schema = {
             "cartItems": [
               {
                 "name": "Nudelwok med hoisin och broccoli",
-                "price": 199,
+                "price": 99,
                 "amount": 2
               },
               {
                 "name": "Glass med nötter",
-                "price": 199,
+                "price": 79,
                 "amount": 1
               },
               {
                 "name": "Lemon curd med mandelfrags",
-                "price": 599,
+                "price": 89,
                 "amount": 1
               }
             ],
-            "totalPrice": 1196
+            "totalPrice": 366
           },
           "user": {
             "name": "Julia",
@@ -192,11 +192,11 @@ export const data: Schema = {
             "cartItems": [
               {
                 "name": "Hot fudge brownie",
-                "price": 120,
+                "price": 69,
                 "amount": 4
               }
             ],
-            "totalPrice": 480
+            "totalPrice": 276
           },
           "user": {
             "name": "Maja Majasson",
@@ -218,154 +218,154 @@ export const data: Schema = {
           "name": "Vitlöksbröd",
           "desc": "Härligt krispiga baguetter med vitlökssmör och tomater",
           "allergies": "Laktos, Gluten",
-          "price": 99,
+          "price": 39,
           "type": "Förrätt"
         },
         {
           "name": "Entrecôte m. klyftpotatis",
           "desc": "Entrecôte stekt i smör och serverad med rödvinssås, klyftpotatis och grönsaker",
           "allergies": "Gluten, Laktos",
-          "price": 599,
+          "price": 139,
           "type": "Kött"
         },
         {
           "name": "Fiskpinnar och pulvermos",
           "desc": "Frysta fiskpinnar stekt i en stekpanna. Serveras tillsammans med högkvalité pulvermos och citron på burk",
           "allergies": "Fisk",
-          "price": 599,
+          "price": 109,
           "type": "Fisk"
         },
         {
           "name": "Nudelwok med hoisin och broccoli",
           "desc": "En fräsch vegowok med mycket grönsaker. Smaksättaren är hoisin, lime och sesamfrön. Rostad lök och solrosskott toppar det hela och binder ihop rätten på ett utsökt sätt",
           "allergies": "",
-          "price": 199,
+          "price": 99,
           "type": "Veg"
         },
         {
           "name": "Oxfilé med Pommes",
           "desc": "Saftig prime cut av oxe, Serveras med schalottenlökar, Rödvinsås och Pommes ",
           "allergies": " Ägg, Laktos, Gluten",
-          "price": 699,
+          "price": 199,
           "type": "Kött"
         },
         {
           "name": "Glass med nötter",
           "desc": "Krämig gräddglass med hackade hasselnötter och chokladsås",
           "allergies": "Laktos, Nötter",
-          "price": 199,
+          "price": 79,
           "type": "Efterrätt"
         },
         {
           "name": "Citronstekt torsk med sesambakade grönsaker och krämig aioli",
           "desc": "Finaste ryggfiléerna av torsk i syrlig och god citron/smörsås.",
           "allergies": "Gluten, Laktos, Fisk, Sesamfrön",
-          "price": 349,
+          "price": 139,
           "type": "Fisk"
         },
         {
           "name": "Affogato med rostade hasselnötter",
           "desc": "goda rostade hasselnötter med vaniljglass, extra stark kaffe och lite socker, perfekt efter huvudrätten!",
           "allergies": "Hasselnötter, Laktos",
-          "price": 599,
+          "price": 78,
           "type": "Efterrätt"
         },
         {
           "name": "Lemon curd med mandelfrags",
           "desc": "Varva lemon curd, vaniljkräm och mandelfras i höga glas för en läcker och vacker efterrätt. Toppas med hallon och garneras med mynta.",
           "allergies": "Mandel, Laktos",
-          "price": 599,
+          "price": 89,
           "type": "Efterrätt"
         },
         {
           "name": "Vaniljkräm med mango och passionsfrukt",
           "desc": "Rårörd vaniljkräm med kesella och vispgrädde. Mango, passionsfrukt och vaniljkräm i fina glas och servera direkt.",
           "allergies": "Laktos",
-          "price": 599,
+          "price": 68,
           "type": "Efterrätt"
         },
         {
           "name": "Grillad Harissa Kyckling",
           "desc": "Grillade kyckling sticks med en örtig harissa och fänkolsyoghurt",
           "allergies": "Laktos, Gluten",
-          "price": 399,
+          "price": 149,
           "type": "Fågel"
         },
         {
           "name": "Medelhavskyckling med tabbouleh",
           "desc": "Pannstekt medelhavskyckling med härlig tabbouleh och mild gräslöksdressing",
           "allergies": "Gluten, Laktos",
-          "price": 389,
+          "price": 209,
           "type": "Fågel"
         },
         {
           "name": "Chips med rom och citroncrème",
           "desc": "Lyxig förrätt med chips, och citroncrème toppas av rom från Skagerak",
           "allergies": "Laktos, Skaldjur",
-          "price": 215,
+          "price": 59,
           "type": "Förrätt"
         },
         {
           "name": "Krispig pankoblomkål",
           "desc": "Krispigt god pankoblomkål, serveras med vitlöksris och wokade grönsaker",
           "allergies": "Gluten",
-          "price": 349,
+          "price": 109,
           "type": "Veg"
         },
         {
           "name": "Ostbricka",
           "desc": "Fem av de finaste ostarna du kan tänka dig. Serveras med två olika marmelad.",
           "allergies": "Laktos",
-          "price": 199,
+          "price": 59,
           "type": "Förrätt"
         },
         {
           "name": "Toast Skagen",
           "desc": "Två skivor rostat bröd med handskalade räkor ,skagenröra och citrongarnish",
           "allergies": "Skaldjur, Gluten",
-          "price": 225,
+          "price": 142,
           "type": "Förrätt"
         },
         {
           "name": "Grynsallad med tomater och bönröra",
           "desc": "en tallrik som är både är en fröjd för ögat och för smaklökarna! En matig sallad gjord på matvete serveras här ihop med härliga smaker från fänkål och soltorkade tomater, som sedan binds ihop fint med den krämiga bönröran",
           "allergies": "",
-          "price": 199,
+          "price": 139,
           "type": "Veg"
         },
         {
           "name": "Krämig laxpasta",
           "desc": "En härlig pastarätt med lax, zucchini och dill. Mild och god.",
           "allergies": "Gluten, Laktos, Fisk",
-          "price": 349,
+          "price": 129,
           "type": "Fisk"
         },
         {
           "name": "Black & White",
           "desc": "Helstekt fläskfilé serveras med potatisgratäng, bearnaisesås och rödvinssky",
           "allergies": "Laktos, ägg",
-          "price": 250,
+          "price": 215,
           "type": "Kött"
         },
         {
           "name": "Marulksgryta",
           "desc": "Tillagas med grädde, räkor, rom och dill",
           "allergies": "Laktos, skaldjur",
-          "price": 280,
+          "price": 200,
           "type": "Fisk"
         },
         {
           "name": "Hot fudge brownie",
           "desc": "Nybakad brownie serveras med vaniljglass, valnötter och varm kolasås",
           "allergies": "Laktos, ägg, valnöt, gluten",
-          "price": 120,
+          "price": 69,
           "type": "Efterrätt"
         },
         {
           "name": "Kryddiga grillost-tacos",
           "desc": "Gyllene grillost i mjuka tortillas med stekta bönor och cajunmajonäs.",
           "allergies": "Gluten, Laktos",
-          "price": 289,
+          "price": 179,
           "type": "Veg"
         }
       ]

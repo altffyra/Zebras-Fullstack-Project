@@ -52,6 +52,13 @@
           position: absolute;
           top: 4em;
         }
+
+        .open-text {
+          font-family: variables.$headerFont;
+          position: absolute;
+          top: 7.5em;
+        }
+
       }
       .logo {
         animation: wiggle 1s linear infinite;
