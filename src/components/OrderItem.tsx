@@ -30,6 +30,10 @@ const OrderItem = (props: OrderItemProps) => {
     <section className="order-overlay">
       <div className="order-container">
         <h2>Order {order.id}</h2>
+        <div className="order-time">
+          <p>Order lagd : {order.orderPlaced}</p>
+          <p>Order ca. klar : {order.orderCompleted}</p>
+        </div>
         <div className="user-information">
           <p>Beställare</p>
           <p>Namn : {order.user.name}</p>
@@ -38,7 +42,7 @@ const OrderItem = (props: OrderItemProps) => {
         </div>
         <div className="divider"></div>
         <div className="order-information">
-          <p className="order-title">Order {order.id}</p>
+          <p className="order-title">Maträtter</p>
           {orderItem}
           <p>Totalt : {order.cart.totalPrice} kr</p>
         </div>

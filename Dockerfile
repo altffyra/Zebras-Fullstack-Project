@@ -4,14 +4,14 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm run build-backend
-
 RUN npm install
 
 COPY . .
 
 RUN npm run build
 
-EXPOSE 8080
+RUN npm run build-backend
 
-CMD ["npm", "start-backend"]
+EXPOSE 8123
+
+CMD ["npm","run", "start-backend"]

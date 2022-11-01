@@ -3,7 +3,7 @@ import { User, LoginCreds } from "../lowDb/dbinterface";
 import db, { findUser, createAccount, findAccount, updateUser, getUser } from "../lowDb/database.js";
 import { data as defaultData } from '../defaultData.js'
 import { isValidUser } from "../validators/validUser.js";
-import { uuid } from "uuidv4";
+import { uuid } from 'uuidv4';
 const app = express();
 app.use(express.json());
 const userRoute = express.Router();
