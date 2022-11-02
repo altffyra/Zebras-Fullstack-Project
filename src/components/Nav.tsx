@@ -41,6 +41,7 @@ const Nav = (props: NavProps) => {
   const handleLogout: () => void = () => {
     dispatch(userActions.logOut());
     setLoggedIn(false);
+    setMenuOpen(!menuOpen);
     localStorage.removeItem('accountId')
     if(location.pathname == '/Account') {
       navigate('/menu')      
@@ -70,25 +71,25 @@ const Nav = (props: NavProps) => {
       <nav className={menuOpen ? "nav open" : "nav"}>
         <ul className="link-container" >
           
-          <NavLink className="link" to="/">
+          <NavLink onClick={handleMenu} className="link" to="/">
             Hem
           </NavLink>
           <div className="divider"></div>
-          <NavLink className="link" to="/Menu">
+          <NavLink onClick={handleMenu} className="link" to="/Menu">
             Meny
           </NavLink>
           <div className="divider"></div>
           {loggedIn ? (
-            <NavLink className="link" to="/Account">
+            <NavLink onClick={handleMenu} className="link" to="/Account">
               Konto
             </NavLink>
           ) : (
-            <NavLink className="link" to="/Login">
+            <NavLink onClick={handleMenu} className="link" to="/Login">
               Logga in
             </NavLink>
           )}
           <div className="divider"></div>
-          <NavLink className="link" to="/Search">
+          <NavLink onClick={handleMenu} className="link" to="/Search">
             Sök order
           </NavLink>
           <div className="divider"></div>
