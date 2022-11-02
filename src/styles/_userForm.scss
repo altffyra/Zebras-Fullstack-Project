@@ -168,28 +168,28 @@
     margin-right: auto;
 
     .small__btn {
-      @include buttons.smallBtn($bg: variables.$fontLight);
+      @include buttons.smallBtn($bg: variables.$primaryBackground);
     }
 
     .userForm {
       .form__input {
-        background: variables.$fontLight;
+        background: variables.$primaryBackground;
 
         &:valid {
-          background-color: variables.$fontLight;
+          background-color: variables.$primaryBackground;
         }
         &:active {
-          background-color: variables.$fontLight;
+          background-color: variables.$primaryBackground;
         }
       }
 
       // for autofilled inputs
       .form__input:-webkit-autofill {
-        box-shadow: 0 0 0 50px variables.$fontLight inset;
+        box-shadow: 0 0 0 50px variables.$primaryBackground inset;
       }
 
       .form__input:-webkit-autofill:focus {
-        box-shadow: 0 0 0 50px variables.$fontLight inset;
+        box-shadow: 0 0 0 50px variables.$primaryBackground inset;
       }
     }
   }
