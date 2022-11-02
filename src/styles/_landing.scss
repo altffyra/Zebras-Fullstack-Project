@@ -38,6 +38,7 @@
 
 
     .logo-container {
+      margin-top: auto;
       z-index: 12;
       @include variables.flexContainer(row);
       gap: 1em;
@@ -53,11 +54,7 @@
           top: 4em;
         }
 
-        .open-text {
-          font-family: variables.$headerFont;
-          position: absolute;
-          top: 7.5em;
-        }
+  
 
       }
       .logo {
@@ -88,6 +85,15 @@
       }
 
     }
+    .open-text {
+      margin-top: 1em;
+      font-family: variables.$headerFont;
+      z-index: 100;
+      color: variables.$fontLight;
+      margin-bottom: auto;
+    }
+
+
     button {
       border: none;
       padding: 0.8em 2.5em;
