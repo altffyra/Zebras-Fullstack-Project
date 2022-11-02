@@ -120,10 +120,6 @@ const Search = () => {
             {searchedOrder.userComment ? <p>{searchedOrder?.userComment}</p> : '-'}
           </div>
 
-          <div className="comment">
-            <h3>Kommentar till kocken</h3>
-            {searchedOrder.adminComment ? <p>{searchedOrder?.adminComment}</p> : '-'}
-          </div>
           {!searchedOrder.locked ? (
             <button className="btn-change" onClick={changeOrder}>
               Ändra

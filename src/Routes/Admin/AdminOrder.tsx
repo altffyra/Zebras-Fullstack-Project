@@ -214,6 +214,8 @@ const AdminOrder = () => {
       {!order?.locked ? (
         <form className="order-form">
           <h1>Order {order?.id}</h1>
+          <p>Order lagd: {order?.orderPlaced}</p>
+          <p>Order ca klar: {order?.orderCompleted}</p>
           <div className="order-cart">
             <div className="headline-cart">
               <h3 className="flex-4">Maträtt</h3>
@@ -314,6 +316,8 @@ const AdminOrder = () => {
       ) : (
         <section className="locked-order">
           <h1>Order {order?.id}</h1>
+          <p>Order lagd: {order?.orderPlaced}</p>
+          <p>Order ca klar: {order?.orderCompleted}</p>
           <div className="order-cart">
             <div className="headline-cart">
               <h3 className="flex-4">Maträtt</h3>

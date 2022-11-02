@@ -44,7 +44,7 @@ async function getOrders(){
       const orderCopy = [...db.data.orders]
       orderCopy.forEach(order => {
             if(order.orderCompleted) {
-                  if(order.orderCompleted < started) {
+                  if(order.orderCompleted < dayjs().format('YYYY-MM-DD HH:mm')) {
                         order.locked = true
                   }
             }
@@ -81,7 +81,7 @@ async function updateOrder(updatedOrder: Order, id:number) {
             }
       }
 
-      updatedOrder.orderPlaced = started;      
+      updatedOrder.orderPlaced = dayjs().format('YYYY-MM-DD HH:mm');      
       db.data.orders[id] = updatedOrder;  
       await db.write()
       return true
@@ -229,7 +229,7 @@ export async function checkLock(orderId: string) {
 export async function createOrderInfo() {
       const randomNum: number = Math.ceil(Math.random() * 30)
       const orderInfo = {
-            started: started,
+            started: dayjs().format('YYYY-MM-DD HH:mm'),
             completed: dayjs().add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm'),
             id: uid()
       }

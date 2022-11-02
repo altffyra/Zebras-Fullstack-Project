@@ -50,10 +50,7 @@ const OrderItem = (props: OrderItemProps) => {
           <h3>Kundkommentar</h3>
           {order.userComment ? <p>{order?.userComment}</p> : '-'}
         </div>
-        <div className="comment">
-          <h3>Kommentar till kocken</h3>
-          {order.adminComment ? <p>{order?.adminComment}</p> : '-'}
-        </div>
+
         <div className="button-container">
           <button className="btn-close" onClick={props.showOrderOverlay}>
             Stäng
