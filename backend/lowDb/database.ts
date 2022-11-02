@@ -229,7 +229,6 @@ export async function checkLock(orderId: string) {
 // Function to check if CET or CEST. Render only goes by UTC
 const dateCheck: (date: Date) => number = (date) => {
       const dateNow = new Date(date.getFullYear()).getTimezoneOffset();
-      console.log(dateNow);
     
       return dateNow;
 }
@@ -239,14 +238,18 @@ export async function createOrderInfo() {
       const randomNum: number = Math.ceil(Math.random() * 30)
       const checkTimezone = dateCheck(date);
       let orderStarted: string = ''
+      let orderComplete: string = ''
       if(checkTimezone == -60) {
-            orderStarted = dayjs().format('YYYY-MM-DD HH:mm')
-      } else {
             orderStarted = dayjs().add(1, 'hours').format('YYYY-MM-DD HH:mm')
+            orderComplete = dayjs().add(randomNum, 'minutes').add(1, 'hours').format('YYYY-MM-DD HH:mm')
+            
+      } else {
+            orderStarted = dayjs().format('YYYY-MM-DD HH:mm')
+            orderComplete = dayjs().add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm')
       }
       const orderInfo = {
             started: orderStarted,
-            completed: dayjs().add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm'),
+            completed: orderComplete,
             id: uid()
       }
 

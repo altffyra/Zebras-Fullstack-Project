@@ -71,9 +71,7 @@ const LandingView = () => {
   function goToMenu() {
     navigate("/Menu");
   }
-  const date = new Date();
-  const dateNow = new Date(date.getFullYear()).getTimezoneOffset();
-  console.log(dateNow);
+
   return (
     <main className="landing" onScroll={()=>console.log("Scrolled")}>
       <Nav scrollTop={navCSS} />
