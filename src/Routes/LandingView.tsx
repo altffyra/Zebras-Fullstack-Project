@@ -12,6 +12,7 @@ import logoLight from "../assets/logoLight.svg";
 import chefCooking from "../assets/chef-cooking.jpg"
 import foodImg from "../assets/food.jpg"
 import ourGoal from "../assets/our-goal.jpg"
+import vector from '../assets/menu/white-vector.svg';
 
 const LandingView = () => {
   const navigate = useNavigate();
@@ -22,6 +23,14 @@ const LandingView = () => {
   const [navCSS, setNavCSS] = useState<boolean>(false)
   const setScroll = () => {
     setOffset(window.scrollY);
+  };
+
+  const handleLink: (id: string) => void = (id) => {
+    const elemendId: Element | null = document.querySelector(`#${id}`);
+    if (elemendId) {
+      const y = elemendId.getBoundingClientRect().top + window.pageYOffset - 90;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
   };
 
   useEffect(() => {
@@ -67,24 +76,32 @@ const LandingView = () => {
     <main className="landing" onScroll={()=>console.log("Scrolled")}>
       <Nav scrollTop={navCSS} />
       <section className="hero" >
-      <video className="video-container" ref={videoRef} muted playsInline autoPlay loop  >
+        <video className="video-container" ref={videoRef} muted playsInline autoPlay loop  >
             <source src={heroVideo} type="video/mp4"/> 
         </video>
         <div className="logo-container">
-          <h2>Rocksalt</h2>
+          <div className="logo-text">
+            <h2>Rocksalt</h2>
+            <p>take-away</p>
+            <p className="open-text">Öppet dygnet runt!</p>
+          </div>
           <img src={logoLight} alt="rocksalt logo" className="logo" />
         </div>
         <button onClick={goToMenu}>Meny</button>
+        <figure className="arrows"  onClick={() => handleLink("about-us")}>
+          <img src={vector} alt="" className="small-arrow"/>
+          <img src={vector} alt="" className="big-arrow"/>
+        </figure>
       </section>
       <section className="about-page">
-        <section className="about-us" >
-          <div className="border">
+        <section className="about-us">
+          <div className="border" id="about-us">
             <h3>Om oss</h3>
           </div>
           <p>
-            Rocksalt grundades av Christian Johnsson år 2022 med idén om att
-            personer ska kunna få god och vällagad restaurangmat utan besväret att
-            behöva sitta på en restaurang.
+            Rocksalt take-away grundades av John Christiansson, hösten 2021. Efter år av
+            pandemi föddes idén om att alla ska kunna få njuta av vällagad restaurangmat
+            utan att behöva sitta och trängas på en restaurang.
           </p>
         </section>
         <figure className="about-us-img" style={{ backgroundImage: `url(${chefCooking})`}}></figure>
@@ -104,12 +121,9 @@ const LandingView = () => {
         </section>
 
         <section className="our-goal">
-          <div className="border">
-            <h3>Vårt mål</h3>
-          </div>
+          <p className="quote">"Rocksalt har den bästa take-away maten i hela Sverige!"</p>
           <p>
-            Vår grundare Christian Johnsson har som mål att alla i hela världen
-            ska få äta bra mat, även om man inte kan ta sig till en restaurang.
+           - New York Times, 2022
           </p>
         </section>
         <figure className="our-goal-img" style={{ backgroundImage: `url(${ourGoal})`}}></figure>

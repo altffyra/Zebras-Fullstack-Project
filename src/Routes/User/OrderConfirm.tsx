@@ -40,6 +40,7 @@ const OrderConfirm = () => {
         <h1>Orderbekräftelse</h1>
       </div>
       <div className="time-container">
+        <p className="open-text">Vi har öppet dygnet runt !</p>
         <p>Maten klar att hämtas : Kl. {orderDone}</p>
       </div>
 

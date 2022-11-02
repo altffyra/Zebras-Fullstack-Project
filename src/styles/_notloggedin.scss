@@ -6,6 +6,8 @@
   margin: 0 auto;
   width: 100%;
   margin:2em 0;
+  display:flex;
+  justify-content: center;
   .flex-container {
     .form {
       @include variables.flexContainer();
@@ -84,11 +86,14 @@
         width: 12em;
       }
 
-      .guest-btn {
-        @include buttons.bigBtn($bg: transparent);
-        color: variables.$fontDark;
-        border: 1px solid black;
-      }
+
     }
+  }
+  .guest-btn {
+    @include buttons.bigBtn($bg: transparent);
+    color: variables.$fontDark;
+    border: 1px solid black;
+    margin:1em;
+
   }
 }

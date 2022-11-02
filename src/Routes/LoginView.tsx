@@ -1,9 +1,9 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { actions as userActions } from "../features/userReducer";
+import { actions as cartActions } from "../features/cartReducer";
 import { useDispatch } from "react-redux";
 import "../styles/_userForm.scss";
-import logo from "../assets/logo.svg";
 import fork from '../assets/fork.svg'
 import Alert from "../components/Alert";
 import "../styles/_alert.scss";
@@ -64,6 +64,7 @@ const LoginView = () => {
       dispatch(userActions.setUser(data.user));
       localStorage.setItem("accountId", data.user.accountId);
       if (data.user.admin) {
+        dispatch(cartActions.clearCart())
         navigate("/AdminPage");
       } else {
         navigate("/menu");
