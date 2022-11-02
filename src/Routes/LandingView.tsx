@@ -25,6 +25,14 @@ const LandingView = () => {
     setOffset(window.scrollY);
   };
 
+  const handleLink: (id: string) => void = (id) => {
+    const elemendId: Element | null = document.querySelector(`#${id}`);
+    if (elemendId) {
+      const y = elemendId.getBoundingClientRect().top + window.pageYOffset - 90;
+      window.scrollTo({ top: y, behavior: "smooth" });
+    }
+  };
+
   useEffect(() => {
     const navElem: HTMLElement | null = document.querySelector('header');
     const scrollHeight = window.pageYOffset;
@@ -80,14 +88,14 @@ const LandingView = () => {
           <img src={logoLight} alt="rocksalt logo" className="logo" />
         </div>
         <button onClick={goToMenu}>Meny</button>
-        <figure className="arrows">
+        <figure className="arrows"  onClick={() => handleLink("about-us")}>
           <img src={vector} alt="" className="small-arrow"/>
           <img src={vector} alt="" className="big-arrow"/>
         </figure>
       </section>
       <section className="about-page">
-        <section className="about-us" >
-          <div className="border">
+        <section className="about-us">
+          <div className="border" id="about-us">
             <h3>Om oss</h3>
           </div>
           <p>
