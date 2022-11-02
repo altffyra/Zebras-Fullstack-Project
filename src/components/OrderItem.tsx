@@ -31,20 +31,20 @@ const OrderItem = (props: OrderItemProps) => {
       <div className="order-container">
         <h2>Order {order.id}</h2>
         <div className="order-time">
-          <p>Order lagd : {order.orderPlaced}</p>
-          <p>Order ca. klar : {order.orderCompleted}</p>
+          <p>Order lagd: {order.orderPlaced}</p>
+          <p>Order klar cirka: {order.orderCompleted}</p>
         </div>
         <div className="user-info">
           <p>Beställare</p>
-          <p>Namn : {order.user.name}</p>
-          <p>Email : {order.user.email}</p>
-          <p>Tel.nr : {order.user.phoneNumber}</p>
+          <p>Namn: {order.user.name}</p>
+          <p>E-mail: {order.user.email}</p>
+          <p>Tel.nr: {order.user.phoneNumber}</p>
         </div>
         <div className="divider"></div>
         <div className="order-information">
           <p className="order-title">Maträtter</p>
           {orderItem}
-          <p>Totalt : {order.cart.totalPrice} kr</p>
+          <p>Totalt: {order.cart.totalPrice} kr</p>
         </div>
         <div className="comment">
           <h3>Kundkommentar</h3>

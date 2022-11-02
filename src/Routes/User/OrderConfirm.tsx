@@ -13,8 +13,12 @@ const OrderConfirm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+
   useEffect(() => {
     dispatch(cartActions.clearCart());
+    const root:any = document.querySelector('#root');
+    root.scrollIntoView({
+    behavior: 'instant'})
   }, []);
 
   const confirmedOrder: Order = useSelector(
@@ -40,16 +44,16 @@ const OrderConfirm = () => {
         <h1>Orderbekräftelse</h1>
       </div>
       <div className="time-container">
-        <p className="open-text">Vi har öppet dygnet runt !</p>
-        <p>Maten klar att hämtas : Kl. {orderDone}</p>
+        <p className="open-text">Vi har öppet dygnet runt!</p>
+        <p>Maten klar att hämtas: Kl. {orderDone}</p>
       </div>
 
       <div className="order-user">
         <p className="user-headline">Beställare</p>
         <div className="user">
-          <p>Namn : {confirmedOrder.user.name}</p>
-          <p>Email : {confirmedOrder.user.email}</p>
-          <p>Tel.nr : {confirmedOrder.user.phoneNumber}</p>
+          <p>Namn: {confirmedOrder.user.name}</p>
+          <p>E-mail: {confirmedOrder.user.email}</p>
+          <p>Tel.nr: {confirmedOrder.user.phoneNumber}</p>
         </div>
       </div>
 
@@ -70,7 +74,7 @@ const OrderConfirm = () => {
         </div>
       </div>
       <p className="change-order">
-        Blev det något tokigt? <span onClick={changeOrder}>Tryck här!</span>
+        Blev något fel? <span onClick={changeOrder}>Tryck här för att ändra din order!</span>
       </p>
       {confirmedOrder.userComment ? (
         <div className="order-comment">
