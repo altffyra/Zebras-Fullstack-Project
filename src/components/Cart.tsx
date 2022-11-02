@@ -80,7 +80,7 @@ const Cart = (props: CartProp) => {
       <div className={cartCss}>
         <p className="remove-all" onClick={handleRemoveAll}>Töm varukorg</p>
         {cartItemEl}
-        <p className="total-price">Totalt : {props.cart.totalPrice} kr</p>
+        <p className="total-price">Totalt: {props.cart.totalPrice} kr</p>
         <div className="button-container">
           {tempOrder.length > 0 ? (
             <button className="btn-cancel" onClick={handleCancelUpdate}>

@@ -155,7 +155,7 @@ const SignUp = () => {
             }}
           />
           <label className="form__label form__label--info" htmlFor="email">
-            Email
+            E-mail
           </label>
         </div>
         <div>
