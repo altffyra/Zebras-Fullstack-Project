@@ -237,8 +237,8 @@ export async function createOrderInfo() {
       const randomNum: number = Math.ceil(Math.random() * 30)
       
       const orderInfo = {
-            started: dayjs().tz(timeZone).tz("America/Toronto").format('YYYY-MM-DD HH:mm'),
-            completed: dayjs().tz(timeZone).tz("America/Toronto").add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm'),
+            started: dayjs().tz(timeZone).tz("Europe/Stockholm").format('YYYY-MM-DD HH:mm'),
+            completed: dayjs().tz(timeZone).tz("Europe/Stockholm").add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm'),
             id: uid()
       }
 
