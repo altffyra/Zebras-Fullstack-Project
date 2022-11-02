@@ -3,16 +3,25 @@ import { Low, JSONFile } from 'lowdb';
 import { fileURLToPath } from 'url';
 import { User, Schema, Order, LoginCreds, ShortUniqueIdOptions } from './dbinterface';
 import { data as defaultData } from '../defaultData.js';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone'
+
 import dayjs from 'dayjs';
+import { timeStamp } from 'console';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+const tz = 'Europe/Berlin'
+const dayjsLocal = dayjs(timeStamp)
+const dayjsEurope = dayjsLocal.tz(tz, true);
+const timeFormat = dayjs().format('YYYY-MM-DD HH:mm')
 
 import ShortUniqueId from 'short-unique-id';
-
 
 const DEFAULT_OPTIONS: ShortUniqueIdOptions = {
       dictionary: 'alpha_upper',
       length: 10,
-    };
-
+};
 const uid = new ShortUniqueId(DEFAULT_OPTIONS);
 
 export const started = dayjs().format('YYYY-MM-DD HH:mm');
