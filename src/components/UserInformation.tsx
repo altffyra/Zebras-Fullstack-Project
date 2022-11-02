@@ -216,6 +216,7 @@ const UserInformation = (props: UserInformationProps) => {
               type="text"
               name="username"
               id="username"
+              required
               defaultValue={props.user.name}
               onChange={(e) => handleName(e)}
             />
@@ -226,6 +227,7 @@ const UserInformation = (props: UserInformationProps) => {
               type="email"
               name="email"
               id="email"
+              required
               defaultValue={props.user.email}
               onChange={(e) => handleEmail(e)}
             />
@@ -236,6 +238,7 @@ const UserInformation = (props: UserInformationProps) => {
               type="text"
               name="phonenum"
               id="phonenum"
+              required
               defaultValue={props.user.phoneNumber}
               onChange={(e) => handlePhone(e)}
             />

@@ -194,7 +194,7 @@ type errorObj = {
     user.accountId == "" ? (
       <NotLoggedIn setUser={setUser} />
     ) : (
-      <form className="LoggedIn" onSubmit={updateOrder}>
+      <form className="LoggedIn" onSubmit={orderCheck ? updateOrder : sendOrder}>
         <div className="Account-info">
           <div className="Account-top">
             <p className="Account-top-p">Mina uppgifter</p>
@@ -203,6 +203,7 @@ type errorObj = {
             <p className="User-info">
               Namn:{" "}
               <input
+                type='text'
                 name="name"
                 value={userCredentials.name}
                 required
@@ -216,6 +217,7 @@ type errorObj = {
                 name="email"
                 value={userCredentials.email}
                 required
+                type='email'
                 onChange={(e) => changeCredentials(e)}
               ></input>
             </p>
@@ -252,7 +254,7 @@ type errorObj = {
               Updatera{" "}
             </button>
           ) : (
-            <button type="submit" onClick={sendOrder} className="order-btn">
+            <button type="submit" className="order-btn">
               Beställ{" "}
             </button>
           )}
