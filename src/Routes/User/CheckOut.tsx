@@ -48,6 +48,9 @@ const CheckOut = () => {
 
   const orderCheck: Boolean = tempOrder.length > 0 ? true : false;
   useEffect(() => {
+    const root:any = document.querySelector('#root');
+    root.scrollIntoView({
+    behavior: 'instant'})
     if (orderCheck) {
       setUser(tempOrder[0].user);
       if (tempOrder[0].userComment) {
@@ -275,7 +278,7 @@ type errorObj = {
         </section>
 
         <section className="current-order">
-          <p className="order-top"> Order</p>
+          <p className="order-top">Order</p>
           {cartItemEl}
           <section className="total-wrapper">
             <p className="total">Totalt:</p>{" "}

@@ -11,6 +11,9 @@ import { RootState } from "../store";
 
 type CartProp = {
   cart: CartProps;
+  setActive: any;
+  handleCart: () => void;
+  active: boolean;
 };
 
 type UpdatedItemProps = {
@@ -21,22 +24,20 @@ type UpdatedItemProps = {
 const Cart = (props: CartProp) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [active, setActive] = useState<boolean>(false);
+
 
   const tempOrder: Order[] = useSelector((state: RootState) => state.tempOrder);
 
-  const handleCart: () => void = () => {
-    setActive(!active);
-  };
+
 
   useEffect(() => {
     if (props.cart.cartItems.length == 0) {
-      setActive(false);
+      props.setActive(false);
     }
   }, [props.cart.cartItems.length]);
 
-  const activeCss: string = active ? "active" : "";
-  const cartCss: string = active ? "active-cart" : "closed-cart";
+  const activeCss: string = props.active ? "active" : "";
+  const cartCss: string = props.active ? "active-cart" : "closed-cart";
 
   const handleCheckout: () => void = () => {
     navigate("/checkout");
@@ -65,9 +66,9 @@ const Cart = (props: CartProp) => {
 
   return (
     <section className="cart">
-      <div className="cart-dropdown" onClick={handleCart}>
+      <div className="cart-dropdown" onClick={props.handleCart}>
         <img src={dropDownLight} className={activeCss} alt="drop down icon" />
-        {props.cart.cartItems.length > 0 && !active ? (
+        {props.cart.cartItems.length > 0 && !props.active ? (
           <div className="cart-headline">
             <p>{amountOfProducts} produkter</p>
             <p>{props.cart.totalPrice} kr</p>
@@ -79,7 +80,7 @@ const Cart = (props: CartProp) => {
       <div className={cartCss}>
         <p className="remove-all" onClick={handleRemoveAll}>Töm varukorg</p>
         {cartItemEl}
-        <p className="total-price">Totalt : {props.cart.totalPrice} kr</p>
+        <p className="total-price">Totalt: {props.cart.totalPrice} kr</p>
         <div className="button-container">
           {tempOrder.length > 0 ? (
             <button className="btn-cancel" onClick={handleCancelUpdate}>

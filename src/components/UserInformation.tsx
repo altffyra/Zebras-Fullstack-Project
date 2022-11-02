@@ -188,7 +188,7 @@ const UserInformation = (props: UserInformationProps) => {
             <p>{props.user.name}</p>
           </div>
           <div className="user-info">
-            <p>Email: </p>
+            <p>E-mail: </p>
             <p>{props.user.email}</p>
           </div>
           <div className="user-info">
@@ -222,7 +222,7 @@ const UserInformation = (props: UserInformationProps) => {
             />
           </div>
           <div className="user-info">
-            <label htmlFor="email">Email: </label>
+            <label htmlFor="email">E-mail: </label>
             <input
               type="email"
               name="email"
