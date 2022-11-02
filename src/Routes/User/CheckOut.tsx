@@ -194,7 +194,7 @@ type errorObj = {
     user.accountId == "" ? (
       <NotLoggedIn setUser={setUser} />
     ) : (
-      <form className="LoggedIn">
+      <form className="LoggedIn" onSubmit={updateOrder}>
         <div className="Account-info">
           <div className="Account-top">
             <p className="Account-top-p">Mina uppgifter</p>
@@ -248,7 +248,7 @@ type errorObj = {
             Tillbaka{" "}
           </button>
           {orderCheck ? (
-            <button onClick={updateOrder} className="order-btn">
+            <button type="submit" className="order-btn">
               Updatera{" "}
             </button>
           ) : (

@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { actions as userActions } from "../features/userReducer";
+import { actions as cartActions } from "../features/cartReducer";
 import { useDispatch } from "react-redux";
 import "../styles/_userForm.scss";
 import fork from '../assets/fork.svg'
@@ -63,6 +64,7 @@ const LoginView = () => {
       dispatch(userActions.setUser(data.user));
       localStorage.setItem("accountId", data.user.accountId);
       if (data.user.admin) {
+        dispatch(cartActions.clearCart())
         navigate("/AdminPage");
       } else {
         navigate("/menu");
@@ -102,7 +104,7 @@ const LoginView = () => {
         <h1>Rocksalt</h1>
         <img src={fork} alt="logo" className="logo" />
       </figure>
-      <form className="userForm">
+      <form className="userForm" onSubmit={(e)=>{handleSubmit(e)}}>
         <div>
           <input
             className="form__input"
@@ -147,9 +149,7 @@ const LoginView = () => {
         <div>
           <button
             className="big__btn login__btn"
-            onClick={(e) => {
-              handleSubmit(e);
-            }}
+            type="submit"
           >
             Logga in
           </button>

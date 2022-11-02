@@ -112,7 +112,7 @@ const SignUp = () => {
         <h1>Rocksalt</h1>
         <img src={fork} alt="logo" className="logo" />
       </figure>
-      <form className="userForm">
+      <form className="userForm" onSubmit={(e)=>{handleSubmit(e)}}>
         <div>
           <input
             className="form__input"
@@ -175,9 +175,7 @@ const SignUp = () => {
         </div>
         <button
           className="big__btn signup__btn"
-          onClick={(e) => {
-            handleSubmit(e);
-          }}
+          type="submit"
         >
           Skapa konto
         </button>

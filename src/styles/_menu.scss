@@ -71,11 +71,9 @@
 
   .menu-item {
     @include variables.flexContainer(row);
-    width: 80%;
-    margin: 1em auto 2em auto;
     border-bottom: 0.1em solid #050505;
     box-shadow: 0 .15em 0 0 rgb(0 0 0 / 15%);
-
+    margin: 1em 0.5em 1em 0.5em;
     .menu-item--bold {
       font-weight: 500;
     }
@@ -152,7 +150,7 @@
     }
 
     .menu-item--add {
-      
+      padding-left: 1em;
       cursor: pointer;
       font-size: 2em;
       font-weight: 500;
@@ -211,6 +209,7 @@
     .menu-header--container {
       .menu-item {
         width: 55%;
+        margin: 1em auto 2em auto;
       }
     }
   }

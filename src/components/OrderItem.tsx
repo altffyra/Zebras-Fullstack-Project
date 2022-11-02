@@ -48,7 +48,7 @@ const OrderItem = (props: OrderItemProps) => {
         </div>
         <div className="comment">
           <h3>Kundkommentar</h3>
-          {order.adminComment ? <p>{order?.adminComment}</p> : '-'}
+          {order.userComment ? <p>{order?.userComment}</p> : '-'}
         </div>
         <div className="comment">
           <h3>Kommentar till kocken</h3>
