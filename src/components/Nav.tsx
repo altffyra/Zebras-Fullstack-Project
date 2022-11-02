@@ -13,6 +13,9 @@ import { CartProps } from "../models/types";
 
 type NavProps = {
   scrollTop?: boolean;
+  setActive: any;
+  handleCart: () => void;
+  active: boolean;
 }
 
 const Nav = (props: NavProps) => {
@@ -46,6 +49,7 @@ const Nav = (props: NavProps) => {
 
   const handleCart: () => void = () => {
     navigate('/menu')
+    props.setActive(!props.active)
   }
 
   let amountOfProducts: number = 0;

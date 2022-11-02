@@ -17,6 +17,11 @@ import { useDraggable } from "react-use-draggable-scroll";
 const Menu = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(false);
+  const [active, setActive] = useState<boolean>(false);
+
+  const handleCart: () => void = () => {
+    setActive(!active);
+  };
 
   useEffect(() => {
     const root:any = document.querySelector('#root');
@@ -62,7 +67,7 @@ const Menu = () => {
 
   return (
     <div className="menu-wrapper">
-      <Nav / >
+      <Nav setActive={setActive} handleCart={handleCart} active={active} />
       {loading ? <div className="loading"></div> : ""}
       <section
         className="menu-header"
@@ -93,7 +98,7 @@ ref={ref}>
       <MenuTopic topic={"Vegetariskt"} foodImg={veg} menuArray={vegArr} />
       <MenuTopic topic={"Efterrätt"} foodImg={dessert} menuArray={desertArr} />
 
-      {cart.cartItems.length > 0 ? <Cart cart={cart} /> : ""}
+      {cart.cartItems.length > 0 ? <Cart cart={cart} setActive={setActive} handleCart={handleCart} active={active}/> : ""}
     </div>
   );
 };
