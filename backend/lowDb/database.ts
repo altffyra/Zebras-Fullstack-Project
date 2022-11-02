@@ -4,7 +4,14 @@ import { fileURLToPath } from 'url';
 import { User, Schema, Order, LoginCreds, ShortUniqueIdOptions } from './dbinterface';
 import { data as defaultData } from '../defaultData.js';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc.js'
+import tz from 'dayjs/plugin/timezone.js'
 
+dayjs.extend(utc)
+dayjs.extend(tz)
+
+const timeZone = dayjs.tz.guess()
+dayjs.utc().tz(timeZone).tz("America/Toronto").local()
 import ShortUniqueId from 'short-unique-id';
 
 
@@ -226,30 +233,12 @@ export async function checkLock(orderId: string) {
       return foundOrder[0];
 }
 
-// Function to check if CET or CEST. Render only goes by UTC
-const dateCheck: (date: Date) => number = (date) => {
-      const dateNow = new Date(date.getFullYear()).getTimezoneOffset();
-    
-      return dateNow;
-}
-
 export async function createOrderInfo() {
-      const date = new Date()
       const randomNum: number = Math.ceil(Math.random() * 30)
-      const checkTimezone = dateCheck(date);
-      let orderStarted: string = ''
-      let orderComplete: string = ''
-      if(checkTimezone == -60) {
-            orderStarted = dayjs().add(1, 'hours').format('YYYY-MM-DD HH:mm')
-            orderComplete = dayjs().add(randomNum, 'minutes').add(1, 'hours').format('YYYY-MM-DD HH:mm')
-            
-      } else {
-            orderStarted = dayjs().format('YYYY-MM-DD HH:mm')
-            orderComplete = dayjs().add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm')
-      }
+      
       const orderInfo = {
-            started: orderStarted,
-            completed: orderComplete,
+            started: dayjs().tz(timeZone).tz("America/Toronto").format('YYYY-MM-DD HH:mm'),
+            completed: dayjs().tz(timeZone).tz("America/Toronto").add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm'),
             id: uid()
       }
 
