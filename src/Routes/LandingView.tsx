@@ -83,7 +83,7 @@ const LandingView = () => {
           <div className="logo-text">
             <h2>Rocksalt</h2>
             <p>take-away</p>
-            <p className="open-text">Öppet dygnet runt !</p>
+            <p className="open-text">Öppet dygnet runt!</p>
           </div>
           <img src={logoLight} alt="rocksalt logo" className="logo" />
         </div>
