@@ -90,10 +90,9 @@
       background-position: center;
       cursor: pointer;
       transition: all 400ms;
-      transform: rotateZ(0);
       &:hover {
         scale: 105%;
-        transform: rotateZ(90deg);
+        filter: sepia(60%);
       }
     }
 
