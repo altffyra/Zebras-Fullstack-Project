@@ -62,7 +62,7 @@ const Menu = () => {
 
   return (
     <div className="menu-wrapper">
-      <Nav / >
+      <Nav />
       {loading ? <div className="loading"></div> : ""}
       <section
         className="menu-header"

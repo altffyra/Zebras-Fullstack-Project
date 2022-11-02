@@ -226,10 +226,24 @@ export async function checkLock(orderId: string) {
       return foundOrder[0];
 }
 
+const dateCheck: (date: Date) => number = (date) => {
+      const dateNow = new Date(date.getFullYear()).getTimezoneOffset();
+    
+      return dateNow;
+}
+
 export async function createOrderInfo() {
+      const date = new Date()
       const randomNum: number = Math.ceil(Math.random() * 30)
+      const checkTimezone = dateCheck(date);
+      let orderStarted: string = ''
+      if(checkTimezone == -60) {
+            orderStarted = dayjs().format('YYYY-MM-DD HH:mm')
+      } else {
+            orderStarted = dayjs().add(1, 'hours').format('YYYY-MM-DD HH:mm')
+      }
       const orderInfo = {
-            started: dayjs().format('YYYY-MM-DD HH:mm'),
+            started: orderStarted,
             completed: dayjs().add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm'),
             id: uid()
       }
