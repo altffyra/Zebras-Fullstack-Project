@@ -3,18 +3,19 @@ import { Low, JSONFile } from 'lowdb';
 import { fileURLToPath } from 'url';
 import { User, Schema, Order, LoginCreds, ShortUniqueIdOptions } from './dbinterface';
 import { data as defaultData } from '../defaultData.js';
-import utc from 'dayjs/plugin/utc';
-import timezone from 'dayjs/plugin/timezone'
+import utc from 'dayjs/plugin/utc.js';
+import timezone from 'dayjs/plugin/timezone.js'
+
 
 import dayjs from 'dayjs';
 import { timeStamp } from 'console';
-
+import timestamp from 'dayjs'
 dayjs.extend(utc);
 dayjs.extend(timezone);
-const tz = 'Europe/Berlin'
-const dayjsLocal = dayjs(timeStamp)
-const dayjsEurope = dayjsLocal.tz(tz, true);
-const timeFormat = dayjs().format('YYYY-MM-DD HH:mm')
+
+const defaultUtc = dayjs().utc().local().format('YYYY-MM-DD HH:mm')
+
+
 
 import ShortUniqueId from 'short-unique-id';
 
@@ -238,10 +239,11 @@ export async function checkLock(orderId: string) {
 export async function createOrderInfo() {
       const randomNum: number = Math.ceil(Math.random() * 30)
       const orderInfo = {
-            started: started,
-            completed: dayjs().add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm'),
+            started: defaultUtc, //started,
+            completed: dayjs().utc().local().add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm'),
             id: uid()
       }
+      console.log(orderInfo)
 
       return orderInfo
 }
