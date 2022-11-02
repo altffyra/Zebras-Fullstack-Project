@@ -233,7 +233,7 @@ const UserInformation = (props: UserInformationProps) => {
           <div className="user-info">
             <label htmlFor="username">Tel.nr: </label>
             <input
-              type="number"
+              type="text"
               name="phonenum"
               id="phonenum"
               defaultValue={props.user.phoneNumber}

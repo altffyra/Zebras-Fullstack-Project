@@ -5,12 +5,14 @@ import veg from "../../assets/menu/veg.svg";
 import dessert from "../../assets/menu/dessert.svg";
 import MenuTopic from "../../components/MenuTopic";
 import Cart from "../../components/Cart";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
 import { CartProps, MenuItems } from "../../models/types";
 import { actions as menuActions } from "../../features/menuReducer";
 import Nav from "../../components/Nav";
+import { useDraggable } from "react-use-draggable-scroll"; 
+
 
 const Menu = () => {
   const dispatch = useDispatch();
@@ -50,9 +52,17 @@ const Menu = () => {
     }
   };
 
+
+  const ref =
+  useRef<HTMLDivElement>() as React.MutableRefObject<HTMLInputElement>;
+  const { events } = useDraggable(ref, {
+    activeMouseButton: "Left"
+});
+
+
   return (
     <div className="menu-wrapper">
-      <Nav />
+      <Nav / >
       {loading ? <div className="loading"></div> : ""}
       <section
         className="menu-header"
@@ -60,7 +70,8 @@ const Menu = () => {
       >
         <h1>Meny</h1>
       </section>
-      <section className="menu-header--category">
+      <section className="menu-header--category" {...events}
+ref={ref}>
         <h2 onClick={() => handleLink("entree")}>Förrätter</h2>
         <h2 onClick={() => handleLink("meat")}>Kött</h2>
         <h2 onClick={() => handleLink("fish")}>Fisk</h2>

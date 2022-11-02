@@ -7,6 +7,8 @@ header {
   position: fixed;
   top: 0;
   left: 0;
+  gap: 2em;
+  padding-right: 2em;
   width: 100%;
   min-height: 10vh;
   background-color: variables.$primaryBackground;
@@ -15,6 +17,7 @@ header {
   color: variables.$fontLight;
   transition: all 400ms;
 
+  
   .logo-container {
     @include variables.flexContainer(row);
     .nav-headline {
@@ -26,11 +29,35 @@ header {
     .logo {
       max-width: 10vw;
       max-height: 5vh;
-      margin-right: 2em;
       cursor: pointer;
     }
   }
+  
+  .cart-icon {
+    position: relative;
+    cursor: pointer;
+    img {
+      width: 1.5em;
+      height: 1.5em;
+    }
+    .cart-amount {
 
+      position: absolute;
+      bottom: -1em;
+      left: -0.5em;
+      border-radius: 50%;
+      padding: 0.5em;
+      background-color: variables.$dropdownRed;
+      transition: all 400ms;
+      p {
+        font-size: 0.6em;
+        pointer-events: none;
+      }
+      &:hover {
+        background-color: variables.$lockColor;
+      }
+    }
+  }
   .menu-btn {
     display: block;
     border: none;
@@ -120,6 +147,7 @@ header {
       
     }
   }
+
   .logo-container {
     .nav-headline {
       display: none;
@@ -133,7 +161,12 @@ header {
 @media screen and (min-width: 786px) {
   header {
     .logo-container {
+      order: 2;
       gap: 1em;
+    }
+
+    .cart-icon {
+      order: 1;
     }
     .menu-btn {
       display: none;

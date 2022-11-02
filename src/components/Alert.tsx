@@ -1,4 +1,3 @@
-
 type Props = {
   errorTitle: string | null;
   errorMessage: string | null;

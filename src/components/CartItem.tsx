@@ -1,16 +1,42 @@
 import { CartItems } from "../models/types";
 import { ChangeEvent } from "react";
+import removeItem from '../assets/remove-item.svg';
+import { useDispatch } from "react-redux";
+import { actions as cartActions } from "../features/cartReducer";
 
 type CartItemsProps = {
   item: CartItems;
-  handleAmount: (e: ChangeEvent<HTMLSelectElement>, itemName: string) => void;
   locked?: boolean;
 };
 
-const CartItem = (props: CartItemsProps) => {
-  const itemPrice: number = props.item.price * props.item.amount;
+type UpdatedItemProps = {
+  name: string;
+  amount: number;
+};
 
+const CartItem = (props: CartItemsProps) => {
+  const dispatch = useDispatch();
+  const itemPrice: number = props.item.price * props.item.amount;
   const dotsCss: string = props.locked ? "cart-dots" : "cart-item";
+
+  const handleAmount: (
+    e: ChangeEvent<HTMLSelectElement>,
+    itemName: string
+  ) => void = (e, itemName) => {
+    const updatedItem: UpdatedItemProps = {
+      name: itemName,
+      amount: parseInt(e.target.value),
+    };
+    dispatch(cartActions.updateAmount(updatedItem));
+  };
+
+  const handleRemoveItem: () => void = () => {
+    const updatedItem: UpdatedItemProps = {
+      name: props.item.name,
+      amount: 0,
+    };
+    dispatch(cartActions.updateAmount(updatedItem));
+  }
   return (
     <section className={dotsCss}>
       <p className="item-name">{props.item.name} {props.locked ? `x ${props.item.amount}` : ''}</p>
@@ -20,7 +46,7 @@ const CartItem = (props: CartItemsProps) => {
           name="amount"
           id=""
           value={props.item.amount}
-          onChange={(e) => props.handleAmount(e, props.item.name)}
+          onChange={(e) => handleAmount(e, props.item.name)}
         >
           <option value="0">0</option>
           <option value="1">1</option>
@@ -37,7 +63,7 @@ const CartItem = (props: CartItemsProps) => {
       ) : (
         ""
       )}
-
+      <div onClick={handleRemoveItem} className="remove-item" style={{backgroundImage: `url(${removeItem})`}}></div>
       <p className="item-price">{itemPrice} kr</p>
     </section>
   );

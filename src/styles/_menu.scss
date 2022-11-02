@@ -70,11 +70,15 @@
   }
 
   .menu-item {
-    display: flex;
-    flex-direction: column;
+    @include variables.flexContainer(row);
     width: 80%;
     margin: 1em auto 2em auto;
     border-bottom: 0.1em solid #050505;
+    box-shadow: 0 .15em 0 0 rgb(0 0 0 / 15%);
+
+    .menu-item--bold {
+      font-weight: 500;
+    }
 
     p {
       font-family: "Roboto";
@@ -83,23 +87,27 @@
 
     .tab-container {
       .desc {
+        max-width: 90%;
+        margin-bottom: 1em;
         font-size: 0.9em;
       }
       .allergies {
-      
+        margin-bottom: 1.2em;
         font-size: 0.7em;
       }
+    }
+
+    .menu-item--right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 0 2em auto;
     }
 
     .menu-item--info {
       display: flex;
       position: relative;
 
-      .menu-item--right {
-        display: flex;
-        align-items: center;
-        margin: 0 0 0 auto;
-      }
 
       .menu-item--left {
         .menu-item--flex {
@@ -130,7 +138,7 @@
     .menu-item--vector {
       width: 100%;
       bottom: 0;
-      transform: translateY(0.7em);
+      //transform: translateY(0.7em);
 
       .menu-item--img {
         display: flex;
@@ -144,9 +152,19 @@
     }
 
     .menu-item--add {
+      
       cursor: pointer;
-      font-size: 1.6em;
+      font-size: 2em;
       font-weight: 500;
+      text-shadow: 0 .06em rgb(0 0 0 / 25%);
+
+      &:hover {
+        color: variables.$yellowSenap;
+      }
+
+      &:active {
+        scale: 125%;
+      }
     }
   }
 }
@@ -197,3 +215,6 @@
     }
   }
 }
+
+
+

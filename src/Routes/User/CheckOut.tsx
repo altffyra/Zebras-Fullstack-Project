@@ -2,7 +2,6 @@ import React, {
   ChangeEvent,
   useState,
   useEffect,
-  FormEventHandler,
   FormEvent,
 } from "react";
 import Nav from "../../components/Nav";
@@ -11,9 +10,10 @@ import "../../styles/_checkout.scss";
 import NotLoggedIn from "../../components/NotLoggedIn";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
-import { CartProps, MenuItems, User, Order } from "../../models/types";
+import { CartProps, User, Order } from "../../models/types";
 import { useNavigate } from "react-router-dom";
 import { actions as orderActions } from "../../features/orderReducer";
+import { actions as userActions } from "../../features/userReducer";
 import Alert from "../../components/Alert";
 import "../../styles/_alert.scss";
 
@@ -168,6 +168,10 @@ type errorObj = {
 
     setLoading(false);
     dispatch(orderActions.makeOrders(datasave));
+    if(user.accountId == "guest")
+    {
+      dispatch(userActions.logOut())
+    }
     navigate("/OrderConfirm");
   }
 
@@ -219,7 +223,7 @@ type errorObj = {
             <p className="User-info">
               Tel.nr:{" "}
               <input
-                type="number"
+                type="text"
                 name="phoneNumber"
                 required
                 value={userCredentials.phoneNumber}
@@ -273,7 +277,7 @@ type errorObj = {
           {cartItemEl}
           <section className="total-wrapper">
             <p className="total">Totalt:</p>{" "}
-            <p className="total-sum">{cart.totalPrice} kr.</p>
+            <p className="total-sum">{cart.totalPrice} kr</p>
           </section>
         </section>
 

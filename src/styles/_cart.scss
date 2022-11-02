@@ -8,6 +8,7 @@
   left: 0;
   background-color: variables.$dropdownRed;
   width: 100vw;
+  max-height: 50vh;
   @include variables.flexContainer();
   align-items: center;
   z-index: 99999;
@@ -55,9 +56,20 @@
   .active-cart {
     width: 100%;
     @include variables.flexContainer();
-    max-height: 94vh;
     overflow-y: auto;
     z-index: 1000;
+  }
+
+  .remove-all {
+    align-self: flex-end;
+    padding: 1em 3em 0 0;
+    font-size: 0.8em;
+    color: color.scale(variables.$lockColor, $lightness: 20%);
+    cursor: pointer;
+    transition: all 400ms;
+    &:hover {
+      color: color.scale(variables.$yellowSenap, $lightness: 20%);
+    }
   }
 
   .cart-item {
@@ -69,6 +81,20 @@
     @include variables.flexContainer(row);
     justify-content: space-between;
     gap: 1em;
+
+    .remove-item {
+      width: 1em;
+      height: 1em;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      cursor: pointer;
+      transition: all 400ms;
+      &:hover {
+        scale: 105%;
+        filter: sepia(60%);
+      }
+    }
 
     .item-price {
       text-align: end;
@@ -125,11 +151,25 @@
 
 @media screen and (min-width: 786px) {
   .cart {
+
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
     left: 0;
     right: 0;
-    // text-align: center;
+    .cart-item {
+
+      :first-child {
+        flex: 7;
+      }
+    }
   }
 }
+
+@media screen and (min-width: 2000px) {
+  .cart{
+    margin-right:5%;
+    max-width: 20%;
+    max-height: 88%;
+  }
+  }
