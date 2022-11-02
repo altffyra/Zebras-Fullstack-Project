@@ -13,7 +13,6 @@ import { actions as menuActions } from "../../features/menuReducer";
 import Nav from "../../components/Nav";
 import { useDraggable } from "react-use-draggable-scroll"; 
 
-
 const Menu = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(false);
@@ -24,6 +23,9 @@ const Menu = () => {
   };
 
   useEffect(() => {
+    if (cart.cartItems.length > 0) {
+      setActive(!active)
+    }
     const root:any = document.querySelector('#root');
         root.scrollIntoView({
         behavior: 'instant'
