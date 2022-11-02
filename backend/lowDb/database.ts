@@ -226,8 +226,10 @@ export async function checkLock(orderId: string) {
       return foundOrder[0];
 }
 
+// Function to check if CET or CEST. Render only goes by UTC
 const dateCheck: (date: Date) => number = (date) => {
       const dateNow = new Date(date.getFullYear()).getTimezoneOffset();
+      console.log(dateNow);
     
       return dateNow;
 }
