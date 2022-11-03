@@ -9,6 +9,8 @@
   display:flex;
   justify-content: center;
   .flex-container {
+    @include variables.flexContainer();
+    
     .form {
       @include variables.flexContainer();
       align-items: center;
@@ -95,5 +97,9 @@
     border: 1px solid black;
     margin:1em;
 
+  }
+  .go-back {
+    align-self: center;
+    cursor: pointer;
   }
 }
