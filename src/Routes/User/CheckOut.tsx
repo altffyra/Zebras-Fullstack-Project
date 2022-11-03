@@ -28,12 +28,12 @@ const CheckOut = () => {
   const cart: CartProps = useSelector((state: RootState) => state.cart);
   const tempOrder: Order[] = useSelector((state: RootState) => state.tempOrder);
 
+
   const cartItemEl = cart.cartItems.map((item, index) => (
     <div key={item.name} className="cartmodule">
       <div className="cart-item">
-        <p className="item-name">{item.name}</p>{" "}
-        <p className="item-amount">{item.amount} st</p>{" "}
-        <p className="item-price">{item.price} kr</p>{" "}
+        <p className="item-name">{item.name} x {item.amount}</p>{" "}
+        <p className="item-price">{item.price * item.amount} kr</p>{" "}
       </div>
       <div className="divider"></div>
     </div>
