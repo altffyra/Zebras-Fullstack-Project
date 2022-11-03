@@ -3,6 +3,9 @@ import { Low, JSONFile } from 'lowdb';
 import { fileURLToPath } from 'url';
 import { User, Schema, Order, LoginCreds, ShortUniqueIdOptions } from './dbinterface';
 import { data as defaultData } from '../defaultData.js';
+
+
+
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc.js'
 import tz from 'dayjs/plugin/timezone.js'
@@ -11,15 +14,12 @@ dayjs.extend(utc)
 dayjs.extend(tz)
 
 const timeZone = dayjs.tz.guess()
-
 import ShortUniqueId from 'short-unique-id';
-
 
 const DEFAULT_OPTIONS: ShortUniqueIdOptions = {
       dictionary: 'alpha_upper',
       length: 10,
-    };
-
+};
 const uid = new ShortUniqueId(DEFAULT_OPTIONS);
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -239,6 +239,7 @@ export async function createOrderInfo() {
             completed: dayjs().tz(timeZone).tz("Europe/Stockholm").add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm'),
             id: uid()
       }
+      console.log(orderInfo)
 
       return orderInfo
 }

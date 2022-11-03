@@ -136,12 +136,17 @@
     background-color: variables.$fontLight;
     color: variables.$fontDark;
     box-shadow: variables.$boxShadow;
+
+    div {
+      text-align: start;
+    }
   }
 
   iframe {
     align-self: center;
     width: 90%;
     box-shadow: variables.$boxShadow;
+    border: none;
   }
 
 

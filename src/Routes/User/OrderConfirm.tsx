@@ -44,16 +44,15 @@ const OrderConfirm = () => {
         <h1>Orderbekräftelse</h1>
       </div>
       <div className="time-container">
-        <p className="open-text">Vi har öppet dygnet runt!</p>
         <p>Maten klar att hämtas: Kl. {orderDone}</p>
       </div>
 
       <div className="order-user">
         <p className="user-headline">Beställare</p>
         <div className="user">
-          <p>Namn: {confirmedOrder.user.name}</p>
-          <p>E-mail: {confirmedOrder.user.email}</p>
-          <p>Tel.nr: {confirmedOrder.user.phoneNumber}</p>
+          <p>Namn: &emsp; {confirmedOrder.user.name}</p>
+          <p>E-mail: &emsp; {confirmedOrder.user.email}</p>
+          <p>Tel.nr: &emsp; {confirmedOrder.user.phoneNumber}</p>
         </div>
       </div>
 
@@ -86,10 +85,12 @@ const OrderConfirm = () => {
       )}
 
       <div className="location">
-        <p>Hämtas på : </p>
+        <p>Hämtas på: </p>
         <div>
-          <p>Lambergskajen</p>
+          <p>Lambergskajen 56</p>
           <p>652 21 Karlstad</p>
+          <br />
+          <p className="open-text">Vi har öppet dygnet runt!</p>
         </div>
       </div>
       <iframe

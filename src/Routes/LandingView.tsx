@@ -11,7 +11,7 @@ import heroVideo from '../assets/hero-video.mp4';
 import logoLight from "../assets/logoLight.svg";
 import chefCooking from "../assets/chef-cooking.jpg"
 import foodImg from "../assets/food.jpg"
-import ourGoal from "../assets/our-goal.jpg"
+import quoteImg from "../assets/our-goal.jpg"
 import vector from '../assets/menu/white-vector.svg';
 
 const LandingView = () => {
@@ -28,7 +28,7 @@ const LandingView = () => {
   const handleLink: (id: string) => void = (id) => {
     const elemendId: Element | null = document.querySelector(`#${id}`);
     if (elemendId) {
-      const y = elemendId.getBoundingClientRect().top + window.pageYOffset - 90;
+      const y = elemendId.getBoundingClientRect().top + window.pageYOffset - 120;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
@@ -125,20 +125,22 @@ const LandingView = () => {
           </p>
         </section>
 
-        <section className="our-goal">
+        <section className="quote-container">
           <p className="quote">"Rocksalt har den bästa take-away maten i hela Sverige!"</p>
           <p>
            - New York Times, 2022
           </p>
         </section>
-        <figure className="our-goal-img" style={{ backgroundImage: `url(${ourGoal})`}}></figure>
+        <figure className="quote-img" style={{ backgroundImage: `url(${quoteImg})`}}></figure>
 
 
       <section className="map">
         <div className="info-where">
           <h4>Hitta till oss</h4>
-          <p>Lambergskajen</p>
-          <p>652 21 Karlstad</p>
+          <div className="adress">
+            <p>Lambergskajen</p>
+            <p>652 21 Karlstad</p>
+          </div>
         </div>
         
 

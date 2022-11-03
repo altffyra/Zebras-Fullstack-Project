@@ -12,14 +12,10 @@ import { actions as orderActions } from "../../features/orderReducer";
 import locked from "../../assets/locked.png";
 import Alert from "../../components/Alert";
 import "../../styles/_alert.scss";
+import { send } from "process";
 
 type MyParams = {
   id: string;
-};
-
-type UpdatedItemProps = {
-  name: string;
-  amount: number;
 };
 
 const AdminOrder = () => {
@@ -71,6 +67,10 @@ const AdminOrder = () => {
       const data = await response.json();
       dispatch(menuActions.getMenu(data));
     }
+
+    const root:any = document.querySelector('#root');
+    root.scrollIntoView({
+      behavior: 'instant'})
     getMenu();
   }, []);
 
@@ -130,6 +130,7 @@ const AdminOrder = () => {
       }
 
       if (response.ok) {
+        dispatch(cartActions.clearCart());
         dispatch(orderActions.getOrders(datasave));
         setLoading(false);
         navigate("/AdminPage");
@@ -180,6 +181,7 @@ const AdminOrder = () => {
           };
 
         if (response.ok) {
+          dispatch(cartActions.clearCart());
           setLoading(false);
           dispatch(orderActions.getOrders(datasave));
           navigate("/AdminPage");
@@ -203,12 +205,17 @@ const AdminOrder = () => {
     />
   ));
 
+    function sendBack(){
+      dispatch(cartActions.clearCart());
+      navigate("/AdminPage")
+    }
+
   return (
     <section className="admin-order">
       {showAlert}
       {loading ? <div className="loading"></div> : ""}
       <div className="top-btn">
-        <button onClick={() => navigate("/AdminPage")}>Tillbaka</button>
+        <button onClick={sendBack}>Tillbaka</button>
         {order?.locked ? <img src={locked} alt="" /> : ""}
       </div>
       {!order?.locked ? (

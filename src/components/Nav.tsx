@@ -9,7 +9,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { RootState } from "../store";
 import cartIcon from '../assets/cart-icon.png'
 import cartIconLight from '../assets/cart-icon-light.png'
-import { CartProps } from "../models/types";
+import { CartProps, User } from "../models/types";
 
 type NavProps = {
   scrollTop?: boolean;
@@ -27,21 +27,38 @@ const Nav = (props: NavProps) => {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
 
   const accountId = localStorage.getItem("accountId");
+
   useEffect(() => {
     if (accountId) {
       setLoggedIn(true);
+      getUser(accountId);
     }
   }, [accountId]);
 
+  async function getUser(accountId: string) {  
+    const userResponse = await fetch(`/api/user/${accountId}`);
+    const userData = await userResponse.json();      
+    dispatch(userActions.setUser(userData))
+    if(userData.admin) {
+      navigate('/adminpage')
+    }    
+  }
 
   const handleMenu: () => void = () => {
     setMenuOpen(!menuOpen);
+    if(location.pathname === '/') {
+      const elemendId: Element | null = document.querySelector(`#about-us`);
+      if (elemendId) {
+        const y = elemendId.getBoundingClientRect().top + window.pageYOffset - 120;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    }
   };
 
   const handleLogout: () => void = () => {
     dispatch(userActions.logOut());
     setLoggedIn(false);
-    setMenuOpen(!menuOpen);
+    setMenuOpen(false);
     localStorage.removeItem('accountId')
     if(location.pathname == '/Account') {
       navigate('/menu')      

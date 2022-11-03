@@ -15,6 +15,7 @@ type Props = {
 const NotLoggedIn = (props: Props) => {
   const [errorElement, showError] = useState<boolean>(false);
   const [errorMessages, makeError] = useState({ title: "", message: "" });
+  
   const showAlert = errorElement ? (
     <Alert
       errorTitle={errorMessages.title}
@@ -71,7 +72,13 @@ const NotLoggedIn = (props: Props) => {
       dispatch(userActions.setUser(data.user));
       props.setUser(data.user);
       localStorage.setItem("accountId", data.user.accountId);
-    }
+    } else
+    tempObject.title = "Fel inloggningsuppgifter";
+      tempObject.message = "Kan inte logga för användarnamnet eller lösenordet är fel";
+      makeError(tempObject);
+      showError(true);
+      setLoading(false);
+      return;
   }
 
   const handleName: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
@@ -119,10 +126,11 @@ const NotLoggedIn = (props: Props) => {
             <label className="form__label form--password" htmlFor="password">
               Lösenord
             </label>
+            <br />
+            <p>
+              Inget konto? <span onClick={() => navigate("/Signup")}>Skapa</span>
+            </p>
           </div>
-          <p>
-            Inget konto? <span onClick={() => navigate("/Signup")}>Skapa</span>
-          </p>
           <div>
             <button
               type="submit"
@@ -136,9 +144,8 @@ const NotLoggedIn = (props: Props) => {
 
           </div>
         </form>
-        <button onClick={loginGuest} className="guest-btn">
-              Fortsätt som gäst
-            </button>
+        <button onClick={loginGuest} className="guest-btn">Fortsätt som gäst</button>
+        <p className="go-back" onClick={() => navigate('/Menu')}>&#10229; Gå tillbaka</p>
       </section>
       {showAlert}
     </div>
