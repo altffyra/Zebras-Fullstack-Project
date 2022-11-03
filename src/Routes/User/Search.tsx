@@ -100,14 +100,14 @@ const Search = () => {
         <div className="order-container">
           <h2>Order {searchedOrder.id}</h2>
           <div className="order-time">
-            <p>Order lagd : {searchedOrder.orderPlaced}</p>
-            <p>Order ca. klar : {searchedOrder.orderCompleted}</p>
+            <p>Order lagd: {searchedOrder.orderPlaced}</p>
+            <p>Order klar cirka: {searchedOrder.orderCompleted}</p>
           </div>
           <div className="user-info">
             <p>Beställare</p>
-            <p>Namn : {searchedOrder.user.name}</p>
-            <p>Email : {searchedOrder.user.email}</p>
-            <p>Tel.nr : {searchedOrder.user.phoneNumber}</p>
+            <p>Namn: {searchedOrder.user.name}</p>
+            <p>E-mail: {searchedOrder.user.email}</p>
+            <p>Tel.nr: {searchedOrder.user.phoneNumber}</p>
           </div>
           <div className="divider"></div>
           <div className="order-information">

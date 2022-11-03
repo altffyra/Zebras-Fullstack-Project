@@ -3,20 +3,18 @@ import { Low, JSONFile } from 'lowdb';
 import { fileURLToPath } from 'url';
 import { User, Schema, Order, LoginCreds, ShortUniqueIdOptions } from './dbinterface';
 import { data as defaultData } from '../defaultData.js';
-import utc from 'dayjs/plugin/utc.js';
-import timezone from 'dayjs/plugin/timezone.js'
+
 
 
 import dayjs from 'dayjs';
-import { timeStamp } from 'console';
-import timestamp from 'dayjs'
-dayjs.extend(utc);
-dayjs.extend(timezone);
+import utc from 'dayjs/plugin/utc.js'
+import tz from 'dayjs/plugin/timezone.js'
 
-const defaultUtc = dayjs().utc().local().format('YYYY-MM-DD HH:mm')
+dayjs.extend(utc)
+dayjs.extend(tz)
 
-
-
+const timeZone = dayjs.tz.guess()
+dayjs.utc().tz(timeZone).tz("America/Toronto").local()
 import ShortUniqueId from 'short-unique-id';
 
 const DEFAULT_OPTIONS: ShortUniqueIdOptions = {
@@ -238,9 +236,10 @@ export async function checkLock(orderId: string) {
 
 export async function createOrderInfo() {
       const randomNum: number = Math.ceil(Math.random() * 30)
+      
       const orderInfo = {
-            started: defaultUtc, //started,
-            completed: dayjs().utc().local().add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm'),
+            started: dayjs().tz(timeZone).tz("Europe/Stockholm").format('YYYY-MM-DD HH:mm'),
+            completed: dayjs().tz(timeZone).tz("Europe/Stockholm").add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm'),
             id: uid()
       }
       console.log(orderInfo)
