@@ -3,6 +3,7 @@ import unlockedIcon from '../assets/unlocked.png'
 import completeIcon from '../assets/complete.svg'
 import { useState } from 'react';
 import message from '../assets/message.png';
+import messageLock from '../assets/message-lock.png';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { actions as orderActions } from '../features/orderReducer'
@@ -143,8 +144,13 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
   const navigateOrder = () => {
     navigate(`/AdminOrder/${ props.order.id }`);
   }
-
-
+  const [comment, setComment] = useState<boolean>(false)
+  const orderComment = () => {
+    setTimeout(() => {
+      setComment(false)      
+    }, 400);
+    setComment(true)
+  }
 
     return (
       <section className="single-order" >
@@ -155,7 +161,7 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
               <p onClick={showOrderOverlay} >Order {props.order.id}</p>
               { props.order.userComment !== ""
               ?
-                <img src={message} alt="" />
+                <img className={comment ? 'check-message' : ''} src={comment ? messageLock : message} alt="" />
               :
                 '' }
               </section>
@@ -166,7 +172,7 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
           <section className="single-order__locks">
             {!props.order.locked && !props.order.completed
             ? 
-                <img src={unlockedIcon} alt="unlocked icon" onClick={lockOrder}/>
+                <img src={unlockedIcon} alt="unlocked icon" onClick={props.order.userComment?.length == 0 ? lockOrder : orderComment}/>
             :
                 ''
             }

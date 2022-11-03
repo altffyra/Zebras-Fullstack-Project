@@ -17,11 +17,6 @@ type MyParams = {
   id: string;
 };
 
-type UpdatedItemProps = {
-  name: string;
-  amount: number;
-};
-
 const AdminOrder = () => {
   const { id } = useParams<keyof MyParams>() as MyParams;
   const dispatch = useDispatch();
@@ -71,6 +66,10 @@ const AdminOrder = () => {
       const data = await response.json();
       dispatch(menuActions.getMenu(data));
     }
+
+    const root:any = document.querySelector('#root');
+    root.scrollIntoView({
+      behavior: 'instant'})
     getMenu();
   }, []);
 
