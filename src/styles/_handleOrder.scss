@@ -8,7 +8,7 @@
     padding: 0 1em;
     gap: 2em;
 
-    .loader {
+    .loading {
         @include variables.loader();
     }
     .admin-buttonSmall {
@@ -83,13 +83,19 @@
                         img {
                             margin: 0.9em 0 0 1em;
                             height: fit-content;
+                            transition: all 300ms;
                         }
+                        .check-message {
+                            scale: 120%;
+                        }
+
                     }
     
                 }
                 .single-order__locks {
                     margin: 0.8em 1.5em;
                     align-self: center;
+                    position: relative;
                     img {
                         cursor: pointer;
                     }
