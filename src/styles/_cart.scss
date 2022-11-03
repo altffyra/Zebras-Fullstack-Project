@@ -76,7 +76,7 @@
     position: relative;
     padding: 1em;
     padding-top: 2em;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
     @include variables.flexContainer(row);
     justify-content: space-between;
@@ -98,6 +98,7 @@
 
     .item-price {
       text-align: end;
+
     }
     :first-child {
       flex: 3;
@@ -169,7 +170,7 @@
 @media screen and (min-width: 2000px) {
   .cart{
     margin-right:5%;
-    max-width: 20%;
+    max-width: 22%;
     max-height: 88%;
   }
   }
