@@ -55,6 +55,11 @@ const Nav = (props: NavProps) => {
     }
   };
 
+  const handleMenuBtn: () => void = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+
   const handleLogout: () => void = () => {
     dispatch(userActions.logOut());
     setLoggedIn(false);
@@ -80,7 +85,7 @@ const Nav = (props: NavProps) => {
   const navCss = props.scrollTop ? 'nav-top' : ''
   return (
     <header className={navCss}      >
-      <div className="menu-btn" onClick={handleMenu}>
+      <div className="menu-btn" onClick={handleMenuBtn}>
         <span className={menuOpen ? "menu-btn--top" : ""} ></span>
         <span className={menuOpen ? "menu-btn--mid" : ""}></span>
         <span className={menuOpen ? "menu-btn--bottom" : ""}></span>
