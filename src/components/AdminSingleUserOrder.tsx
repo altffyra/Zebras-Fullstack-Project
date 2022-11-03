@@ -137,7 +137,7 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
   }
   
   const allItems = props.order.cart.cartItems.map((item) => {
-    return <p key={ item.name }>{ item.name }  x {item.amount}</p>
+    return <p  key={ item.name }>{ item.name }  x {item.amount}</p>
   });
 
   const navigateOrder = () => {
@@ -152,7 +152,10 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
         {loading ? <div className="loading"></div> : ""}
           <div className='single-order__left' onClick={navigateOrder}>
             <section className="single-order__id">
-              <p onClick={showOrderOverlay} >Order {props.order.id}</p>
+              <div>
+                <p onClick={showOrderOverlay} >Order {props.order.id}</p>
+                <p className='person'>Beställare: {props.order.user.name}</p>
+              </div>
               { props.order.userComment !== ""
               ?
                 <img src={message} alt="" />
