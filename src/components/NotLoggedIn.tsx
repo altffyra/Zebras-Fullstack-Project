@@ -72,6 +72,12 @@ const NotLoggedIn = (props: Props) => {
       props.setUser(data.user);
       localStorage.setItem("accountId", data.user.accountId);
     }
+    tempObject.title = "Fel inloggningsuppgifter";
+      tempObject.message = "Kan inte logga för användarnamnet eller lösenordet är fel";
+      makeError(tempObject);
+      showError(true);
+      setLoading(false);
+      return;
   }
 
   const handleName: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
