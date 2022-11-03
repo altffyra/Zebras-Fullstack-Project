@@ -30,35 +30,65 @@ const AdminPage = () => {
       setOrders(orders)
     }
 
-    useEffect(() => {
-        async function getOrders() {
-            if (checkId === 'null') {
-                return
-            } else {
-                setLoading(true)
-                const response = await fetch('api/order/admin/orders',
-                {
-                    headers: {
-                        "accountID": `${checkId}`
-                    }
-                });
-                const data = await response.json();  
-
-                if(data.error) {
-
-                  navigate('/')
-                  
-                } else {
-                  setLoading(true);
-                  dispatch(orderActions.getOrders(data));
-                  setOrders(data);
-
+    async function getOrders() {
+        if (checkId === 'null') {
+            return
+        } else {
+            setLoading(true)
+            const response = await fetch('api/order/admin/orders',
+            {
+                headers: {
+                    "accountID": `${checkId}`
                 }
-            } 
-        }
-        getOrders();
-        
-    }, []);
+            });
+            const data = await response.json();  
+
+            if(data.error) {
+
+              navigate('/')
+              
+            } else {
+              setLoading(false);
+              dispatch(orderActions.getOrders(data));
+              setOrders(data);           
+            }
+        } 
+    }
+
+    async function updateOrderList() {
+      if (checkId === 'null') {
+          return
+      } else {
+          const response = await fetch('api/order/admin/orders',
+          {
+              headers: {
+                  "accountID": `${checkId}`
+              }
+          });
+          const data = await response.json();  
+
+          if(data.error) {
+
+            navigate('/')
+            
+          } else {
+            dispatch(orderActions.getOrders(data));
+            setOrders(data);           
+          }
+      } 
+  }
+
+    let fetchInterval: any;
+    useEffect(() => {
+      getOrders();
+
+      const interval = setInterval(() => {
+        updateOrderList()
+      }, 10000);
+
+      return () => clearInterval(interval);
+
+      }, []);
 
   if (orders !== undefined) {
     activeOrders = orders.filter((order) => !order.completed && !order.locked);
@@ -68,6 +98,7 @@ const AdminPage = () => {
   }
 
   const handleLogout: () => void = () => {
+    clearInterval(fetchInterval)
     localStorage.removeItem('accountId')
     dispatch(userActions.logOut())
     navigate('/')
@@ -98,12 +129,19 @@ const AdminPage = () => {
     }
   };
 
+  const handleOrder: () => void = () => {
+    if(found) {
+      navigate(`/AdminOrder/${found.id}`)
+      clearInterval(fetchInterval)
+    }
+  }
+
   return (
     <div className="admin_page--wrapper">
         {loading ? <div className="loading"></div> : ""}
 
         <section className="menu-header" style={{'backgroundImage':`url(${foodImg})`}}>
-            <h1>ADMINISTRATION </h1>
+            <h1>Administration </h1>
         </section>
 
         <button className='admin-buttonSmall' onClick={handleLogout}>Logga ut </button>
@@ -115,7 +153,7 @@ const AdminPage = () => {
             {searchError ? <p>Ingen order hittades på det ordernumret.</p> : ""}
             {found ? 
               <div className='search-order'>
-                <p onClick={(() => navigate(`/AdminOrder/${found.id}`))}>Order {found.id}</p>
+                <p onClick={(() => handleOrder)}>Order {found.id}</p>
                 {found.locked ?
                  <img src={locked} alt="locked icon" />
                 
