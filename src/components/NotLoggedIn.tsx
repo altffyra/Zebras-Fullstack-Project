@@ -71,7 +71,7 @@ const NotLoggedIn = (props: Props) => {
       dispatch(userActions.setUser(data.user));
       props.setUser(data.user);
       localStorage.setItem("accountId", data.user.accountId);
-    }
+    } else
     tempObject.title = "Fel inloggningsuppgifter";
       tempObject.message = "Kan inte logga för användarnamnet eller lösenordet är fel";
       makeError(tempObject);
