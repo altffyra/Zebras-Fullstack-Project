@@ -178,7 +178,7 @@
         grid-area: 3 / 1 / 3 / 6;
       }
     
-      .our-goal {
+      .quote-container {
         background-color: black;
         color: variables.$fontLight;
         grid-area: 5 / 1 / 5 / 6;
@@ -190,7 +190,7 @@
         
       }
     
-      .our-goal-img {
+      .quote-img {
         grid-area: 6 / 1 / 6 / 6;
       }
  
@@ -216,6 +216,9 @@
           margin-bottom: 0.5em;
         }
         
+      }
+
+      .quote-container, .about-us, .our-food {
         h3 {
           font-family: variables.$headerFont;
         }
@@ -224,7 +227,7 @@
           padding: 0 2em;
         }
       }
-        .map {
+      .map {
           grid-area: 7 / 1 / 7 / 6;
           background-color: variables.$fontLight;
           gap:0;
@@ -234,7 +237,7 @@
             width: 100%;
             @include variables.flexContainer(row);
             align-items: center;
-            justify-content: space-around;
+            justify-content: space-between;
           
         }
 
@@ -276,11 +279,11 @@
         grid-area: 2 / 3 / 3 / 6;
       }
 
-      .our-goal {
+      .quote-container {
         grid-area: 3 / 1 / 4 / 4; 
       }
 
-      .our-goal-img {
+      .quote-img {
         grid-area: 3 / 4 / 4 / 6;
       }
       .map {
