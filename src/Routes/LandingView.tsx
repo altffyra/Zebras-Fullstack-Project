@@ -28,7 +28,7 @@ const LandingView = () => {
   const handleLink: (id: string) => void = (id) => {
     const elemendId: Element | null = document.querySelector(`#${id}`);
     if (elemendId) {
-      const y = elemendId.getBoundingClientRect().top + window.pageYOffset - 90;
+      const y = elemendId.getBoundingClientRect().top + window.pageYOffset - 120;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   };

@@ -46,6 +46,13 @@ const Nav = (props: NavProps) => {
 
   const handleMenu: () => void = () => {
     setMenuOpen(!menuOpen);
+    if(location.pathname === '/') {
+      const elemendId: Element | null = document.querySelector(`#about-us`);
+      if (elemendId) {
+        const y = elemendId.getBoundingClientRect().top + window.pageYOffset - 120;
+        window.scrollTo({ top: y, behavior: "smooth" });
+      }
+    }
   };
 
   const handleLogout: () => void = () => {
