@@ -85,10 +85,11 @@ const OrderConfirm = () => {
       )}
 
       <div className="location">
-        <p>Hämtas på : </p>
+        <p>Hämtas på: </p>
         <div>
-          <p>Lambergskajen</p>
+          <p>Lambergskajen 56</p>
           <p>652 21 Karlstad</p>
+          <br />
           <p className="open-text">Vi har öppet dygnet runt!</p>
         </div>
       </div>
