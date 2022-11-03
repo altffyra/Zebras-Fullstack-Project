@@ -22,7 +22,6 @@ const DEFAULT_OPTIONS: ShortUniqueIdOptions = {
 };
 const uid = new ShortUniqueId(DEFAULT_OPTIONS);
 
-
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const file = join(__dirname, 'db.json')
