@@ -50,9 +50,9 @@ const OrderConfirm = () => {
       <div className="order-user">
         <p className="user-headline">Beställare</p>
         <div className="user">
-          <p>Namn: {confirmedOrder.user.name}</p>
-          <p>E-mail: {confirmedOrder.user.email}</p>
-          <p>Tel.nr: {confirmedOrder.user.phoneNumber}</p>
+          <p>Namn: &emsp; {confirmedOrder.user.name}</p>
+          <p>E-mail: &emsp; {confirmedOrder.user.email}</p>
+          <p>Tel.nr: &emsp; {confirmedOrder.user.phoneNumber}</p>
         </div>
       </div>
 
