@@ -18,7 +18,7 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
   return (
     <section className="single-order">
       <p onClick={showOrderOverlay}> Order {props.order.orderPlaced}</p>
-      {props.order.completed ? (
+      {props.order.locked ? (
         <img src={lockedIcon} alt="locked icon" />
       ) : (
         <img src={unlockedIcon} alt="unlocked icon" />

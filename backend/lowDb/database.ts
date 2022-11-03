@@ -3,6 +3,9 @@ import { Low, JSONFile } from 'lowdb';
 import { fileURLToPath } from 'url';
 import { User, Schema, Order, LoginCreds, ShortUniqueIdOptions } from './dbinterface';
 import { data as defaultData } from '../defaultData.js';
+
+
+
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc.js'
 import tz from 'dayjs/plugin/timezone.js'
@@ -11,18 +14,14 @@ dayjs.extend(utc)
 dayjs.extend(tz)
 
 const timeZone = dayjs.tz.guess()
-dayjs.utc().tz(timeZone).tz("America/Toronto").local()
 import ShortUniqueId from 'short-unique-id';
-
 
 const DEFAULT_OPTIONS: ShortUniqueIdOptions = {
       dictionary: 'alpha_upper',
       length: 10,
-    };
-
+};
 const uid = new ShortUniqueId(DEFAULT_OPTIONS);
 
-export const started = dayjs().format('YYYY-MM-DD HH:mm');
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
@@ -51,7 +50,7 @@ async function getOrders(){
       const orderCopy = [...db.data.orders]
       orderCopy.forEach(order => {
             if(order.orderCompleted) {
-                  if(order.orderCompleted < dayjs().format('YYYY-MM-DD HH:mm')) {
+                  if(order.orderCompleted < dayjs().tz(timeZone).tz("Europe/Stockholm").format('YYYY-MM-DD HH:mm')) {
                         order.locked = true
                   }
             }
@@ -88,7 +87,7 @@ async function updateOrder(updatedOrder: Order, id:number) {
             }
       }
 
-      updatedOrder.orderPlaced = dayjs().format('YYYY-MM-DD HH:mm');      
+      updatedOrder.orderPlaced = dayjs().tz(timeZone).tz("Europe/Stockholm").format('YYYY-MM-DD HH:mm');      
       db.data.orders[id] = updatedOrder;  
       await db.write()
       return true
@@ -241,6 +240,7 @@ export async function createOrderInfo() {
             completed: dayjs().tz(timeZone).tz("Europe/Stockholm").add(randomNum, 'minutes').format('YYYY-MM-DD HH:mm'),
             id: uid()
       }
+      console.log(orderInfo)
 
       return orderInfo
 }

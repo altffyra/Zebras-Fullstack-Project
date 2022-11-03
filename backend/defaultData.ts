@@ -230,7 +230,7 @@ export const data: Schema = {
         },
         {
           "name": "Fiskpinnar och pulvermos",
-          "desc": "Frysta fiskpinnar stekt i en stekpanna. Serveras tillsammans med högkvalité pulvermos och citron på burk.",
+          "desc": "Frysta fiskpinnar stekta i stekpanna. Serveras tillsammans med högkvalitativt pulvermos och citron på burk.",
           "allergies": "Fisk",
           "price": 109,
           "type": "Fisk"
@@ -279,14 +279,14 @@ export const data: Schema = {
         },
         {
           "name": "Vaniljkräm med mango och passionsfrukt",
-          "desc": "Rårörd vaniljkräm med kesella och vispgrädde. Mango, passionsfrukt och vaniljkräm i fina glas och servera direkt.",
+          "desc": "Rårörd vaniljkräm med kesella och vispgrädde. Mango, passionsfrukt och vaniljkräm i fina glas som smakar himmelskt!",
           "allergies": "Laktos",
           "price": 68,
           "type": "Efterrätt"
         },
         {
           "name": "Grillad Harissa Kyckling",
-          "desc": "Grillade kyckling sticks med en örtig harissa och fänkolsyoghurt.",
+          "desc": "Kolgrillad kyckling serveras med en örtig harissa och fänkålsyoghurt.",
           "allergies": "Laktos, Gluten",
           "price": 149,
           "type": "Fågel"
@@ -300,7 +300,7 @@ export const data: Schema = {
         },
         {
           "name": "Chips med rom och citroncrème",
-          "desc": "Lyxig förrätt med chips, och citroncrème toppas av rom från Skagerak.",
+          "desc": "Lyxig förrätt med chips och citroncrème. Toppas med rom från Skagerak.",
           "allergies": "Laktos, Skaldjur",
           "price": 79,
           "type": "Förrätt"
