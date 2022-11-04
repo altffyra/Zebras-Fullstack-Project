@@ -61,7 +61,6 @@ const OrderConfirm = () => {
           <p className="order-title">Order ID: {confirmedOrder.id}</p>
           <div className="list-titles">
             <p>Rätt</p>
-            <p>Antal</p>
             <p>Pris</p>
           </div>
         </div>
