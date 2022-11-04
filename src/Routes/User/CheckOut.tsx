@@ -33,7 +33,7 @@ const CheckOut = () => {
     <div key={item.name} className="cartmodule">
       <div className="cart-item">
         <p className="item-name">{item.name} x {item.amount}</p>{" "}
-        <p className="item-price">{item.price * item.amount} kr</p>{" "}
+        <p className="item-price">à {item.price} kr</p>{" "}
       </div>
       <div className="divider"></div>
     </div>

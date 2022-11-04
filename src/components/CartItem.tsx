@@ -16,7 +16,7 @@ type UpdatedItemProps = {
 
 const CartItem = (props: CartItemsProps) => {
   const dispatch = useDispatch();
-  const itemPrice: number = props.item.price * props.item.amount;
+  // const itemPrice: number = props.item.price * props.item.amount;
   const dotsCss: string = props.locked ? "cart-dots" : "cart-item";
 
   const handleAmount: (
@@ -64,7 +64,7 @@ const CartItem = (props: CartItemsProps) => {
         ""
       )}
       <div onClick={handleRemoveItem} className="remove-item" style={{backgroundImage: `url(${removeItem})`}}></div>
-      <p className="item-price">{itemPrice} kr</p>
+      <p className="item-price">à {props.item.price} kr</p>
     </section>
   );
 };
