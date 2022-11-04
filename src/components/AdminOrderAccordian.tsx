@@ -14,15 +14,15 @@ type UserOrderAccordian = {
 
 const UserOrderAccordian = (props: UserOrderAccordian) => {
     const [dropActive, setDropActive] = useState<boolean>(true);
-    const cssActive = dropActive ? 'active' : '';
+    const cssActive:string = dropActive ? 'active' : '';
 
-    const ordersEl = props.orders.map(order => <AdminSingleUserOrders key={order.id} order={order} updateAllOrders={ props.updateAllOrders }/>);
+    const ordersEl:JSX.Element[] = props.orders.map(order => <AdminSingleUserOrders key={order.id} order={order} updateAllOrders={ props.updateAllOrders }/>);
 
     const handleDropDown: () => void = () => {
         setDropActive(!dropActive);
     };
 
-    let symbol_img = '';
+    let symbol_img:string = '';
     if (props.orderType === 'Ohanterade') {
         symbol_img = symbol_green;
     } else if (props.orderType === 'Ej hämtade' ) {

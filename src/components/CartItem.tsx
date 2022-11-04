@@ -16,7 +16,6 @@ type UpdatedItemProps = {
 
 const CartItem = (props: CartItemsProps) => {
   const dispatch = useDispatch();
-  // const itemPrice: number = props.item.price * props.item.amount;
   const dotsCss: string = props.locked ? "cart-dots" : "cart-item";
 
   const handleAmount: (

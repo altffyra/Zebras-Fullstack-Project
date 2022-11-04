@@ -12,11 +12,16 @@ import { actions as orderActions } from "../../features/orderReducer";
 import locked from "../../assets/locked.png";
 import Alert from "../../components/Alert";
 import "../../styles/_alert.scss";
-import { send } from "process";
+
 
 type MyParams = {
   id: string;
 };
+
+type errorType = {
+  title: string,
+  message: string
+}
 
 const AdminOrder = () => {
   const { id } = useParams<keyof MyParams>() as MyParams;
@@ -33,7 +38,10 @@ const AdminOrder = () => {
   const [ adminComment, setAdminComment ] = useState<string>('');
   const [ showMenu, setShowMenu ] = useState<boolean>(false);
   const [errorElement, showError] = useState<boolean>(false);
-  const [errorMessages, makeError] = useState({ title: "", message: "" });
+  const [errorMessages, makeError] = useState<errorType>({ title: "", message: "" });
+
+ 
+
   const showAlert = errorElement ? (
     <Alert
       errorTitle={errorMessages.title}

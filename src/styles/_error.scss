@@ -2,7 +2,7 @@
 @use "buttons";
 
 .error {
-  margin-top: 1vh;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,8 +11,9 @@
   padding: 1em;
   background-image: url("../assets/error.jpg");
   background-repeat: no-repeat;
-  background-size: contain;
-  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  height: calc(100vh - 6em);
 
   .back-btn {
     @include buttons.smallBtn($pad: 1em 1em, $bg: transparent);

@@ -2,7 +2,7 @@ import "../styles/_cart.scss";
 import dropDownLight from "../assets/dropDownLight.svg";
 import { CartProps, Order } from "../models/types";
 import CartItem from "./CartItem";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { actions as cartActions } from "../features/cartReducer";
@@ -16,10 +16,6 @@ type CartProp = {
   active: boolean;
 };
 
-type UpdatedItemProps = {
-  name: string;
-  amount: number;
-};
 
 const Cart = (props: CartProp) => {
   const navigate = useNavigate();

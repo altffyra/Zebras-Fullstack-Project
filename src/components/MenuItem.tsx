@@ -16,6 +16,11 @@ const MenuItem = ({ item }: Props) => {
   const dispatch = useDispatch();
 
   let allergyImg;
+
+
+ // KOMMENTARER ÄR FRÅN PRODUKT ÄGAREN FÖR HAN VILLE HA FUNKTIONEN SPARAD OM
+ // DEN FEATUREN VILLE HAS IGEN
+
   {/*
   if (!tabbed && allergies) {
     allergyImg = allergy;

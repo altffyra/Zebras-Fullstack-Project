@@ -168,7 +168,7 @@ type errorObj = {
       body: JSON.stringify(data),
     });
     const datasave:Order = await response.json();
-    console.log(datasave)
+
     setLoading(false);
     dispatch(orderActions.makeOrders(datasave));
     if(user.accountId == "guest")
@@ -190,6 +190,9 @@ type errorObj = {
   }
 
   function backBtn() {
+    if(user.accountId == "guest"){
+    dispatch(userActions.logOut())
+  }
     navigate("/Menu");
   }
 
