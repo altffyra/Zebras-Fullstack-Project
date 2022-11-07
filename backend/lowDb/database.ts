@@ -248,6 +248,8 @@ export async function updateUser(accountId: string, updatedUser: User) {
   return true;
 }
 
+
+
 export async function createOrderInfo() {
   const randomNum: number = Math.ceil(Math.random() * 30);
 
