@@ -257,7 +257,7 @@ type errorObj = {
           </button>
           {orderCheck ? (
             <button type="submit" className="order-btn">
-              Updatera{" "}
+              Uppdatera{" "}
             </button>
           ) : (
             <button type="submit" className="order-btn">

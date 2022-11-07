@@ -22,6 +22,7 @@ $darkBackground: rgb(69, 69, 69);
   margin: auto;
   width: 80px;
   height: 80px;
+  z-index: 1000;
   &:after {
     content: " ";
     position: absolute;

@@ -80,7 +80,7 @@ userRoute.post('/login', async (req, res) => {
 //   GET USER
 userRoute.get('/:id', async (req, res) => {
     const id:string = req.params.id;
-    const user = await getUser(id)
+    const user: User | boolean = await getUser(id)
     if(!user) {
         res.status(400).send({error: true})
         return

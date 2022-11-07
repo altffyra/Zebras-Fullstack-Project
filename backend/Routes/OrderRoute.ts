@@ -41,7 +41,7 @@ orderRoute.get('/:id', async (req:IdParam, res:Response) => {
 type IdObject = { id: string };
 type IdParam = Request<IdObject>;
 
-// // GET USER ORDERS
+// GET USER ORDERS
  orderRoute.get("/user/:id", async (req:IdParam, res:Response) => {
      const id:string = req.params.id;
      let resOrders = await getOrders()
@@ -50,19 +50,19 @@ type IdParam = Request<IdObject>;
  });
 
 
-// // GET ALL ORDERS ADMIN
+// GET ALL ORDERS ADMIN
 orderRoute.get("/admin/orders", auth, async (req:Request, res:Response) => {
 
   const resOrders: Order[] = await getOrders()
 
-  if (resOrders.length > 0) {
+  if (resOrders) {
     res.send(resOrders);
   } else {
     res.sendStatus(404);
   }
 })
 
-// // LOCK ORDER ADMIN
+// LOCK ORDER ADMIN
 
 orderRoute.put("/admin/orders/:id", auth, async (req:Request, res:Response) => {
   const orderId: string = req.params.id;
@@ -75,7 +75,7 @@ orderRoute.put("/admin/orders/:id", auth, async (req:Request, res:Response) => {
 });
 
 
-// // MAKE ORDER
+// MAKE ORDER
 orderRoute.post("/", async (req, res) => {
   let orderObj: Order = req.body;
   const func = orderObj.user.accountId ? isValidUser : isValidGuest;
@@ -103,7 +103,7 @@ orderRoute.post("/", async (req, res) => {
   }
 })
 
-// // CHANGE ORDER
+// CHANGE ORDER
 orderRoute.put("/:id", async (req:IdParam, res:Response) => {
   const id:string = req.params.id;  
   let updatedOrder: Order = req.body;
@@ -138,7 +138,7 @@ orderRoute.put("/:id", async (req:IdParam, res:Response) => {
   }
 });
 
-// CHANGE ADMIN ORDER (OBS lägg till auth)
+// CHANGE ADMIN ORDER
 orderRoute.put("/admin/:id", auth, async (req:Request, res:Response) => {
   const id:string = req.params.id;  
   let updatedOrder: Order = req.body;
