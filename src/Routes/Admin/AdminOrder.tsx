@@ -284,7 +284,7 @@ const AdminOrder = () => {
               />
             </div>
             <div>
-              <label htmlFor="">Email</label>
+              <label htmlFor="">E-mail</label>
               <input
                 type="text"
                 name="email"
@@ -349,7 +349,7 @@ const AdminOrder = () => {
               <p>{user.name}</p>
             </div>
             <div>
-              <p>Email</p>
+              <p>E-mail</p>
               <p>{user.email}</p>
             </div>
             <div>
