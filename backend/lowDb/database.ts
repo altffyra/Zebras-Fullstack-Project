@@ -212,24 +212,6 @@ export async function updateUser(accountId:string, updatedUser:User) {
       return true
 }
 
-export async function checkLock(orderId: string) {
-
-      if( !db.data ) {
-            db.data = defaultData
-      }
-
-      const filterOrders: Order[] = [...db.data.orders];
-      const foundOrder: Order[] = filterOrders.filter(order => order.id == orderId)
-      const orderIndex: number = db.data.orders.findIndex(order => order.id == orderId)
-
-      if (foundOrder.length === 0 && foundOrder[0].locked === true) {
-            return
-      }
-
-      db.data.orders[orderIndex].locked = true;
-      db.write();
-      return foundOrder[0];
-}
 
 export async function createOrderInfo() {
       const randomNum: number = Math.ceil(Math.random() * 30)

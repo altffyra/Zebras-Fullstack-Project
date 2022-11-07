@@ -3,7 +3,7 @@ import express, { NextFunction, Request, Response } from "express";
  app.use(express.json());
  const orderRoute = express.Router();
  import {User, Order} from '../lowDb/dbinterface'
- import { authenticateLogin, getOrders,checkOrder, createOrderInfo, updateOrder, createOrder, checkLock, adminUpdateOrder} from '../lowDb/database.js'
+ import { authenticateLogin, getOrders,checkOrder, createOrderInfo, updateOrder, createOrder, adminUpdateOrder} from '../lowDb/database.js'
  import { isValidCart, isValidUpdatedOrder } from "../validators/validOrder.js";
  import { isValidUser, isValidGuest } from "../validators/validUser.js";
 
@@ -62,17 +62,7 @@ orderRoute.get("/admin/orders", auth, async (req:Request, res:Response) => {
   }
 })
 
-// LOCK ORDER ADMIN
 
-orderRoute.put("/admin/orders/:id", auth, async (req:Request, res:Response) => {
-  const orderId: string = req.params.id;
-  const lockedOrder = await checkLock(orderId);
-
-  if (lockedOrder != undefined && lockedOrder.locked === false) {
-      res.send(lockedOrder);
-    }
-    res.send('Order is already locked');
-});
 
 
 // MAKE ORDER
