@@ -382,7 +382,7 @@ const AdminOrder = () => {
               ''
             :  
               <button className="btn-submit" onClick={completeOrder}>
-                Order avslutad
+                Avsluta order
               </button>
           }
         </section>
