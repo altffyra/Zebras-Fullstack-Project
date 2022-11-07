@@ -48,11 +48,22 @@ const CheckOut = () => {
 
   const orderCheck: Boolean = tempOrder.length > 0 ? true : false;
   useEffect(() => {
-    const root:any = document.querySelector('#root');
+    const root: any = document.querySelector("#root");
     root.scrollIntoView({
-    behavior: 'instant'})
+      behavior: "instant",
+    });
     if (orderCheck) {
-      setUser(tempOrder[0].user);
+      if (user.accountId.length > 0) {
+        const updateOrderUser: User = {
+          name: tempOrder[0].user.name,
+          accountId: user.accountId,
+          email: tempOrder[0].user.email,
+          phoneNumber: tempOrder[0].user.phoneNumber,
+        };
+        setUser(updateOrderUser);
+      } else {
+        setUser(tempOrder[0].user);
+      }
       if (tempOrder[0].userComment) {
         setMessage(tempOrder[0].userComment);
       }
@@ -106,6 +117,8 @@ type errorObj = {
       locked: tempOrder[0].locked,
       completed: tempOrder[0].completed,
     };
+
+
     const tempOrderId = tempOrder[0].id;
     const response = await fetch(`/api/order/${tempOrderId}`, {
       method: "PUT",
