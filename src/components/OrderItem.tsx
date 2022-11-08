@@ -25,6 +25,7 @@ const OrderItem = (props: OrderItemProps) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+console.log('HEJSAN');
 
   const [deleteOverlay, setDeleteOverlay] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
@@ -65,19 +66,57 @@ const OrderItem = (props: OrderItemProps) => {
     });
     if (!response.ok) {
       tempObject.title = "Något gick fel";
-      tempObject.message = "Ordern togs inte bort. Försök igen.";
+      tempObject.message = "Det uppstod ett problem, försök igen.";
       makeError(tempObject);
       showError(true);
+      if(props.setOrder) {
+        props.setOrder(undefined)
+      }
+      props.showOrderOverlay
+      const accountId: string | null = localStorage.getItem("accountId");
+      if(accountId) {
+        getOrder(accountId)
+      }
     } else {
+      const data = await response.json();
       if (order.id) {
-        dispatch(orderActions.deleteOrder(order.id));
-        if(props.setOrder) {
-          props.setOrder(undefined)
+        if(data.locked == false) {          
+          dispatch(orderActions.deleteOrder(order.id));
+          if(props.setOrder) {
+            props.setOrder(undefined)
+          }
+          props.showOrderOverlay
+          const accountId: string | null = localStorage.getItem("accountId");
+          if(accountId) {
+            getOrder(accountId)
+          }
+        } else {          
+          tempObject.title = "Order låst";
+          tempObject.message = "Ordern är låst, kan ej ta bort.";
+          makeError(tempObject);
+          showError(true);
+          dispatch(orderActions.deleteOrder(order.id));
+          if(props.setOrder) {
+            props.setOrder(undefined)
+          }
+          const accountId: string | null = localStorage.getItem("accountId");
+          if(accountId) {
+            getOrder(accountId)
+          }
         }
-        props.showOrderOverlay
       }
     }
     setLoading(false);
+  }
+
+  async function getOrder(accountId: string) {
+    setLoading(true);
+    const orderResponse = await fetch(`/api/order/user/${accountId}`);
+    const orderData = await orderResponse.json();   
+    
+   
+    dispatch(orderActions.getOrders(orderData));        
+    setLoading(false)
   }
 
   const toggleDeleteOverlay: () => void = () => {

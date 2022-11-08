@@ -75,7 +75,9 @@ const Nav = (props: NavProps) => {
 
   const handleCart: () => void = () => {
     navigate('/menu')
-    props.setActive(!props.active)
+    if(location.pathname == '/menu' || location.pathname == '/Menu') {
+      props.setActive(!props.active)
+    }
   }
 
   let amountOfProducts: number = 0;

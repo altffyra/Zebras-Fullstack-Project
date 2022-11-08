@@ -208,7 +208,7 @@ export async function deleteOrder(ids: string) {
         const index: number = db.data.orders.findIndex(order => order.id == ids)
         db.data.orders[index] = orderfind
         await db.write();
-        return false;
+        return orderfind;
       }
     }
     const orderIndex: Order[] = db.data.orders.filter(
@@ -216,8 +216,8 @@ export async function deleteOrder(ids: string) {
     );
       db.data.orders = orderIndex;
       await db.write();
-      return true;
-  } else return false;
+      return orderfind;
+  } else return undefined;
 }
 
 export async function createOrder(orderData: Order) {
@@ -270,11 +270,16 @@ export async function createOrderInfo() {
       .tz(timeZone)
       .tz("Europe/Stockholm")
       .format("YYYY-MM-DD HH:mm"),
+    // completed: dayjs()
+    //   .tz(timeZone)
+    //   .tz("Europe/Stockholm")
+    //   .add(randomNum, "minutes")
+    //   .format("YYYY-MM-DD HH:mm"),
     completed: dayjs()
-      .tz(timeZone)
-      .tz("Europe/Stockholm")
-      .add(randomNum, "minutes")
-      .format("YYYY-MM-DD HH:mm"),
+    .tz(timeZone)
+    .tz("Europe/Stockholm")
+    .add(1, "minutes")
+    .format("YYYY-MM-DD HH:mm"),
     id: uid(),
   };
 

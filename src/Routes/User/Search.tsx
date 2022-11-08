@@ -78,13 +78,19 @@ const Search = () => {
     });
     if (!response.ok) {
       tempObject.title = "Något gick fel";
-      tempObject.message = "Ordern togs inte bort. Försök igen.";
+      tempObject.message = "Det uppstod ett problem, försök igen.";
       makeError(tempObject);
       showError(true);
     } else {
-      setFound(false);
-      setSearchId('')
-      dispatch(orderActions.deleteOrder(search));
+      const data = await response.json();
+      if(data.locked == false) {
+        setFound(false);
+        setSearchId('')
+        dispatch(orderActions.deleteOrder(search));
+      } else {
+        setFound(false);
+        setSearchId('')
+      }
     }
     setLoading(false);
   }

@@ -77,13 +77,22 @@ const OrderConfirm = () => {
     });
     if (!response.ok) {
       tempObject.title = "Något gick fel";
-      tempObject.message = "Ordern togs inte bort. Försök igen.";
+      tempObject.message = "Det uppstod ett problem, försök igen.";
       makeError(tempObject);
       showError(true);
     } else {
-      if (confirmedOrder.id) {
-        navigate('/menu')
-        dispatch(orderActions.deleteOrder(confirmedOrder.id));
+      const data = await response.json();
+      if(data.locked == false) {
+        if (confirmedOrder.id) {
+          navigate('/menu')
+          dispatch(orderActions.deleteOrder(confirmedOrder.id));
+        }
+
+      } else {
+        tempObject.title = "Order låst";
+        tempObject.message = "Ordern är låst, kan ej ta bort.";
+        makeError(tempObject);
+        showError(true);
       }
     }
     setLoading(false);

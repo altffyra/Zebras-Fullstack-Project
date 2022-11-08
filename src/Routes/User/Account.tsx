@@ -21,6 +21,8 @@ const Account = () => {
   const tempOrder: Order | undefined = useSelector(
     (state: RootState) => state.tempOrder
   )[0];
+  console.log('account sidan');
+  const accountId: string | null = localStorage.getItem("accountId");
   useEffect(() => {
     const root:any = document.querySelector('#root');
     root.scrollIntoView({
@@ -30,7 +32,6 @@ const Account = () => {
       dispatch(tempOrderActions.clearTempOrder());
       dispatch(cartActions.clearCart());
     }
-    const accountId: string | null = localStorage.getItem("accountId");
 
     if (accountId) {
       getOrder(accountId);
