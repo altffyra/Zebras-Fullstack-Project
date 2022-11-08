@@ -270,11 +270,16 @@ export async function createOrderInfo() {
       .tz(timeZone)
       .tz("Europe/Stockholm")
       .format("YYYY-MM-DD HH:mm"),
+    // completed: dayjs()
+    //   .tz(timeZone)
+    //   .tz("Europe/Stockholm")
+    //   .add(randomNum, "minutes")
+    //   .format("YYYY-MM-DD HH:mm"),
     completed: dayjs()
-      .tz(timeZone)
-      .tz("Europe/Stockholm")
-      .add(randomNum, "minutes")
-      .format("YYYY-MM-DD HH:mm"),
+    .tz(timeZone)
+    .tz("Europe/Stockholm")
+    .add(20, "seconds")
+    .format("YYYY-MM-DD HH:mm"),
     id: uid(),
   };
 
