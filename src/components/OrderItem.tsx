@@ -82,6 +82,7 @@ const OrderItem = (props: OrderItemProps) => {
           if(props.setOrder) {
             props.setOrder(undefined)
           }
+          props.showOrderOverlay
           const accountId: string | null = localStorage.getItem("accountId");
           if(accountId) {
             getOrder(accountId)
