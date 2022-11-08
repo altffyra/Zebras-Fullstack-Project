@@ -6,6 +6,7 @@ import { useState } from "react";
 
 type SingleUserOrderProps = {
   order: Order;
+  setOrder: <SetStateAction>(order: Order | undefined) => any;
 };
 
 const SingleUserOrders = (props: SingleUserOrderProps) => {
@@ -24,7 +25,7 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
         <img src={unlockedIcon} alt="unlocked icon" />
       )}
       {showOrder ? (
-        <OrderItem order={props.order} showOrderOverlay={showOrderOverlay} />
+        <OrderItem order={props.order} showOrderOverlay={showOrderOverlay} setOrder={props.setOrder} />
       ) : (
         ""
       )}

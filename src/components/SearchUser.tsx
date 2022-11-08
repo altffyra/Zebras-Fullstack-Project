@@ -58,7 +58,7 @@ const SearchUser = (props: SearchUserProps) => {
         </label>
       </div>
       <article className="order">
-        {order ? <SingleUserOrders order={order} /> : ""}
+        {order ? <SingleUserOrders order={order} setOrder={setOrder} /> : ""}
         {searched ? (
           <p className="search-result">Hittade tyvärr ingen order</p>
         ) : (

@@ -17,6 +17,7 @@ type errorObj = {
 type OrderItemProps = {
   order: Order;
   showOrderOverlay?: () => void;
+  setOrder: <SetStateAction>(order: Order | undefined) => any;
 };
 
 const OrderItem = (props: OrderItemProps) => {
@@ -70,6 +71,8 @@ const OrderItem = (props: OrderItemProps) => {
     } else {
       if (order.id) {
         dispatch(orderActions.deleteOrder(order.id));
+        props.setOrder(undefined)
+        props.showOrderOverlay
       }
     }
     setLoading(false);
