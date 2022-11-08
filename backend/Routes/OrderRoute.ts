@@ -62,16 +62,6 @@ orderRoute.get("/admin/orders", auth, async (req:Request, res:Response) => {
   }
 })
 
-// DELETE ORDER
-orderRoute.delete("/delete/:id", async (req:IdParam, res:Response) => {
-  const id:string = req.params.id;
-  let resOrders = await deleteOrder(id)
-  if (resOrders== true){
-  res.sendStatus(200);
-  }
-  else res.sendStatus(400)
-});
-
 
 // MAKE ORDER
 orderRoute.post("/", async (req, res) => {
