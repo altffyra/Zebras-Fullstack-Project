@@ -6,7 +6,7 @@ import { useState } from "react";
 
 type SingleUserOrderProps = {
   order: Order;
-  setOrder: <SetStateAction>(order: Order | undefined) => any;
+  setOrder?: <SetStateAction>(order: Order | undefined) => any;
 };
 
 const SingleUserOrders = (props: SingleUserOrderProps) => {
