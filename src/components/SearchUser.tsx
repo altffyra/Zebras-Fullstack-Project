@@ -2,8 +2,14 @@ import { ChangeEvent, useState, KeyboardEvent } from "react";
 import { Order } from "../models/types";
 import SingleUserOrders from "./SingleUserOrder";
 
+type errorObj = {
+  title: string;
+  message: string;
+};
+
 type SearchUserProps = {
   orders: Order[];
+  alertMessage: (errorMsg: errorObj ) => void;
 };
 
 const SearchUser = (props: SearchUserProps) => {
@@ -58,7 +64,7 @@ const SearchUser = (props: SearchUserProps) => {
         </label>
       </div>
       <article className="order">
-        {order ? <SingleUserOrders order={order} setOrder={setOrder} /> : ""}
+        {order ? <SingleUserOrders order={order} setOrder={setOrder} alertMessage={props.alertMessage} /> : ""}
         {searched ? (
           <p className="search-result">Hittade tyvärr ingen order</p>
         ) : (

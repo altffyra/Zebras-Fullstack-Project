@@ -131,11 +131,15 @@ orderRoute.put("/:id", async (req:IdParam, res:Response) => {
 // DELETE ORDER
 orderRoute.delete("/delete/:id", async (req:IdParam, res:Response) => {
   const id:string = req.params.id;
-  let resOrders = await deleteOrder(id)
-  if (resOrders== true){
-  res.sendStatus(200);
+  let resOrders: Order | undefined = await deleteOrder(id)
+  if (resOrders){
+    if(resOrders.locked == false) {
+      res.status(200).send({locked: false})
+    } else {
+      res.status(200).send({locked: true})
+    }
   }
-  else res.sendStatus(400)
+  else res.status(400).send('Error')
 });
 
 

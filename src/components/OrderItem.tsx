@@ -7,7 +7,6 @@ import { actions as cartActions } from "../features/cartReducer";
 import { actions as orderActions } from "../features/orderReducer";
 import { actions as setTempOrderaction } from "../features/tempOrderReducer";
 import { useState } from "react";
-import Alert from "./Alert";
 
 type errorObj = {
   title: string;
@@ -17,7 +16,8 @@ type errorObj = {
 type OrderItemProps = {
   order: Order;
   showOrderOverlay?: () => void;
-  setOrder: <SetStateAction>(order: Order | undefined) => any;
+  setOrder?: <SetStateAction>(order: Order | undefined) => any;
+  alertMessage: (errorMsg: errorObj ) => void;
 };
 
 const OrderItem = (props: OrderItemProps) => {
@@ -28,20 +28,7 @@ const OrderItem = (props: OrderItemProps) => {
 
   const [deleteOverlay, setDeleteOverlay] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const [errorElement, showError] = useState<boolean>(false);
-  const [errorMessages, makeError] = useState<errorObj>({
-    title: "",
-    message: "",
-  });
-  const showAlert = errorElement ? (
-    <Alert
-      errorTitle={errorMessages.title}
-      errorMessage={errorMessages.message}
-      showError={showError}
-    />
-  ) : (
-    ""
-  );
+
   let tempObject: errorObj = { title: "", message: "" };
 
   const orderItem = order.cart.cartItems.map((item) => (
@@ -65,17 +52,54 @@ const OrderItem = (props: OrderItemProps) => {
     });
     if (!response.ok) {
       tempObject.title = "Något gick fel";
-      tempObject.message = "Ordern togs inte bort. Försök igen.";
-      makeError(tempObject);
-      showError(true);
-    } else {
-      if (order.id) {
-        dispatch(orderActions.deleteOrder(order.id));
+      tempObject.message = "Det uppstod ett problem, försök igen.";
+      props.alertMessage(tempObject)
+      if(props.setOrder) {
         props.setOrder(undefined)
-        props.showOrderOverlay
+      }
+      props.showOrderOverlay
+      const accountId: string | null = localStorage.getItem("accountId");
+      if(accountId) {
+        getOrder(accountId)
+      }
+    } else {
+      const data = await response.json();
+      if (order.id) {
+        if(data.locked == false) {          
+          dispatch(orderActions.deleteOrder(order.id));
+          if(props.setOrder) {
+            props.setOrder(undefined)
+          }
+          props.showOrderOverlay
+          const accountId: string | null = localStorage.getItem("accountId");
+          if(accountId) {
+            getOrder(accountId)
+          }
+        } else {          
+          tempObject.title = "Order låst";
+          tempObject.message = "Ordern är låst, kan ej ta bort.";
+          props.alertMessage(tempObject)
+          if(props.setOrder) {
+            props.setOrder(undefined)
+          }
+          const accountId: string | null = localStorage.getItem("accountId");
+          if(accountId) {
+            getOrder(accountId)
+          }
+        }
       }
     }
     setLoading(false);
+  }
+
+  async function getOrder(accountId: string) {
+    setLoading(true);
+    const orderResponse = await fetch(`/api/order/user/${accountId}`);
+    const orderData = await orderResponse.json();   
+    
+   
+    dispatch(orderActions.getOrders(orderData));        
+    setLoading(false)
   }
 
   const toggleDeleteOverlay: () => void = () => {
@@ -147,7 +171,6 @@ const OrderItem = (props: OrderItemProps) => {
       ) : (
         ""
       )}
-      {showAlert}
     </section>
   );
 };
