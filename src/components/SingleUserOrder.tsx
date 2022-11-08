@@ -18,7 +18,7 @@ type SingleUserOrderProps = {
 const SingleUserOrders = (props: SingleUserOrderProps) => {
   const [showOrder, setShowOrder] = useState<boolean>(false);
 
-  const showOrderOverlay: () => void = () => {
+  const showOrderOverlay: () => void = () => {  
     setShowOrder(!showOrder);
   };
 

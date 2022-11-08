@@ -84,13 +84,15 @@ const Search = () => {
     } else {
       const data = await response.json();
       if(data.locked == false) {
-        setFound(false);
-        setSearchId('')
         dispatch(orderActions.deleteOrder(search));
       } else {
-        setFound(false);
-        setSearchId('')
+        tempObject.title = "Orden är låst";
+        tempObject.message = "Ordern är låst, kan ej ta bort.";
+        makeError(tempObject);
+        showError(true);
       }
+      setFound(false);
+      setSearchId('')
     }
     setLoading(false);
   }
