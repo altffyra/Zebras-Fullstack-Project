@@ -138,8 +138,9 @@ const LandingView = () => {
         <div className="info-where">
           <h4>Hitta till oss</h4>
           <div className="adress">
-            <p>Lambergskajen</p>
-            <p>652 21 Karlstad</p>
+          <p>Lambergskajen 56</p>
+          <p>652 21 Karlstad</p>
+          <p className="open-text">Vi har öppet dygnet runt!</p>
           </div>
         </div>
         
