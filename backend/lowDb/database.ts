@@ -198,25 +198,25 @@ export async function deleteOrder(ids: string) {
   const orderfind: Order | undefined = db.data.orders.find(
     (orderid) => orderid.id == ids
   );
-  if (orderfind != undefined && orderfind.locked == false) {
+  if (orderfind) {
     if(orderfind.orderCompleted) {
-      if (
-        orderfind.orderCompleted <
-        dayjs().tz(timeZone).tz("Europe/Stockholm").format("YYYY-MM-DD HH:mm")
-      ) {
+      if (orderfind.orderCompleted < dayjs().tz(timeZone).tz("Europe/Stockholm").format("YYYY-MM-DD HH:mm")) {
         orderfind.locked = true;
         const index: number = db.data.orders.findIndex(order => order.id == ids)
         db.data.orders[index] = orderfind
         await db.write();
         return orderfind;
+      } else if(orderfind.locked == true) {
+        return orderfind;
+      } else {
+        const orderIndex: Order[] = db.data.orders.filter(
+          (orderid) => orderid.id != ids
+        );
+          db.data.orders = orderIndex;
+          await db.write();
+          return orderfind;
       }
     }
-    const orderIndex: Order[] = db.data.orders.filter(
-      (orderid) => orderid.id != ids
-    );
-      db.data.orders = orderIndex;
-      await db.write();
-      return orderfind;
   } else return undefined;
 }
 
