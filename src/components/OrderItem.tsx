@@ -7,7 +7,6 @@ import { actions as cartActions } from "../features/cartReducer";
 import { actions as orderActions } from "../features/orderReducer";
 import { actions as setTempOrderaction } from "../features/tempOrderReducer";
 import { useState } from "react";
-import Alert from "./Alert";
 
 type errorObj = {
   title: string;
@@ -18,6 +17,7 @@ type OrderItemProps = {
   order: Order;
   showOrderOverlay?: () => void;
   setOrder?: <SetStateAction>(order: Order | undefined) => any;
+  alertMessage: (errorMsg: errorObj ) => void;
 };
 
 const OrderItem = (props: OrderItemProps) => {
@@ -25,24 +25,10 @@ const OrderItem = (props: OrderItemProps) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-console.log('HEJSAN');
 
   const [deleteOverlay, setDeleteOverlay] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
-  const [errorElement, showError] = useState<boolean>(false);
-  const [errorMessages, makeError] = useState<errorObj>({
-    title: "",
-    message: "",
-  });
-  const showAlert = errorElement ? (
-    <Alert
-      errorTitle={errorMessages.title}
-      errorMessage={errorMessages.message}
-      showError={showError}
-    />
-  ) : (
-    ""
-  );
+
   let tempObject: errorObj = { title: "", message: "" };
 
   const orderItem = order.cart.cartItems.map((item) => (
@@ -67,8 +53,7 @@ console.log('HEJSAN');
     if (!response.ok) {
       tempObject.title = "Något gick fel";
       tempObject.message = "Det uppstod ett problem, försök igen.";
-      makeError(tempObject);
-      showError(true);
+      props.alertMessage(tempObject)
       if(props.setOrder) {
         props.setOrder(undefined)
       }
@@ -93,9 +78,7 @@ console.log('HEJSAN');
         } else {          
           tempObject.title = "Order låst";
           tempObject.message = "Ordern är låst, kan ej ta bort.";
-          makeError(tempObject);
-          showError(true);
-          dispatch(orderActions.deleteOrder(order.id));
+          props.alertMessage(tempObject)
           if(props.setOrder) {
             props.setOrder(undefined)
           }
@@ -188,7 +171,6 @@ console.log('HEJSAN');
       ) : (
         ""
       )}
-      {showAlert}
     </section>
   );
 };

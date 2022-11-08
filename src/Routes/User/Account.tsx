@@ -12,6 +12,12 @@ import { actions as orderActions } from "../../features/orderReducer";
 import { actions as tempOrderActions } from "../../features/tempOrderReducer";
 import { actions as cartActions } from "../../features/cartReducer";
 import { actions as userActions } from "../../features/userReducer";
+import Alert from "../../components/Alert";
+
+type errorObj = {
+  title: string;
+  message: string;
+};
 
 const Account = () => {
   const navigate = useNavigate();
@@ -21,7 +27,6 @@ const Account = () => {
   const tempOrder: Order | undefined = useSelector(
     (state: RootState) => state.tempOrder
   )[0];
-  console.log('account sidan');
   const accountId: string | null = localStorage.getItem("accountId");
   useEffect(() => {
     const root:any = document.querySelector('#root');
@@ -64,6 +69,26 @@ const Account = () => {
  const user:User = useSelector((state: RootState) => state.user);
  const orders:Order[] = useSelector((state: RootState) => state.orders);
 
+ const [errorElement, showError] = useState<boolean>(false);
+ const [errorMessages, makeError] = useState<errorObj>({
+   title: "",
+   message: "",
+ });
+ const showAlert = errorElement ? (
+   <Alert
+     errorTitle={errorMessages.title}
+     errorMessage={errorMessages.message}
+     showError={showError}
+   />
+ ) : (
+   ""
+ );
+
+ const alertMessage: (errorMsg: errorObj) => void = (errorMsg) => {
+   makeError(errorMsg);
+   showError(true);
+ }
+
   return (
     <section className="account-page">
       <Nav />
@@ -78,9 +103,10 @@ const Account = () => {
       <div className="account-top">
         <UserInformation user={user} />
         <div className="divider"></div>
-        <SearchUser orders={orders} />
+        <SearchUser orders={orders} alertMessage={alertMessage} />
       </div>
-      <UserOrders orders={orders} />
+      <UserOrders orders={orders} alertMessage={alertMessage} />
+      {showAlert}
     </section>
   );
 };
