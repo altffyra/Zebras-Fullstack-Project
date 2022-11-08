@@ -70,20 +70,20 @@ const Search = () => {
     setSearchError(false);
     setFound(false);
     setDeleteOverlay(false);
-    const response = await fetch(`/api/order/${search}`, {
+    const response = await fetch(`/api/order/delete/${search}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const data = await response.json();
-    if (!data.ok) {
+    if (!response.ok) {
       tempObject.title = "Något gick fel";
       tempObject.message = "Ordern togs inte bort. Försök igen.";
       makeError(tempObject);
       showError(true);
     } else {
-      setFound(true);
+      setFound(false);
+      setSearchId('')
       dispatch(orderActions.deleteOrder(search));
     }
     setLoading(false);

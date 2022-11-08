@@ -50,11 +50,15 @@ const OrderConfirm = () => {
     (state: RootState) => state.orders
   )[0];
 
-  const orderItemsEl = confirmedOrder.cart.cartItems.map((item) => (
-    <OrderItems item={item} key={item.name} />
-  ));
-  const orderDone: string | undefined =
-    confirmedOrder.orderCompleted?.slice(10);
+  let orderItemsEl: JSX.Element[] | undefined
+  let orderDone: string | undefined = ''
+  if(confirmedOrder) {
+    orderItemsEl = confirmedOrder.cart.cartItems.map((item) => (
+      <OrderItems item={item} key={item.name} />
+      ));
+      orderDone = confirmedOrder.orderCompleted?.slice(10);
+
+  }
 
   const changeOrder: () => void = () => {
     dispatch(cartActions.changeOrder(confirmedOrder.cart));
@@ -65,20 +69,20 @@ const OrderConfirm = () => {
   async function deleteOrder() {
     setLoading(true);
     setDeleteOverlay(false);
-    const response = await fetch(`/api/order/${confirmedOrder.id}`, {
+    const response = await fetch(`/api/order/delete/${confirmedOrder.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const data = await response.json();
-    if (!data.ok) {
+    if (!response.ok) {
       tempObject.title = "Något gick fel";
       tempObject.message = "Ordern togs inte bort. Försök igen.";
       makeError(tempObject);
       showError(true);
     } else {
       if (confirmedOrder.id) {
+        navigate('/menu')
         dispatch(orderActions.deleteOrder(confirmedOrder.id));
       }
     }
@@ -104,15 +108,15 @@ const OrderConfirm = () => {
       <div className="order-user">
         <p className="user-headline">Beställare</p>
         <div className="user">
-          <p>Namn: &emsp; {confirmedOrder.user.name}</p>
-          <p>E-mail: &emsp; {confirmedOrder.user.email}</p>
-          <p>Tel.nr: &emsp; {confirmedOrder.user.phoneNumber}</p>
+          <p>Namn: &emsp; {confirmedOrder?.user.name}</p>
+          <p>E-mail: &emsp; {confirmedOrder?.user.email}</p>
+          <p>Tel.nr: &emsp; {confirmedOrder?.user.phoneNumber}</p>
         </div>
       </div>
 
       <div className="order-cart">
         <div className="order-header">
-          <p className="order-title">Order ID: {confirmedOrder.id}</p>
+          <p className="order-title">Order ID: {confirmedOrder?.id}</p>
           <div className="list-titles">
             <p>Rätt</p>
             <p>Pris</p>
@@ -122,7 +126,7 @@ const OrderConfirm = () => {
         <div className="order-information">{orderItemsEl}</div>
         <div className="order-price">
           <p>Totalt</p>
-          <p>{confirmedOrder.cart.totalPrice} kr</p>
+          <p>{confirmedOrder?.cart.totalPrice} kr</p>
         </div>
       </div>
       <p className="change-order">
@@ -135,10 +139,10 @@ const OrderConfirm = () => {
           Tryck här för att ta bort ordern.
         </span>
       </p>
-      {confirmedOrder.userComment ? (
+      {confirmedOrder?.userComment ? (
         <div className="order-comment">
           <p>Kommentar</p>
-          <p>{confirmedOrder.userComment}</p>
+          <p>{confirmedOrder?.userComment}</p>
         </div>
       ) : (
         ""

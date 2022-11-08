@@ -265,7 +265,6 @@ export async function createOrderInfo() {
       .format("YYYY-MM-DD HH:mm"),
     id: uid(),
   };
-  console.log(orderInfo);
 
   return orderInfo;
 }

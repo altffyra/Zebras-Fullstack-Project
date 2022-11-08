@@ -56,14 +56,13 @@ const OrderItem = (props: OrderItemProps) => {
   async function deleteOrder() {
     setLoading(true);
     setDeleteOverlay(false);
-    const response = await fetch(`/api/order/${order.id}`, {
+    const response = await fetch(`/api/order/delete/${order.id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
     });
-    const data = await response.json();
-    if (!data.ok) {
+    if (!response.ok) {
       tempObject.title = "Något gick fel";
       tempObject.message = "Ordern togs inte bort. Försök igen.";
       makeError(tempObject);
