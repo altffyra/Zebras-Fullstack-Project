@@ -28,10 +28,7 @@
       background-color: variables.$lockColor;
       transition: all 300ms;
       &:hover {
-        background-color: color.scale(
-          variables.$lockColor,
-          $lightness: 40%
-        );
+        background-color: color.scale(variables.$lockColor, $lightness: 40%);
       }
     }
   }
@@ -45,9 +42,9 @@
     box-shadow: variables.$boxShadow;
     border-radius: 0.4em;
 
-    h2{
-        font-family: variables.$primaryFont;
-        text-align: center
+    h2 {
+      font-family: variables.$primaryFont;
+      text-align: center;
     }
 
     .user-info {
@@ -83,11 +80,53 @@
         font-family: variables.$primaryFont;
       }
     }
+    .btn-container {
+      @include variables.flexContainer(row);
+      justify-content: space-evenly;
+      .btn-delete {
+        @include buttons.bigBtn($pad: 0.6em 2em, $bg: variables.$dropdownRed);
+      }
+      .btn-change {
+        @include buttons.bigBtn(
+          $pad: 0.6em 2em,
+          $bg: variables.$acceptBtnGreen
+        );
+      }
+    }
+  }
+  .delete-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba($color: #000000, $alpha: 0.5);
+    z-index: 999999;
+    display: grid;
+    place-items: center;
+    .delete-container {
+      background-color: white;
+      padding: 2em;
+      box-shadow: variables.$boxShadow;
+      border-radius: 0.6em;
+      h3 {
+        font-family: variables.$primaryFont;
+      }
+      .btn-container {
+        @include variables.flexContainer(row);
+        justify-content: space-between;
+        margin-top: 2em;
+        .btn-cancel {
+          @include buttons.bigBtn(
+            $pad: 0.6em 2em,
+            $bg: variables.$acceptBtnGreen
+          );
+        }
 
-    .btn-change {
-      @include buttons.bigBtn($pad: 0.6em 2em, $bg: variables.$acceptBtnGreen);
-      align-self: center;
-      margin: 1em;
+        .btn-delete {
+          @include buttons.bigBtn($pad: 0.6em 2em, $bg: variables.$dropdownRed);
+        }
+      }
     }
   }
 }

@@ -151,7 +151,7 @@ const AdminPage = () => {
             {searchError ? <p>Ingen order hittades på det ordernumret.</p> : ""}
             {found ? 
               <div className='search-order'>
-                <p onClick={(() => handleOrder)}>Order {found.id}</p>
+                <p onClick={handleOrder}>Order {found.id}</p>
                 {found.locked ?
                  <img src={locked} alt="locked icon" />
                 
