@@ -3,7 +3,7 @@ import express, { NextFunction, Request, Response } from "express";
  app.use(express.json());
  const orderRoute = express.Router();
  import {User, Order} from '../lowDb/dbinterface'
- import { authenticateLogin, getOrders,checkOrder, createOrderInfo, updateOrder, createOrder, adminUpdateOrder} from '../lowDb/database.js'
+ import { authenticateLogin, getOrders,checkOrder, createOrderInfo, updateOrder, createOrder, adminUpdateOrder, deleteOrder} from '../lowDb/database.js'
  import { isValidCart, isValidUpdatedOrder } from "../validators/validOrder.js";
  import { isValidUser, isValidGuest } from "../validators/validUser.js";
 
@@ -62,7 +62,15 @@ orderRoute.get("/admin/orders", auth, async (req:Request, res:Response) => {
   }
 })
 
-
+// DELETE ORDER
+orderRoute.delete("/delete/:id", async (req:IdParam, res:Response) => {
+  const id:string = req.params.id;
+  let resOrders = await deleteOrder(id)
+  if (resOrders== true){
+  res.sendStatus(200);
+  }
+  else res.sendStatus(400)
+});
 
 
 // MAKE ORDER

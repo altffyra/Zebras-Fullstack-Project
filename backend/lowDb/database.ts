@@ -176,6 +176,21 @@ export async function checkUser(id: string) {
 
 }
 
+
+export async function deleteOrder(ids: string) {
+      await db.read()
+      if ( !db.data ) {
+            db.data = defaultData
+      }
+      const orderIndex:Order[] = db.data.orders.filter(orderid => orderid.id != ids)
+      if (orderIndex.length > 0){
+            db.data.orders= orderIndex
+            await db.write();
+            return true 
+      } else return false
+}
+
+
 export async function createOrder(orderData: Order) {
       await db.read()
       if ( !db.data ) {
@@ -226,6 +241,6 @@ export async function createOrderInfo() {
       return orderInfo
 }
 
-export {getMenu, getOrders, authenticateLogin, checkOrder, updateOrder, getUsers, adminUpdateOrder }
+export {getMenu, getOrders, authenticateLogin, checkOrder, updateOrder, getUsers, adminUpdateOrder}
 
 export default db
