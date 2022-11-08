@@ -9,6 +9,12 @@ import { RootState } from "../../store";
 import { actions as orderActions } from "../../features/orderReducer";
 import { actions as cartActions } from "../../features/cartReducer";
 import { actions as tempOrderActions } from "../../features/tempOrderReducer";
+import Alert from "../../components/Alert";
+
+type errorObj = {
+  title: string;
+  message: string;
+};
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -17,7 +23,22 @@ const Search = () => {
   const [searchId, setSearchId] = useState<string>("");
   const [searchError, setSearchError] = useState<boolean>(false);
   const [found, setFound] = useState<boolean>(false);
-
+  const [deleteOverlay, setDeleteOverlay] = useState<boolean>(false);
+  const [errorElement, showError] = useState<boolean>(false);
+  const [errorMessages, makeError] = useState<errorObj>({
+    title: "",
+    message: "",
+  });
+  const showAlert = errorElement ? (
+    <Alert
+      errorTitle={errorMessages.title}
+      errorMessage={errorMessages.message}
+      showError={showError}
+    />
+  ) : (
+    ""
+  );
+  let tempObject: errorObj = { title: "", message: "" };
   const tempOrder: Order | undefined = useSelector(
     (state: RootState) => state.tempOrder
   )[0];
@@ -43,6 +64,40 @@ const Search = () => {
     }
     setLoading(false);
   }
+
+  async function deleteOrder(search: string) {
+    setLoading(true);
+    setSearchError(false);
+    setFound(false);
+    setDeleteOverlay(false);
+    const response = await fetch(`/api/order/delete/${search}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    if (!response.ok) {
+      tempObject.title = "Något gick fel";
+      tempObject.message = "Det uppstod ett problem, försök igen.";
+      makeError(tempObject);
+      showError(true);
+    } else {
+      const data = await response.json();
+      if(data.locked == false) {
+        setFound(false);
+        setSearchId('')
+        dispatch(orderActions.deleteOrder(search));
+      } else {
+        setFound(false);
+        setSearchId('')
+      }
+    }
+    setLoading(false);
+  }
+
+  const toggleDeleteOverlay: () => void = () => {
+    setDeleteOverlay(!deleteOverlay);
+  };
 
   const handleInput: (e: ChangeEvent<HTMLInputElement>) => void = (e) => {
     setSearchId(e.target.value);
@@ -117,13 +172,22 @@ const Search = () => {
           </div>
           <div className="comment">
             <h3>Kundkommentar</h3>
-            {searchedOrder.userComment ? <p>{searchedOrder?.userComment}</p> : '-'}
+            {searchedOrder.userComment ? (
+              <p>{searchedOrder?.userComment}</p>
+            ) : (
+              "-"
+            )}
           </div>
 
           {!searchedOrder.locked ? (
-            <button className="btn-change" onClick={changeOrder}>
-              Ändra
-            </button>
+            <div className="btn-container">
+              <button className="btn-delete" onClick={toggleDeleteOverlay}>
+                Ta bort
+              </button>
+              <button className="btn-change" onClick={changeOrder}>
+                Ändra
+              </button>
+            </div>
           ) : (
             ""
           )}
@@ -131,6 +195,27 @@ const Search = () => {
       ) : (
         ""
       )}
+      {deleteOverlay ? (
+        <div className="delete-overlay">
+          <div className="delete-container">
+            <h3>Bekräftelse på att ta bort en order</h3>
+            <div className="btn-container">
+              <button className="btn-cancel" onClick={toggleDeleteOverlay}>
+                Avbryt
+              </button>
+              <button
+                className="btn-delete"
+                onClick={() => deleteOrder(searchId)}
+              >
+                Ta bort
+              </button>
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+      {showAlert}
     </section>
   );
 };

@@ -199,13 +199,25 @@ export async function deleteOrder(ids: string) {
     (orderid) => orderid.id == ids
   );
   if (orderfind != undefined && orderfind.locked == false) {
+    if(orderfind.orderCompleted) {
+      if (
+        orderfind.orderCompleted <
+        dayjs().tz(timeZone).tz("Europe/Stockholm").format("YYYY-MM-DD HH:mm")
+      ) {
+        orderfind.locked = true;
+        const index: number = db.data.orders.findIndex(order => order.id == ids)
+        db.data.orders[index] = orderfind
+        await db.write();
+        return orderfind;
+      }
+    }
     const orderIndex: Order[] = db.data.orders.filter(
       (orderid) => orderid.id != ids
     );
       db.data.orders = orderIndex;
       await db.write();
-      return true;
-  } else return false;
+      return orderfind;
+  } else return undefined;
 }
 
 export async function createOrder(orderData: Order) {
@@ -248,6 +260,8 @@ export async function updateUser(accountId: string, updatedUser: User) {
   return true;
 }
 
+
+
 export async function createOrderInfo() {
   const randomNum: number = Math.ceil(Math.random() * 30);
 
@@ -263,7 +277,6 @@ export async function createOrderInfo() {
       .format("YYYY-MM-DD HH:mm"),
     id: uid(),
   };
-  console.log(orderInfo);
 
   return orderInfo;
 }

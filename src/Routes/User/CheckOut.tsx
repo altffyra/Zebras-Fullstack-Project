@@ -54,13 +54,7 @@ const CheckOut = () => {
     });
     if (orderCheck) {
       if (user.accountId.length > 0) {
-        const updateOrderUser: User = {
-          name: tempOrder[0].user.name,
-          accountId: user.accountId,
-          email: tempOrder[0].user.email,
-          phoneNumber: tempOrder[0].user.phoneNumber,
-        };
-        setUser(updateOrderUser);
+        setUser(user);
       } else {
         setUser(tempOrder[0].user);
       }
