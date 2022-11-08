@@ -43,8 +43,11 @@ const Nav = (props: NavProps) => {
       navigate('/adminpage')
     }    
   }
-
   const handleMenu: () => void = () => {
+    setMenuOpen(!menuOpen);
+  };
+
+  const handleHome: () => void = () => {
     setMenuOpen(!menuOpen);
     if(location.pathname === '/') {
       const elemendId: Element | null = document.querySelector(`#about-us`);
@@ -93,7 +96,7 @@ const Nav = (props: NavProps) => {
       <nav className={menuOpen ? "nav open" : "nav"}>
         <ul className="link-container" >
           
-          <NavLink onClick={handleMenu} className="link" to="/">
+          <NavLink onClick={handleHome} className="link" to="/">
             Hem
           </NavLink>
           <div className="divider"></div>

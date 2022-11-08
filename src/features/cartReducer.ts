@@ -1,5 +1,4 @@
 import { createAction, createReducer } from "@reduxjs/toolkit";
-import CartItem from "../components/CartItem";
 import { CartProps, CartItems } from "../models/types";
 
 const initialState: CartProps = {

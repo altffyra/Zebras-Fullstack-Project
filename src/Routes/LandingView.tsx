@@ -35,9 +35,9 @@ const LandingView = () => {
 
   useEffect(() => {
     const navElem: HTMLElement | null = document.querySelector('header');
-    const scrollHeight = window.pageYOffset;
+    const scrollHeight:number = window.pageYOffset;
     if(navElem) {
-      let navHeight = navElem.getBoundingClientRect().height;
+      let navHeight:number = navElem.getBoundingClientRect().height;
       if(scrollHeight < navHeight) {
         setNavCSS(true)
         videoRef.current && videoRef.current.play();
@@ -73,7 +73,7 @@ const LandingView = () => {
   }
 
   return (
-    <main className="landing" onScroll={()=>console.log("Scrolled")}>
+    <main className="landing">
       <Nav scrollTop={navCSS} />
       <section className="hero" >
         <video className="video-container" ref={videoRef} muted playsInline autoPlay loop  >

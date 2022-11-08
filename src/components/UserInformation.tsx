@@ -197,11 +197,11 @@ const UserInformation = (props: UserInformationProps) => {
           </div>
           <div className="button-container">
             <button className="change-btn" onClick={handlePassword}>
-              Lösenord
+              Ändra lösenord
             </button>
 
             <button className="change-btn" onClick={handleUpdate}>
-              Uppgifter
+              Ändra uppgifter
             </button>
           </div>
         </section>

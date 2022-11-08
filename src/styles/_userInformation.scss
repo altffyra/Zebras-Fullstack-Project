@@ -45,6 +45,7 @@
       .change-btn {
         @include buttons.bigBtn($pad: 0.6em 2em, $bg: variables.$dropdownRed);
         align-self: center;
+        font-size: 1em;
       }
       .update-btn {
         @include buttons.bigBtn(

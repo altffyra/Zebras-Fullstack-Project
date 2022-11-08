@@ -78,11 +78,11 @@ const AdminPage = () => {
       } 
   }
 
-    let fetchInterval: any;
+
     useEffect(() => {
       getOrders();
 
-      const interval = setInterval(() => {
+      const interval:NodeJS.Timer = setInterval(() => {
         updateOrderList()
       }, 10000);
 
@@ -98,7 +98,6 @@ const AdminPage = () => {
   }
 
   const handleLogout: () => void = () => {
-    clearInterval(fetchInterval)
     localStorage.removeItem('accountId')
     dispatch(userActions.logOut())
     navigate('/')
@@ -132,7 +131,6 @@ const AdminPage = () => {
   const handleOrder: () => void = () => {
     if(found) {
       navigate(`/AdminOrder/${found.id}`)
-      clearInterval(fetchInterval)
     }
   }
 

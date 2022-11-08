@@ -26,7 +26,7 @@ const LoginView = () => {
   const [userPassword, setUserPassword] = useState<string>("");
 
   const [errorElement, showError] = useState<boolean>(false);
-  const [errorMessages, makeError] = useState({ title: "", message: "" });
+  const [errorMessages, makeError] = useState<errorType>({ title: "", message: "" });
   const showAlert = errorElement ? (
     <Alert
       errorTitle={errorMessages.title}

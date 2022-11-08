@@ -8,18 +8,23 @@ import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
 import { actions as orderActions } from '../features/orderReducer'
 import Alert from './Alert'
+import { stringify } from 'querystring';
 
 
 type SingleUserOrderProps = {
     order: Order;
     updateAllOrders: (orders: Order[]) => void;
 }
+type errorType = {
+  title: string,
+  message: string
+}
 
 const SingleUserOrders = (props: SingleUserOrderProps) => {
-  const [showOrder, setShowOrder] = useState<boolean>(false);
+
   const [ loading, setLoading ] = useState<boolean>(false);
   const [errorElement, showError] = useState<boolean>(false);
-  const [errorMessages, makeError] = useState({ title: "", message: "" });
+  const [errorMessages, makeError] = useState<errorType>({ title: "", message: "" });
   const showAlert = errorElement ? (
     <Alert
       errorTitle={errorMessages.title}
@@ -29,15 +34,13 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
   ) : (
     " "
   );
-  let tempObject = { title: "", message: "" };
+  let tempObject:errorType = { title: "", message: "" };
   let checkId: string | null = localStorage.getItem('accountId');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const showOrderOverlay: () => void = () => {
-    setShowOrder(!showOrder)
-  }
+
 
 
   async function lockOrder() {
@@ -55,7 +58,7 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
         completed : props.order.completed,
       }
 
-      const orderId = props.order?.id
+      const orderId:string|undefined = props.order?.id
       const response = await fetch(`/api/order/admin/${orderId}`, {
         method: "PUT",
         headers: {
@@ -66,7 +69,7 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
       });
 
       const datasave = await response.json();
-      if(datasave.error) {
+      if(datasave) {
 
         navigate('/')
         
@@ -159,7 +162,7 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
           <div className='single-order__left' onClick={navigateOrder}>
             <section className="single-order__id">
               <div>
-                <p onClick={showOrderOverlay} >Order {props.order.id}</p>
+                <p>Order {props.order.id}</p>
                 <p className='person'>Beställare: {props.order.user.name}</p>
               </div>
               { props.order.userComment !== ""

@@ -74,7 +74,7 @@ const NotLoggedIn = (props: Props) => {
       localStorage.setItem("accountId", data.user.accountId);
     } else
     tempObject.title = "Fel inloggningsuppgifter";
-      tempObject.message = "Kan inte logga för användarnamnet eller lösenordet är fel";
+      tempObject.message = "Kan inte logga in för att användarnamnet eller lösenordet är fel";
       makeError(tempObject);
       showError(true);
       setLoading(false);
