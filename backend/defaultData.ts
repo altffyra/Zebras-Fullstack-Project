@@ -27,7 +27,7 @@ export const data: Schema = {
       },
       {
           "name": "Åke",
-          "email": "åke@åk.se",
+          "email": "ake@ak.se",
           "accountId": "2149",
           "phoneNumber": "070000003",
           "admin": false,
@@ -101,19 +101,20 @@ export const data: Schema = {
           "cart": {
               "cartItems": [
                   {
-                      "name": "Hot fudge brownie",
-                      "price": 69,
-                      "amount": 4
+                      "name": "Fiskpinnar och pulvermos",
+                      "price": 109,
+                      "amount": 1
                   }
               ],
-              "totalPrice": 276
+              "totalPrice": 109
           },
           "user": {
-              "name": "Maja Majasson",
-              "email": "maja@maj.com",
-              "phoneNumber": "0805456224",
-              "accountId": "guest",
-              "password": ""
+            "name": "Åke",
+            "email": "ake@ak.se",
+            "accountId": "2149",
+            "phoneNumber": "070000003",
+            "admin": false,
+            "password": "test"
           },
           "userComment": "",
           "locked": true,
@@ -121,7 +122,110 @@ export const data: Schema = {
           "orderPlaced": "2022-10-28 10:05",
           "orderCompleted": "2022-10-28 10:41",
           "id": "MNPDHBBDHN"
-      }
+      },
+      {
+        "cart": {
+            "cartItems": [
+                {
+                    "name": "Fiskpinnar och pulvermos",
+                    "price": 109,
+                    "amount": 1
+                }
+            ],
+            "totalPrice": 109
+        },
+        "user": {
+          "name": "Åke",
+          "email": "ake@ak.se",
+          "accountId": "2149",
+          "phoneNumber": "070000003",
+          "admin": false,
+          "password": "test"
+        },
+        "userComment": "",
+        "locked": true,
+        "completed": true,
+        "orderPlaced": "2022-10-28 10:05",
+        "orderCompleted": "2022-10-28 10:41",
+        "id": "MNPDHBBDHN"
+    },
+    {
+        "cart": {
+            "cartItems": [
+                {
+                    "name": "Fiskpinnar och pulvermos",
+                    "price": 109,
+                    "amount": 1
+                }
+            ],
+            "totalPrice": 109
+        },
+        "user": {
+          "name": "Åke",
+          "email": "ake@ak.se",
+          "accountId": "2149",
+          "phoneNumber": "070000003",
+          "admin": false,
+          "password": "test"
+        },
+        "userComment": "",
+        "locked": true,
+        "completed": true,
+        "orderPlaced": "2022-10-28 10:05",
+        "orderCompleted": "2022-10-28 10:41",
+        "id": "MNPDHBBDHN"
+    },
+    {
+        "cart": {
+            "cartItems": [
+                {
+                    "name": "Fiskpinnar och pulvermos",
+                    "price": 109,
+                    "amount": 1
+                }
+            ],
+            "totalPrice": 109
+        },
+        "user": {
+          "name": "Åke",
+          "email": "ake@ak.se",
+          "accountId": "2149",
+          "phoneNumber": "070000003",
+          "admin": false,
+          "password": "test"
+        },
+        "userComment": "",
+        "locked": true,
+        "completed": true,
+        "orderPlaced": "2022-10-28 10:05",
+        "orderCompleted": "2022-10-28 10:41",
+        "id": "MNPDHBBDHN"
+    },
+      {
+        "cart": {
+            "cartItems": [
+                {
+                    "name": "Hot fudge brownie",
+                    "price": 69,
+                    "amount": 4
+                }
+            ],
+            "totalPrice": 276
+        },
+        "user": {
+            "name": "Maja Majasson",
+            "email": "maja@maj.com",
+            "phoneNumber": "0805456224",
+            "accountId": "guest",
+            "password": ""
+        },
+        "userComment": "",
+        "locked": true,
+        "completed": true,
+        "orderPlaced": "2022-10-28 10:05",
+        "orderCompleted": "2022-10-28 10:41",
+        "id": "MNPDHBBDHN"
+    }
   ],
   "menu": [
       {
