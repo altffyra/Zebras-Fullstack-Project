@@ -69,11 +69,7 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
       });
 
       const datasave = await response.json();
-      if(datasave) {
 
-        navigate('/')
-        
-      }
       if (!response.ok) {
         setLoading(false);
         tempObject.title = "Ordern ej ändrad";
@@ -119,11 +115,6 @@ const SingleUserOrders = (props: SingleUserOrderProps) => {
       });
 
       const datasave = await response.json();
-      if(datasave.error) {
-
-        navigate('/')
-        
-      }
       if (!response.ok) {
         setLoading(false);
         tempObject.title = "Ordern ej ändrad";

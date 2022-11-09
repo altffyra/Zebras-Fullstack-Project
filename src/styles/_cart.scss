@@ -7,7 +7,7 @@
   bottom: -1px;
   left: 0;
   background-color: variables.$dropdownRed;
-  width: 100vw;
+  width: 100%;
   max-height: 50vh;
   @include variables.flexContainer();
   align-items: center;
