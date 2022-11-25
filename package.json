@@ -12,7 +12,7 @@
     "restart-backend": "npm run build-backend && npm run start-backend"
   },
   "dependencies": {
-    "@reduxjs/toolkit": "^1.8.6",
+    "@reduxjs/toolkit": "^1.9.0",
     "cors": "^2.8.5",
     "dayjs": "^1.11.5",
     "express": "^4.18.2",
