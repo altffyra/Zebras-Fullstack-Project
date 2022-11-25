@@ -23,7 +23,7 @@
     "react-router-dom": "^6.4.2",
     "react-use-draggable-scroll": "^0.4.7",
     "redux": "^4.2.0",
-    "sass": "^1.55.0",
+    "sass": "^1.56.0",
     "short-unique-id": "^4.4.4",
     "uuidv4": "^6.2.13"
   },
